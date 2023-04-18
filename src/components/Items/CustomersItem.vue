@@ -33,12 +33,12 @@ onMounted(() => {
       <div class="flex items-center space-x-2">
         <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
         <span class="text-lg font-medium capitalize">
-          {{ customer?.customer?.firstname + ' ' + customer?.customer?.lastname }}
+          {{ customer?.firstname + ' ' + customer?.lastname }}
         </span>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.customer?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.customer?.gender }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.phone }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.gender }}</td>
     <td v-motion-pop class="py-2 px-4 text-center">
       <div class="flex item-center justify-center">
         <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">

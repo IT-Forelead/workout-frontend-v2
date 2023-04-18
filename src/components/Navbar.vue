@@ -7,6 +7,7 @@ import CaretDownIcon from './Icons/CaretDownIcon.vue'
 import GlobeEastIcon from './Icons/GlobeEastIcon.vue'
 import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
+import AddCustomerModal from './Modals/AddCustomerModal.vue'
 
 const { t } = useI18n()
 const currentLang = ref('')
@@ -57,6 +58,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <AddCustomerModal/>
 </template>
 
 <style scoped></style>
