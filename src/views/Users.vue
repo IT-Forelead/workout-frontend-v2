@@ -1,7 +1,6 @@
 <script setup>
 import { computed } from '@vue/reactivity'
 import { onMounted } from 'vue'
-import AddUser from '../components/Registration/AddUser.vue'
 import 'izitoast/dist/css/iziToast.min.css'
 import UserService from '../services/user.service'
 import { useUserStore } from '../store/user.store'
@@ -23,10 +22,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="grid grid-cols-3 gap-3">
-      <AddUser />
-      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden mt-3 col-span-2 bg-white rounded-lg">
+  <div class="px-4 py-2">
+    <div class="bg-white rounded capitalize h-[40vh] p-5">
+      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden">
         <div class="flex items-center p-3">
           <p class="text-3xl font-bold">{{ $t('usersReport') }}</p>
         </div>
@@ -35,8 +33,8 @@ onMounted(() => {
             <tr class="text-gray-600 capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('user') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('phone') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('role') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('subRole') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>
           </thead>

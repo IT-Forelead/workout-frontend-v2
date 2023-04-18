@@ -1,104 +1,61 @@
 <script setup>
-import SearchIcon from '../assets/icons/SearchIcon.vue'
-import BellIcon from '../assets/icons/BellIcon.vue'
-import { computed } from '@vue/reactivity'
-import { useRouter } from 'vue-router'
+import { useAuthStore } from '../store/auth.store'
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted } from 'vue'
-import { parseJwt } from '../mixins/utils.js'
-import Registration from './Modals/Registration.vue'
-import ChangePaymentStatus from './Modals/ChangePaymentStatus.vue'
-import AddVisitModal from './Modals/AddVisitModal.vue'
-import OperationInfoModal from './Modals/OperationInfoModal.vue'
-import Cheque from './Modals/Cheque.vue'
-import PrintPdfModal from './Modals/PrintPdfModal.vue'
-import AddServiceModal from './Modals/AddServiceModal.vue'
-import EditServiceModal from './Modals/EditServiceModal.vue'
-import DeleteAlertModal from './Modals/DeleteAlertModal.vue'
+import decodeJwt, { parseJwt } from '../mixins/utils'
+import CaretDownIcon from './Icons/CaretDownIcon.vue'
+import GlobeEastIcon from './Icons/GlobeEastIcon.vue'
+import ChatTextIcon from './Icons/ChatTextIcon.vue'
+import BellIcon from './Icons/BellIcon.vue'
 
 const { t } = useI18n()
-
-const router = useRouter()
+const currentLang = ref('')
 const payload = ref({})
 
-const currentLabel = computed(() => {
-  if (router.currentRoute?.value?.path === '/visits') {
-    return t('visitsManagment')
-  } else if (router.currentRoute?.value?.path === '/patients') {
-    return t('patientsManagment')
-  } else if (router.currentRoute?.value?.path === '/patient-visit') {
-    return t('visitsManagment')
-  } else if (router.currentRoute?.value?.path === '/dashboard') {
-    return t('mainPage')
-  } else if (router.currentRoute?.value?.path === '/services') {
-    return t('servicesManagment')
-  } else if (router.currentRoute?.value?.path === '/users') {
-    return t('usersManagment')
-  } else if (router.currentRoute?.value?.path === '/service-types') {
-    return t('serviceTypes')
-  } else if (router.currentRoute?.value?.path === '/operations') {
-    return t('operationManagment')
-  } else if (router.currentRoute?.value?.path === '/operations/services') {
-    return t('operationServices')
-  } else if (router.currentRoute?.value?.path === '/operation-expenses') {
-    return t('operationExpenses')
-  } else if (router.currentRoute?.value?.path === '/operation-expenses/summary') {
-    return t('operationExpensesReport')
-  } else if (router.currentRoute?.value?.path === '/operation-expenses/add') {
-    return t('addOperationExpense')
-  } else if (router.currentRoute?.value?.path === '/checkup-expenses') {
-    return t('checkupExpenses')
-  } else if (router.currentRoute?.value?.path === '/checkup-expenses/summary') {
-    return t('checkupExpensesReport')
-  } else if (router.currentRoute?.value?.path === '/checkup-expenses/doctor-shares') {
-    return t('doctorShares')
-  } else if (router.currentRoute?.value?.path === '/sms-messages') {
-    return t('smsMessagesManagment')
-  }
-})
-
-const navigationGuard = (access) => {
-  return access.includes(payload.value?.role)
-}
-
 onMounted(() => {
+  currentLang.value = localStorage.getItem('lang') || 'uz'
+  document.getElementsByTagName('title')[0].innerHTML = t('title')
+  useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
   payload.value = parseJwt()
 })
 </script>
 
 <template>
-  <div class="bg-neutral-900 px-5 py-3 flex justify-between items-center">
-    <div class="space-y-2">
-      <h1 class="text-3xl font-semibold">{{ currentLabel }}</h1>
-      <p class="text-gray-500">{{ $t('welcome') }}</p>
-    </div>
-    <div class="flex items-center justify-center space-x-5">
-      <div class="relative text-gray-600">
-        <input id="search" class="border-none bg-white h-10 pl-11 py-6 rounded-xl text focus:outline-none" type="search" name="search" :placeholder="$t('search')" />
-        <label for="search" class="cursor-pointer absolute left-3 top-3 mr-4">
-          <SearchIcon class="text-gray-600 h-6 w-6 fill-current" />
-        </label>
+  <div
+    class="z-10 px-14 flex items-center justify-between h-16 py-4 text-black bg-white sticky-top dark:bg-gray-800 dark:text-gray-300 md:h-20">
+    <div class="flex items-center justify-between space-x-10">
+      <div
+        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        <GlobeEastIcon class="w-6 h-6 text-gray-500" />
+        <h1>English</h1>
+        <CaretDownIcon class="w-5 h-5" />
       </div>
-      <div class="bg-white rounded-xl p-3 cursor-pointer hover:shadow">
-        <BellIcon class="text-gray-600 h-7 w-7 fill-current" />
+      <div
+        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        <ChatTextIcon class="w-6 h-6 text-gray-500" />
+        <h1>Help</h1>
+        <CaretDownIcon class="w-5 h-5" />
       </div>
-      <router-link to="/patient-visit" v-if="navigationGuard(['admin', 'super_manager', 'tech_admin'])" class="bg-gray-900 text-white rounded-xl p-3.5 px-7 cursor-pointer hover:bg-gray-800">
-        <p class="text-base">+ {{ $t('addRecord') }}</p>
-      </router-link>
     </div>
-    <!-- Registration Modal (Payment & Patient) -->
-    <Registration />
-    <!-- Payment Status Changer Modal -->
-    <ChangePaymentStatus />
-    <!-- Delete Alert -->
-    <DeleteAlertModal />
-    <!-- Add Visit Modal -->
-    <AddVisitModal />
-    <AddServiceModal />
-    <EditServiceModal />
-    <OperationInfoModal />
-    <Cheque />
-    <PrintPdfModal />
+    <div class="flex items-center space-x-5">
+      <div
+        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        <BellIcon class="w-6 h-6 text-gray-500" />
+        <h1>Notification</h1>
+      </div>
+      <div class="flex items-center justify-between space-x-5">
+        <div class="text-sm text-right">
+          <h1 class="font-bold">
+            {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
+          </h1>
+          <h1 class="text-gray-500">{{ useAuthStore().user?.phone }}</h1>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
+          <CaretDownIcon class="w-5 h-5" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_BASE_URL
 class AuthService {
   async login(user) {
     await axios
-      .post(API_URL + '/auth/login', {
+      .post(API_URL + '/auth/user/login', {
         phone: user.phone.replace(/([() -])/g, ''),
         password: user.password,
       })
