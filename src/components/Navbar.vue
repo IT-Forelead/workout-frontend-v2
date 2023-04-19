@@ -11,6 +11,7 @@ import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
+import ProfileDropDown from './ProfileDropDown.vue'
 
 const { t } = useI18n()
 const payload = ref({})
@@ -55,7 +56,7 @@ onMounted(() => {
           <div class="text-base">There are no notifications</div>
         </div>
       </div>
-      <div class="flex items-center justify-between space-x-5 relative">
+      <div @click="useModalStore().toggleProfile()" class="flex items-center select-none justify-between space-x-5 relative cursor-pointer">
         <div class="text-sm text-right">
           <h1 class="font-bold">
             {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
@@ -66,15 +67,7 @@ onMounted(() => {
           <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
           <CaretDownIcon class="w-5 h-5" />
         </div>
-        <div class="absolute top-14 w-full bg-white flex items-center justify-between p-3 rounded-lg border border-gray-200 shadow-lg">
-          <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
-          <div class="text-xs">
-            <h1 class="font-bold">
-            {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
-          </h1>
-          <h1 class="text-gray-500">{{ useAuthStore().user?.phone }}</h1>
-          </div>
-        </div>
+        <ProfileDropDown v-if="useModalStore().isOpenProfileDropDown"/>
       </div>
     </div>
   </div>

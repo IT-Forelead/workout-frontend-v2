@@ -7,6 +7,7 @@ export const useModalStore = defineStore('modal', {
     isOpenDeleteAlertModal: false,
     isOpenFilterBy: false,
     isOpenNotification: false,
+    isOpenProfileDropDown: false,
   }),
   actions: {
     openAddUserModal() {
@@ -32,6 +33,9 @@ export const useModalStore = defineStore('modal', {
     },
     toggleNotification() {
       this.isOpenNotification = !this.isOpenNotification
+    },
+    toggleProfile() {
+      this.isOpenProfileDropDown = !this.isOpenProfileDropDown
     },
   },
 })
