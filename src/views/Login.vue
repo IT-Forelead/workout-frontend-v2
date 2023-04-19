@@ -10,6 +10,9 @@ import i18n from '../i18n.js'
 import { useI18n } from 'vue-i18n'
 import decodeJwt from '../mixins/utils'
 import { useSidebarStore } from '../store/sidebar.store.js'
+import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
+import EyeIcon from '../components/Icons/EyeIcon.vue'
+import EyeSlashIcon from '../components/Icons/EyeSlashIcon.vue'
 
 const { t } = useI18n()
 const isLoading = ref(false)
@@ -76,14 +79,7 @@ onMounted(() => {
     <div class="relative w-full xl:basis-1/3 max-h-screen p-4 md:p-8">
       <div class="flex items-center justify-between">
         <img src="/images/logo.png" class="p-2 border border-gray-300 rounded-lg w-14" alt="Logo" />
-        <div>
-          <select v-model="lang" @change="changeLang" class="border border-gray-300 rounded-lg cursor-pointer">
-            <option value="en" selected>English</option>
-            <option value="uz">O'zbek</option>
-            <option value="kr">Ўзбек</option>
-            <option value="ru">Русский</option>
-          </select>
-        </div>
+        <SelectOptionLanguages />
       </div>
       <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-2/3 px-8 md:px-4">
         <h1 class="text-2xl font-bold mb-5">{{ $t('login') }}</h1>
@@ -102,8 +98,8 @@ onMounted(() => {
             <label for="password">
               <div class="relative">
                 <input id="password" :type="hidePassword ? 'password' : 'text'" v-model="loginFormData.password" class="w-full py-2 border border-gray-300 rounded px-3 focus:outline-none focus:border-slate-500 hover:shadow" :placeholder="$t('enterYourPassword')" />
-                <EyeIconVue v-if="hidePassword" @click="togglePassword()" class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
-                <EyeSlashIconVue v-else @click="togglePassword()" class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
+                <EyeIcon v-if="hidePassword" @click="togglePassword()" class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
+                <EyeSlashIcon v-else @click="togglePassword()" class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
               </div>
             </label>
           </div>

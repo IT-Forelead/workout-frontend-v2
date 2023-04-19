@@ -1,22 +1,29 @@
 <script setup>
+import { useModalStore } from '../store/modal.store'
 import { useAuthStore } from '../store/auth.store'
 import { useI18n } from 'vue-i18n'
 import { ref, onMounted } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 import decodeJwt, { parseJwt } from '../mixins/utils'
 import CaretDownIcon from './Icons/CaretDownIcon.vue'
-import GlobeEastIcon from './Icons/GlobeEastIcon.vue'
 import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
+import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 
 const { t } = useI18n()
-const currentLang = ref('')
 const payload = ref({})
 
+const notificationDropdown = ref(null)
+
+onClickOutside(notificationDropdown, () => {
+  if (useModalStore().isOpenNotification) {
+    useModalStore().toggleNotification()
+  }
+})
+
 onMounted(() => {
-  currentLang.value = localStorage.getItem('lang') || 'uz'
-  document.getElementsByTagName('title')[0].innerHTML = t('title')
   useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
   payload.value = parseJwt()
 })
@@ -26,12 +33,7 @@ onMounted(() => {
   <div
     class="z-10 px-14 flex items-center justify-between h-16 py-4 text-black bg-white sticky-top dark:bg-gray-800 dark:text-gray-300 md:h-20">
     <div class="flex items-center justify-between space-x-10">
-      <div
-        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
-        <GlobeEastIcon class="w-6 h-6 text-gray-500" />
-        <span>English</span>
-        <CaretDownIcon class="w-4 h-4" />
-      </div>
+      <SelectOptionLanguages />
       <div
         class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
         <ChatTextIcon class="w-6 h-6 text-gray-500" />
@@ -39,10 +41,19 @@ onMounted(() => {
       </div>
     </div>
     <div class="flex items-center space-x-5">
-      <div
-        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
-        <BellIcon class="w-6 h-6 text-gray-500" />
-        <span>Notification</span>
+      <div class="relative" ref="notificationDropdown">
+        <div @click="useModalStore().toggleNotification()"
+          class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+          <BellIcon class="w-6 h-6 text-gray-500" />
+          <span>Notification</span>
+        </div>
+        <div v-if="useModalStore().isOpenNotification"
+          class="absolute flex flex-col items-center justify-center bg-white w-80 h-40 shadow rounded-b-md p-3 z-20 top-14 right-0 space-y-2">
+          <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 shadow">
+            <BellIcon class="w-10 h-10 text-gray-500" />
+          </div>
+          <div class="text-base">There are no notifications</div>
+        </div>
       </div>
       <div class="flex items-center justify-between space-x-5">
         <div class="text-sm text-right">
@@ -58,7 +69,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  
+
   <AddCustomerModal />
   <AddUserModal />
 </template>

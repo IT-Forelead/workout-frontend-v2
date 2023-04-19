@@ -4,10 +4,10 @@ import AuthService from '../services/auth.service'
 import { onMounted } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
-import i18n from '../i18n.js'
 import { useI18n } from 'vue-i18n'
 import { useSidebarStore } from '../store/sidebar.store.js'
-import CheckIcon from '../assets/icons/EnvelopeIcon.vue'
+import CheckIcon from '../components/Icons/EnvelopeIcon.vue'
+import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
 
 const { t } = useI18n()
 const lang = ref('')
@@ -42,15 +42,7 @@ const resetPassword = () => {
   }
 }
 
-const changeLang = () => {
-  localStorage.setItem('lang', lang.value)
-  i18n.global.locale.value = lang.value
-  document.getElementsByTagName('title')[0].innerHTML = t('title')
-}
-
 onMounted(() => {
-  lang.value = localStorage.getItem('lang') || 'uz'
-  document.getElementsByTagName('title')[0].innerHTML = t('title')
   useSidebarStore().clearStore()
 })
 </script>
@@ -60,14 +52,7 @@ onMounted(() => {
     <div class="relative w-full xl:basis-1/3 max-h-screen p-4 md:p-8">
       <div class="flex items-center justify-between">
         <img src="/images/logo.png" class="p-2 border border-gray-300 rounded-lg w-14" alt="Logo" />
-        <div>
-          <select v-model="lang" @change="changeLang" class="border border-gray-300 rounded-lg cursor-pointer">
-            <option value="en" selected>English</option>
-            <option value="uz">O'zbek</option>
-            <option value="kr">Ўзбек</option>
-            <option value="ru">Русский</option>
-          </select>
-        </div>
+        <SelectOptionLanguages />
       </div>
       <div v-if="result" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-2/3 px-8 md:px-4">
         <div class="flex flex-col items-center space-y-6">
