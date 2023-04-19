@@ -28,6 +28,13 @@ const routes = [
     beforeEnter: navigationGuards(['admin', 'doctor', 'cashier', 'super_manager', 'tech_admin']),
   },
   {
+    path: '/services',
+    name: 'Services',
+    component: () => import('../views/Services.vue'),
+    meta: { layout: 'dashboard' },
+    beforeEnter: navigationGuards(['admin', 'doctor', 'cashier', 'super_manager', 'tech_admin']),
+  },
+  {
     path: '/customers',
     name: 'Customers',
     component: () => import('../views/Customers.vue'),

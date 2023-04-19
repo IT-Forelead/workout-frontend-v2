@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useDropdownStore = defineStore('drop', {
+export const useDropdownStore = defineStore('dropdown', {
   state: () => ({
     isOpenSelectLanguage: false,
   }),

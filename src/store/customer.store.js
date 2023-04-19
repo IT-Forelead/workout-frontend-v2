@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useCustomerStore = defineStore('patient', {
+export const useCustomerStore = defineStore('customer', {
   state: () => ({
     customers: [],
     selectedCustomer: {},
