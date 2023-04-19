@@ -55,7 +55,7 @@ onMounted(() => {
           <div class="text-base">There are no notifications</div>
         </div>
       </div>
-      <div class="flex items-center justify-between space-x-5">
+      <div class="flex items-center justify-between space-x-5 relative">
         <div class="text-sm text-right">
           <h1 class="font-bold">
             {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
@@ -65,6 +65,15 @@ onMounted(() => {
         <div class="flex items-center space-x-2">
           <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
           <CaretDownIcon class="w-5 h-5" />
+        </div>
+        <div class="absolute top-14 w-full bg-white flex items-center justify-between p-3 rounded-lg border border-gray-200 shadow-lg">
+          <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
+          <div class="text-xs">
+            <h1 class="font-bold">
+            {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
+          </h1>
+          <h1 class="text-gray-500">{{ useAuthStore().user?.phone }}</h1>
+          </div>
         </div>
       </div>
     </div>
