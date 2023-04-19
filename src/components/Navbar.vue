@@ -8,6 +8,7 @@ import GlobeEastIcon from './Icons/GlobeEastIcon.vue'
 import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
+import AddUserModal from './Modals/AddUserModal.vue'
 
 const { t } = useI18n()
 const currentLang = ref('')
@@ -26,23 +27,22 @@ onMounted(() => {
     class="z-10 px-14 flex items-center justify-between h-16 py-4 text-black bg-white sticky-top dark:bg-gray-800 dark:text-gray-300 md:h-20">
     <div class="flex items-center justify-between space-x-10">
       <div
-        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
         <GlobeEastIcon class="w-6 h-6 text-gray-500" />
-        <h1>English</h1>
-        <CaretDownIcon class="w-5 h-5" />
+        <span>English</span>
+        <CaretDownIcon class="w-4 h-4" />
       </div>
       <div
-        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
         <ChatTextIcon class="w-6 h-6 text-gray-500" />
-        <h1>Help</h1>
-        <CaretDownIcon class="w-5 h-5" />
+        <span>Help</span>
       </div>
     </div>
     <div class="flex items-center space-x-5">
       <div
-        class="flex items-center justify-between rounded-xl bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
         <BellIcon class="w-6 h-6 text-gray-500" />
-        <h1>Notification</h1>
+        <span>Notification</span>
       </div>
       <div class="flex items-center justify-between space-x-5">
         <div class="text-sm text-right">
@@ -58,7 +58,9 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <AddCustomerModal/>
+  
+  <AddCustomerModal />
+  <AddUserModal />
 </template>
 
 <style scoped></style>

@@ -86,7 +86,7 @@ const submitFilterData = () => {
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="border border-gray-200 select-none text-gray-500 bg-gray-50 rounded-md w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-100 cursor-pointer">
+              class="border border-gray-200 select-none text-gray-500 bg-gray-50 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-100 cursor-pointer">
               <FunnelIcon class="w-5 h-5 text-gray-400" />
               <span>
                 {{ $t('filter') }}
@@ -105,11 +105,11 @@ const submitFilterData = () => {
                   type="text" id="lastname" :placeholder="$t('enterLastname')" />
               </div>
               <!-- <div>
-                        <label for="phone">{{ $t('phone') }}</label>
-                        <input v-model="filterData.phone"
-                          class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="phone"
-                          :placeholder="$t('enterFirstname')" />
-                      </div> -->
+                          <label for="phone">{{ $t('phone') }}</label>
+                          <input v-model="filterData.phone"
+                            class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="phone"
+                            :placeholder="$t('enterFirstname')" />
+                        </div> -->
               <div>
                 <label for="gender">{{ $t('gender') }}</label>
                 <select id="gender" v-model="filterData.gender"
@@ -144,8 +144,8 @@ const submitFilterData = () => {
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openModal()"
-            class="bg-black text-white text-base rounded-md p-2 px-4 cursor-pointer hover:bg-black/75">
+          <div @click="useModalStore().openAddCustomerModal()"
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
             add customer
           </div>
         </div>
