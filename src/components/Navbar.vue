@@ -9,6 +9,7 @@ import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
 import AddServiceModal from './Modals/AddServiceModal.vue'
+import AddTrainerServiceModal from './Modals/AddTrainerServiceModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
@@ -63,6 +64,7 @@ onMounted(() => {
   <AddUserModal />
   <AddCustomerModal />
   <AddServiceModal />
+  <AddTrainerServiceModal />
 </template>
 
 <style scoped></style>
