@@ -18,10 +18,10 @@ const router = useRouter()
 const payload = ref({})
 
 const props = defineProps({
-  customerTariffs: { type: Array, required: true },
+  customerTrainerTariffs: { type: Array, required: true },
 })
 
-const { customerTariffs } = toRefs(props)
+const { customerTrainerTariffs } = toRefs(props)
 
 const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
@@ -32,39 +32,43 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(customer, idx) in customerTariffs"
-    :key="idx">
+  <tr v-for="(tariff, idx) in customerTrainerTariffs" :key="idx"
+    class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
         <div>
           <div class="text-lg font-medium capitalize">
-            {{ customer?.customer?.firstname + ' ' + customer?.customer?.lastname }}
+            {{ tariff?.customer?.firstname + ' ' + tariff?.customer?.lastname }}
           </div>
-          <div>{{ customer?.customer?.phone }}</div>
+          <div>{{ tariff?.customer?.phone }}</div>
         </div>
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
+      {{ tariff?.trainerService?.trainerFirstName + ' ' + tariff?.trainerService?.trainerLastName }}
+    </td>
+    <td v-motion-pop class="py-2 px-4 text-left">
       <div class="">
-        {{ customer?.service?.name }}
+        {{ tariff?.trainerService?.name }}
       </div>
       <div class="text-sm">
-        {{ durationDayTranslate(customer?.service?.durationDay) + ' (' + monthlyArrivalTranslate(customer?.service?.monthlyArrival) + ')' }}
+        {{ durationDayTranslate(tariff?.trainerService?.durationDay) + ' (' +
+          monthlyArrivalTranslate(tariff?.trainerService?.monthlyArrival) + ')' }}
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-1">
         <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
         <div>
-          {{ moment(customer?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
+          {{ moment(tariff?.customerTrainerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
         </div>
       </div>
       <div class="flex items-center space-x-1">
         <CalendarXIcon class="w-5 h-5 text-gray-500" />
         <div>
-          {{ moment(customer?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
+          {{ moment(tariff?.customerTrainerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
         </div>
       </div>
     </td>
@@ -74,7 +78,7 @@ onMounted(() => {
           Total:
         </div>
         <div>
-          {{ useMoneyFormatter(customer?.customerTariff?.totalPrice) }}
+          {{ useMoneyFormatter(tariff?.customerTrainerTariff?.totalPrice) }}
         </div>
       </div>
       <div class="flex items-center space-x-1">
@@ -82,13 +86,13 @@ onMounted(() => {
           Paid:
         </div>
         <div>
-          {{ useMoneyFormatter(customer?.customerTariff?.pricePaid) }}
+          {{ useMoneyFormatter(tariff?.customerTrainerTariff?.pricePaid) }}
         </div>
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(customer?.customerTariff?.paymentStatus)">
-        {{ paymentStatusTranslate(customer?.customerTariff?.paymentStatus) }}
+      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTrainerTariff?.paymentStatus)">
+        {{ paymentStatusTranslate(tariff?.customerTrainerTariff?.paymentStatus) }}
       </span>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">

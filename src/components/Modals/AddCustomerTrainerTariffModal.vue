@@ -3,45 +3,47 @@ import { reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
-import CustomerTariffService from '../../services/customerTariff.service'
-import { useCustomerTariffStore } from '../../store/customerTariff.store'
+import CustomerTrainerTariffService from '../../services/customerTrainerTariff.service'
+import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff.store'
 import { useModalStore } from '../../store/modal.store'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
 
 const { t } = useI18n()
 
-const customerTariffForm = reactive({
-  customerId: '',
-  serviceId: '',
+const customerTrainerTariffForm = reactive({
+  customerTariffId: '',
+  trainerServiceId: '',
 })
 
 const clearForm = () => {
-  customerTariffForm.customerId = ''
-  customerTariffForm.serviceId = ''
+  customerTariffForm.customerTariffId = ''
+  customerTariffForm.trainerServiceId = ''
 }
 
 const submitServiceData = () => {
-  if (!customerTariffForm.customerId) {
+  if (!customerTariffForm.customerTariffId) {
     notify.warning({
       message: t('plsEnterServiceName'),
     })
-  } else if (!customerTariffForm.serviceId) {
+  } else if (!customerTariffForm.trainerServiceId) {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
   } else {
-    CustomerTariffService.createCustomerTariff(cleanObjectEmptyFields(customerTariffForm))
+    CustomerTrainerTariffService.createCustomerTariff(
+      cleanObjectEmptyFields(customerTrainerTariffForm)
+    )
       .then(() => {
         clearForm()
         notify.success({
           message: t('serviceCreated'),
         })
-        CustomerTariffService.getCustomerTariffs({})
+        CustomerTrainerTrainerTariffService.getCustomerTrainerTariffs({})
           .then((res) => {
-            useCustomerTariffStore().clearStore()
+            useCustomerTrainerTariffStore().clearStore()
             setTimeout(() => {
-              useCustomerTariffStore().setCustomerTariffs(res?.data)
+              useCustomerTrainerTariffStore().setCustomerTrainerTariffs(res?.data)
             }, 500)
           })
           .catch(() => {
@@ -49,7 +51,7 @@ const submitServiceData = () => {
               message: t('errorGettingServices'),
             })
           })
-        useModalStore().closeAddCustomerTariffModal()
+        useModalStore().closeAddCustomerTrainerTariffModal()
       })
       .catch((err) => {
         notify.error({
@@ -60,21 +62,21 @@ const submitServiceData = () => {
 }
 </script>
 <template>
-  <div v-if="useModalStore().isAddCustomerTariffModalOpen"
+  <div v-if="useModalStore().isAddCustomerTrainerTariffModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
           <div class="text-xl font-medium">{{ $t('addService') }}</div>
-          <button @click="useModalStore().closeAddCustomerTariffModal()"
+          <button @click="useModalStore().closeAddCustomerTrainerTariffModal()"
             class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <label for="durationDay">{{ $t('customer') }}</label>
-            <select v-model="customerTariffForm.durationDay" id="durationDay"
+            <label for="durationDay">{{ $t('customerTariff') }}</label>
+            <select v-model="customerTrainerTariffForm.durationDay" id="durationDay"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
               <option value="" selected>{{ $t('selectServiceType') }}</option>
               <option value="">{{ $t('selectServiceType') }}</option>
@@ -82,8 +84,8 @@ const submitServiceData = () => {
             </select>
           </div>
           <div>
-            <label for="monthlyArrival">{{ $t('service') }}</label>
-            <select v-model="customerTariffForm.monthlyArrival" id="monthlyArrival"
+            <label for="monthlyArrival">{{ $t('trainerService') }}</label>
+            <select v-model="customerTrainerTariffForm.monthlyArrival" id="monthlyArrival"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
               <option value="" selected>{{ $t('selectServiceType') }}</option>
               <option value="30">{{ $t('evriyday') }}</option>
