@@ -5,7 +5,6 @@ import { useI18n } from 'vue-i18n'
 import { ref, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import decodeJwt, { parseJwt } from '../mixins/utils'
-import CaretDownIcon from './Icons/CaretDownIcon.vue'
 import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
@@ -57,19 +56,7 @@ onMounted(() => {
           <div class="text-base">There are no notifications</div>
         </div>
       </div>
-      <div @click="useModalStore().toggleProfile()" class="flex items-center select-none justify-between space-x-5 relative cursor-pointer">
-        <div class="text-sm text-right">
-          <h1 class="font-bold">
-            {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
-          </h1>
-          <h1 class="text-gray-500">{{ useAuthStore().user?.phone }}</h1>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-10 block h-10 rounded-full bg-gray-700 shadow"></div>
-          <CaretDownIcon class="w-5 h-5" />
-        </div>
-        <ProfileDropDown v-if="useModalStore().isOpenProfileDropDown"/>
-      </div>
+      <ProfileDropDown />
     </div>
   </div>
 
