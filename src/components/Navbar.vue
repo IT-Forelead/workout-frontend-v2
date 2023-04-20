@@ -10,6 +10,7 @@ import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
 import AddServiceModal from './Modals/AddServiceModal.vue'
 import AddTrainerServiceModal from './Modals/AddTrainerServiceModal.vue'
+import AddCustomerTariffModal from './Modals/AddCustomerTariffModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
@@ -65,6 +66,7 @@ onMounted(() => {
   <AddCustomerModal />
   <AddServiceModal />
   <AddTrainerServiceModal />
+  <AddCustomerTariffModal />
 </template>
 
 <style scoped></style>
