@@ -17,3 +17,12 @@
   background: #555;
   -webkit-border-radius: 10px;
 }
+
+/* SIDEBAR ACTIVE CLASS */
+.active div:first-child {
+  @apply bg-yellow-400;
+}
+
+.active div {
+  @apply text-yellow-400;
+}
