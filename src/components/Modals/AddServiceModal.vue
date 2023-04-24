@@ -1,13 +1,17 @@
 <script setup>
-import { reactive } from '@vue/reactivity'
+import { computed, reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
 import ServicesService from '../../services/services.service'
 import { useServiceStore } from '../../store/service.store'
 import { useModalStore } from '../../store/modal.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
+import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
+import SelectOptionMonthlyArrival from '../Inputs/SelectOptionMonthlyArrival.vue'
 
 const { t } = useI18n()
 
@@ -17,89 +21,71 @@ const moneyConf = {
   precision: 0,
 }
 
-const serviceTypes = [
-  {
-    value: 'usual',
-    name: 'Usual'
-  },
-  {
-    value: 'for_students',
-    name: 'For students'
-  },
-  {
-    value: 'for_kids',
-    name: 'For kids'
-  },
-]
+const selectServiceType = computed(() => {
+  return useDropdownStore().selectServiceTypeOption
+})
 
-const durationDays = [
-  {
-    value: 1,
-    name: 'Bir kunlik'
-  },
-  {
-    value: 30,
-    name: 'Bir oylik'
-  },
-  {
-    value: 90,
-    name: 'Uch oylik'
-  },
-  {
-    value: 180,
-    name: 'Olti oylik'
-  },
-  {
-    value: 365,
-    name: 'Bir yillik'
-  }
-]
+const selectDurationDay = computed(() => {
+  return useDropdownStore().selectDurationDayOption
+})
 
-const serviceForm = reactive({
+const selectMonthlyArrival = computed(() => {
+  return useDropdownStore().selectMonthlyArrivalOption
+})
+
+const submitForm = reactive({
   name: '',
-  serviceType: '',
-  durationDay: 0,
-  monthlyArrival: 0,
   priceForMale: 0,
   priceForFemale: 0,
 })
 
+const clearFormData = () => {
+  submitForm.name = ''
+  submitForm.priceForMale = 0
+  submitForm.priceForFemale = 0
+}
+
 const clearForm = () => {
-  serviceForm.name = ''
-  serviceForm.serviceType = ''
-  serviceForm.durationDay = 0
-  serviceForm.monthlyArrival = 0
-  serviceForm.priceForMale = 0
-  serviceForm.priceForFemale = 0
+  clearFormData()
+  useDropdownStore().clearStore()
 }
 
 const submitServiceData = () => {
-  if (!serviceForm.name) {
+  if (!submitForm.name) {
     notify.warning({
       message: t('plsEnterServiceName'),
     })
-  } else if (!serviceForm.durationDay) {
+  } else if (!selectDurationDay?.value?.id) {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
-  } else if (!serviceForm.monthlyArrival) {
+  } else if (!selectMonthlyArrival?.value?.id) {
     notify.warning({
       message: t('plsSelectMonthlyArrival'),
     })
-  } else if (!serviceForm.serviceType) {
+  } else if (!selectServiceType?.value?.id) {
     notify.warning({
       message: t('plsSelectServiceType'),
     })
-  } else if (serviceForm.priceForMale == 0) {
+  } else if (submitForm.priceForMale == 0) {
     notify.warning({
       message: t('plsEnterPriceForMale'),
     })
-  } else if (serviceForm.priceForFemale == 0) {
+  } else if (submitForm.priceForFemale == 0) {
     notify.warning({
       message: t('plsEnterPriceForFemale'),
     })
   } else {
-    ServicesService.createService(cleanObjectEmptyFields(serviceForm))
+    ServicesService.createService(
+      cleanObjectEmptyFields({
+        name: submitForm.name,
+        serviceType: selectServiceType?.value?.id,
+        durationDay: selectDurationDay?.value?.id,
+        monthlyArrival: selectMonthlyArrival?.value?.id,
+        priceForMale: submitForm.priceForMale,
+        priceForFemale: submitForm.priceForFemale,
+      })
+    )
       .then(() => {
         clearForm()
         notify.success({
@@ -144,44 +130,31 @@ const submitServiceData = () => {
             <div class="space-y-4">
               <div>
                 <label for="firstname">{{ $t('serviceName') }}</label>
-                <input v-model="serviceForm.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+                <input v-model="submitForm.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
                   type="text" id="firstname" :placeholder="$t('enterFirstname')" />
               </div>
               <div>
-                <label for="durationDay">{{ $t('durationDay') }}</label>
-                <select v-model="serviceForm.durationDay" id="durationDay"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-                  <option value="" selected>{{ $t('selectServiceType') }}</option>
-                  <option v-for="(type, idx) in durationDays" :key="idx" :value="type.value">{{ type.name }}</option>
-                </select>
+                <label>{{ $t('durationDay') }}</label>
+                <SelectOptionDurationDay />
               </div>
               <div>
-                <label for="monthlyArrival">{{ $t('monthlyArrival') }}</label>
-                <select v-model="serviceForm.monthlyArrival" id="monthlyArrival"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-                  <option value="" selected>{{ $t('selectServiceType') }}</option>
-                  <option value="30">{{ $t('evriyday') }}</option>
-                  <option value="15">1/2</option>
-                </select>
+                <label>{{ $t('monthlyArrival') }}</label>
+                <SelectOptionMonthlyArrival />
               </div>
             </div>
             <div class="space-y-4">
               <div>
-                <label for="serviceType">{{ $t('serviceType') }}</label>
-                <select v-model="serviceForm.serviceType" id="serviceType"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-                  <option value="" selected>{{ $t('selectServiceType') }}</option>
-                  <option v-for="(type, idx) in serviceTypes" :key="idx" :value="type.value">{{ type.name }}</option>
-                </select>
+                <label>{{ $t('serviceType') }}</label>
+                <SelectOptionServiceType />
               </div>
               <div>
-                <label for="gender">{{ $t('priceForMale') }}</label>
-                <money3 v-model="serviceForm.priceForMale" v-bind="moneyConf" id="servicePrice"
+                <label for="priceForMale">{{ $t('priceForMale') }}</label>
+                <money3 v-model="submitForm.priceForMale" v-bind="moneyConf" id="priceForMale"
                   class="border-none text-right text-gray-500 bg-gray-100 rounded-lg w-full text-lg"> </money3>
               </div>
               <div>
-                <label for="gender">{{ $t('priceForFemale') }}</label>
-                <money3 v-model="serviceForm.priceForFemale" v-bind="moneyConf" id="servicePrice"
+                <label for="priceForFemale">{{ $t('priceForFemale') }}</label>
+                <money3 v-model="submitForm.priceForFemale" v-bind="moneyConf" id="priceForFemale"
                   class="border-none text-right text-gray-500 bg-gray-100 rounded-lg w-full text-lg"> </money3>
               </div>
             </div>

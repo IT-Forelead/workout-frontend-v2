@@ -4,9 +4,9 @@ export const useDropdownStore = defineStore('dropdown', {
   state: () => ({
     selectPaymentStatusOption: '',
     selectDeliveryStatusOption: '',
-    selectServiceTypeOption: '',
     selectGenderOption: '',
     selectRoleOption: '',
+    selectServiceTypeOption: '',
     selectDurationDayOption: '',
     selectMonthlyArrivalOption: '',
     isOpenSelectLanguage: false,
@@ -25,14 +25,14 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectDeliveryStatusOption(data) {
       this.selectDeliveryStatusOption = data
     },
-    setSelectServiceTypeOption(data) {
-      this.selectServiceTypeOption = data
-    },
     setSelectGenderOption(data) {
       this.selectGenderOption = data
     },
     setSelectRoleOption(data) {
       this.selectRoleOption = data
+    },
+    setSelectServiceTypeOption(data) {
+      this.selectServiceTypeOption = data
     },
     setSelectDurationDayOption(data) {
       this.selectDurationDayOption = data
@@ -58,12 +58,6 @@ export const useDropdownStore = defineStore('dropdown', {
     closeDeliveryStatusDropDown() {
       this.isOpenDeliveryStatusDropDown = false
     },
-    openServiceTypeDropDown() {
-      this.isOpenServiceTypeDropDown = true
-    },
-    closeServiceTypeDropDown() {
-      this.isOpenServiceTypeDropDown = false
-    },
     openGenderDropDown() {
       this.isOpenGenderDropDown = true
     },
@@ -75,6 +69,12 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     closeRoleDropDown() {
       this.isOpenRoleDropDown = false
+    },
+    openServiceTypeDropDown() {
+      this.isOpenServiceTypeDropDown = true
+    },
+    closeServiceTypeDropDown() {
+      this.isOpenServiceTypeDropDown = false
     },
     openDurationDayDropDown() {
       this.isOpenDurationDayDropDown = true
@@ -91,10 +91,11 @@ export const useDropdownStore = defineStore('dropdown', {
     clearStore() {
       this.selectPaymentStatusOption = ''
       this.selectDeliveryStatusOption = ''
-      this.selectServiceTypeOption = ''
       this.selectGenderOption = ''
       this.selectRoleOption = ''
+      this.selectServiceTypeOption = ''
       this.selectDurationDayOption = ''
+      this.selectMonthlyArrivalOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenPaymentStatusDropDown = false
       this.isOpenDeliveryStatusDropDown = false

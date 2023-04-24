@@ -10,36 +10,32 @@ import XIcon from '../Icons/XIcon.vue'
 const { t } = useI18n()
 
 const selectedOption = computed(() => {
-  return useDropdownStore().selectServiceTypeOption
+  return useDropdownStore().selectMonthlyArrivalOption
 })
 const dropdown = ref(null)
 
 const list = [
   {
-    id: 'usual',
-    name: t('usual')
+    id: 15,
+    name: t('fifteenDays')
   },
   {
-    id: 'for_students',
-    name: t('forStudents')
-  },
-  {
-    id: 'for_kids',
-    name: t('forKids')
+    id: 30,
+    name: t('everyDay')
   },
 ]
 
 const clearSelectedOptionData = () => {
-  useDropdownStore().setSelectServiceTypeOption('')
+  useDropdownStore().setSelectMonthlyArrivalOption('')
 }
 
 onClickOutside(dropdown, () => {
-  useDropdownStore().closeServiceTypeDropDown()
+  useDropdownStore().closeMonthlyArrivalDropDown()
 })
 
 const optionClicked = (data) => {
-  useDropdownStore().setSelectServiceTypeOption(data)
-  useDropdownStore().closeServiceTypeDropDown()
+  useDropdownStore().setSelectMonthlyArrivalOption(data)
+  useDropdownStore().closeMonthlyArrivalDropDown()
 }
 </script>
 <template>
@@ -48,19 +44,18 @@ const optionClicked = (data) => {
       <div v-if="selectedOption"
         class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2"
         v-text="selectedOption?.name"></div>
-      <div @click="useDropdownStore().openServiceTypeDropDown()" v-else
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
-        {{ $t('select') }}
-        </div>
-      <ChevronRightIcon @click="useDropdownStore().openServiceTypeDropDown()" v-if="!selectedOption"
+      <div @click="useDropdownStore().openMonthlyArrivalDropDown()" v-else
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">{{ $t('select')
+        }}</div>
+      <ChevronRightIcon @click="useDropdownStore().openMonthlyArrivalDropDown()" v-if="!selectedOption"
         class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
       <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
         class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
-      <ul v-if="useDropdownStore().isOpenServiceTypeDropDown"
+      <ul v-if="useDropdownStore().isOpenMonthlyArrivalDropDown"
         class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 divide-y divide-gray-200">
-        <li v-for="(type, idx) in list" :key="idx" @click="optionClicked(type)"
+        <li v-for="(status, idx) in list" :key="idx" @click="optionClicked(status)"
           class="hover:bg-gray-200 cursor-pointer p-2 ">
-          {{ type?.name }}
+          {{ status?.name }}
       </li>
     </ul>
   </label>
