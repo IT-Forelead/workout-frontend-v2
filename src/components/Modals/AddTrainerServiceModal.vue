@@ -12,6 +12,7 @@ import XIcon from '../Icons/XIcon.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
 import SelectOptionMonthlyArrival from '../Inputs/SelectOptionMonthlyArrival.vue'
+import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 
 const { t } = useI18n()
 
@@ -25,6 +26,10 @@ const selectServiceType = computed(() => {
   return useDropdownStore().selectServiceTypeOption
 })
 
+const selectTrainer = computed(() => {
+  return useDropdownStore().selectTrainerOption
+})
+
 const selectDurationDay = computed(() => {
   return useDropdownStore().selectDurationDayOption
 })
@@ -34,13 +39,11 @@ const selectMonthlyArrival = computed(() => {
 })
 
 const submitForm = reactive({
-  trainerId: '',
   name: '',
   price: 0,
 })
 
 const clearFormData = () => {
-  submitForm.trainerId = ''
   submitForm.name = ''
   submitForm.price = 0
 }
@@ -51,7 +54,7 @@ const clearForm = () => {
 }
 
 const submitTrainerServiceData = () => {
-  if (!submitForm.trainerId) {
+  if (!selectTrainer?.value?.id) {
     notify.warning({
       message: t('plsSelectTrainer'),
     })
@@ -78,7 +81,7 @@ const submitTrainerServiceData = () => {
   } else {
     TrainerServiceService.createTrainerService(
       cleanObjectEmptyFields({
-        trainerId: submitForm.trainerId,
+        userId: selectTrainer?.value?.id,
         name: submitForm.name,
         serviceType: selectServiceType?.value?.id,
         durationDay: selectDurationDay?.value?.id,
@@ -130,11 +133,7 @@ const submitTrainerServiceData = () => {
             <div class="space-y-4">
               <div>
                 <label for="serviceType">{{ $t('trainer') }}</label>
-                <select v-model="submitForm.trainerId" id="serviceType"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-                  <option value="" selected>{{ $t('selectServiceType') }}</option>
-                  <option value="c671d884-0b3e-43af-a49a-76b05067127f">Jumaniyozov Suroj</option>
-                </select>
+                <SelectOptionTrainer/>
               </div>
               <div>
                 <label for="firstname">{{ $t('serviceName') }}</label>
