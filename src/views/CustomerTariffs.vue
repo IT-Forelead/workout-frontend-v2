@@ -82,8 +82,8 @@ const submitFilterData = () => {
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="border border-gray-200 select-none text-gray-500 bg-gray-50 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-100 cursor-pointer">
-              <FunnelIcon class="w-5 h-5 text-gray-400" />
+              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
+              <FunnelIcon class="w-5 h-5 text-gray-500" />
               <span>
                 {{ $t('filter') }}
               </span>

@@ -1,8 +1,6 @@
 <script setup>
 import { useModalStore } from '../store/modal.store'
 import { useAuthStore } from '../store/auth.store'
-import SunIcon from './Icons/SunIcon.vue'
-import MoonIcon from './Icons/MoonIcon.vue'
 import CaretDownIcon from './Icons/CaretDownIcon.vue'
 import SettingsIcon from './Icons/SettingsIcon.vue'
 import LogoutIcon from './Icons/LogoutIcon.vue'
@@ -10,6 +8,7 @@ import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 import AuthService from '../services/auth.service'
 import { useRouter } from 'vue-router'
+import UserIcon from './Icons/UserIcon.vue'
 
 
 const router = useRouter()
@@ -33,7 +32,9 @@ const logout = () => {
   <div class="relative w-60" ref="dropdown">
     <div @click="useModalStore().toggleProfile()"
     class="flex items-center select-none justify-between relative cursor-pointer">
-    <div class="w-10 block h-10 rounded-lg bg-gray-700 shadow"></div>
+    <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 shadow">
+      <UserIcon class="w-7 h-7 text-gray-500" />
+    </div>
     <div class="text-sm text-left">
       <div class="font-bold">
         {{ useAuthStore().user?.firstname + ' ' + useAuthStore().user?.lastname }}
@@ -50,20 +51,6 @@ const logout = () => {
         <SettingsIcon class="w-6 h-6" />
         <span>Settings</span>
       </li>
-      <!-- <li class="flex items-center hover:bg-gray-200 cursor-pointer p-2 space-x-2">
-          <SunIcon class="w-6 h-6" />
-          <div class="flex items-center justify-between">
-            <div class="block">Light mode</div>
-            <div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" value="" class="sr-only peer">
-                <div
-                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                </div>
-              </label>
-            </div>
-          </div>
-        </li> -->
       <li @click="logout()" class="flex items-center hover:bg-gray-200 cursor-pointer p-2 space-x-2">
         <LogoutIcon class="w-6 h-6" />
         <span>Logout</span>

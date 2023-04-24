@@ -5,7 +5,7 @@ import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
 import i18n from '../../i18n.js'
 import CaretDownIcon from '../Icons/CaretDownIcon.vue'
-import GlobeEastIcon from '../Icons/GlobeEastIcon.vue'
+import GlobeIcon from '../Icons/GlobeIcon.vue'
 
 const { t } = useI18n()
 const currentLang = ref('')
@@ -55,7 +55,7 @@ onMounted(() => {
   <div class="relative w-36" ref="dropdown">
     <div @click="useDropdownStore().openSelectLanguage()"
       class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 cursor-pointer hover:bg-gray-200">
-      <GlobeEastIcon class="w-6 h-6 text-gray-500" />
+      <GlobeIcon class="w-6 h-6 text-gray-500" />
       <span>{{ currentLang }}</span>
       <CaretDownIcon class="w-4 h-4" />
     </div>
