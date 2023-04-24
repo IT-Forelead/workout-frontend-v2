@@ -70,7 +70,7 @@ import UserListIcon from './Icons/UserListIcon.vue';
       </router-link>
     </ul>
     <div class="absolute bottom-0 w-full mb-3 text-sm text-center text-gray-400 dark:text-gray-400">
-      Copyright &copy; 2023 <a href="http://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br />
+      Copyright &copy; {{ new Date().getFullYear() }} <a href="http://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br />
       All Rights Reserved.
     </div>
   </div>

@@ -38,11 +38,11 @@ onMounted(() => {
     class="z-10 px-14 flex items-center justify-between h-16 py-4 text-black bg-white sticky-top dark:bg-gray-800 dark:text-gray-300 md:h-20">
     <div class="flex items-center justify-between space-x-10">
       <SelectOptionLanguages />
-      <div
+      <a href="https://t.me/trimuzsupport" target="_blank"
         class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
         <ChatTextIcon class="w-6 h-6 text-gray-500" />
         <span>Help</span>
-      </div>
+      </a>
     </div>
     <div class="flex items-center space-x-5">
       <div class="relative" ref="notificationDropdown">
