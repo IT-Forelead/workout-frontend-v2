@@ -4,11 +4,13 @@ import authHeader from '../mixins/auth-header'
 import { computed, ref, reactive } from '@vue/reactivity'
 import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
 import { useModalStore } from '../store/modal.store'
+import { useDropdownStore } from '../store/dropdown.store'
 import { onMounted } from 'vue'
 import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
-import AxiosService from "../services/axios.service.js";
+import AxiosService from '../services/axios.service';
 import { onClickOutside } from '@vueuse/core'
 import { cleanObjectEmptyFields } from '../mixins/utils'
+import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 
@@ -26,7 +28,19 @@ const loadCustomerTrainerTariffs = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post('/trainer-tariff/report', { page: page, limit: 30 }, { headers: authHeader() })
+    AxiosService.post(
+      '/trainer-tariff/report',
+      cleanObjectEmptyFields({
+        paymentStatus: selectPaymentStatus.value?.id,
+        startDate: filterData.startDate,
+        endDate: filterData.endDate,
+        expireAtFrom: filterData.expireAtFrom,
+        expireAtTo: filterData.expireAtTo,
+        page: page,
+        limit: 30,
+      }),
+      { headers: authHeader() }
+    )
       .then((result) => {
         total.value = result?.total
         useCustomerTrainerTariffStore().setCustomerTrainerTariffs(result?.data)
@@ -36,6 +50,10 @@ const loadCustomerTrainerTariffs = async ($state) => {
       })
   } else $state.loaded()
 }
+
+const selectPaymentStatus = computed(() => {
+  return useDropdownStore().selectPaymentStatusOption
+})
 
 onMounted(() => {
   useCustomerTrainerTariffStore().clearStore()
@@ -62,7 +80,15 @@ const filterData = reactive({
 const submitFilterData = () => {
   isLoading.value = true
   CustomerTrainerTariffService.getCustomerTrainerTariffs(
-    cleanObjectEmptyFields(filterData)
+    cleanObjectEmptyFields({
+      paymentStatus: selectPaymentStatus.value?.id,
+      startDate: filterData.startDate,
+      endDate: filterData.endDate,
+      expireAtFrom: filterData.expireAtFrom,
+      expireAtTo: filterData.expireAtTo,
+      page: 1,
+      limit: 30,
+    })
   ).then((res) => {
     useCustomerTrainerTariffStore().clearStore()
     useCustomerTrainerTariffStore().setCustomerTrainerTariffs(res?.data)
@@ -101,12 +127,7 @@ const submitFilterData = () => {
               </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
-                <select id="paymentStatus" v-model="filterData.paymentStatus"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+                <SelectOptionPaymentStatus />
               </div>
               <div>
                 <label>{{ $t('createdAt') }}</label>
@@ -150,7 +171,8 @@ const submitFilterData = () => {
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openAddCustomerTrainerTariffModal()" class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+          <div @click="useModalStore().openAddCustomerTrainerTariffModal()"
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
             add customer Trainer Tariff
           </div>
         </div>
@@ -170,8 +192,8 @@ const submitFilterData = () => {
             </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light">
-            <CustomerTrainerTariffItem :customerTrainerTariffs="customerTrainerTariffs" :distance="distance" :target="target"
-              @infinite="loadCustomerTrainerTariffs" />
+            <CustomerTrainerTariffItem :customerTrainerTariffs="customerTrainerTariffs" :distance="distance"
+              :target="target" @infinite="loadCustomerTrainerTariffs" />
           </tbody>
         </table>
         <div v-if="customerTrainerTariffs?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
