@@ -10,6 +10,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectDurationDayOption: '',
     selectMonthlyArrivalOption: '',
     selectTrainerOption: '',
+    selectCustomerOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentStatusDropDown: false,
     isOpenDeliveryStatusDropDown: false,
@@ -19,10 +20,20 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenDurationDayDropDown: false,
     isOpenMonthlyArrivalDropDown: false,
     isOpenTrainerDropDown: false,
+    isOpenCustomerDropDown: false,
   }),
   actions: {
     setSelectPaymentStatusOption(data) {
       this.selectPaymentStatusOption = data
+    },
+    setSelectCustomerOption(data) {
+      this.selectCustomerOption = data
+    },
+    openCustomerDropDown() {
+      this.isOpenCustomerDropDown = true
+    },
+    closeCustomerDropDown() {
+      this.isOpenCustomerDropDown = false
     },
     setSelectDeliveryStatusOption(data) {
       this.selectDeliveryStatusOption = data
