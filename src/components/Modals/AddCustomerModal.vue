@@ -1,27 +1,36 @@
 <script setup>
-import { reactive } from '@vue/reactivity'
+import { computed, reactive } from '@vue/reactivity'
 import { useModalStore } from '../../store/modal.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
 import CustomerService from '../../services/customer.service'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionGender from '../Inputs/SelectOptionGender.vue'
 
 const { t } = useI18n()
+
+const selectGender = computed(() => {
+  return useDropdownStore().selectGenderOption
+})
 
 const customerForm = reactive({
   firstname: '',
   lastname: '',
   phone: '',
-  gender: '',
 })
 
-const clearForm = () => {
+const clearFormData = () => {
   customerForm.firstname = ''
   customerForm.lastname = ''
-  customerForm.gender = ''
   customerForm.phone = ''
+}
+
+const clearForm = () => {
+  clearFormData()
+  useDropdownStore().clearStore()
 }
 
 const submitCustomerData = () => {
@@ -37,7 +46,7 @@ const submitCustomerData = () => {
     notify.warning({
       message: t('plsEnterPhone'),
     })
-  } else if (!customerForm.gender) {
+  } else if (!selectGender.value?.id) {
     notify.warning({
       message: t('plsEnterGender'),
     })
@@ -46,7 +55,7 @@ const submitCustomerData = () => {
       cleanObjectEmptyFields({
         firstname: customerForm.firstname,
         lastname: customerForm.lastname,
-        gender: customerForm.gender,
+        gender: selectGender.value?.id,
         phone: customerForm.phone.replace(/([() -])/g, ''),
       })
     )
@@ -89,33 +98,28 @@ const submitCustomerData = () => {
             <XIcon />
           </button>
         </div>
-        <div class="p-6">
+        <div class="p-5 space-y-5">
           <div>
             <label for="firstname">{{ $t('firstname') }}</label>
             <input v-model="customerForm.firstname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5" type="text" id="firstname"
+              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="firstname"
               :placeholder="$t('enterFirstname')" />
           </div>
           <div>
             <label for="lastname">{{ $t('lastname') }}</label>
             <input v-model="customerForm.lastname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5" type="text" id="lastname"
+              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="lastname"
               :placeholder="$t('enterLastname')" />
           </div>
           <div>
             <label for="phone">{{ $t('phone') }}</label>
             <input v-model="customerForm.phone"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5" type="text"
+              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text"
               v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
           </div>
           <div>
-            <label for="gender">{{ $t('gender') }}</label>
-            <select v-model="customerForm.gender" id="gender"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5">
-              <option value="" selected>{{ $t('selectGender') }}</option>
-              <option value="male">{{ $t('male') }}</option>
-              <option value="female">{{ $t('female') }}</option>
-            </select>
+            <label>{{ $t('gender') }}</label>
+            <SelectOptionGender />
           </div>
           <div class="flex items-center justify-end space-x-2">
             <button @click="clearForm()"

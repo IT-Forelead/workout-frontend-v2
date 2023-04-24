@@ -3,6 +3,7 @@ import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 import { onMounted, ref, toRefs } from 'vue'
 import { parseJwt } from '../../mixins/utils.js'
+import moment from 'moment'
 import { useRouter } from 'vue-router'
 import UserIcon from '../Icons/UserIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
@@ -39,6 +40,9 @@ onMounted(() => {
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.phone }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.gender }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left">
+      {{ moment(customer?.createdAt).format('DD/MM/YYYY H:mm') }}
+    </td>
     <td v-motion-pop class="py-2 px-4 text-center">
       <div class="flex item-center justify-center">
         <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">

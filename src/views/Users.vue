@@ -4,6 +4,7 @@ import authHeader from '../mixins/auth-header'
 import { computed, ref, reactive } from '@vue/reactivity'
 import { useUserStore } from '../store/user.store'
 import { useModalStore } from '../store/modal.store'
+import { useDropdownStore } from '../store/dropdown.store'
 import { onMounted } from 'vue'
 import UserService from '../services/user.service'
 import AxiosService from "../services/axios.service.js";
@@ -11,6 +12,7 @@ import { onClickOutside } from '@vueuse/core'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import SelectOptionRole from '../components/Inputs/SelectOptionRole.vue'
 
 const isLoading = ref(false)
 
@@ -21,12 +23,29 @@ const users = computed(() => {
 const target = ref('.users-wrapper')
 const distance = ref(0)
 
+const selectRole = computed(() => {
+  return useDropdownStore().selectRoleOption
+})
+
 let page = 0
 const loadUsers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post("/user/report", { page: page, limit: 30 }, { headers: authHeader() })
+    AxiosService.post(
+      '/user/report',
+      cleanObjectEmptyFields({
+        firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
+        lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+        role: selectRole.value?.id,
+        phone: filterData.phone.replace(/([() -])/g, ''),
+        startDate: filterData.startDate,
+        endDate: filterData.endDate,
+        page: page,
+        limit: 30,
+      }),
+      { headers: authHeader() }
+      )
       .then((result) => {
         total.value = result?.total
         useUserStore().setUsers(result?.data)
@@ -53,7 +72,6 @@ const filterData = reactive({
   firstName: '',
   lastName: '',
   phone: '',
-  role: '',
   startDate: '',
   endDate: '',
 })
@@ -64,8 +82,12 @@ const submitFilterData = () => {
     cleanObjectEmptyFields({
       firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
       lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
-      role: filterData.role,
+      role: selectRole.value?.id,
       phone: filterData.phone.replace(/([() -])/g, ''),
+      startDate: filterData.startDate,
+      endDate: filterData.endDate,
+      page: 1,
+      limit: 30,
     })
   ).then((res) => {
     useUserStore().clearStore()
@@ -104,35 +126,24 @@ const submitFilterData = () => {
                 <input v-model="filterData.lastName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
                   type="text" id="lastname" :placeholder="$t('enterLastname')" />
               </div>
-              <!-- <div>
-                        <label for="phone">{{ $t('phone') }}</label>
-                        <input v-model="filterData.phone"
-                          class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="phone"
-                          :placeholder="$t('enterFirstname')" />
-                      </div> -->
               <div>
-                <label for="role">{{ $t('role') }}</label>
-                <select id="role" v-model="filterData.role"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>Select role</option>
-                  <option value="super_manager">Super manager</option>
-                  <option value="admin">Admin</option>
-                  <option value="tech_admin">Tech admin</option>
-                  <option value="trainer">Trainer</option>
-                </select>
+                <label>{{ $t('role') }}</label>
+                <SelectOptionRole />
               </div>
-              <div class="flex items-center space-x-1">
-                <label for="">
-                  {{ $t('from') }}
-                  <input v-model="filterData.startDate" type="datetime-local"
-                    class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" />
-                </label>
-                <!-- <ArrowDownIcon class="-rotate-90 text-gray-600 mt-6" /> -->
-                <label for="">
-                  {{ $t('to') }}
-                  <input v-model="filterData.endDate" type="datetime-local"
-                    class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" />
-                </label>
+              <div>
+                <label>{{ $t('createdAt') }}</label>
+                <div class="flex items-center space-x-1">
+                  <div class="relative">
+                    <input v-model="filterData.startDate" type="datetime-local"
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">from</div>
+                  </div>
+                  <div class="relative">
+                    <input v-model="filterData.endDate" type="datetime-local"
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">to</div>
+                  </div>
+                </div>
               </div>
               <div v-if="isLoading"
                 class="w-full bg-gray-600 py-3 select-none text-white rounded-lg flex items-center justify-center">
@@ -160,6 +171,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('user') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('phone') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('role') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>
           </thead>

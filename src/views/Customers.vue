@@ -4,6 +4,7 @@ import authHeader from '../mixins/auth-header'
 import { computed, ref, reactive } from '@vue/reactivity'
 import { useCustomerStore } from '../store/customer.store'
 import { useModalStore } from '../store/modal.store'
+import { useDropdownStore } from '../store/dropdown.store'
 import { onMounted } from 'vue'
 import CustomerService from '../services/customer.service'
 import AxiosService from "../services/axios.service.js";
@@ -11,6 +12,7 @@ import { onClickOutside } from '@vueuse/core'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import SelectOptionGender from '../components/Inputs/SelectOptionGender.vue'
 
 const isLoading = ref(false)
 
@@ -21,12 +23,29 @@ const customers = computed(() => {
 const target = ref('.customers-wrapper')
 const distance = ref(0)
 
+const selectGender = computed(() => {
+  return useDropdownStore().selectGenderOption
+})
+
 let page = 0
 const loadCustomers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post("/customer/report", { page: page, limit: 30 }, { headers: authHeader() })
+    AxiosService.post(
+      '/customer/report',
+      cleanObjectEmptyFields({
+        firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
+        lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+        gender: selectGender.value?.id,
+        phone: filterData.phone.replace(/([() -])/g, ''),
+        startDate: filterData.startDate,
+        endDate: filterData.endDate,
+        page: page,
+        limit: 30,
+      }),
+      { headers: authHeader() }
+    )
       .then((result) => {
         total.value = result?.total
         useCustomerStore().setCustomers(result?.data)
@@ -64,8 +83,12 @@ const submitFilterData = () => {
     cleanObjectEmptyFields({
       firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
       lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
-      gender: filterData.gender,
+      gender: selectGender.value?.id,
       phone: filterData.phone.replace(/([() -])/g, ''),
+      startDate: filterData.startDate,
+      endDate: filterData.endDate,
+      page: 1,
+      limit: 30,
     })
   ).then((res) => {
     useCustomerStore().clearStore()
@@ -104,33 +127,24 @@ const submitFilterData = () => {
                 <input v-model="filterData.lastName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
                   type="text" id="lastname" :placeholder="$t('enterLastname')" />
               </div>
-              <!-- <div>
-                          <label for="phone">{{ $t('phone') }}</label>
-                          <input v-model="filterData.phone"
-                            class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="phone"
-                            :placeholder="$t('enterFirstname')" />
-                        </div> -->
               <div>
                 <label for="gender">{{ $t('gender') }}</label>
-                <select id="gender" v-model="filterData.gender"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
+                <SelectOptionGender />
               </div>
-              <div class="flex items-center space-x-1">
-                <label for="">
-                  {{ $t('from') }}
-                  <input v-model="filterData.startDate" type="datetime-local"
-                    class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" />
-                </label>
-                <!-- <ArrowDownIcon class="-rotate-90 text-gray-600 mt-6" /> -->
-                <label for="">
-                  {{ $t('to') }}
-                  <input v-model="filterData.endDate" type="datetime-local"
-                    class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" />
-                </label>
+              <div>
+                <label>{{ $t('createdAt') }}</label>
+                <div class="flex items-center space-x-1">
+                  <div class="relative">
+                    <input v-model="filterData.startDate" type="datetime-local"
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">from</div>
+                  </div>
+                  <div class="relative">
+                    <input v-model="filterData.endDate" type="datetime-local"
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">to</div>
+                  </div>
+                </div>
               </div>
               <div v-if="isLoading"
                 class="w-full bg-gray-600 py-3 select-none text-white rounded-lg flex items-center justify-center">
@@ -158,6 +172,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('user') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('phone') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('gender') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>
           </thead>

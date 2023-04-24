@@ -1,27 +1,36 @@
 <script setup>
-import { reactive } from '@vue/reactivity'
+import { computed, reactive } from '@vue/reactivity'
 import { useModalStore } from '../../store/modal.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
 import UserService from '../../services/user.service'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionRole from '../Inputs/SelectOptionRole.vue'
 
 const { t } = useI18n()
+
+const selectRole = computed(() => {
+  return useDropdownStore().selectRoleOption
+})
 
 const userForm = reactive({
   firstname: '',
   lastname: '',
   phone: '',
-  role: '',
 })
 
-const clearForm = () => {
+const clearFormData = () => {
   userForm.firstname = ''
   userForm.lastname = ''
-  userForm.role = ''
   userForm.phone = ''
+}
+
+const clearForm = () => {
+  clearFormData()
+  useDropdownStore().clearStore()
 }
 
 const submitUserData = () => {
@@ -37,7 +46,7 @@ const submitUserData = () => {
     notify.warning({
       message: t('plsEnterPhone'),
     })
-  } else if (!userForm.role) {
+  } else if (!selectRole.value?.id) {
     notify.warning({
       message: t('plsSelectRole'),
     })
@@ -46,7 +55,7 @@ const submitUserData = () => {
       cleanObjectEmptyFields({
         firstname: userForm.firstname,
         lastname: userForm.lastname,
-        role: userForm.role,
+        role: selectRole.value?.id,
         phone: userForm.phone.replace(/([() -])/g, ''),
       })
     )
@@ -89,34 +98,27 @@ const submitUserData = () => {
             <XIcon />
           </button>
         </div>
-        <div class="p-6">
+        <div class="p-5 space-y-5">
           <div>
             <label for="firstname">{{ $t('firstname') }}</label>
             <input v-model="userForm.firstname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5" type="text" id="firstname"
+              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="firstname"
               :placeholder="$t('enterFirstname')" />
           </div>
           <div>
             <label for="lastname">{{ $t('lastname') }}</label>
             <input v-model="userForm.lastname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5" type="text" id="lastname"
+              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="lastname"
               :placeholder="$t('enterLastname')" />
           </div>
           <div>
             <label for="phone">{{ $t('phone') }}</label>
-            <input v-model="userForm.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5"
+            <input v-model="userForm.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
               type="text" v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
           </div>
           <div>
-            <label for="role">{{ $t('role') }}</label>
-            <select v-model="userForm.role" id="role"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg mb-5">
-              <option value="" selected>{{ $t('selectRole') }}</option>
-              <option value="super_manager">Super manager</option>
-              <option value="admin">Admin</option>
-              <option value="tech_admin">Tech admin</option>
-              <option value="trainer">Trainer</option>
-            </select>
+            <label>{{ $t('role') }}</label>
+            <SelectOptionRole />
           </div>
           <div class="flex items-center justify-end space-x-2">
             <button @click="clearForm()"
