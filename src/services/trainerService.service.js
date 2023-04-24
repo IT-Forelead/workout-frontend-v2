@@ -8,6 +8,9 @@ class TrainerServicesService {
   async getAllTrainerServices() {
     return AxiosService.get('/trainer-service/all', { headers: authHeader() })
   }
+  async getTrainerServicesByUserId(userId) {
+    return AxiosService.get(`/trainer-service/${userId}`, { headers: authHeader() })
+  }
 }
 
 export default new TrainerServicesService()

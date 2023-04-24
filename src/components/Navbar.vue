@@ -12,6 +12,7 @@ import AddServiceModal from './Modals/AddServiceModal.vue'
 import AddTrainerServiceModal from './Modals/AddTrainerServiceModal.vue'
 import AddCustomerTariffModal from './Modals/AddCustomerTariffModal.vue'
 import AddCustomerTrainerTariffModal from './Modals/AddCustomerTrainerTariffModal.vue'
+import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
@@ -69,6 +70,7 @@ onMounted(() => {
   <AddTrainerServiceModal />
   <AddCustomerTariffModal />
   <AddCustomerTrainerTariffModal />
+  <AddPaymentModal />
 </template>
 
 <style scoped></style>

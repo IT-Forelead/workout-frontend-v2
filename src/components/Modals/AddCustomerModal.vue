@@ -16,16 +16,16 @@ const selectGender = computed(() => {
   return useDropdownStore().selectGenderOption
 })
 
-const customerForm = reactive({
+const submitForm = reactive({
   firstname: '',
   lastname: '',
   phone: '',
 })
 
 const clearFormData = () => {
-  customerForm.firstname = ''
-  customerForm.lastname = ''
-  customerForm.phone = ''
+  submitForm.firstname = ''
+  submitForm.lastname = ''
+  submitForm.phone = ''
 }
 
 const clearForm = () => {
@@ -34,15 +34,15 @@ const clearForm = () => {
 }
 
 const submitCustomerData = () => {
-  if (!customerForm.firstname) {
+  if (!submitForm.firstname) {
     notify.warning({
       message: t('plsEnterFirstname'),
     })
-  } else if (!customerForm.lastname) {
+  } else if (!submitForm.lastname) {
     notify.warning({
       message: t('plsEnterLastname'),
     })
-  } else if (!customerForm.phone) {
+  } else if (!submitForm.phone) {
     notify.warning({
       message: t('plsEnterPhone'),
     })
@@ -53,10 +53,10 @@ const submitCustomerData = () => {
   } else {
     CustomerService.createCustomer(
       cleanObjectEmptyFields({
-        firstname: customerForm.firstname,
-        lastname: customerForm.lastname,
+        firstname: submitForm.firstname,
+        lastname: submitForm.lastname,
         gender: selectGender.value?.id,
-        phone: customerForm.phone.replace(/([() -])/g, ''),
+        phone: submitForm.phone.replace(/([() -])/g, ''),
       })
     )
       .then(() => {
@@ -101,19 +101,19 @@ const submitCustomerData = () => {
         <div class="p-5 space-y-5">
           <div>
             <label for="firstname">{{ $t('firstname') }}</label>
-            <input v-model="customerForm.firstname"
+            <input v-model="submitForm.firstname"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="firstname"
               :placeholder="$t('enterFirstname')" />
           </div>
           <div>
             <label for="lastname">{{ $t('lastname') }}</label>
-            <input v-model="customerForm.lastname"
+            <input v-model="submitForm.lastname"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="lastname"
               :placeholder="$t('enterLastname')" />
           </div>
           <div>
             <label for="phone">{{ $t('phone') }}</label>
-            <input v-model="customerForm.phone"
+            <input v-model="submitForm.phone"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text"
               v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
           </div>

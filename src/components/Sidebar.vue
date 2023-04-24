@@ -4,6 +4,7 @@ import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
 import FolderOpenIcon from './Icons/FolderOpenIcon.vue';
 import HouseIcon from './Icons/HouseIcon.vue'
 import UserListIcon from './Icons/UserListIcon.vue';
+import MoneyIcon from './Icons/MoneyIcon.vue';
 </script>
 
 <template>
@@ -34,6 +35,14 @@ import UserListIcon from './Icons/UserListIcon.vue';
         <div class="px-10 flex items-center space-x-5">
           <FolderUserIcon class="w-7 h-7" />
           <p>{{ $t('customerTrainerTariffs') }}</p>
+        </div>
+      </router-link>
+      <router-link to="/payments" active-class="active"
+        class="relative flex items-center h-10 w-full hover:bg-yellow-500/10 py-7 cursor-pointer transition-colors duration-300">
+        <div class="-ml-1.5 w-3 h-10 rounded-xl bg-gray-900"></div>
+        <div class="px-10 flex items-center space-x-5">
+          <MoneyIcon class="w-7 h-7" />
+          <p>{{ $t('payments') }}</p>
         </div>
       </router-link>
       <router-link to="/customers" active-class="active"
