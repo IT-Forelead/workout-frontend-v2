@@ -20,12 +20,12 @@ const total = ref(1)
 const customers = computed(() => {
   return useCustomerStore().customers
 })
-const target = ref('.customers-wrapper')
-const distance = ref(0)
-
 const selectGender = computed(() => {
   return useDropdownStore().selectGenderOption
 })
+
+const target = ref('.customers-wrapper')
+const distance = ref(0)
 
 let page = 0
 const loadCustomers = async ($state) => {
