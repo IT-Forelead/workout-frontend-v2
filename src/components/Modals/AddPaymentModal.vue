@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -9,6 +9,7 @@ import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { usePaymentStore } from '../../store/payment.store'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
 
 const { t } = useI18n()
@@ -19,8 +20,14 @@ const moneyConf = {
   precision: 0,
 }
 
+const cost = ref(0)
+
 const selectedPaymentType = computed(() => {
   return useDropdownStore().selectPaymentTypeOption
+})
+
+const selectedCustomerTariffOption = computed(() => {
+  return useDropdownStore().selectCustomerTariffOption
 })
 
 const submitForm = reactive({
@@ -32,10 +39,8 @@ const submitForm = reactive({
 
 const clearForm = () => {
   useDropdownStore().setSelectPaymentTypeOption('')
-  submitForm.paymentType = ''
-  submitForm.customerTariffId = ''
-  submitForm.customerTrainerTariffId = ''
-  submitForm.price = ''
+  useDropdownStore().setSelectCustomerTariffOption('')
+  cost.value = 0
 }
 
 const submitServiceData = () => {
@@ -43,20 +48,20 @@ const submitServiceData = () => {
     notify.warning({
       message: t('plsSelectPaymentType'),
     })
-  } else if (!submitForm.customerTariffId && !submitForm.customerTrainerTariffId) {
+  } else if (!selectedCustomerTariffOption?.value?.customerTariff?.id && !submitForm.customerTrainerTariffId) {
     notify.warning({
-      message: t('plsSelectDurationDay'),
+      message: t('plsSelectCustomerTariff'),
     })
-  } else if (!submitForm.price == 0) {
+  } else if (!cost.value == 0) {
     notify.warning({
       message: t('plsEnterPrice'),
     })
   } else {
     PaymentService.createPayment(
       cleanObjectEmptyFields({
-        customerTariffId: '',
+        customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
         customerTrainerTariffId: '',
-        price: '',
+        price: cost.value,
       })
     )
       .then(() => {
@@ -104,18 +109,12 @@ const submitServiceData = () => {
             <SelectOptionPaymentType />
           </div>
           <div v-if="selectedPaymentType.id == 'for_tariff'">
-            <label for="monthlyArrival">{{ $t('for_tariff') }}</label>
-            <select v-model="submitForm.monthlyArrival" id="monthlyArrival"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-              <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="30">{{ $t('evriyday') }}</option>
-              <option value="15">1/2</option>
-            </select>
+            <label>{{ $t('customerTariff') }}</label>
+            <SelectOptionCustomerTariff />
           </div>
           <div v-if="selectedPaymentType.id == 'for_trainer_tariff'">
-            <label for="monthlyArrival">{{ $t('for_trainer_tariff') }}</label>
-            <select v-model="submitForm.monthlyArrival" id="monthlyArrival"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
+            <label>{{ $t('for_trainer_tariff') }}</label>
+            <select class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
               <option value="" selected>{{ $t('selectServiceType') }}</option>
               <option value="30">{{ $t('evriyday') }}</option>
               <option value="15">1/2</option>
@@ -123,7 +122,7 @@ const submitServiceData = () => {
           </div>
           <div>
             <label for="price">{{ $t('price') }}</label>
-            <money3 v-model="price" v-bind="moneyConf" id="price"
+            <money3 v-model="cost" v-bind="moneyConf" id="price"
               class="border-none text-right text-gray-500 bg-gray-100 rounded-lg w-full text-lg"> </money3>
           </div>
         </div>

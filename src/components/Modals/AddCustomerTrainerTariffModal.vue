@@ -101,7 +101,7 @@ const submitServiceData = () => {
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <label for="durationDay">{{ $t('customerTariff') }}</label>
+            <label>{{ $t('customerTariff') }}</label>
             <SelectOptionCustomerTariff />
           </div>
           <div>

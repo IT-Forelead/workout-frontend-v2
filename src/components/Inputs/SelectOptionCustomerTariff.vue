@@ -16,6 +16,7 @@ const { t } = useI18n()
 const selectedOption = computed(() => {
   return useDropdownStore().selectCustomerTariffOption
 })
+
 const dropdown = ref(null)
 
 const customerTariffs = computed(() => {
@@ -63,7 +64,7 @@ onMounted(() => {
       <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
         class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
       <ul v-if="useDropdownStore().isOpenCustomerTariffDropDown"
-        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 divide-y divide-gray-200">
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
         <li v-for="(customerTariff, idx) in customerTariffs" :key="idx" @click="optionClicked(customerTariff)"
           class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 ">
           <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
