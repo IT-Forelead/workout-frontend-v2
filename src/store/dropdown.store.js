@@ -2,19 +2,25 @@ import { defineStore } from 'pinia'
 
 export const useDropdownStore = defineStore('dropdown', {
   state: () => ({
+    selectPaymentTypeOption: '',
     selectPaymentStatusOption: '',
     selectDeliveryStatusOption: '',
     selectGenderOption: '',
     selectRoleOption: '',
     selectServiceOption: '',
+    selectServiceTypeOption: '',
+    selectTrainerServiceOption: '',
     selectDurationDayOption: '',
     selectMonthlyArrivalOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
     isOpenSelectLanguage: false,
+    isOpenPaymentTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
     isOpenDeliveryStatusDropDown: false,
     isOpenServiceDropDown: false,
+    isOpenServiceTypeDropDown: false,
+    isOpenTrainerServiceDropDown: false,
     isOpenGenderDropDown: false,
     isOpenRoleDropDown: false,
     isOpenDurationDayDropDown: false,
@@ -23,6 +29,9 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenCustomerDropDown: false,
   }),
   actions: {
+    setSelectPaymentTypeOption(data) {
+      this.selectPaymentTypeOption = data
+    },
     setSelectPaymentStatusOption(data) {
       this.selectPaymentStatusOption = data
     },
@@ -37,6 +46,12 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     setSelectServiceOption(data) {
       this.selectServiceOption = data
+    },
+    setSelectServiceTypeOption(data) {
+      this.selectServiceTypeOption = data
+    },
+    setSelectTrainerServiceOption(data) {
+      this.selectTrainerServiceOption = data
     },
     setSelectTrainerOption(data) {
       this.selectTrainerOption = data
@@ -61,6 +76,12 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     closeTrainerDropdown() {
       this.isOpenTrainerDropDown = false
+    },
+    openPaymentTypeDropDown() {
+      this.isOpenPaymentTypeDropDown = true
+    },
+    closePaymentTypeDropDown() {
+      this.isOpenPaymentTypeDropDown = false
     },
     openPaymentStatusDropDown() {
       this.isOpenPaymentStatusDropDown = true
@@ -92,6 +113,19 @@ export const useDropdownStore = defineStore('dropdown', {
     closeServiceDropDown() {
       this.isOpenServiceDropDown = false
     },
+    openServiceTypeDropDown() {
+      this.isOpenServiceTypeDropDown = true
+    },
+    closeServiceTypeDropDown() {
+      this.isOpenServiceTypeDropDown = false
+    },
+    openTrainerServiceDropDown() {
+      console.log("asdasdasd");
+      this.isOpenTrainerServiceDropDown = true
+    },
+    closeTrainerServiceDropDown() {
+      this.isOpenTrainerServiceDropDown = false
+    },
     openDurationDayDropDown() {
       this.isOpenDurationDayDropDown = true
     },
@@ -111,18 +145,24 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenCustomerDropDown = false
     },
     clearStore() {
+      this.selectPaymentTypeOption = ''
       this.selectPaymentStatusOption = ''
       this.selectDeliveryStatusOption = ''
       this.selectGenderOption = ''
       this.selectRoleOption = ''
       this.selectServiceOption = ''
+      this.selectServiceTypeOption = ''
+      this.selectTrainerServiceOption = ''
       this.selectDurationDayOption = ''
       this.selectMonthlyArrivalOption = ''
       this.selectTrainerOption = ''
       this.isOpenSelectLanguage = false
+      this.isOpenPaymentTypeDropDown = false
       this.isOpenPaymentStatusDropDown = false
       this.isOpenDeliveryStatusDropDown = false
       this.isOpenServiceDropDown = false
+      this.isOpenServiceTypeDropDown = false
+      this.isOpenTrainerServiceDropDown = false
       this.isOpenGenderDropDown = false
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false

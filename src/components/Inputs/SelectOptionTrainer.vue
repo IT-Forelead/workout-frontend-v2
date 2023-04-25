@@ -38,7 +38,7 @@ onMounted(() => {
   userService.getUsers({ role: "trainer", page: 1, limit: 1000 }).then((res) => {
     useUserStore().clearStore()
     useUserStore().setUsers(res.data)
-  }).catch((err) => {
+  }).catch(() => {
     console.log("Error while getting trainers");
   })
 })

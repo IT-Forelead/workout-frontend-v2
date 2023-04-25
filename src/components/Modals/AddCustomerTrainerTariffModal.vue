@@ -1,13 +1,18 @@
 <script setup>
-import { reactive } from '@vue/reactivity'
+import { computed, reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
+import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CustomerTrainerTariffService from '../../services/customerTrainerTariff.service'
+import trainerServiceService from '../../services/trainerService.service'
 import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
-import { cleanObjectEmptyFields } from '../../mixins/utils'
+import { useTrainerServiceStore } from '../../store/trainerService.store'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
+import SelectOptionTrainerService from '../Inputs/SelectOptionTrainerService.vue'
 
 const { t } = useI18n()
 
@@ -16,30 +21,51 @@ const customerTrainerTariffForm = reactive({
   trainerServiceId: '',
 })
 
+const selectedTrainer = computed(() => {
+  return useDropdownStore().selectTrainerOption
+})
+
+const selectedTrainerService = computed(() => {
+  return useDropdownStore().selectTrainerServiceOption
+})
+
+watch(
+  () => selectedTrainer.value,
+  (data) => {
+    if (data) {
+      trainerServiceService.getTrainerServicesByUserId(selectedTrainer.value?.id).then((res) => {
+        useTrainerServiceStore().clearStore()
+        useTrainerServiceStore().setTrainerServicesByUserId(res)
+      })
+    }
+  })
+
 const clearForm = () => {
-  customerTariffForm.customerTariffId = ''
-  customerTariffForm.trainerServiceId = ''
+  customerTrainerTariffForm.customerTariffId = ''
+  useDropdownStore().setSelectTrainerOption('')
+  useDropdownStore().setSelectTrainerServiceOption('')
 }
 
 const submitServiceData = () => {
-  if (!customerTariffForm.customerTariffId) {
+  if (customerTrainerTariffForm.customerTariffId) {
     notify.warning({
-      message: t('plsEnterServiceName'),
+      message: t('plsSelectCustomertariff'),
     })
-  } else if (!customerTariffForm.trainerServiceId) {
+  } else if (!selectedTrainerService?.value?.id) {
     notify.warning({
-      message: t('plsSelectDurationDay'),
+      message: t('plsSelectTrainerService'),
     })
   } else {
-    CustomerTrainerTariffService.createCustomerTariff(
-      cleanObjectEmptyFields(customerTrainerTariffForm)
-    )
+    CustomerTrainerTariffService.createCustomerTrainerTariff({
+      customerTariffId: '',
+      trainerServiceId: selectedTrainerService?.value?.id,
+    })
       .then(() => {
         clearForm()
         notify.success({
           message: t('serviceCreated'),
         })
-        CustomerTrainerTrainerTariffService.getCustomerTrainerTariffs({})
+        CustomerTrainerTariffService.getCustomerTrainerTariffs({})
           .then((res) => {
             useCustomerTrainerTariffStore().clearStore()
             setTimeout(() => {
@@ -79,18 +105,17 @@ const submitServiceData = () => {
             <select v-model="customerTrainerTariffForm.durationDay" id="durationDay"
               class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
               <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="">{{ $t('selectServiceType') }}</option>
-              <option value="">{{ $t('selectServiceType') }}</option>
+              <option value="sds">{{ $t('sdsdsds') }}</option>
+              <option value="sdsd">{{ $t('sdsdsdsd') }}</option>
             </select>
           </div>
           <div>
-            <label for="monthlyArrival">{{ $t('trainerService') }}</label>
-            <select v-model="customerTrainerTariffForm.monthlyArrival" id="monthlyArrival"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-              <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="30">{{ $t('evriyday') }}</option>
-              <option value="15">1/2</option>
-            </select>
+            <label>{{ $t('trainer') }}</label>
+            <SelectOptionTrainer />
+          </div>
+          <div>
+            <label>{{ $t('trainerService') }}</label>
+            <SelectOptionTrainerService />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
