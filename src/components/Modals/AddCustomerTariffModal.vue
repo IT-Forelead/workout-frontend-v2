@@ -75,7 +75,7 @@ const submitServiceData = () => {
         <div class="p-6 space-y-4">
           <div>
             <label for="durationDay">{{ $t('customer') }}</label>
-            <SelectOptionCustomer/> 
+            <SelectOptionCustomer /> 
           </div>
           <div>
             <label for="monthlyArrival">{{ $t('service') }}</label>

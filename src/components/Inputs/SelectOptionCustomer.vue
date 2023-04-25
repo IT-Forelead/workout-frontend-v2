@@ -1,98 +1,123 @@
 <script setup>
-import { computed, ref } from '@vue/reactivity'
-import { useDropdownStore } from '../../store/dropdown.store';
-import { onMounted, watch } from 'vue'
+import SelectOptionCustomersItem from '../../components/Items/SelectOptionCustomersItem.vue'
+import authHeader from '../../mixins/auth-header'
 import { onClickOutside } from '@vueuse/core'
-import XIcon from '../Icons/XIcon.vue'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import customerService from '../../services/customer.service'
+import { computed, ref, reactive } from '@vue/reactivity'
 import { useCustomerStore } from '../../store/customer.store'
+import { useModalStore } from '../../store/modal.store'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { onMounted } from 'vue'
+import CustomerService from '../../services/customer.service'
+import AxiosService from "../../services/axios.service.js";
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import UserIcon from '../Icons/UserIcon.vue'
+import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
+import XIcon from '../Icons/XIcon.vue'
+import SearchIcon from '../Icons/SearchIcon.vue'
 
-const selectedOption = ref('')
+const isLoading = ref(false)
 const dropdown = ref(null)
 
+const total = ref(1)
+const customers = computed(() => {
+  return useCustomerStore().customers
+})
+const target = ref('.customers-wrapper')
+const distance = ref(20)
+
+let page = 0
+const loadCustomers = async ($state) => {
+  page++
+  let additional = total.value % 30 === 0 ? 0 : 1
+  if (total.value !== 0 && total.value / 30 + additional >= page) {
+    AxiosService.post(
+      '/customer/report',
+      cleanObjectEmptyFields({
+        firstName: searchCustomer.value != '' ? `%${searchCustomer.value}%` : '',
+        // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+        page: page,
+        limit: 8,
+      }),
+      { headers: authHeader() }
+    )
+      .then((result) => {
+        total.value = result?.total
+        useCustomerStore().setCustomers(result?.data)
+        $state.loaded()
+      }).catch(() => {
+        $state.error()
+      })
+  } else $state.loaded()
+}
+
 onMounted(() => {
-  clearSelectedOptionData()
+  useCustomerStore().clearStore()
 })
 
-watch(useDropdownStore(), () => {
-  selectedOption.value = useDropdownStore().selectCustomerOption
+onClickOutside(dropdown, () => {
+  useDropdownStore().closeCustomerDropDown()
 })
 
 const clearSelectedOptionData = () => {
   useDropdownStore().setSelectCustomerOption('')
 }
 
-onClickOutside(dropdown, () => {
-  useDropdownStore().closeCustomerDropDown()
-})
-
-const optionClicked = (data) => {
-  useDropdownStore().setSelectCustomerOption(data)
-  useDropdownStore().closeCustomerDropDown()
-}
-
 const searchCustomer = ref('')
-const searchResults = ref([])
 
-const getSearchResult = (options) => {
-  if (searchCustomer.value) {
-    searchResults.value = options.filter(customer => customer?.firstname.toLowerCase().includes(searchCustomer?.value.toLowerCase()))
-  } else {
-    searchResults.value = []
-  }
-}
-
-const customers = computed(() => {
-  return useCustomerStore().customers
-})
-
-onMounted(() => {
-  customerService.getCustomers({}).then((res) => {
+const submitFilterData = () => {
+  isLoading.value = true
+  CustomerService.getCustomers(
+    cleanObjectEmptyFields({
+      firstName: searchCustomer.value != '' ? `%${searchCustomer.value}%` : '',
+      // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+      page: 1,
+      limit: 8,
+    })
+  ).then((res) => {
     useCustomerStore().clearStore()
-    useCustomerStore().setCustomers(res.data)
+    useCustomerStore().setCustomers(res?.data)
+    isLoading.value = false
+    if (useModalStore().isOpenFilterBy) {
+      useModalStore().toggleFilterBy()
+    }
   })
-})
-
+}
 </script>
 <template>
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
-      <div v-if="selectedOption && !useDropdownStore().isOpenCustomerDropDown"
-        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2">
-        {{ selectedOption?.firstname + " " + selectedOption?.lastname }}
-      </div>
-      <input type="text" v-model="searchCustomer" v-if="useDropdownStore().isOpenCustomerDropDown"
-        v-on:keyup="getSearchResult(customers)"
-        class="relative w-full foucus:ring-0 focus:outline-none border-none text-lg rounded-lg bg-gray-100 py-2"
-        :placeholder="$t('enterCustomerName')" />
       <div @click="useDropdownStore().openCustomerDropDown()"
-        v-if="!useDropdownStore().isOpenCustomerDropDown && !selectedOption"
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">{{ $t('select')
-        }}</div>
-      <ChevronRightIcon @click="useDropdownStore().openCustomerDropDown()" v-if="!selectedOption"
+        class="w-11 h-11 flex items-center rounded-l-lg justify-center bg-gray-100 cursor-pointer">
+        <UserIcon class="w-10 h-10 border-r rounded-lg p-2" />
+      </div>
+      <div v-if="useDropdownStore().selectCustomerOption"
+        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
+        {{ useDropdownStore().selectCustomerOption?.firstname + ' ' + useDropdownStore().selectCustomerOption?.lastname }}
+      </div>
+      <input type="text" v-if="useDropdownStore().isOpenCustomerDropDown"
+        class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
+        :placeholder="$t('enterCustomerName')" />
+      <SearchIcon v-if="useDropdownStore().isOpenCustomerDropDown" @click="submitFilterData()"
+        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500" />
+      <div @click="useDropdownStore().openCustomerDropDown()"
+        v-if="!useDropdownStore().isOpenCustomerDropDown && !useDropdownStore().selectCustomerOption"
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2">
+        {{ $t('select') }}
+      </div>
+      <ChevronRightIcon @click="useDropdownStore().openCustomerDropDown()"
+        v-if="!useDropdownStore().isOpenCustomerDropDown && !useDropdownStore().selectCustomerOption"
         class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
-      <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
+      <XIcon @click="clearSelectedOptionData()" v-if="useDropdownStore().selectCustomerOption"
         class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
-      <div v-if="!searchCustomer && useDropdownStore().isOpenCustomerDropDown"
-        class="absolute shadow p-2 z-20 top-12 max-h-56 overflow-auto w-full bg-gray-100 rounded-lg divide-y">
-        <div class="hover:bg-gray-200 cursor-pointer p-2 rounded-lg" v-for="(customer, idx) in customers" :key="idx"
-          @click="optionClicked(customer)">
-          {{ customer?.firstname + " " + customer?.lastname }}
-        </div>
-        <div v-if="customers?.length === 0" class="hover:bg-gray-200 cursor-pointer p-2 rounded-lg">
-          <p class="text-red-500">{{ $t('serviceError') }}</p>
-        </div>
-      </div>
-      <div v-if="searchCustomer && useDropdownStore().isOpenCustomerDropDown"
-      class="absolute shadow p-2 z-20 top-12 max-h-56 overflow-auto w-full bg-gray-100 rounded-lg divide-y">
-      <div class="hover:bg-gray-200 cursor-pointer p-2 rounded-lg" v-for="(customer, idx) in searchResults" :key="idx"
-        @click="optionClicked(option)">
-        {{ customer?.firstname + " " + customer?.lastname }}
-      </div>
-      <div v-if="searchResults?.length === 0" class="hover:bg-gray-200 cursor-pointer p-2 rounded-lg">
-        <p class="text-red-500">{{ $t('serviceNotFound') }}</p>
-      </div>
-    </div>
-  </label>
-</div></template>
+      <ul v-if="useDropdownStore().isOpenCustomerDropDown"
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 max-h-56 overflow-auto divide-y divide-gray-200 customers-wrapper">
+        <SelectOptionCustomersItem :customers="customers" :distance="distance" :target="target"
+          @infinite="loadCustomers" />
+        <li v-if="customers?.length === 0" class="w-full text-center text-red-500 p-2">
+          {{ $t('empty') }}
+        </li>
+      </ul>
+    </label>
+  </div>
+</template>
+<style scoped></style>

@@ -26,15 +26,6 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectPaymentStatusOption(data) {
       this.selectPaymentStatusOption = data
     },
-    setSelectCustomerOption(data) {
-      this.selectCustomerOption = data
-    },
-    openCustomerDropDown() {
-      this.isOpenCustomerDropDown = true
-    },
-    closeCustomerDropDown() {
-      this.isOpenCustomerDropDown = false
-    },
     setSelectDeliveryStatusOption(data) {
       this.selectDeliveryStatusOption = data
     },
@@ -55,6 +46,9 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     setSelectMonthlyArrivalOption(data) {
       this.selectMonthlyArrivalOption = data
+    },
+    setSelectCustomerOption(data) {
+      this.selectCustomerOption = data
     },
     openSelectLanguage() {
       this.isOpenSelectLanguage = true
@@ -109,6 +103,12 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     closeMonthlyArrivalDropDown() {
       this.isOpenMonthlyArrivalDropDown = false
+    },
+    openCustomerDropDown() {
+      this.isOpenCustomerDropDown = true
+    },
+    closeCustomerDropDown() {
+      this.isOpenCustomerDropDown = false
     },
     clearStore() {
       this.selectPaymentStatusOption = ''
