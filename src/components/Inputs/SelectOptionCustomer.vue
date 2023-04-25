@@ -68,7 +68,7 @@ const submitFilterData = () => {
   isLoading.value = true
   CustomerService.getCustomers(
     cleanObjectEmptyFields({
-      firstName: searchCustomer.value != '' ? `%${searchCustomer.value}%` : '',
+      firstName: searchCustomer.value ? `%${searchCustomer.value}%` : '',
       // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
       page: 1,
       limit: 8,
@@ -82,6 +82,12 @@ const submitFilterData = () => {
     }
   })
 }
+
+const whenPressEnter = (e) => {
+  if (e.keyCode === 13) {
+    submitFilterData()
+  }
+}
 </script>
 <template>
   <div class="select-none">
@@ -94,7 +100,7 @@ const submitFilterData = () => {
         class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
         {{ useDropdownStore().selectCustomerOption?.firstname + ' ' + useDropdownStore().selectCustomerOption?.lastname }}
       </div>
-      <input type="text" v-if="useDropdownStore().isOpenCustomerDropDown"
+      <input type="text" v-model="searchCustomer" v-on:keypress="whenPressEnter($event)" v-if="useDropdownStore().isOpenCustomerDropDown"
         class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
         :placeholder="$t('enterCustomerName')" />
       <SearchIcon v-if="useDropdownStore().isOpenCustomerDropDown" @click="submitFilterData()"
