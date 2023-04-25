@@ -8,6 +8,7 @@ import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff
 import { useModalStore } from '../../store/modal.store'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 
 const { t } = useI18n()
 
@@ -76,12 +77,7 @@ const submitServiceData = () => {
         <div class="p-6 space-y-4">
           <div>
             <label for="durationDay">{{ $t('customerTariff') }}</label>
-            <select v-model="customerTrainerTariffForm.durationDay" id="durationDay"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-              <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="">{{ $t('selectServiceType') }}</option>
-              <option value="">{{ $t('selectServiceType') }}</option>
-            </select>
+            <SelectOptionCustomerTariff />
           </div>
           <div>
             <label for="monthlyArrival">{{ $t('trainerService') }}</label>
