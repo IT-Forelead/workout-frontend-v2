@@ -1,38 +1,45 @@
 <script setup>
-import { reactive } from '@vue/reactivity'
+import { computed, reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
-import { cleanObjectEmptyFields } from '../../mixins/utils'
 import CustomerTariffService from '../../services/customerTariff.service'
 import { useCustomerTariffStore } from '../../store/customerTariff.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SelectOptionService from '../Inputs/SelectOptionService.vue'
 
 const { t } = useI18n()
 
-const customerTariffForm = reactive({
-  customerId: '',
-  serviceId: '',
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
+
+const selectedService = computed(() => {
+  return useDropdownStore().selectServiceOption
 })
 
 const clearForm = () => {
-  customerTariffForm.customerId = ''
-  customerTariffForm.serviceId = ''
+  useDropdownStore().setSelectCustomerOption('')
+  useDropdownStore().setSelectServiceOption('')
 }
 
 const submitServiceData = () => {
-  if (!customerTariffForm.customerId) {
+  if (!selectedCustomer?.id) {
     notify.warning({
       message: t('plsEnterServiceName'),
     })
-  } else if (!customerTariffForm.serviceId) {
+  } else if (!selectedService?.id) {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
   } else {
-    CustomerTariffService.createCustomerTariff(cleanObjectEmptyFields(customerTariffForm))
+    CustomerTariffService.createCustomerTariff({
+      customerId: selectedCustomer?.id,
+      serviceId: selectedService?.id,
+    })
       .then(() => {
         clearForm()
         notify.success({
@@ -74,17 +81,12 @@ const submitServiceData = () => {
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <label for="durationDay">{{ $t('customer') }}</label>
-            <SelectOptionCustomer /> 
+            <label>{{ $t('customer') }}</label>
+            <SelectOptionCustomer />
           </div>
           <div>
-            <label for="monthlyArrival">{{ $t('service') }}</label>
-            <select v-model="customerTariffForm.monthlyArrival" id="monthlyArrival"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-              <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="30">{{ $t('evriyday') }}</option>
-              <option value="15">1/2</option>
-            </select>
+            <label>{{ $t('service') }}</label>
+            <SelectOptionService />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">

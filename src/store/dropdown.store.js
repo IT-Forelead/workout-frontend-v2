@@ -6,7 +6,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectDeliveryStatusOption: '',
     selectGenderOption: '',
     selectRoleOption: '',
-    selectServiceTypeOption: '',
+    selectServiceOption: '',
     selectDurationDayOption: '',
     selectMonthlyArrivalOption: '',
     selectTrainerOption: '',
@@ -14,7 +14,7 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenSelectLanguage: false,
     isOpenPaymentStatusDropDown: false,
     isOpenDeliveryStatusDropDown: false,
-    isOpenServiceTypeDropDown: false,
+    isOpenServiceDropDown: false,
     isOpenGenderDropDown: false,
     isOpenRoleDropDown: false,
     isOpenDurationDayDropDown: false,
@@ -35,8 +35,8 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectRoleOption(data) {
       this.selectRoleOption = data
     },
-    setSelectServiceTypeOption(data) {
-      this.selectServiceTypeOption = data
+    setSelectServiceOption(data) {
+      this.selectServiceOption = data
     },
     setSelectTrainerOption(data) {
       this.selectTrainerOption = data
@@ -86,11 +86,11 @@ export const useDropdownStore = defineStore('dropdown', {
     closeRoleDropDown() {
       this.isOpenRoleDropDown = false
     },
-    openServiceTypeDropDown() {
-      this.isOpenServiceTypeDropDown = true
+    openServiceDropDown() {
+      this.isOpenServiceDropDown = true
     },
-    closeServiceTypeDropDown() {
-      this.isOpenServiceTypeDropDown = false
+    closeServiceDropDown() {
+      this.isOpenServiceDropDown = false
     },
     openDurationDayDropDown() {
       this.isOpenDurationDayDropDown = true
@@ -115,14 +115,14 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectDeliveryStatusOption = ''
       this.selectGenderOption = ''
       this.selectRoleOption = ''
-      this.selectServiceTypeOption = ''
+      this.selectServiceOption = ''
       this.selectDurationDayOption = ''
       this.selectMonthlyArrivalOption = ''
       this.selectTrainerOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenPaymentStatusDropDown = false
       this.isOpenDeliveryStatusDropDown = false
-      this.isOpenServiceTypeDropDown = false
+      this.isOpenServiceDropDown = false
       this.isOpenGenderDropDown = false
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false
