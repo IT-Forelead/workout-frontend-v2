@@ -104,7 +104,7 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">Customer Tariff report</p>
+        <p class="text-3xl font-bold">{{ $t('customerTrainerTariffReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -135,12 +135,12 @@ const submitFilterData = () => {
                   <div class="relative">
                     <input v-model="filterData.startDate" type="datetime-local"
                       class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">from</div>
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
                   </div>
                   <div class="relative">
                     <input v-model="filterData.endDate" type="datetime-local"
                       class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">to</div>
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
                   </div>
                 </div>
               </div>
@@ -150,12 +150,12 @@ const submitFilterData = () => {
                   <div class="relative">
                     <input v-model="filterData.expireAtFrom" type="datetime-local"
                       class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">from</div>
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
                   </div>
                   <div class="relative">
                     <input v-model="filterData.expireAtTo" type="datetime-local"
                       class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">to</div>
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
                   </div>
                 </div>
               </div>
@@ -173,7 +173,7 @@ const submitFilterData = () => {
           </div>
           <div @click="useModalStore().openAddCustomerTrainerTariffModal()"
             class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            add customer Trainer Tariff
+            {{ $t('addCustomerTrainerTariff') }}
           </div>
         </div>
       </div>

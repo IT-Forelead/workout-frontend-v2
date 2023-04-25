@@ -49,11 +49,11 @@ const logout = () => {
       class="absolute w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-200">
       <li class="flex items-center hover:bg-gray-200 cursor-pointer p-2 space-x-2">
         <SettingsIcon class="w-6 h-6" />
-        <span>Settings</span>
+        <span>{{ $t('settings') }}</span>
       </li>
       <li @click="logout()" class="flex items-center hover:bg-gray-200 cursor-pointer p-2 space-x-2">
         <LogoutIcon class="w-6 h-6" />
-        <span>Logout</span>
+        <span>{{ $t('logout') }}</span>
       </li>
     </ul>
   </div>
