@@ -51,7 +51,7 @@ onMounted(() => {
         class="flex items-center space-x-2 border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2">
         <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
         <div class="capitalize">
-          {{ selectedOption }}
+          {{ selectedOption?.customer?.firstname + " " + selectedOption?.customer?.lastname + " - " + selectedOption?.trainerService?.trainerFirstName + " " + selectedOption?.trainerService?.trainerLastName + ' - ' + selectedOption?.trainerService?.name }}
         </div>
       </div>
       <div @click="useDropdownStore().openCustomerTrainerTariffDropDown()" v-else
@@ -68,7 +68,7 @@ onMounted(() => {
           class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 ">
           <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
           <div class="capitalize">
-            {{ customerTrainerTariff }}
+            {{ customerTrainerTariff?.customer?.firstname + " " + customerTrainerTariff?.customer?.lastname + " - " + customerTrainerTariff?.trainerService?.trainerFirstName + " " + customerTrainerTariff?.trainerService?.trainerLastName + ' - ' + customerTrainerTariff?.trainerService?.name }}
           </div>
         </li>
       </ul>

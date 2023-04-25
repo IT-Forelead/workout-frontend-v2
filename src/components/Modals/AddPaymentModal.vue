@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -35,16 +35,10 @@ const selectedCustomerTrainerTariffOption = computed(() => {
   return useDropdownStore().selectCustomerTrainerTariffOption
 })
 
-const submitForm = reactive({
-  paymentType: '',
-  customerTariffId: '',
-  customerTrainerTariffId: '',
-  price: '',
-})
-
 const clearForm = () => {
   useDropdownStore().setSelectPaymentTypeOption('')
   useDropdownStore().setSelectCustomerTariffOption('')
+  useDropdownStore().setSelectCustomerTrainerTariffOption('')
   cost.value = 0
 }
 
@@ -53,11 +47,11 @@ const submitServiceData = () => {
     notify.warning({
       message: t('plsSelectPaymentType'),
     })
-  } else if (!selectedCustomerTariffOption?.value?.customerTariff?.id && !selectedCustomerTariffOption?.value?.customerTrainerTariff?.id) {
+  } else if (!selectedCustomerTariffOption?.value?.customerTariff?.id && !selectedCustomerTrainerTariffOption?.value?.customerTrainerTariff?.id) {
     notify.warning({
       message: t('plsSelectCustomerTariff'),
     })
-  } else if (!cost.value == 0) {
+  } else if (cost.value == 0) {
     notify.warning({
       message: t('plsEnterPrice'),
     })
@@ -65,7 +59,7 @@ const submitServiceData = () => {
     PaymentService.createPayment(
       cleanObjectEmptyFields({
         customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
-        customerTrainerTariffId: '',
+        customerTrainerTariffId: selectedCustomerTrainerTariffOption?.value?.customerTrainerTariff?.id,
         price: cost.value,
       })
     )
@@ -119,7 +113,7 @@ const submitServiceData = () => {
           </div>
           <div v-if="selectedPaymentType.id == 'for_trainer_tariff'">
             <label>{{ $t('for_trainer_tariff') }}</label>
-            <SelectOptionCustomerTrainerTariff/>
+            <SelectOptionCustomerTrainerTariff />
           </div>
           <div>
             <label for="price">{{ $t('price') }}</label>
