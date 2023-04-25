@@ -14,6 +14,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectMonthlyArrivalOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
+    selectCustomerTariffOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
@@ -27,6 +28,7 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenMonthlyArrivalDropDown: false,
     isOpenTrainerDropDown: false,
     isOpenCustomerDropDown: false,
+    isOpenCustomerTariffDropDown: false,
   }),
   actions: {
     setSelectPaymentTypeOption(data) {
@@ -64,6 +66,15 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     setSelectCustomerOption(data) {
       this.selectCustomerOption = data
+    },
+    setSelectCustomerTariffOption(data) {
+      this.selectCustomerTariffOption = data
+    },
+    openCustomerTariffDropDown() {
+      this.isOpenCustomerTariffDropDown = true
+    },
+    closeCustomerTariffDropDown() {
+      this.isOpenCustomerTariffDropDown = false
     },
     openSelectLanguage() {
       this.isOpenSelectLanguage = true
@@ -156,6 +167,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectDurationDayOption = ''
       this.selectMonthlyArrivalOption = ''
       this.selectTrainerOption = ''
+      this.selectCustomerTariffOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenPaymentTypeDropDown = false
       this.isOpenPaymentStatusDropDown = false
@@ -167,7 +179,8 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false
       this.isOpenMonthlyArrivalDropDown = false
-      this.isOpenTrainerDropDown = false
+      this.isOpenTrainerDropDown = false,
+      this.isOpenCustomerTariffDropDown = false
     },
   },
 })

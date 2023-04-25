@@ -27,18 +27,18 @@ const clearForm = () => {
 }
 
 const submitServiceData = () => {
-  if (!selectedCustomer?.id) {
+  if (!selectedCustomer.value?.id) {
     notify.warning({
       message: t('plsEnterServiceName'),
     })
-  } else if (!selectedService?.id) {
+  } else if (!selectedService.value?.id) {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
   } else {
     CustomerTariffService.createCustomerTariff({
-      customerId: selectedCustomer?.id,
-      serviceId: selectedService?.id,
+      customerId: selectedCustomer.value?.id,
+      serviceId: selectedService.value?.id,
     })
       .then(() => {
         clearForm()
