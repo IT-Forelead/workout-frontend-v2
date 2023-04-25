@@ -15,6 +15,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectTrainerOption: '',
     selectCustomerOption: '',
     selectCustomerTariffOption: '',
+    selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
@@ -29,6 +30,7 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenTrainerDropDown: false,
     isOpenCustomerDropDown: false,
     isOpenCustomerTariffDropDown: false,
+    isOpenCustomerTrainerTariffDropDown: false,
   }),
   actions: {
     setSelectPaymentTypeOption(data) {
@@ -70,11 +72,20 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectCustomerTariffOption(data) {
       this.selectCustomerTariffOption = data
     },
+    setSelectCustomerTrainerTariffOption(data) {
+      this.selectCustomerTrainerTariffOption = data
+    },
     openCustomerTariffDropDown() {
       this.isOpenCustomerTariffDropDown = true
     },
     closeCustomerTariffDropDown() {
       this.isOpenCustomerTariffDropDown = false
+    },
+    openCustomerTrainerTariffDropDown() {
+      this.isOpenCustomerTrainerTariffDropDown = true
+    },
+    closeCustomerTrainerTariffDropDown() {
+      this.isOpenCustomerTrainerTariffDropDown = false
     },
     openSelectLanguage() {
       this.isOpenSelectLanguage = true
@@ -167,6 +178,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectMonthlyArrivalOption = ''
       this.selectTrainerOption = ''
       this.selectCustomerTariffOption = ''
+      this.selectCustomerTrainerTariffOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenPaymentTypeDropDown = false
       this.isOpenPaymentStatusDropDown = false
@@ -180,6 +192,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenMonthlyArrivalDropDown = false
       this.isOpenTrainerDropDown = false,
       this.isOpenCustomerTariffDropDown = false
+      this.isOpenCustomerTrainerTariffDropDown = false
     },
   },
 })

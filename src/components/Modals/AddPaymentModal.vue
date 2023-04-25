@@ -10,6 +10,7 @@ import { useModalStore } from '../../store/modal.store'
 import { usePaymentStore } from '../../store/payment.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
+import SelectOptionCustomerTrainerTariff from '../Inputs/SelectOptionCustomerTrainerTariff.vue'
 import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
 
 const { t } = useI18n()
@@ -30,6 +31,10 @@ const selectedCustomerTariffOption = computed(() => {
   return useDropdownStore().selectCustomerTariffOption
 })
 
+const selectedCustomerTrainerTariffOption = computed(() => {
+  return useDropdownStore().selectCustomerTrainerTariffOption
+})
+
 const submitForm = reactive({
   paymentType: '',
   customerTariffId: '',
@@ -48,7 +53,7 @@ const submitServiceData = () => {
     notify.warning({
       message: t('plsSelectPaymentType'),
     })
-  } else if (!selectedCustomerTariffOption?.value?.customerTariff?.id && !submitForm.customerTrainerTariffId) {
+  } else if (!selectedCustomerTariffOption?.value?.customerTariff?.id && !selectedCustomerTariffOption?.value?.customerTrainerTariff?.id) {
     notify.warning({
       message: t('plsSelectCustomerTariff'),
     })
@@ -114,11 +119,7 @@ const submitServiceData = () => {
           </div>
           <div v-if="selectedPaymentType.id == 'for_trainer_tariff'">
             <label>{{ $t('for_trainer_tariff') }}</label>
-            <select class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg">
-              <option value="" selected>{{ $t('selectServiceType') }}</option>
-              <option value="30">{{ $t('evriyday') }}</option>
-              <option value="15">1/2</option>
-            </select>
+            <SelectOptionCustomerTrainerTariff/>
           </div>
           <div>
             <label for="price">{{ $t('price') }}</label>
