@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from '@vue/reactivity'
+import { computed } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { watch } from 'vue'
@@ -11,15 +11,14 @@ import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
 import XIcon from '../Icons/XIcon.vue'
+import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 import SelectOptionTrainerService from '../Inputs/SelectOptionTrainerService.vue'
-import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 
 const { t } = useI18n()
 
-const customerTrainerTariffForm = reactive({
-  customerTariffId: '',
-  trainerServiceId: '',
+const selectedCustomerTariffOption = computed(() => {
+  return useDropdownStore().selectCustomerTariffOption
 })
 
 const selectedTrainer = computed(() => {
@@ -42,13 +41,13 @@ watch(
   })
 
 const clearForm = () => {
-  customerTrainerTariffForm.customerTariffId = ''
+  useDropdownStore().setSelectCustomerTariffOption('')
   useDropdownStore().setSelectTrainerOption('')
   useDropdownStore().setSelectTrainerServiceOption('')
 }
 
 const submitServiceData = () => {
-  if (customerTrainerTariffForm.customerTariffId) {
+  if (!selectedCustomerTariffOption?.value?.customerTariff?.id) {
     notify.warning({
       message: t('plsSelectCustomertariff'),
     })
@@ -58,7 +57,7 @@ const submitServiceData = () => {
     })
   } else {
     CustomerTrainerTariffService.createCustomerTrainerTariff({
-      customerTariffId: '',
+      customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
       trainerServiceId: selectedTrainerService?.value?.id,
     })
       .then(() => {

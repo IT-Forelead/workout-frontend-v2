@@ -38,7 +38,6 @@ const optionClicked = (data) => {
 onMounted(() => {
   customerTariffService.getCustomerTariffs({}).then((res) => {
     useUserStore().clearStore()
-    console.log(res.data);
     useCustomerTariffStore().setCustomerTariffs(res.data)
   }).catch(() => {
     console.log("Error while getting customer tariffs");

@@ -131,7 +131,6 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenServiceTypeDropDown = false
     },
     openTrainerServiceDropDown() {
-      console.log("asdasdasd");
       this.isOpenTrainerServiceDropDown = true
     },
     closeTrainerServiceDropDown() {
