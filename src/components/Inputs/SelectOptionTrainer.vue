@@ -8,6 +8,7 @@ import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 import { useUserStore } from '../../store/user.store'
 import userService from '../../services/user.service'
+import UserIcon from '../Icons/UserIcon.vue'
 
 const { t } = useI18n()
 
@@ -46,8 +47,11 @@ onMounted(() => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div v-if="selectedOption"
-        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2">
-        {{ selectedOption?.firstname + " " + selectedOption?.lastname }}
+        class="flex items-center space-x-2 border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2">
+        <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
+        <div class="capitalize">
+          {{ selectedOption?.firstname + " " + selectedOption?.lastname }}
+        </div>
       </div>
       <div @click="useDropdownStore().openTrainerDropdown()" v-else
         class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
@@ -60,8 +64,11 @@ onMounted(() => {
       <ul v-if="useDropdownStore().isOpenTrainerDropDown"
         class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 divide-y divide-gray-200">
         <li v-for="(trainer, idx) in trainers" :key="idx" @click="optionClicked(trainer)"
-          class="hover:bg-gray-200 cursor-pointer p-2 ">
-          {{ trainer?.firstname + " " + trainer?.lastname }}
+          class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 ">
+          <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
+          <div class="capitalize">
+            {{ trainer?.firstname + " " + trainer?.lastname }}
+          </div>
         </li>
       </ul>
     </label>

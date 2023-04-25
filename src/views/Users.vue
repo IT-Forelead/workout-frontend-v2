@@ -102,7 +102,7 @@ const submitFilterData = () => {
 
 <template>
   <div class="px-4 py-2">
-    <div class="bg-white rounded capitalize h-[40vh] p-5">
+    <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
         <p class="text-3xl font-bold">User report</p>
         <div class="flex items-center space-x-3">
