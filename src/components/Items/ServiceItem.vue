@@ -23,14 +23,14 @@ const { services } = toRefs(props)
     <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForMale) }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForFemale) }}</td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <div class="flex item-center justify-center">
+      <!-- <div class="flex item-center justify-center">
         <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
         </div>
         <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
           <TrashIcon class="w-6 h-6" />
         </div>
-      </div>
+      </div> -->
     </td>
   </tr>
 </template>
