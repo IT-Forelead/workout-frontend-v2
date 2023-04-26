@@ -50,6 +50,11 @@ const clearForm = () => {
   createdAt.value = ''
 }
 
+const closeModal = () => {
+  useModalStore().closeAddCustomerTrainerTariffModal()
+  clearForm()
+}
+
 const submitServiceData = () => {
   if (!selectedCustomerTariffOption?.value?.customerTariff?.id) {
     notify.warning({
@@ -68,7 +73,6 @@ const submitServiceData = () => {
       })
     )
       .then(() => {
-        clearForm()
         notify.success({
           message: t('customerTrainerTariffCreated'),
         })
@@ -84,7 +88,7 @@ const submitServiceData = () => {
               message: t('errorGettingCustomerTrainerTariffs'),
             })
           })
-        useModalStore().closeAddCustomerTrainerTariffModal()
+        closeModal()
       })
       .catch((err) => {
         notify.error({
@@ -101,7 +105,7 @@ const submitServiceData = () => {
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
           <div class="text-xl font-medium">{{ $t('addCustomerTrainerTariff') }}</div>
-          <button @click="useModalStore().closeAddCustomerTrainerTariffModal()"
+          <button @click="closeModal()"
             class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>

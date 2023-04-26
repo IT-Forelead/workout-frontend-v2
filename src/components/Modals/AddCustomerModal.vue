@@ -29,6 +29,11 @@ const clearForm = () => {
   useDropdownStore().clearStore()
 }
 
+const closeModal = () => {
+  useModalStore().closeAddCustomerModal()
+  clearForm()
+}
+
 const submitCustomerData = () => {
   if (!submitForm.firstname) {
     notify.warning({
@@ -89,21 +94,21 @@ const submitCustomerData = () => {
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
           <div class="text-xl font-medium">{{ $t('addCustomer') }}</div>
-          <button @click="useModalStore().closeAddCustomerModal()"
+          <button @click="closeModal()"
             class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>
         </div>
         <div class="p-5 space-y-5">
           <div>
-            <label for="firstname">{{ $t('firstname') }}</label>
-            <input v-model="submitForm.firstname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
-              type="text" id="firstname" :placeholder="$t('enterFirstname')" />
-          </div>
-          <div>
             <label for="lastname">{{ $t('lastname') }}</label>
             <input v-model="submitForm.lastname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
               type="text" id="lastname" :placeholder="$t('enterLastname')" />
+          </div>
+          <div>
+            <label for="firstname">{{ $t('firstname') }}</label>
+            <input v-model="submitForm.firstname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+              type="text" id="firstname" :placeholder="$t('enterFirstname')" />
           </div>
           <div>
             <label for="phone">{{ $t('phone') }}</label>
