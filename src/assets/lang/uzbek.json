@@ -27,8 +27,8 @@
   "save": "Saqlash",
   "saving": "Saqlash",
   "reset": "Tozalash",
-  "role": "rol",
-  "selectRole": "rolni tanlang",
+  "role": "Rol",
+  "selectRole": "Rolni tanlang",
   "users": "Foydalanuvchilar",
   "user": "Foydalanuvchi",
   "customers": "Mijozlar",
@@ -51,7 +51,7 @@
   "savePayment": "To'lovni saqlash",
   "firstname": "Ism",
   "enterFirstname": "Ismni kiriting",
-  "lastname": "familiya",
+  "lastname": "Familiya",
   "enterLastname": "Familiyani kiriting",
   "birthday": "Tug'ilgan kun",
   "phone": "Telefon",
@@ -116,7 +116,7 @@
   "servicesReport": "Xizmatlar hisoboti",
   "total": "Jami",
   "price": "Narx",
-  "clear": "Clear",
+  "clear": "Tozalash",
   "selectServiceType": "Xizmat turini tanlang",
   "serviceError": "Ushbu xizmat turiga xizmat biriktirilmagan!",
   "filter": "Filtr",
@@ -192,7 +192,6 @@
   "trainerService": "Murabbiy xizmati",
   "priceForMale": "Erkaklar uchun narx",
   "priceForFemale": "Ayollar uchun narx",
-
   "superManager": "Super menejer",
   "techAdmin": "Texnik admin",
   "admin": "Admin",
@@ -246,5 +245,10 @@
   "customerTrainerTariffCreated": "Mijoz murabbiy tarifi muvaffaqiyatli yaratildi!",
   "errorGettingCustomerTrainerTariffs": "Mijozlarning murabbiy tariflarini olishda xatolik yuz berdi!",
   "errorCreatingCustomerTrainerTariff": "Mijoz murabbiy tarifini yaratishda xatolik yuz berdi!",
-  "errorGettingPayments": "To'lovlarni olishda xatolik yuz berdi!"
+  "errorGettingPayments": "To'lovlarni olishda xatolik yuz berdi!",
+  "customerData": "Mijoz ma'lumotlari",
+  "confirmation": "Tasdiqlash",
+  "finish": "Yakunlash",
+  "uploadPhoto": "Fotosuratni yuklash",
+  "smsVerification": "SMS tasdiqlash"
 }

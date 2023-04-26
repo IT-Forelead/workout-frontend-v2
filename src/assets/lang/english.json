@@ -244,5 +244,10 @@
   "customerTrainerTariffCreated": "Customer trainer tariff successfully created!",
   "errorGettingCustomerTrainerTariffs": "Error while getting customer trainer tariffs!",
   "errorCreatingCustomerTrainerTariff": "Error while creating customer trainer tariff!",
-  "errorGettingPayments": "Error while getting payments!"
+  "errorGettingPayments": "Error while getting payments!",
+  "customerData": "Customer data",
+  "confirmation": "Confirmation",
+  "finish": "Finish",
+  "uploadPhoto": "Upload a photo",
+  "smsVerification": "SMS verification!"
 }

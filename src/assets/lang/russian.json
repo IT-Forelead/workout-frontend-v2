@@ -244,5 +244,10 @@
   "customerTrainerTariffCreated": "Тариф для тренера успешно создан!",
   "errorGettingCustomerTrainerTariffs": "Ошибка при получении тарифов тренера клиентов!",
   "errorCreatingCustomerTrainerTariff": "Ошибка при создании тарифа тренера для клиентов!",
-  "errorGettingPayments": "Ошибка при получении платежей!"
+  "errorGettingPayments": "Ошибка при получении платежей!",
+  "customerData": "Данные клиента",
+  "confirmation": "Подтверждение",
+  "finish": "Готово",
+  "uploadPhoto": "Загрузить фото",
+  "smsVerification": "Подтверждение SMS!"
 }
