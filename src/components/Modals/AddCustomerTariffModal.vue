@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
 import CustomerTariffService from '../../services/customerTariff.service'
 import { useCustomerTariffStore } from '../../store/customerTariff.store'
 import { useDropdownStore } from '../../store/dropdown.store'
@@ -12,6 +13,8 @@ import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 import SelectOptionService from '../Inputs/SelectOptionService.vue'
 
 const { t } = useI18n()
+
+const createdAt = ref('')
 
 const selectedCustomer = computed(() => {
   return useDropdownStore().selectCustomerOption
@@ -24,6 +27,7 @@ const selectedService = computed(() => {
 const clearForm = () => {
   useDropdownStore().setSelectCustomerOption('')
   useDropdownStore().setSelectServiceOption('')
+  createdAt.value = ''
 }
 
 const submitServiceData = () => {
@@ -36,10 +40,13 @@ const submitServiceData = () => {
       message: t('plsSelectService'),
     })
   } else {
-    CustomerTariffService.createCustomerTariff({
-      customerId: selectedCustomer.value?.id,
-      serviceId: selectedService.value?.id,
-    })
+    CustomerTariffService.createCustomerTariff(
+      cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
+        serviceId: selectedService.value?.id,
+        createdAt: createdAt.value,
+      })
+    )
       .then(() => {
         clearForm()
         notify.success({
@@ -87,6 +94,11 @@ const submitServiceData = () => {
           <div>
             <label>{{ $t('service') }}</label>
             <SelectOptionService />
+          </div>
+          <div>
+            <label for="createdAt">{{ $t('createdAt') }}</label>
+            <input v-model="createdAt" type="datetime-local" id="createdAt"
+              class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">

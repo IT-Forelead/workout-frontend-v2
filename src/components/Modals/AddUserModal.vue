@@ -63,6 +63,7 @@ const submitUserData = () => {
         UserService.getUsers({})
           .then((res) => {
             useUserStore().clearStore()
+            useModalStore().closeAddUserModal()
             setTimeout(() => {
               useUserStore().setUsers(res?.data)
             }, 500)

@@ -1,9 +1,10 @@
 <script setup>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
 import CustomerTrainerTariffService from '../../services/customerTrainerTariff.service'
 import trainerServiceService from '../../services/trainerService.service'
 import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff.store'
@@ -16,6 +17,8 @@ import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 import SelectOptionTrainerService from '../Inputs/SelectOptionTrainerService.vue'
 
 const { t } = useI18n()
+
+const createdAt = ref('')
 
 const selectedCustomerTariffOption = computed(() => {
   return useDropdownStore().selectCustomerTariffOption
@@ -44,6 +47,7 @@ const clearForm = () => {
   useDropdownStore().setSelectCustomerTariffOption('')
   useDropdownStore().setSelectTrainerOption('')
   useDropdownStore().setSelectTrainerServiceOption('')
+  createdAt.value = ''
 }
 
 const submitServiceData = () => {
@@ -56,10 +60,13 @@ const submitServiceData = () => {
       message: t('plsSelectTrainerService'),
     })
   } else {
-    CustomerTrainerTariffService.createCustomerTrainerTariff({
-      customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
-      trainerServiceId: selectedTrainerService?.value?.id,
-    })
+    CustomerTrainerTariffService.createCustomerTrainerTariff(
+      cleanObjectEmptyFields({
+        customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
+        trainerServiceId: selectedTrainerService?.value?.id,
+        createdAt: createdAt.value,
+      })
+    )
       .then(() => {
         clearForm()
         notify.success({
@@ -111,6 +118,11 @@ const submitServiceData = () => {
           <div>
             <label>{{ $t('trainerService') }}</label>
             <SelectOptionTrainerService />
+          </div>
+          <div>
+            <label for="createdAt">{{ $t('createdAt') }}</label>
+            <input v-model="createdAt" type="datetime-local" id="createdAt"
+              class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
