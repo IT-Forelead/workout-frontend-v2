@@ -140,7 +140,6 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
             </tr>

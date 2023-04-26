@@ -99,44 +99,6 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      <div v-if="payment?.customerTrainerTariff">
-        <div class="flex items-center space-x-1">
-          <div class="text-sm text-gray-500">
-            Total:
-          </div>
-          <div>
-            {{ useMoneyFormatter(payment?.customerTrainerTariff?.totalPrice) }}
-          </div>
-        </div>
-        <div class="flex items-center space-x-1">
-          <div class="text-sm text-gray-500">
-            Paid:
-          </div>
-          <div>
-            {{ useMoneyFormatter(payment?.customerTrainerTariff?.pricePaid) }}
-          </div>
-        </div>
-      </div>
-      <div v-else>
-        <div class="flex items-center space-x-1">
-          <div class="text-sm text-gray-500">
-            Total:
-          </div>
-          <div>
-            {{ useMoneyFormatter(payment?.customerTariff?.totalPrice) }}
-          </div>
-        </div>
-        <div class="flex items-center space-x-1">
-          <div class="text-sm text-gray-500">
-            Paid:
-          </div>
-          <div>
-            {{ useMoneyFormatter(payment?.customerTariff?.pricePaid) }}
-          </div>
-        </div>
-      </div>
-    </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
       {{ moment(payment?.payment?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
