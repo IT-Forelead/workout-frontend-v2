@@ -3,15 +3,15 @@ import { computed, reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
-import TrainerServiceService from '../../services/trainerService.service'
-import { useTrainerServiceStore } from '../../store/trainerService.store'
-import { useModalStore } from '../../store/modal.store'
-import { useDropdownStore } from '../../store/dropdown.store'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
+import TrainerServiceService from '../../services/trainerService.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
+import { useTrainerServiceStore } from '../../store/trainerService.store'
 import XIcon from '../Icons/XIcon.vue'
-import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
 import SelectOptionMonthlyArrival from '../Inputs/SelectOptionMonthlyArrival.vue'
+import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 
 const { t } = useI18n()
@@ -43,13 +43,9 @@ const submitForm = reactive({
   price: 0,
 })
 
-const clearFormData = () => {
+const clearForm = () => {
   submitForm.name = ''
   submitForm.price = 0
-}
-
-const clearForm = () => {
-  clearFormData()
   useDropdownStore().clearStore()
 }
 
@@ -88,7 +84,7 @@ const submitTrainerServiceData = () => {
         monthlyArrival: selectMonthlyArrival?.value?.id,
         price: submitForm.price,
       })
-      )
+    )
       .then(() => {
         clearForm()
         notify.success({
@@ -103,14 +99,14 @@ const submitTrainerServiceData = () => {
           })
           .catch(() => {
             notify.error({
-              message: t('errorGettingServices'),
+              message: t('errorGettingTrainerServices'),
             })
           })
         useModalStore().closeAddTrainerServiceModal()
       })
       .catch((err) => {
         notify.error({
-          message: t('errorCreatingService'),
+          message: t('errorCreatingTrainerService'),
         })
       })
   }
@@ -133,7 +129,7 @@ const submitTrainerServiceData = () => {
             <div class="space-y-4">
               <div>
                 <label for="serviceType">{{ $t('trainer') }}</label>
-                <SelectOptionTrainer/>
+                <SelectOptionTrainer />
               </div>
               <div>
                 <label for="firstname">{{ $t('serviceName') }}</label>

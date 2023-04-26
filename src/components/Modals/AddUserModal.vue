@@ -1,12 +1,12 @@
 <script setup>
 import { computed, reactive } from '@vue/reactivity'
-import { useModalStore } from '../../store/modal.store'
-import { useDropdownStore } from '../../store/dropdown.store'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
-import UserService from '../../services/user.service'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
+import UserService from '../../services/user.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionRole from '../Inputs/SelectOptionRole.vue'
 
@@ -22,14 +22,10 @@ const userForm = reactive({
   phone: '',
 })
 
-const clearFormData = () => {
+const clearForm = () => {
   userForm.firstname = ''
   userForm.lastname = ''
   userForm.phone = ''
-}
-
-const clearForm = () => {
-  clearFormData()
   useDropdownStore().clearStore()
 }
 
@@ -101,15 +97,13 @@ const submitUserData = () => {
         <div class="p-5 space-y-5">
           <div>
             <label for="firstname">{{ $t('firstname') }}</label>
-            <input v-model="userForm.firstname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="firstname"
-              :placeholder="$t('enterFirstname')" />
+            <input v-model="userForm.firstname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+              type="text" id="firstname" :placeholder="$t('enterFirstname')" />
           </div>
           <div>
             <label for="lastname">{{ $t('lastname') }}</label>
-            <input v-model="userForm.lastname"
-              class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="lastname"
-              :placeholder="$t('enterLastname')" />
+            <input v-model="userForm.lastname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+              type="text" id="lastname" :placeholder="$t('enterLastname')" />
           </div>
           <div>
             <label for="phone">{{ $t('phone') }}</label>

@@ -104,7 +104,7 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('customerTrainerTariffReport') }}</p>
+        <p class="text-3xl font-bold">{{ $t('customerTrainerTariffsReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -116,15 +116,6 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
-              <div>
-                <label for="serviceId">{{ $t('trainerService') }}</label>
-                <select id="serviceId" v-model="filterData.trainerServiceId"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />
@@ -173,7 +164,7 @@ const submitFilterData = () => {
           </div>
           <div @click="useModalStore().openAddCustomerTrainerTariffModal()"
             class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            {{ $t('addCustomerTrainerTariff') }}
+            {{ $t('addTariff') }}
           </div>
         </div>
       </div>
@@ -185,7 +176,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('trainer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('gender') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('paymentStatus') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>

@@ -39,14 +39,10 @@ const submitForm = reactive({
   priceForFemale: 0,
 })
 
-const clearFormData = () => {
+const clearForm = () => {
   submitForm.name = ''
   submitForm.priceForMale = 0
   submitForm.priceForFemale = 0
-}
-
-const clearForm = () => {
-  clearFormData()
   useDropdownStore().clearStore()
 }
 
@@ -134,7 +130,7 @@ const submitServiceData = () => {
                   type="text" id="firstname" :placeholder="$t('enterFirstname')" />
               </div>
               <div>
-                <label>{{ $t('durationDay') }}</label>
+                <label>{{ $t('duration') }}</label>
                 <SelectOptionDurationDay />
               </div>
               <div>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from '@vue/reactivity'
+import { computed } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -29,11 +29,11 @@ const clearForm = () => {
 const submitServiceData = () => {
   if (!selectedCustomer.value?.id) {
     notify.warning({
-      message: t('plsEnterServiceName'),
+      message: t('plsSelectCustomer'),
     })
   } else if (!selectedService.value?.id) {
     notify.warning({
-      message: t('plsSelectDurationDay'),
+      message: t('plsSelectService'),
     })
   } else {
     CustomerTariffService.createCustomerTariff({
@@ -43,7 +43,7 @@ const submitServiceData = () => {
       .then(() => {
         clearForm()
         notify.success({
-          message: t('serviceCreated'),
+          message: t('customerTariffCreated'),
         })
         CustomerTariffService.getCustomerTariffs({})
           .then((res) => {
@@ -54,14 +54,14 @@ const submitServiceData = () => {
           })
           .catch(() => {
             notify.error({
-              message: t('errorGettingServices'),
+              message: t('errorGettingCustomerTariffs'),
             })
           })
         useModalStore().closeAddCustomerTariffModal()
       })
       .catch((err) => {
         notify.error({
-          message: t('errorCreatingService'),
+          message: t('errorCreatingCustomerTariff'),
         })
       })
   }
@@ -73,7 +73,7 @@ const submitServiceData = () => {
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('addService') }}</div>
+          <div class="text-xl font-medium">{{ $t('addCustomerTariff') }}</div>
           <button @click="useModalStore().closeAddCustomerTariffModal()"
             class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />

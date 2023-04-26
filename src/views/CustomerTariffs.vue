@@ -1,18 +1,18 @@
 <script setup>
-import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useCustomerTariffStore } from '../store/customerTariff.store'
-import { useModalStore } from '../store/modal.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { onMounted } from 'vue'
-import CustomerTariffService from '../services/customerTariff.service'
-import AxiosService from '../services/axios.service';
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
+import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
+import authHeader from '../mixins/auth-header'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import AxiosService from '../services/axios.service'
+import CustomerTariffService from '../services/customerTariff.service'
+import { useCustomerTariffStore } from '../store/customerTariff.store'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
 
 const isLoading = ref(false)
 
@@ -104,7 +104,7 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('customerTariffReport') }}</p>
+        <p class="text-3xl font-bold">{{ $t('customerTariffsReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -116,24 +116,6 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
-              <div>
-                <label for="customerId">{{ $t('customer') }}</label>
-                <select id="customerId" v-model="filterData.customerId"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label for="serviceId">{{ $t('service') }}</label>
-                <select id="serviceId" v-model="filterData.serviceId"
-                  class="border-none text-gray-500 bg-gray-100 rounded-lg w-full">
-                  <option value="" selected>{{ $t('selectGender') }}</option>
-                  <option value="male">{{ $t('male') }}</option>
-                  <option value="female">{{ $t('female') }}</option>
-                </select>
-              </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />
@@ -182,7 +164,7 @@ const submitFilterData = () => {
           </div>
           <div @click="useModalStore().openAddCustomerTariffModal()"
             class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            {{ $t('addCustomerTariff') }}
+            {{ $t('addTariff') }}
           </div>
         </div>
       </div>
@@ -193,7 +175,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('gender') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('paymentStatus') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>

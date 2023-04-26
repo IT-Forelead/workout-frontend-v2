@@ -23,11 +23,11 @@ onMounted(() => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">Trainer Service report</p>
+        <p class="text-3xl font-bold">{{ $t('trainerServicesReport') }}</p>
         <div class="flex items-center">
           <div @click="useModalStore().openAddTrainerServiceModal()"
             class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            add Service
+            {{ $t('addService') }}
           </div>
         </div>
       </div>

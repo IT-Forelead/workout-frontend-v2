@@ -26,7 +26,7 @@ import MoneyIcon from './Icons/MoneyIcon.vue';
         <div class="-ml-1.5 w-3 h-10 rounded-xl bg-gray-900"></div>
         <div class="px-10 flex items-center space-x-5">
           <FolderUserIcon class="w-7 h-7" />
-          <p>{{ $t('customerTariffs') }}</p>
+          <p>{{ $t('tariffs') }}</p>
         </div>
       </router-link>
       <router-link to="/trainer-tariffs" active-class="active"
@@ -34,7 +34,7 @@ import MoneyIcon from './Icons/MoneyIcon.vue';
         <div class="-ml-1.5 w-3 h-10 rounded-xl bg-gray-900"></div>
         <div class="px-10 flex items-center space-x-5">
           <FolderUserIcon class="w-7 h-7" />
-          <p>{{ $t('customerTrainerTariffs') }}</p>
+          <p>{{ $t('trainerTariffs') }}</p>
         </div>
       </router-link>
       <router-link to="/payments" active-class="active"

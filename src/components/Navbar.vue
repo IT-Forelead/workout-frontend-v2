@@ -57,7 +57,7 @@ onMounted(() => {
           <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 shadow">
             <BellIcon class="w-10 h-10 text-gray-500" />
           </div>
-          <div class="text-base">{{ $t('nonOtification') }}</div>
+          <div class="text-base">{{ $t('noNotification') }}</div>
         </div>
       </div>
       <ProfileDropDown />
