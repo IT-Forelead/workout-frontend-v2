@@ -20,7 +20,7 @@
 
 /* SIDEBAR ACTIVE CLASS */
 .active div:first-child {
-  @apply bg-yellow-400;
+  @apply bg-yellow-500/10;
 }
 
 .active div {
