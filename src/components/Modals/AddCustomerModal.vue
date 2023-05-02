@@ -123,12 +123,12 @@ const sendActivationCode = () => {
     CustomerService.sendActivationCode(submitForm.phone.replace(/([() -])/g, ''))
       .then(() => {
         notify.success({
-          message: `${submitForm.phone} raqamiga tasdiqlash kodi muvaffaqiyatli yaratildi!`,
+          message: t('verificationCodeSentSuccessfully'),
         })
       })
       .catch(() => {
         notify.error({
-          message: `${submitForm.phone} raqamiga tasdiqlash kodi yuborishda xatolik yuz berdi!`,
+          message: t('errorSendingVerificationCode'),
         })
         showResendSMS.value = true
       })
@@ -329,10 +329,10 @@ const createCustomer = () => {
           <!-- Step 2 -->
           <div v-if="registerProcess.checkingMode" class="flex justify-center">
             <div class="flex flex-col">
-              <p class="px-3 text-xl text-center text-gray-600 dark:text-gray-300">
-                <strong class="text-black dark:text-gray-300">{{ submitForm.phone }}</strong> telefon raqamiga tasdiqlash
-                kodi SMS tarzida jo'natildi!
-              </p>
+              <div class="px-3 text-xl text-center text-gray-600 dark:text-gray-300">
+                {{ $t('verificationCodeHasBeenSentToTheNumberBelow') }}
+                <strong class="text-black dark:text-gray-300 ml-2">{{ submitForm.phone }}</strong>
+              </div>
               <div class="flex justify-center my-5">
                 <v-otp-input ref="otpInput"
                   input-classes="otp-input dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 mx-2 w-9 border-gray-300 rounded text-center p-0 py-1.5 text-xl"
@@ -342,7 +342,7 @@ const createCustomer = () => {
               </div>
               <div v-if="showResendSMS" @click="sendActivationCode()"
                 class="flex justify-center my-3 text-lg text-red-500 cursor-pointer hover:underline">
-                SMS xabarnoma kelmadimi?
+                {{ $t('didNotreceiveSms') }}
               </div>
               <div v-else class="flex items-center justify-center my-3 text-xl text-red-600 space-x-2">
                 <ClockCountdownIcon class="w-6 h-6" />

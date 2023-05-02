@@ -6,7 +6,6 @@ import { useI18n } from 'vue-i18n'
 import customerTrainerTariffService from '../../services/customerTrainerTariff.service'
 import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff.store'
 import { useDropdownStore } from '../../store/dropdown.store'
-import { useUserStore } from '../../store/user.store'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import UserIcon from '../Icons/UserIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
@@ -37,10 +36,8 @@ const optionClicked = (data) => {
 
 onMounted(() => {
   customerTrainerTariffService.getCustomerTrainerTariffs({}).then((res) => {
-    useUserStore().clearStore()
+    useCustomerTrainerTariffStore().clearStore()
     useCustomerTrainerTariffStore().setCustomerTrainerTariffs(res.data)
-  }).catch(() => {
-    console.log("Error while getting customer tariffs");
   })
 })
 </script>

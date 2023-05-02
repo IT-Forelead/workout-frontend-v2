@@ -250,5 +250,10 @@
   "confirmation": "Tasdiqlash",
   "finish": "Yakunlash",
   "uploadPhoto": "Fotosuratni yuklash",
-  "smsVerification": "SMS tasdiqlash"
+  "smsVerification": "SMS tasdiqlash",
+  "customerTrainerTariff": "Mijozning murabbiy tarifi",
+  "verificationCodeSentSuccessfully": "Tasdiqlash kodi muvaffaqiyatli yuborildi",
+  "verificationCodeHasBeenSentToTheNumberBelow": "Tasdiqlash kodi quyidagi raqamga yuborildi",
+  "errorSendingVerificationCode": "Tasdiqlash kodini yuborishda xatolik yuz berdi!",
+  "didNotreceiveSms": "SMS xabarni olmadingizmi?"
 }

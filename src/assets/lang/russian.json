@@ -249,5 +249,10 @@
   "confirmation": "Подтверждение",
   "finish": "Готово",
   "uploadPhoto": "Загрузить фото",
-  "smsVerification": "Подтверждение SMS!"
+  "smsVerification": "Подтверждение SMS!",
+  "customerTrainerTariff": "Тренерский тариф клиента",
+  "verificationCodeSentSuccessfully": "Код подтверждения успешно отправлен",
+  "verificationCodeHasBeenSentToTheNumberBelow": "Код подтверждения отправлен на указанный ниже номер",
+  "errorSendingVerificationCode": "Ошибка при отправке кода подтверждения!",
+  "didNotreceiveSms": "Не получили SMS-сообщение?"
 }

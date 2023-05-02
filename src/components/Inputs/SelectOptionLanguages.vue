@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { useDropdownStore } from '../../store/dropdown.store'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import i18n from '../../i18n.js'
+import { useDropdownStore } from '../../store/dropdown.store'
 import CaretDownIcon from '../Icons/CaretDownIcon.vue'
 import GlobeIcon from '../Icons/GlobeIcon.vue'
 

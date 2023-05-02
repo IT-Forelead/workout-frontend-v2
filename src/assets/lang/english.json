@@ -249,5 +249,10 @@
   "confirmation": "Confirmation",
   "finish": "Finish",
   "uploadPhoto": "Upload a photo",
-  "smsVerification": "SMS verification!"
+  "smsVerification": "SMS verification!",
+  "customerTrainerTariff": "Customer's trainer tariff",
+  "verificationCodeSentSuccessfully": "Verification code sent successfully",
+  "verificationCodeHasBeenSentToTheNumberBelow": "Verification code has been sent to the number below",
+  "errorSendingVerificationCode": "Error while sending the verification code!",
+  "didNotreceiveSms": "Didn't receive the SMS message?"
 }

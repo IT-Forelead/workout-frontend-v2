@@ -68,7 +68,8 @@ const optionClicked = (data) => {
         <li v-for="(status, idx) in list" :key="idx" @click="optionClicked(status)"
           class="hover:bg-gray-200 cursor-pointer p-2 ">
           {{ status?.name }}
-      </li>
-    </ul>
-  </label>
-</div></template>
+        </li>
+      </ul>
+    </label>
+  </div>
+</template>
