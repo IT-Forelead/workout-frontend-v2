@@ -14,6 +14,8 @@ import CalendarXIcon from '../Icons/CalendarXIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 
+const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
+
 const router = useRouter()
 const payload = ref({})
 
@@ -37,7 +39,12 @@ onMounted(() => {
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
-        <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        <div v-if="tariff?.customer?.image">
+          <img :src="URL + tariff?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
+        </div>
+        <div v-else>
+          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        </div>
         <div>
           <div class="text-lg font-medium capitalize">
             {{ tariff?.customer?.firstname + ' ' + tariff?.customer?.lastname }}

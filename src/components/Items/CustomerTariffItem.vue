@@ -14,6 +14,8 @@ import CalendarXIcon from '../Icons/CalendarXIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 
+const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
+
 const router = useRouter()
 const payload = ref({})
 
@@ -32,39 +34,44 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(customer, idx) in customerTariffs"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"
     :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
-        <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        <div v-if="tariff?.customer?.image">
+          <img :src="URL + tariff?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
+        </div>
+        <div v-else>
+          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        </div>
         <div>
           <div class="text-lg font-medium capitalize">
-            {{ customer?.customer?.firstname + ' ' + customer?.customer?.lastname }}
+            {{ tariff?.customer?.firstname + ' ' + tariff?.customer?.lastname }}
           </div>
-          <div>{{ customer?.customer?.phone }}</div>
+          <div>{{ tariff?.customer?.phone }}</div>
         </div>
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="">
-        {{ customer?.service?.name }}
+        {{ tariff?.service?.name }}
       </div>
       <div class="text-sm">
-        {{ durationDayTranslate(customer?.service?.durationDay) + ' (' + monthlyArrivalTranslate(customer?.service?.monthlyArrival) + ')' }}
+        {{ durationDayTranslate(tariff?.service?.durationDay) + ' (' + monthlyArrivalTranslate(tariff?.service?.monthlyArrival) + ')' }}
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-1">
         <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
         <div>
-          {{ moment(customer?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
+          {{ moment(tariff?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
         </div>
       </div>
       <div class="flex items-center space-x-1">
         <CalendarXIcon class="w-5 h-5 text-gray-500" />
         <div>
-          {{ moment(customer?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
+          {{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
         </div>
       </div>
     </td>
@@ -74,7 +81,7 @@ onMounted(() => {
           Total:
         </div>
         <div>
-          {{ useMoneyFormatter(customer?.customerTariff?.totalPrice) }}
+          {{ useMoneyFormatter(tariff?.customerTariff?.totalPrice) }}
         </div>
       </div>
       <div class="flex items-center space-x-1">
@@ -82,13 +89,13 @@ onMounted(() => {
           Paid:
         </div>
         <div>
-          {{ useMoneyFormatter(customer?.customerTariff?.pricePaid) }}
+          {{ useMoneyFormatter(tariff?.customerTariff?.pricePaid) }}
         </div>
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(customer?.customerTariff?.paymentStatus)">
-        {{ paymentStatusTranslate(customer?.customerTariff?.paymentStatus) }}
+      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
+        {{ paymentStatusTranslate(tariff?.customerTariff?.paymentStatus) }}
       </span>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">

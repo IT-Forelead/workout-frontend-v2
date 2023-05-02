@@ -9,6 +9,8 @@ import UserIcon from '../Icons/UserIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 
+const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
+
 const router = useRouter()
 const payload = ref({})
 
@@ -32,7 +34,13 @@ onMounted(() => {
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
-        <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        <div v-if="customer?.image">
+          <img :src="URL + customer?.image" alt="#"
+            class="object-cover w-9 h-9 rounded-full border duration-500 cursor-zoom-out hover:object-scale-down" />
+        </div>
+        <div v-else>
+          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+        </div>
         <span class="text-lg font-medium capitalize">
           {{ customer?.firstname + ' ' + customer?.lastname }}
         </span>
