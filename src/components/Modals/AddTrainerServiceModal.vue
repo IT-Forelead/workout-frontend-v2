@@ -136,9 +136,9 @@ const submitTrainerServiceData = () => {
                 <SelectOptionTrainer />
               </div>
               <div>
-                <label for="firstname">{{ $t('serviceName') }}</label>
+                <label for="serviceName">{{ $t('serviceName') }}</label>
                 <input v-model="submitForm.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
-                  type="text" id="firstname" :placeholder="$t('enterFirstname')" />
+                  type="text" id="serviceName" :placeholder="$t('enterServiceName')" />
               </div>
               <div>
                 <label>{{ $t('serviceType') }}</label>

@@ -25,6 +25,10 @@ const list = [
     id: 'uz',
     name: "O'zbekcha"
   },
+  {
+    id: 'kr',
+    name: "Ўзбекча"
+  },
 ]
 
 onClickOutside(dropdown, () => {
@@ -35,6 +39,7 @@ const langTranslate = (lang) => {
   if (lang === 'en') return 'English'
   else if (lang === 'ru') return 'Русский'
   else if (lang === 'uz') return "O'zbekcha"
+  else if (lang === 'kr') return "Ўзбекча"
   else return "O'zbekcha"
 }
 

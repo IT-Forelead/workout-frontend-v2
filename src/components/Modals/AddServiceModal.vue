@@ -129,9 +129,9 @@ const submitServiceData = () => {
           <div class="grid gap-5 grid-cols-2">
             <div class="space-y-4">
               <div>
-                <label for="firstname">{{ $t('serviceName') }}</label>
+                <label for="serviceName">{{ $t('serviceName') }}</label>
                 <input v-model="submitForm.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
-                  type="text" id="firstname" :placeholder="$t('enterFirstname')" />
+                  type="text" id="serviceName" :placeholder="$t('enterServiceName')" />
               </div>
               <div>
                 <label>{{ $t('duration') }}</label>
