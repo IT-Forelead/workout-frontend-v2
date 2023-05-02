@@ -1,44 +1,48 @@
 <script setup>
-import CustomerItem from '../components/Items/CustomerItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useCustomerStore } from '../store/customer.store'
-import { useModalStore } from '../store/modal.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { onMounted } from 'vue'
-import CustomerService from '../services/customer.service'
-import AxiosService from "../services/axios.service.js";
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
-import SelectOptionGender from '../components/Inputs/SelectOptionGender.vue'
+import SmsMessageItem from '../components/Items/SmsMessageItem.vue'
+import authHeader from '../mixins/auth-header'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import AxiosService from "../services/axios.service.js"
+import SmsMessageService from '../services/smsMessage.service'
+import { useModalStore } from '../store/modal.store'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useSmsMessageStore } from '../store/smsMessage.store'
+import SelectOptionDeliveryStatus from '../components/Inputs/SelectOptionDeliveryStatus.vue'
+import SelectOptionMessageType from '../components/Inputs/SelectOptionMessageType.vue'
 
 const isLoading = ref(false)
 
 const total = ref(1)
-const customers = computed(() => {
-  return useCustomerStore().customers
+const smsMessages = computed(() => {
+  return useSmsMessageStore().smsMessages
 })
-const target = ref('.customers-wrapper')
+const target = ref('.sms-messages-wrapper')
 const distance = ref(0)
 
-const selectGender = computed(() => {
-  return useDropdownStore().selectGenderOption
+const selectedMessageType = computed(() => {
+  return useDropdownStore().selectMessageTypeOption
+})
+
+const selectedDeliveryStatus = computed(() => {
+  return useDropdownStore().selectDeliveryStatusOption
 })
 
 let page = 0
-const loadCustomers = async ($state) => {
+const loadSmsMessages = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
     AxiosService.post(
-      '/customer/report',
+      '/message/report',
       cleanObjectEmptyFields({
-        firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
-        lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
-        gender: selectGender.value?.id,
         phone: filterData.phone.replace(/([() -])/g, ''),
+        messageType: selectedMessageType.value?.id,
+        deliveryStatus: selectedDeliveryStatus.value?.id,
         startDate: filterData.startDate,
         endDate: filterData.endDate,
         page: page,
@@ -48,7 +52,7 @@ const loadCustomers = async ($state) => {
     )
       .then((result) => {
         total.value = result?.total
-        useCustomerStore().setCustomers(result?.data)
+        useSmsMessageStore().setSmsMessages(result?.data)
         $state.loaded()
       }).catch(() => {
         $state.error()
@@ -57,7 +61,7 @@ const loadCustomers = async ($state) => {
 }
 
 onMounted(() => {
-  useCustomerStore().clearStore()
+  useSmsMessageStore().clearStore()
 })
 
 const dropdown = ref(null)
@@ -69,30 +73,28 @@ onClickOutside(dropdown, () => {
 })
 
 const filterData = reactive({
-  firstName: '',
-  lastName: '',
   phone: '',
-  gender: '',
+  messageType: '',
+  deliveryStatus: '',
   startDate: '',
   endDate: '',
 })
 
 const submitFilterData = () => {
   isLoading.value = true
-  CustomerService.getCustomers(
+  SmsMessageService.getSmsMessages(
     cleanObjectEmptyFields({
-      firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
-      lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
-      gender: selectGender.value?.id,
       phone: filterData.phone.replace(/([() -])/g, ''),
+      messageType: selectedMessageType.value?.id,
+      deliveryStatus: selectedDeliveryStatus.value?.id,
       startDate: filterData.startDate,
       endDate: filterData.endDate,
       page: 1,
       limit: 30,
     })
   ).then((res) => {
-    useCustomerStore().clearStore()
-    useCustomerStore().setCustomers(res?.data)
+    useSmsMessageStore().clearStore()
+    useSmsMessageStore().setSmsMessages(res?.data)
     isLoading.value = false
     if (useModalStore().isOpenFilterBy) {
       useModalStore().toggleFilterBy()
@@ -105,7 +107,7 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('customersReport') }}</p>
+        <p class="text-3xl font-bold">{{ $t('smsMessagesReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -118,18 +120,17 @@ const submitFilterData = () => {
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
               <div>
-                <label for="firstname">{{ $t('firstname') }}</label>
-                <input v-model="filterData.firstName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
-                  type="text" id="firstname" :placeholder="$t('enterFirstname')" />
+                <label for="phone">{{ $t('phone') }}</label>
+                <input v-model="filterData.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
+                  type="text" v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
               </div>
               <div>
-                <label for="lastname">{{ $t('lastname') }}</label>
-                <input v-model="filterData.lastName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
-                  type="text" id="lastname" :placeholder="$t('enterLastname')" />
+                <label>{{ $t('messageType') }}</label>
+                <SelectOptionMessageType />
               </div>
               <div>
-                <label for="gender">{{ $t('gender') }}</label>
-                <SelectOptionGender />
+                <label>{{ $t('deliveryStatus') }}</label>
+                <SelectOptionDeliveryStatus />
               </div>
               <div>
                 <label>{{ $t('createdAt') }}</label>
@@ -158,29 +159,26 @@ const submitFilterData = () => {
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openAddCustomerModal()"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            {{ $t('addCustomer') }}
-          </div>
         </div>
       </div>
-      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customers-wrapper">
+      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden sms-messages-wrapper">
         <table class="min-w-max w-full table-auto">
           <thead class="sticky z-10 top-0 bg-white shadow">
             <tr class="text-gray-600 capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('phone') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('gender') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
-              <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('text') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('sentDate') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('messageType') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('deliveryStatus') }}</th>
             </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light">
-            <CustomerItem :customers="customers" :distance="distance" :target="target" @infinite="loadCustomers" />
+            <SmsMessageItem :smsMessages="smsMessages" :distance="distance" :target="target"
+              @infinite="loadSmsMessages" />
           </tbody>
         </table>
-        <div v-if="customers?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+        <div v-if="smsMessages?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
       </div>
     </div>
   </div>

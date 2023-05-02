@@ -254,5 +254,10 @@
   "verificationCodeSentSuccessfully": "Код подтверждения успешно отправлен",
   "verificationCodeHasBeenSentToTheNumberBelow": "Код подтверждения отправлен на указанный ниже номер",
   "errorSendingVerificationCode": "Ошибка при отправке кода подтверждения!",
-  "didNotreceiveSms": "Не получили SMS-сообщение?"
+  "didNotreceiveSms": "Не получили SMS-сообщение?",
+  "smsMessages": "SMS-сообщения",
+  "sentDate": "Время отправки",
+  "messageType": "Тип сообщения",
+  "deliveryStatus": "Статус доставки",
+  "sentCode": "Код отправлен"
 }

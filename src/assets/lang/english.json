@@ -254,5 +254,10 @@
   "verificationCodeSentSuccessfully": "Verification code sent successfully",
   "verificationCodeHasBeenSentToTheNumberBelow": "Verification code has been sent to the number below",
   "errorSendingVerificationCode": "Error while sending the verification code!",
-  "didNotreceiveSms": "Didn't receive the SMS message?"
+  "didNotreceiveSms": "Didn't receive the SMS message?",
+  "smsMessages": "SMS messages",
+  "sentDate": "Sent date",
+  "messageType": "Message type",
+  "deliveryStatus": "Delivery status",
+  "sentCode": "Sent code"
 }

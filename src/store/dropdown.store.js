@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useDropdownStore = defineStore('dropdown', {
   state: () => ({
     selectPaymentTypeOption: '',
+    selectMessageTypeOption: '',
     selectPaymentStatusOption: '',
     selectDeliveryStatusOption: '',
     selectGenderOption: '',
@@ -18,6 +19,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentTypeDropDown: false,
+    isOpenMessageTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
     isOpenDeliveryStatusDropDown: false,
     isOpenServiceDropDown: false,
@@ -35,6 +37,9 @@ export const useDropdownStore = defineStore('dropdown', {
   actions: {
     setSelectPaymentTypeOption(data) {
       this.selectPaymentTypeOption = data
+    },
+    setSelectMessageTypeOption(data) {
+      this.selectMessageTypeOption = data
     },
     setSelectPaymentStatusOption(data) {
       this.selectPaymentStatusOption = data
@@ -105,6 +110,12 @@ export const useDropdownStore = defineStore('dropdown', {
     closePaymentTypeDropDown() {
       this.isOpenPaymentTypeDropDown = false
     },
+    openMessageTypeDropDown() {
+      this.isOpenMessageTypeDropDown = true
+    },
+    closeMessageTypeDropDown() {
+      this.isOpenMessageTypeDropDown = false
+    },
     openPaymentStatusDropDown() {
       this.isOpenPaymentStatusDropDown = true
     },
@@ -167,6 +178,7 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     clearStore() {
       this.selectPaymentTypeOption = ''
+      this.selectMessageTypeOption = ''
       this.selectPaymentStatusOption = ''
       this.selectDeliveryStatusOption = ''
       this.selectGenderOption = ''
@@ -181,6 +193,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectCustomerTrainerTariffOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenPaymentTypeDropDown = false
+      this.isOpenMessageTypeDropDown = false
       this.isOpenPaymentStatusDropDown = false
       this.isOpenDeliveryStatusDropDown = false
       this.isOpenServiceDropDown = false

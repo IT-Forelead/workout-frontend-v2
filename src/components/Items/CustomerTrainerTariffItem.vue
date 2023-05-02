@@ -1,18 +1,18 @@
 <script setup>
+import moment from 'moment'
 import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
-import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { paymentStatusColor, paymentStatusTranslate } from '../../mixins/paymentUtils.js'
-import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
 import { onMounted, ref, toRefs } from 'vue'
-import { parseJwt } from '../../mixins/utils.js'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import moment from 'moment'
-import UserIcon from '../Icons/UserIcon.vue'
+import useMoneyFormatter from '../../mixins/currencyFormatter.js'
+import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { parseJwt } from '../../mixins/utils.js'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
-import TrashIcon from '../Icons/TrashIcon.vue'
-import EditIcon from '../Icons/EditIcon.vue'
+import UserIcon from '../Icons/UserIcon.vue'
+
+const { t } = useI18n()
 
 const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
 
@@ -32,6 +32,32 @@ const navigationGuard = (access) => {
 onMounted(() => {
   payload.value = parseJwt()
 })
+
+const paymentStatusTranslate = (status) => {
+  switch (status) {
+    case 'fully_paid':
+      return t('fullyPaid')
+    case 'not_paid':
+      return t('notPaid')
+    case 'partially_paid':
+      return t('partiallyPaid')
+    case 'canceled':
+      return t('canceled')
+  }
+}
+
+const paymentStatusColor = (status) => {
+  switch (status) {
+    case 'fully_paid':
+      return 'bg-green-500 text-white'
+    case 'not_paid':
+      return 'bg-red-500 text-white'
+    case 'partially_paid':
+      return 'bg-orange-500 text-white'
+    case 'canceled':
+      return 'bg-teal-500 text-white'
+  }
+}
 </script>
 <template>
   <tr v-for="(tariff, idx) in customerTrainerTariffs" :key="idx"
@@ -98,7 +124,8 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTrainerTariff?.paymentStatus)">
+      <span class="p-1.5 px-3 text-sm rounded-full"
+        :class="paymentStatusColor(tariff?.customerTrainerTariff?.paymentStatus)">
         {{ paymentStatusTranslate(tariff?.customerTrainerTariff?.paymentStatus) }}
       </span>
     </td>

@@ -1,5 +1,5 @@
 <script setup>
-import SelectOptionCustomersItem from '../../components/Items/SelectOptionCustomersItem.vue'
+import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
 import authHeader from '../../mixins/auth-header'
 import { onClickOutside } from '@vueuse/core'
 import { computed, ref, reactive } from '@vue/reactivity'
@@ -117,7 +117,7 @@ const whenPressEnter = (e) => {
         class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
       <ul v-if="useDropdownStore().isOpenCustomerDropDown"
         class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 max-h-56 overflow-auto divide-y divide-gray-200 customers-wrapper">
-        <SelectOptionCustomersItem :customers="customers" :distance="distance" :target="target"
+        <SelectOptionCustomerItem :customers="customers" :distance="distance" :target="target"
           @infinite="loadCustomers" />
         <li v-if="customers?.length === 0" class="w-full text-center text-red-500 p-2">
           {{ $t('empty') }}
