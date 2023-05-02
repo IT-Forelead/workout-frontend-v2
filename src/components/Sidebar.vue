@@ -1,11 +1,26 @@
 <script setup>
-import FolderUserIcon from './Icons/FolderUserIcon.vue';
-import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
-import FolderOpenIcon from './Icons/FolderOpenIcon.vue';
-import HouseIcon from './Icons/HouseIcon.vue'
-import UserListIcon from './Icons/UserListIcon.vue';
-import MoneyIcon from './Icons/MoneyIcon.vue';
+import { onMounted } from '@vue/runtime-core';
+import { ref } from 'vue';
+import decodeJwt, { parseJwt } from '../mixins/utils';
+import { useAuthStore } from '../store/auth.store';
 import EnvelopeIcon from './Icons/EnvelopeIcon.vue';
+import FolderOpenIcon from './Icons/FolderOpenIcon.vue';
+import FolderUserIcon from './Icons/FolderUserIcon.vue';
+import HouseIcon from './Icons/HouseIcon.vue';
+import MoneyIcon from './Icons/MoneyIcon.vue';
+import UserListIcon from './Icons/UserListIcon.vue';
+import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
+
+const payload = ref({})
+
+const navigationGuard = (access) => {
+  return access.includes(payload.value?.role)
+}
+
+onMounted(() => {
+  useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
+  payload.value = parseJwt()
+})
 </script>
 
 <template>
@@ -78,7 +93,7 @@ import EnvelopeIcon from './Icons/EnvelopeIcon.vue';
           <p>{{ $t('users') }}</p>
         </div>
       </router-link>
-      <router-link to="/sms-messages" active-class="active"
+      <router-link to="/sms-messages" v-if="navigationGuard(['super_manager'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-500/10 py-7 cursor-pointer transition-colors duration-300">
         <div class="-ml-1.5 w-3 h-10 rounded-xl bg-gray-900"></div>
         <div class="px-10 flex items-center space-x-5">
@@ -88,7 +103,8 @@ import EnvelopeIcon from './Icons/EnvelopeIcon.vue';
       </router-link>
     </ul>
     <div class="absolute bottom-0 w-full mb-3 text-sm text-center dark:text-gray-400">
-      Copyright &copy; {{ new Date().getFullYear() }} <a href="http://it-forelead.uz" class="hover:underline">IT-Forelead</a>. <br />
+      Copyright &copy; {{ new Date().getFullYear() }} <a href="http://it-forelead.uz"
+        class="hover:underline">IT-Forelead</a>. <br />
       All Rights Reserved.
     </div>
   </div>
