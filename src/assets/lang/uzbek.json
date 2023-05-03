@@ -260,5 +260,17 @@
   "sentDate": "Yuborilgan vaqti",
   "messageType": "Xabar turi",
   "deliveryStatus": "Yetkazilganlik holati",
-  "sentCode": "Kod yuborilgan"
+  "sentCode": "Kod yuborilgan",
+  "visits": "Tashriflar",
+  "visit": "Tashrif",
+  "visitsReport": "Tashriflar hisoboti",
+  "visitTime": "Tashrif vaqti",
+  "visitType": "Tashrif turi",
+  "addVisit": "Tashrif qo'shish",
+  "comeIn": "Keldi",
+  "goOut": "Ketdi",
+  "plsSelectVisitType": "Iltimos, tashrif turini tanlang",
+  "visitCreated": "Tashrif muvaffaqiyatli yaratildi!",
+  "errorGettingVisits": "Tashriflarni olishda xatolik yuz berdi!",
+  "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!"
 }

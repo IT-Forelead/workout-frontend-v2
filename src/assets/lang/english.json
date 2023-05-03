@@ -259,5 +259,17 @@
   "sentDate": "Sent date",
   "messageType": "Message type",
   "deliveryStatus": "Delivery status",
-  "sentCode": "Sent code"
+  "sentCode": "Sent code",
+  "visits": "Visits",
+  "visit": "Visit",
+  "visitsReport": "Visits report",
+  "visitTime": "Visit time",
+  "visitType": "Visit type",
+  "addVisit": "Add visit",
+  "comeIn": "Come in",
+  "goOut": "Go out",
+  "plsSelectVisitType": "Please select visit type",
+  "visitCreated": "Visit successfully created!",
+  "errorGettingVisits": "Error while getting visits!",
+  "errorCreatingVisit": "Error while creating visit!"
 }

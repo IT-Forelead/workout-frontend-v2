@@ -260,5 +260,17 @@
   "sentDate": "Юборилган вақти",
   "messageType": "Хабар тури",
   "deliveryStatus": "Йетказилганлик ҳолати",
-  "sentCode": "Код юборилган"
+  "sentCode": "Код юборилган",
+  "visits": "Ташрифлар",
+  "visit": "Ташриф",
+  "visitsReport": "Ташрифлар ҳисоботи",
+  "visitTime": "Ташриф вақти",
+  "visitType": "Ташриф тури",
+  "addVisit": "Ташриф қўшиш",
+  "comeIn": "Келди",
+  "goOut": "Кетди",
+  "plsSelectVisitType": "Илтимос, ташриф турини танланг",
+  "visitCreated": "Ташриф муваффақиятли яратилди!",
+  "errorGettingVisits": "Ташрифларни олишда хатолик юз берди!",
+  "errorCreatingVisit": "Ташриф яратишда хатолик юз берди!"
 }

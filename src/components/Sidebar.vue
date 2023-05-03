@@ -12,6 +12,7 @@ import MoneyIcon from './Icons/MoneyIcon.vue';
 import UserListIcon from './Icons/UserListIcon.vue';
 import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
 import ChevronRightIcon from './Icons/ChevronRightIcon.vue';
+import FootPrintsIcon from './Icons/FootPrintsIcon.vue';
 
 const payload = ref({})
 
@@ -74,6 +75,13 @@ onMounted(() => {
           <MoneyIcon class="w-6 h-6" />
         </div>
         <div>{{ $t('payments') }}</div>
+      </router-link>
+      <router-link to="/visits" active-class="active"
+        class="relative flex items-center h-10 w-full hover:bg-yellow-500/10 py-7 px-6 space-x-4 cursor-pointer transition-colors duration-300">
+        <div class="flex items-center justify-center rounded-xl w-10 h-10">
+          <FootPrintsIcon class="w-6 h-6" />
+        </div>
+        <div>{{ $t('visits') }}</div>
       </router-link>
       <router-link to="/customers" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-500/10 py-7 px-6 space-x-4 cursor-pointer transition-colors duration-300">

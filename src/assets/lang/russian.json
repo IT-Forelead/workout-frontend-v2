@@ -259,5 +259,17 @@
   "sentDate": "Время отправки",
   "messageType": "Тип сообщения",
   "deliveryStatus": "Статус доставки",
-  "sentCode": "Код отправлен"
+  "sentCode": "Код отправлен",
+  "visits": "Посещения",
+  "visit": "Посетить",
+  "visitsReport": "Отчет о посещениях",
+  "visitTime": "Время посещения",
+  "visitType": "Тип посещения",
+  "addVisit": "Добавить посещение",
+  "comIn": "Входи",
+  "goOut": "Выйти",
+  "plsSelectVisitType": "Выберите тип посещения",
+  "visitCreated": "Посещение успешно создано!",
+  "errorGettingVisits": "Ошибка при получении посещений!",
+  "errorCreatingVisit": "Ошибка при создании визита!"
 }

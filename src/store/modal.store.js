@@ -8,6 +8,7 @@ export const useModalStore = defineStore('modal', {
     isAddTrainerServiceModalOpen: false,
     isAddCustomerTariffModalOpen: false,
     isAddCustomerTrainerTariffModalOpen: false,
+    isAddVisitModalOpen: false,
     isAddPaymentModalOpen: false,
     isOpenDeleteAlertModal: false,
     isOpenFilterBy: false,
@@ -50,6 +51,12 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddCustomerTrainerTariffModal() {
       this.isAddCustomerTrainerTariffModalOpen = false
+    },
+    openAddVisitModal() {
+      this.isAddVisitModalOpen = true
+    },
+    closeAddVisitModal() {
+      this.isAddVisitModalOpen = false
     },
     openAddPaymentModal() {
       this.isAddPaymentModalOpen = true
