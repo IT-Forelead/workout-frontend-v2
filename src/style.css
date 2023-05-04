@@ -19,10 +19,13 @@
 }
 
 /* SIDEBAR ACTIVE CLASS */
-.active div:first-child {
-  @apply bg-yellow-500/10;
+.active div.first-child-bg-color {
+  @apply bg-yellow-200;
+}
+.active div.second-child-bg-color {
+  @apply bg-yellow-200/10;
 }
 
 .active div {
-  @apply text-yellow-400;
+  @apply text-yellow-200;
 }
