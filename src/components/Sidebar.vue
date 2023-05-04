@@ -1,19 +1,19 @@
 <script setup>
 import { computed, onMounted } from '@vue/runtime-core';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import decodeJwt, { parseJwt } from '../mixins/utils';
 import { useAuthStore } from '../store/auth.store';
 import { useSidebarStore } from '../store/sidebar.store';
-import { useRouter } from 'vue-router'
+import ChevronRightIcon from './Icons/ChevronRightIcon.vue';
 import EnvelopeIcon from './Icons/EnvelopeIcon.vue';
 import FolderOpenIcon from './Icons/FolderOpenIcon.vue';
 import FolderUserIcon from './Icons/FolderUserIcon.vue';
+import FootPrintsIcon from './Icons/FootPrintsIcon.vue';
 import HouseIcon from './Icons/HouseIcon.vue';
 import MoneyIcon from './Icons/MoneyIcon.vue';
 import UserListIcon from './Icons/UserListIcon.vue';
 import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
-import ChevronRightIcon from './Icons/ChevronRightIcon.vue';
-import FootPrintsIcon from './Icons/FootPrintsIcon.vue';
 
 const router = useRouter()
 
@@ -49,14 +49,16 @@ onMounted(() => {
       </router-link>
       <div @click="useSidebarStore().toggleSubMenuForTariffs()"
         class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 font-medium  py-7 cursor-pointer transition-colors duration-300">
-        <div class="flex items-center space-x-4" :class="router?.currentRoute?.value?.path === '/tariffs' || router?.currentRoute?.value?.path === '/trainer-tariffs' ? 'active' : ''">
+        <div class="flex items-center space-x-4"
+          :class="router?.currentRoute?.value?.path === '/tariffs' || router?.currentRoute?.value?.path === '/trainer-tariffs' ? 'active' : ''">
           <div class="w-1.5 h-10 rounded-r-xl mr-2 first-child-bg-color"></div>
           <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
             <FolderUserIcon class="w-6 h-6" />
           </div>
           <div>{{ $t('tariffs') }}</div>
         </div>
-        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4" :class="{ 'rotate-90': isOpenSubMenuForTariffs }" />
+        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4"
+          :class="{ 'rotate-90': isOpenSubMenuForTariffs }" />
       </div>
       <div :class="{ hidden: !isOpenSubMenuForTariffs }" class="transition-all duration-300">
         <router-link to="/tariffs" active-class="active"
@@ -98,17 +100,18 @@ onMounted(() => {
         </div>
         <div>{{ $t('customers') }}</div>
       </router-link>
-
       <div @click="useSidebarStore().toggleSubMenuForServices()"
         class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 font-medium  py-7 cursor-pointer transition-colors duration-300">
-        <div class="flex items-center space-x-4" :class="router?.currentRoute?.value?.path === '/services' || router?.currentRoute?.value?.path === '/trainer-services' ? 'active' : ''">
+        <div class="flex items-center space-x-4"
+          :class="router?.currentRoute?.value?.path === '/services' || router?.currentRoute?.value?.path === '/trainer-services' ? 'active' : ''">
           <div class="w-1.5 h-10 rounded-r-xl mr-2 first-child-bg-color"></div>
           <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
             <FolderOpenIcon class="w-6 h-6" />
           </div>
           <div>{{ $t('services') }}</div>
         </div>
-        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4" :class="{ 'rotate-90': isOpenSubMenuForServices }" />
+        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4"
+          :class="{ 'rotate-90': isOpenSubMenuForServices }" />
       </div>
       <div :class="{ hidden: !isOpenSubMenuForServices }" class="transition-all duration-300">
         <router-link to="/services" active-class="active"
@@ -148,5 +151,4 @@ onMounted(() => {
         class="hover:underline">IT-Forelead</a>. <br />
       All Rights Reserved.
     </div>
-  </div>
-</template>
+</div></template>
