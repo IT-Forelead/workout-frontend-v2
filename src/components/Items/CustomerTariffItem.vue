@@ -6,7 +6,6 @@ import { onMounted, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import { parseJwt } from '../../mixins/utils.js'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
@@ -59,6 +58,29 @@ const paymentStatusColor = (status) => {
   }
 }
 
+const durationDayTranslate = (n) => {
+  switch (n) {
+    case 1:
+      return t('oneDay')
+    case 30:
+      return t('oneMonth')
+    case 90:
+      return t('threeMonths')
+    case 180:
+      return t('sixMonths')
+    case 365:
+      return t('oneYear')
+  }
+}
+
+const monthlyVisitTranslate = (n) => {
+  switch (n) {
+    case 30:
+      return t('everyDay')
+    case 15:
+      return t('fifteenDays')
+  }
+}
 </script>
 <template>
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"

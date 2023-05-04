@@ -2,11 +2,13 @@
 import { ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
 import { computed } from 'vue'
-import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
+import { useI18n } from 'vue-i18n'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
+
+const { t } = useI18n()
 
 const selectedOption = computed(() => {
   return useDropdownStore().selectTrainerServiceOption
@@ -31,6 +33,29 @@ const optionClicked = (data) => {
   useDropdownStore().closeTrainerServiceDropDown()
 }
 
+const durationDayTranslate = (n) => {
+  switch (n) {
+    case 1:
+      return t('oneDay')
+    case 30:
+      return t('oneMonth')
+    case 90:
+      return t('threeMonths')
+    case 180:
+      return t('sixMonths')
+    case 365:
+      return t('oneYear')
+  }
+}
+
+const monthlyVisitTranslate = (n) => {
+  switch (n) {
+    case 30:
+      return t('everyDay')
+    case 15:
+      return t('fifteenDays')
+  }
+}
 </script>
 <template>
   <div class="select-none">

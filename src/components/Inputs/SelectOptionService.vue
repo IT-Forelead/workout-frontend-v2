@@ -4,7 +4,6 @@ import { computed, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
-import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 import { useServiceStore } from '../../store/service.store'
@@ -40,6 +39,30 @@ onMounted(() => {
     useServiceStore().setServices(res)
   })
 })
+
+const durationDayTranslate = (n) => {
+  switch (n) {
+    case 1:
+      return t('oneDay')
+    case 30:
+      return t('oneMonth')
+    case 90:
+      return t('threeMonths')
+    case 180:
+      return t('sixMonths')
+    case 365:
+      return t('oneYear')
+  }
+}
+
+const monthlyVisitTranslate = (n) => {
+  switch (n) {
+    case 30:
+      return t('everyDay')
+    case 15:
+      return t('fifteenDays')
+  }
+}
 </script>
 <template>
   <div class="select-none">

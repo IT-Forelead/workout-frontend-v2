@@ -5,11 +5,13 @@ import { onMounted, ref, toRefs } from 'vue'
 import { parseJwt } from '../../mixins/utils.js'
 import moment from 'moment'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import UserIcon from '../Icons/UserIcon.vue'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
+
+const { t } = useI18n()
 
 const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
 
@@ -24,6 +26,30 @@ const { payments } = toRefs(props)
 
 const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
+}
+
+const durationDayTranslate = (n) => {
+  switch (n) {
+    case 1:
+      return t('oneDay')
+    case 30:
+      return t('oneMonth')
+    case 90:
+      return t('threeMonths')
+    case 180:
+      return t('sixMonths')
+    case 365:
+      return t('oneYear')
+  }
+}
+
+const monthlyVisitTranslate = (n) => {
+  switch (n) {
+    case 30:
+      return t('everyDay')
+    case 15:
+      return t('fifteenDays')
+  }
 }
 
 onMounted(() => {
