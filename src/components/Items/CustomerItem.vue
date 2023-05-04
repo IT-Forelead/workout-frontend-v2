@@ -1,6 +1,7 @@
 <script setup>
 import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
+import { useI18n } from 'vue-i18n'
 import { onMounted, ref, toRefs } from 'vue'
 import { parseJwt } from '../../mixins/utils.js'
 import moment from 'moment'
@@ -8,6 +9,8 @@ import { useRouter } from 'vue-router'
 import UserIcon from '../Icons/UserIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
+
+const { t } = useI18n()
 
 const URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
 
@@ -22,6 +25,15 @@ const { customers } = toRefs(props)
 
 const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
+}
+
+const genderTranslate = (sex) => {
+  switch (sex) {
+    case 'male':
+      return t('male')
+    case 'female':
+      return t('female')
+  }
 }
 
 onMounted(() => {
@@ -47,7 +59,7 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.gender }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left">{{ genderTranslate(customer?.gender) }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       {{ moment(customer?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
