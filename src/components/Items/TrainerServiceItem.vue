@@ -1,7 +1,7 @@
 <script setup>
 import { toRefs } from 'vue'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { serviceTypeTranslate, durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { serviceTypeTranslate, durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import UserIcon from '../Icons/UserIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
@@ -27,7 +27,7 @@ const { trainerServices } = toRefs(props)
     <td v-motion-pop class="py-2 px-4 text-left">{{ service?.name }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ serviceTypeTranslate(service?.serviceType) }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      {{ durationDayTranslate(service?.durationDay) + ' (' + monthlyArrivalTranslate(service?.monthlyArrival) + ')' }}
+      {{ durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.price) }}</td>
     <td v-motion-pop class="py-2 px-4 text-center">

@@ -6,7 +6,7 @@ import { onMounted, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import { parseJwt } from '../../mixins/utils.js'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
@@ -88,7 +88,7 @@ const paymentStatusColor = (status) => {
       </div>
       <div class="text-sm">
         {{ durationDayTranslate(tariff?.trainerService?.durationDay) + ' (' +
-          monthlyArrivalTranslate(tariff?.trainerService?.monthlyArrival) + ')' }}
+          monthlyVisitTranslate(tariff?.trainerService?.monthlyVisit) + ')' }}
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">

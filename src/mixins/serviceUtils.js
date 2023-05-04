@@ -14,7 +14,7 @@ export function durationDayTranslate(n) {
   }
 }
 
-export function monthlyArrivalTranslate(n) {
+export function monthlyVisitTranslate(n) {
   if (n === 30) {
     return 'har kuni'
   } else if (n === 15) {

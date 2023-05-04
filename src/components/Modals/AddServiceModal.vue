@@ -11,7 +11,7 @@ import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
-import SelectOptionMonthlyArrival from '../Inputs/SelectOptionMonthlyArrival.vue'
+import SelectOptionMonthlyVisit from '../Inputs/SelectOptionMonthlyVisit.vue'
 
 const { t } = useI18n()
 
@@ -29,8 +29,8 @@ const selectDurationDay = computed(() => {
   return useDropdownStore().selectDurationDayOption
 })
 
-const selectMonthlyArrival = computed(() => {
-  return useDropdownStore().selectMonthlyArrivalOption
+const selectMonthlyVisit = computed(() => {
+  return useDropdownStore().selectMonthlyVisitOption
 })
 
 const submitForm = reactive({
@@ -60,9 +60,9 @@ const submitServiceData = () => {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
-  } else if (!selectMonthlyArrival?.value?.id) {
+  } else if (!selectMonthlyVisit?.value?.id) {
     notify.warning({
-      message: t('plsSelectMonthlyArrival'),
+      message: t('plsSelectMonthlyVisit'),
     })
   } else if (!selectServiceType?.value?.id) {
     notify.warning({
@@ -82,7 +82,7 @@ const submitServiceData = () => {
         name: submitForm.name,
         serviceType: selectServiceType?.value?.id,
         durationDay: selectDurationDay?.value?.id,
-        monthlyArrival: selectMonthlyArrival?.value?.id,
+        monthlyVisit: selectMonthlyVisit?.value?.id,
         priceForMale: submitForm.priceForMale,
         priceForFemale: submitForm.priceForFemale,
       })
@@ -138,8 +138,8 @@ const submitServiceData = () => {
                 <SelectOptionDurationDay />
               </div>
               <div>
-                <label>{{ $t('monthlyArrival') }}</label>
-                <SelectOptionMonthlyArrival />
+                <label>{{ $t('monthlyVisit') }}</label>
+                <SelectOptionMonthlyVisit />
               </div>
             </div>
             <div class="space-y-4">

@@ -10,7 +10,7 @@ import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
-import SelectOptionMonthlyArrival from '../Inputs/SelectOptionMonthlyArrival.vue'
+import SelectOptionMonthlyVisit from '../Inputs/SelectOptionMonthlyVisit.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 
@@ -34,8 +34,8 @@ const selectDurationDay = computed(() => {
   return useDropdownStore().selectDurationDayOption
 })
 
-const selectMonthlyArrival = computed(() => {
-  return useDropdownStore().selectMonthlyArrivalOption
+const selectMonthlyVisit = computed(() => {
+  return useDropdownStore().selectMonthlyVisitOption
 })
 
 const submitForm = reactive({
@@ -67,9 +67,9 @@ const submitTrainerServiceData = () => {
     notify.warning({
       message: t('plsSelectDurationDay'),
     })
-  } else if (!selectMonthlyArrival?.value?.id) {
+  } else if (!selectMonthlyVisit?.value?.id) {
     notify.warning({
-      message: t('plsSelectMonthlyArrival'),
+      message: t('plsSelectMonthlyVisit'),
     })
   } else if (!selectServiceType?.value?.id) {
     notify.warning({
@@ -86,7 +86,7 @@ const submitTrainerServiceData = () => {
         name: submitForm.name,
         serviceType: selectServiceType?.value?.id,
         durationDay: selectDurationDay?.value?.id,
-        monthlyArrival: selectMonthlyArrival?.value?.id,
+        monthlyVisit: selectMonthlyVisit?.value?.id,
         price: submitForm.price,
       })
     )
@@ -151,8 +151,8 @@ const submitTrainerServiceData = () => {
                 <SelectOptionDurationDay />
               </div>
               <div>
-                <label>{{ $t('monthlyArrival') }}</label>
-                <SelectOptionMonthlyArrival />
+                <label>{{ $t('monthlyVisit') }}</label>
+                <SelectOptionMonthlyVisit />
               </div>
               <div>
                 <label for="price">{{ $t('price') }}</label>

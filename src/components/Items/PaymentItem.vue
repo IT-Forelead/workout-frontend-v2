@@ -5,7 +5,7 @@ import { onMounted, ref, toRefs } from 'vue'
 import { parseJwt } from '../../mixins/utils.js'
 import moment from 'moment'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import { useRouter } from 'vue-router'
 import UserIcon from '../Icons/UserIcon.vue'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
@@ -62,7 +62,7 @@ onMounted(() => {
         </div>
         <div class="text-sm">
           {{ durationDayTranslate(payment?.trainerService?.durationDay) + ' (' +
-            monthlyArrivalTranslate(payment?.trainerService?.monthlyArrival) + ')' }}
+            monthlyVisitTranslate(payment?.trainerService?.monthlyVisit) + ')' }}
         </div>
       </div>
       <div v-else>
@@ -71,7 +71,7 @@ onMounted(() => {
         </div>
         <div class="text-sm">
           {{ durationDayTranslate(payment?.service?.durationDay) + ' (' +
-            monthlyArrivalTranslate(payment?.service?.monthlyArrival) + ')' }}
+            monthlyVisitTranslate(payment?.service?.monthlyVisit) + ')' }}
         </div>
       </div>
     </td>

@@ -2,7 +2,7 @@
 import { ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
 import { computed } from 'vue'
-import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
@@ -36,7 +36,7 @@ const optionClicked = (data) => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div v-if="selectedOption" class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg p-2">
-        {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyArrivalTranslate(selectedOption?.monthlyArrival) + ')' }}
+        {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyVisitTranslate(selectedOption?.monthlyVisit) + ')' }}
       </div>
       <div @click="useDropdownStore().openTrainerServiceDropDown()" v-else
         class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
@@ -53,7 +53,7 @@ const optionClicked = (data) => {
         </li>
         <li v-else v-for="(service, idx) in trainerServices" :key="idx" @click="optionClicked(service)"
           class="hover:bg-gray-200 cursor-pointer p-2 ">
-          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyArrivalTranslate(service?.monthlyArrival) + ')' }}
+          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
         </li>
       </ul>
     </label>

@@ -13,7 +13,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectServiceTypeOption: '',
     selectTrainerServiceOption: '',
     selectDurationDayOption: '',
-    selectMonthlyArrivalOption: '',
+    selectMonthlyVisitOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
     selectCustomerTariffOption: '',
@@ -30,7 +30,7 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenGenderDropDown: false,
     isOpenRoleDropDown: false,
     isOpenDurationDayDropDown: false,
-    isOpenMonthlyArrivalDropDown: false,
+    isOpenMonthlyVisitDropDown: false,
     isOpenTrainerDropDown: false,
     isOpenCustomerDropDown: false,
     isOpenCustomerTariffDropDown: false,
@@ -73,8 +73,8 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectDurationDayOption(data) {
       this.selectDurationDayOption = data
     },
-    setSelectMonthlyArrivalOption(data) {
-      this.selectMonthlyArrivalOption = data
+    setSelectMonthlyVisitOption(data) {
+      this.selectMonthlyVisitOption = data
     },
     setSelectCustomerOption(data) {
       this.selectCustomerOption = data
@@ -175,11 +175,11 @@ export const useDropdownStore = defineStore('dropdown', {
     closeDurationDayDropDown() {
       this.isOpenDurationDayDropDown = false
     },
-    openMonthlyArrivalDropDown() {
-      this.isOpenMonthlyArrivalDropDown = true
+    openMonthlyVisitDropDown() {
+      this.isOpenMonthlyVisitDropDown = true
     },
-    closeMonthlyArrivalDropDown() {
-      this.isOpenMonthlyArrivalDropDown = false
+    closeMonthlyVisitDropDown() {
+      this.isOpenMonthlyVisitDropDown = false
     },
     openCustomerDropDown() {
       this.isOpenCustomerDropDown = true
@@ -199,7 +199,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectServiceTypeOption = ''
       this.selectTrainerServiceOption = ''
       this.selectDurationDayOption = ''
-      this.selectMonthlyArrivalOption = ''
+      this.selectMonthlyVisitOption = ''
       this.selectTrainerOption = ''
       this.selectCustomerTariffOption = ''
       this.selectCustomerTrainerTariffOption = ''
@@ -215,7 +215,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenGenderDropDown = false
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false
-      this.isOpenMonthlyArrivalDropDown = false
+      this.isOpenMonthlyVisitDropDown = false
       this.isOpenTrainerDropDown = false,
       this.isOpenCustomerTariffDropDown = false
       this.isOpenCustomerTrainerTariffDropDown = false

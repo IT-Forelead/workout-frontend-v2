@@ -4,7 +4,7 @@ import { computed, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
-import { durationDayTranslate, monthlyArrivalTranslate } from '../../mixins/serviceUtils.js'
+import { durationDayTranslate, monthlyVisitTranslate } from '../../mixins/serviceUtils.js'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 import { useServiceStore } from '../../store/service.store'
@@ -45,7 +45,7 @@ onMounted(() => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div v-if="selectedOption" class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg p-2">
-        {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyArrivalTranslate(selectedOption?.monthlyArrival) + ')' }}
+        {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyVisitTranslate(selectedOption?.monthlyVisit) + ')' }}
       </div>
       <div @click="useDropdownStore().openServiceDropDown()" v-else
         class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
@@ -59,7 +59,7 @@ onMounted(() => {
         class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
         <li v-for="(service, idx) in services" :key="idx" @click="optionClicked(service)"
           class="hover:bg-gray-200 cursor-pointer p-2 ">
-          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyArrivalTranslate(service?.monthlyArrival) + ')' }}
+          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
         </li>
       </ul>
     </label>
