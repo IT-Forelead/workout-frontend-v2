@@ -1,17 +1,17 @@
 version: "3.9"
 services:
-  babymed-frontend:
+  workout-frontend:
     restart: always
-    image: babymed/frontend:latest
-    hostname: babymed-frontend
-    container_name: babymed-frontend
+    image: workout/frontend:latest
+    hostname: workout-frontend
+    container_name: workout-frontend
     networks:
       - external-net
     logging:
       driver: fluentd
       options:
         fluentd-address: localhost:24224
-        tag: babymed
+        tag: workout
 networks:
   external-net:
     external:

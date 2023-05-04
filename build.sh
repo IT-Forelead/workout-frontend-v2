@@ -3,14 +3,14 @@
 echo '--------------------------------------------------------------------'
 echo 'Stoppping & Removing Frontend container...'
 echo '--------------------------------------------------------------------'
-docker container stop babymed-frontend
-docker container rm babymed-frontend
+docker container stop workout-frontend
+docker container rm workout-frontend
 echo '--------------------------------------------------------------------'
 echo 'Removing Frontend image...'
 echo '--------------------------------------------------------------------'
-docker rmi -f babymed/frontend:latest
+docker rmi -f workout/frontend:latest
 echo '===================================================================='
 echo 'Building Frontend image...'
 echo '--------------------------------------------------------------------'
-docker build -t babymed/frontend .
+docker build -t workout/frontend .
 echo '--------------------------------------------------------------------'

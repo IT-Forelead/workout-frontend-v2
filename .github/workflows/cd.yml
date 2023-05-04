@@ -24,7 +24,7 @@ jobs:
       - name: Publishing image ...
         run: |
           chmod a+x publish
-          bash publish push -f babymed/frontend -t latest
+          bash publish push -f workout/frontend -t latest
 
   deploy:
     name: DEPLOY
@@ -51,7 +51,7 @@ jobs:
             docker login -p ${{ secrets.DOCKER_PASSWORD }} -u ${{ secrets.DOCKER_USERNAME }}
             cd frontend
             docker compose down
-            docker rmi babymed/frontend
-            docker pull babymed/frontend
+            docker rmi workout/frontend
+            docker pull workout/frontend
             docker compose up -d
             docker restart nginx

@@ -1,4 +1,4 @@
 #!/bin/bash
 docker compose down
-source publish rm -f babymed-front -t latest
+source publish rm -f workout-front -t latest
 docker compose up -d
