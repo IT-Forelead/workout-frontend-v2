@@ -1,13 +1,14 @@
 <script setup>
+import moment from 'moment'
 import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 import { onMounted, ref, toRefs } from 'vue'
-import { parseJwt } from '../../mixins/utils.js'
-import moment from 'moment'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { parseJwt } from '../../mixins/utils.js'
 import UserIcon from '../Icons/UserIcon.vue'
-import TrashIcon from '../Icons/TrashIcon.vue'
-import EditIcon from '../Icons/EditIcon.vue'
+
+const { t } = useI18n()
 
 const router = useRouter()
 const payload = ref({})
@@ -22,13 +23,25 @@ const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
 }
 
+const roleTranslate = (role) => {
+  switch (role) {
+    case 'super_manager':
+      return t('superManager')
+    case 'tech_admin':
+      return t('techAdmin')
+    case 'admin':
+      return t('admin')
+    case 'trainer':
+      return t('trainer')
+  }
+}
+
 onMounted(() => {
   payload.value = parseJwt()
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(user, idx) in users"
-    :key="idx">
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(user, idx) in users" :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
@@ -39,7 +52,7 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ user?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left uppercase">{{ user?.role }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left uppercase">{{ roleTranslate(user?.role) }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">
       {{ moment(user?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>

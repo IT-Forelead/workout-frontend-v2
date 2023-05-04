@@ -1,14 +1,12 @@
 <script setup>
+import moment from 'moment'
 import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
-import { useI18n } from 'vue-i18n'
 import { onMounted, ref, toRefs } from 'vue'
-import { parseJwt } from '../../mixins/utils.js'
-import moment from 'moment'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import { parseJwt } from '../../mixins/utils.js'
 import UserIcon from '../Icons/UserIcon.vue'
-import TrashIcon from '../Icons/TrashIcon.vue'
-import EditIcon from '../Icons/EditIcon.vue'
 
 const { t } = useI18n()
 
