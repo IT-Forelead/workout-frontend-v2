@@ -48,7 +48,7 @@ onMounted(() => {
         <div>{{ $t('mainPage') }}</div>
       </router-link>
       <div @click="useSidebarStore().toggleSubMenuForTariffs()"
-        class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 font-medium  py-7 cursor-pointer transition-colors duration-300">
+        class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 font-medium  py-7 cursor-pointer transition-colors duration-300">
         <div class="flex items-center space-x-4"
           :class="router?.currentRoute?.value?.path === '/tariffs' || router?.currentRoute?.value?.path === '/trainer-tariffs' ? 'active' : ''">
           <div class="w-1.5 h-10 rounded-r-xl mr-2 first-child-bg-color"></div>
@@ -57,7 +57,7 @@ onMounted(() => {
           </div>
           <div>{{ $t('tariffs') }}</div>
         </div>
-        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4"
+        <ChevronRightIcon class="w-5 h-5 transition-all text-gray-400 duration-300 mx-4"
           :class="{ 'rotate-90': isOpenSubMenuForTariffs }" />
       </div>
       <div :class="{ hidden: !isOpenSubMenuForTariffs }" class="transition-all duration-300">
@@ -101,7 +101,7 @@ onMounted(() => {
         <div>{{ $t('customers') }}</div>
       </router-link>
       <div @click="useSidebarStore().toggleSubMenuForServices()"
-        class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 font-medium  py-7 cursor-pointer transition-colors duration-300">
+        class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 font-medium  py-7 cursor-pointer transition-colors duration-300">
         <div class="flex items-center space-x-4"
           :class="router?.currentRoute?.value?.path === '/services' || router?.currentRoute?.value?.path === '/trainer-services' ? 'active' : ''">
           <div class="w-1.5 h-10 rounded-r-xl mr-2 first-child-bg-color"></div>
@@ -110,7 +110,7 @@ onMounted(() => {
           </div>
           <div>{{ $t('services') }}</div>
         </div>
-        <ChevronRightIcon class="w-5 h-5 transition-all duration-300 mx-4"
+        <ChevronRightIcon class="w-5 h-5 transition-all text-gray-400 duration-300 mx-4"
           :class="{ 'rotate-90': isOpenSubMenuForServices }" />
       </div>
       <div :class="{ hidden: !isOpenSubMenuForServices }" class="transition-all duration-300">
