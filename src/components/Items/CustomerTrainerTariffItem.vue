@@ -131,7 +131,7 @@ const monthlyVisitTranslate = (n) => {
     <td v-motion-pop class="py-2 px-4 text-left">
       <div class="flex items-center space-x-1">
         <div class="text-sm text-gray-500">
-          Total:
+          {{ $t('total')}}:
         </div>
         <div>
           {{ useMoneyFormatter(tariff?.customerTrainerTariff?.totalPrice) }}
@@ -139,7 +139,7 @@ const monthlyVisitTranslate = (n) => {
       </div>
       <div class="flex items-center space-x-1">
         <div class="text-sm text-gray-500">
-          Paid:
+          {{ $t('paid')}}:
         </div>
         <div>
           {{ useMoneyFormatter(tariff?.customerTrainerTariff?.pricePaid) }}
