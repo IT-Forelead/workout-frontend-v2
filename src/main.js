@@ -6,6 +6,7 @@ import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 import { createApp } from 'vue'
 import VueTheMask from 'vue-the-mask'
+import Vue3Marquee from 'vue3-marquee'
 import VueApexCharts from 'vue3-apexcharts'
 import VOtpInput from 'vue3-otp-input'
 import App from './App.vue'
@@ -25,6 +26,7 @@ app.use(i18n)
 app.use(VueTheMask)
 app.use(MotionPlugin)
 app.use(VueApexCharts)
+app.use(Vue3Marquee)
 app.component('dashboard-layout', DashboardLayout)
 app.component('login-layout', LoginLayout)
 app.component('infinite-loading', InfiniteLoading)
