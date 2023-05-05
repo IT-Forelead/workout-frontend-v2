@@ -2,8 +2,8 @@
   "title": "AlphaSport - CRM tizimi",
   "login": "Kirish",
   "mobilePhone": "Mobil telefon",
-  "quote": "Yo'qotilgan vaqt boshqa topilmaydi.",
-  "author": "Benjamin Franklin",
+  "workoutPlatform": "Workout platformasi",
+  "platformDescription": "Fitness klubingiz boshqaruvini qulaylashtiruvchi, harajatlarni kamaytirgan holda ish samaradoligini oshiruvchi qulay hamda sodda tizim.",
   "password": "Parol",
   "newPassword": "Yangi parol",
   "confirmPassword": "Parolni tasdiqlang",
@@ -272,5 +272,6 @@
   "plsSelectVisitType": "Iltimos, tashrif turini tanlang",
   "visitCreated": "Tashrif muvaffaqiyatli yaratildi!",
   "errorGettingVisits": "Tashriflarni olishda xatolik yuz berdi!",
-  "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!"
+  "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!",
+  "paid": "To'langan"
 }

@@ -2,8 +2,8 @@
   "title": "AlphaSport - CRM System",
   "login": "Login",
   "mobilePhone": "Mobile phone",
-  "quote": "Lost time is never found again.",
-  "author": "Benjamin Franklin",
+  "workoutPlatform": "Workout platform",
+  "platformDescription": "A convenient and simple system that facilitates the management of your fitness club, increases work efficiency while reducing costs.",
   "password": "Password",
   "newPassword": "New password",
   "confirmPassword": "Confirm password",
@@ -271,5 +271,6 @@
   "plsSelectVisitType": "Please select visit type",
   "visitCreated": "Visit successfully created!",
   "errorGettingVisits": "Error while getting visits!",
-  "errorCreatingVisit": "Error while creating visit!"
+  "errorCreatingVisit": "Error while creating visit!",
+  "paid": "Paid"
 }
