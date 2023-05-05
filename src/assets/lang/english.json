@@ -271,5 +271,6 @@
   "plsSelectVisitType": "Please select visit type",
   "visitCreated": "Visit successfully created!",
   "errorGettingVisits": "Error while getting visits!",
-  "errorCreatingVisit": "Error while creating visit!"
+  "errorCreatingVisit": "Error while creating visit!",
+  "paid": "Paid"
 }

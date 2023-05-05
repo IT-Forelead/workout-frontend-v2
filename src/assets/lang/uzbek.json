@@ -272,5 +272,6 @@
   "plsSelectVisitType": "Iltimos, tashrif turini tanlang",
   "visitCreated": "Tashrif muvaffaqiyatli yaratildi!",
   "errorGettingVisits": "Tashriflarni olishda xatolik yuz berdi!",
-  "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!"
+  "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!",
+  "paid": "To'langan"
 }
