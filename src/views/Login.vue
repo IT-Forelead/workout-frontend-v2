@@ -8,7 +8,6 @@ import "vue3-marquee/dist/style.css";
 import { onMounted } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
-import i18n from '../i18n.js'
 import { useI18n } from 'vue-i18n'
 import decodeJwt from '../mixins/utils'
 import { useSidebarStore } from '../store/sidebar.store.js'
@@ -61,17 +60,7 @@ const login = () => {
   }
 }
 
-const lang = ref('')
-
-const changeLang = () => {
-  localStorage.setItem('lang', lang.value)
-  i18n.global.locale.value = lang.value
-  document.getElementsByTagName('title')[0].innerHTML = t('title')
-}
-
 onMounted(() => {
-  lang.value = localStorage.getItem('lang') || 'uz'
-  document.getElementsByTagName('title')[0].innerHTML = t('title')
   useSidebarStore().clearStore()
 })
 </script>
@@ -151,7 +140,8 @@ onMounted(() => {
             <img class="rounded-xl h-44 w-auto" src="/images/workout/image-7.webp" alt="#">
           </div>
         </Vue3Marquee>
-        <Vue3Marquee :pauseOnHover="true" :duration="250" :gradient="false" :direction="'reverse'" class="overflow-hidden">
+        <Vue3Marquee :pauseOnHover="true" :duration="250" :gradient="false" :direction="'reverse'"
+          class="overflow-hidden">
           <div class="flex ml-2 space-x-2">
             <img class="rounded-xl h-44 w-auto" src="/images/workout/image-8.webp" alt="#">
             <img class="rounded-xl h-44 w-auto" src="/images/workout/image-9.webp" alt="#">
