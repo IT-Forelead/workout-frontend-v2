@@ -3,12 +3,12 @@ services:
   workout-frontend:
     restart: always
     image: workout/frontend:latest
-    hostname: workout-frontend
-    container_name: workout-frontend
+    hostname: workout-ui
+    container_name: workout-ui
     networks:
       - external-net
     ports:
-      - "3000:80"
+      - "3003:80"
 networks:
   external-net:
     name: external-net
