@@ -6,5 +6,5 @@ echo "alphaui.tar.gz file created!"
 echo "--------------------------------------------------------"
 echo "Transfer ui file to server"
 scp ./alphaui.tar.gz timeweb2:/home/admin
-echo "Transfer succesful!"
+echo "Transfer successful!"
 echo "--------------------------------------------------------"
