@@ -272,5 +272,6 @@
   "visitCreated": "Visit successfully created!",
   "errorGettingVisits": "Error while getting visits!",
   "errorCreatingVisit": "Error while creating visit!",
-  "paid": "Paid"
+  "paid": "Paid",
+  "qrCodeId":"QR code id"
 }

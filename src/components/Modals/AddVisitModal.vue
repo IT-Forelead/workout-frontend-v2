@@ -92,6 +92,11 @@ const submitData = () => {
             <label>{{ $t('visitType') }}</label>
             <SelectOptionVisitType />
           </div>
+          <div>
+            <label for="lastname">{{ $t('qrCodeId') }}</label>
+            <input class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="lastname"
+              :placeholder="$t('qrCodeId')" autofocus />
+          </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
           <button @click="clearForm()"

@@ -273,5 +273,6 @@
   "visitCreated": "Tashrif muvaffaqiyatli yaratildi!",
   "errorGettingVisits": "Tashriflarni olishda xatolik yuz berdi!",
   "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!",
-  "paid": "To'langan"
+  "paid": "To'langan",
+  "qrCodeId":"QR kod id"
 }
