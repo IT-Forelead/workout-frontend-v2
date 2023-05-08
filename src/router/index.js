@@ -25,7 +25,7 @@ const routes = [
     name: 'Index',
     component: () => import('../views/Home.vue'),
     meta: { layout: 'dashboard' },
-    beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
+    beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin', 'trainer']),
   },
   {
     path: '/services',

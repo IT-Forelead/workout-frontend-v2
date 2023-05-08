@@ -47,7 +47,7 @@ onMounted(() => {
         </div>
         <div>{{ $t('mainPage') }}</div>
       </router-link>
-      <div @click="useSidebarStore().toggleSubMenuForTariffs()"
+      <div @click="useSidebarStore().toggleSubMenuForTariffs()" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])"
         class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 font-medium  py-7 cursor-pointer transition-colors duration-300">
         <div class="flex items-center space-x-4"
           :class="router?.currentRoute?.value?.path === '/tariffs' || router?.currentRoute?.value?.path === '/trainer-tariffs' ? 'active' : ''">
@@ -76,7 +76,7 @@ onMounted(() => {
           </div>
         </router-link>
       </div>
-      <router-link to="/payments" active-class="active"
+      <router-link to="/payments" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
@@ -84,7 +84,7 @@ onMounted(() => {
         </div>
         <div>{{ $t('payments') }}</div>
       </router-link>
-      <router-link to="/visits" active-class="active"
+      <router-link to="/visits" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
@@ -92,7 +92,7 @@ onMounted(() => {
         </div>
         <div>{{ $t('visits') }}</div>
       </router-link>
-      <router-link to="/customers" active-class="active"
+      <router-link to="/customers" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
@@ -100,7 +100,7 @@ onMounted(() => {
         </div>
         <div>{{ $t('customers') }}</div>
       </router-link>
-      <div @click="useSidebarStore().toggleSubMenuForServices()"
+      <div @click="useSidebarStore().toggleSubMenuForServices()" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])"
         class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 font-medium  py-7 cursor-pointer transition-colors duration-300">
         <div class="flex items-center space-x-4"
           :class="router?.currentRoute?.value?.path === '/services' || router?.currentRoute?.value?.path === '/trainer-services' ? 'active' : ''">
@@ -129,7 +129,7 @@ onMounted(() => {
           </div>
         </router-link>
       </div>
-      <router-link to="/users" active-class="active"
+      <router-link to="/users" v-if="navigationGuard(['super_manager'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
@@ -137,7 +137,7 @@ onMounted(() => {
         </div>
         <div>{{ $t('users') }}</div>
       </router-link>
-      <router-link to="/sms-messages" active-class="active"
+      <router-link to="/sms-messages" v-if="navigationGuard(['super_manager'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">

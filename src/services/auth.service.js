@@ -25,7 +25,7 @@ class AuthService {
     await axios.get(`${API_URL}/auth/link-validation/${linkCode}`)
   }
   async logout() {
-    await axios.get(API_URL + '/auth/logout', { headers: authHeader() }).then(() => {
+    await axios.get(API_URL + '/auth/user/logout', { headers: authHeader() }).then(() => {
       localStorage.clear()
     })
     localStorage.clear()
