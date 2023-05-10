@@ -58,9 +58,9 @@ const paymentStatusColor = (status) => {
   }
 }
 
-const checkStatus = (endDate) => !moment().isAfter(endDate) ? t('active') : t('notActive')
+const checkStatus = (endDate) => moment().isBefore(endDate) ? t('active') : t('notActive')
 
-const statusColor = (endDate) => !moment().isAfter(endDate) ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+const statusColor = (endDate) => moment().isBefore(endDate) ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
 
 const durationDayTranslate = (n) => {
   switch (n) {
@@ -148,11 +148,12 @@ const monthlyVisitTranslate = (n) => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 inline-block w-28 text-sm rounded-full" :class="statusColor((tariff?.customerTariff?.expireAt))">{{
-        checkStatus(tariff?.customerTariff?.expireAt) }}</span>
+      <span class="p-1.5 px-3 inline-block w-28 text-sm rounded-full"
+        :class="statusColor((tariff?.customerTariff?.expireAt))">{{
+          checkStatus(tariff?.customerTariff?.expireAt) }}</span>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
+      <span class="p-1.5 inline-block w-28 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
         {{ paymentStatusTranslate(tariff?.customerTariff?.paymentStatus) }}
       </span>
     </td>

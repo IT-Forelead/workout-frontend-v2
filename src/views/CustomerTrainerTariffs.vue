@@ -178,6 +178,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('status') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('paymentStatus') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>
