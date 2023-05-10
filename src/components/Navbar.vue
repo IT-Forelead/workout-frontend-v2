@@ -8,6 +8,7 @@ import decodeJwt, { parseJwt } from '../mixins/utils'
 import ChatTextIcon from './Icons/ChatTextIcon.vue'
 import BellIcon from './Icons/BellIcon.vue'
 import AddCustomerModal from './Modals/AddCustomerModal.vue'
+import AddQrCodeModal from './Modals/AddQrCodeModal.vue'
 import AddServiceModal from './Modals/AddServiceModal.vue'
 import AddTrainerServiceModal from './Modals/AddTrainerServiceModal.vue'
 import AddCustomerTariffModal from './Modals/AddCustomerTariffModal.vue'
@@ -73,6 +74,7 @@ onMounted(() => {
   <AddCustomerTrainerTariffModal />
   <AddPaymentModal />
   <AddVisitModal />
+  <AddQrCodeModal />
 </template>
 
 <style scoped></style>

@@ -273,5 +273,8 @@
   "errorGettingVisits": "Ошибка при получении посещений!",
   "errorCreatingVisit": "Ошибка при создании визита!",
   "paid": "Оплаченный",
-  "qrCodeId":"QR кода ид"
+  "qrCodeId":"QR кода ид",
+  "deleteQrCode":"Удалить QR-код",
+  "addQrCode":"Добавить QR-код",
+  "noQrCodeAvailable":"QR-код недоступен"
 }

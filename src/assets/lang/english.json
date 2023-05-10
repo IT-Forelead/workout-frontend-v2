@@ -273,5 +273,8 @@
   "errorGettingVisits": "Error while getting visits!",
   "errorCreatingVisit": "Error while creating visit!",
   "paid": "Paid",
-  "qrCodeId":"QR code id"
+  "qrCodeId":"QR code id",
+  "deleteQrCode":"Delete QR code",
+  "addQrCode":"Add QR code",
+  "noQrCodeAvailable":"No QR code available"
 }
