@@ -23,6 +23,7 @@
   "n": "No",
   "welcome": "Welcome to our system!",
   "search": "Search",
+  "status": "Status",
   "sortBy": "Sort by",
   "save": "Save",
   "saving": "Saving",
@@ -273,5 +274,7 @@
   "errorGettingVisits": "Error while getting visits!",
   "errorCreatingVisit": "Error while creating visit!",
   "paid": "Paid",
-  "qrCodeId":"QR code id"
+  "qrCodeId":"QR code id",
+  "active": "Active",
+  "notActive": "Not Active"
 }

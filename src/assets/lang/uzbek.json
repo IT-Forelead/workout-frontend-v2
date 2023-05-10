@@ -24,6 +24,7 @@
   "welcome": "Tizimimizga xush kelibsiz!",
   "search": "Qidirish",
   "sortBy": "Saralash bo'yicha",
+  "status": "Holati",
   "save": "Saqlash",
   "saving": "Saqlash",
   "reset": "Tozalash",
@@ -274,5 +275,7 @@
   "errorGettingVisits": "Tashriflarni olishda xatolik yuz berdi!",
   "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!",
   "paid": "To'langan",
-  "qrCodeId":"QR kod id"
+  "qrCodeId":"QR kod id",
+  "active": "Faol",
+  "notActive": "Faol emas"
 }
