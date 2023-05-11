@@ -278,7 +278,6 @@
   "deleteQrCode":"Delete QR code",
   "addQrCode":"Add QR code",
   "noQrCodeAvailable":"No QR code available",
-  "qrCodeId":"QR code id",
   "active": "Active",
   "notActive": "Not active"
 }
