@@ -276,6 +276,9 @@
   "errorCreatingVisit": "Tashrif yaratishda xatolik yuz berdi!",
   "paid": "To'langan",
   "qrCodeId":"QR kod id",
+  "deleteQrCode":"QR kodni o'chirish",
+  "addQrCode":"QR kod qo'shish",
+  "noQrCodeAvailable":"QR kod mavjud emas",
   "active": "Faol",
   "notActive": "Faol emas"
 }

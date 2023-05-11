@@ -275,6 +275,10 @@
   "errorCreatingVisit": "Error while creating visit!",
   "paid": "Paid",
   "qrCodeId":"QR code id",
+  "deleteQrCode":"Delete QR code",
+  "addQrCode":"Add QR code",
+  "noQrCodeAvailable":"No QR code available",
+  "qrCodeId":"QR code id",
   "active": "Active",
-  "notActive": "Not Active"
+  "notActive": "Not active"
 }

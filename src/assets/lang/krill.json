@@ -276,6 +276,9 @@
   "errorCreatingVisit": "Ташриф яратишда хатолик юз берди!",
   "paid": "Тўланган",
   "qrCodeId":"QR код ид",
+  "deleteQrCode":"QR кодни ўчириш",
+  "addQrCode":"QR код қўшиш",
+  "noQrCodeAvailable":"QR код мавжуд емас",
   "active": "Фаол",
   "notActive": "Фаол эмас"
 }

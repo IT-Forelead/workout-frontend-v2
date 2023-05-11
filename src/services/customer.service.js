@@ -17,6 +17,9 @@ class CustomerService {
   async sendActivationCode(phone) {
     return AxiosService.get(`/customer/sent-code?phone=${encodeURIComponent(phone)}`, { headers: authHeader() })
   }
+  async addQrCodeToCustomer(customerId) {
+    return AxiosService.get(`/customer/add-qrcode/${customerId}`, { headers: authHeader() })
+  }
 }
 
 export default new CustomerService()

@@ -89,11 +89,6 @@ const submitData = () => {
             <SelectOptionCustomer />
           </div>
           <div>
-            <label for="qrCodeId">{{ $t('qrCodeId') }}</label>
-            <input class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="qrCodeId"
-              placeholder="0a0aa0a0-0aa0-a00a-0a0a-a0a0a0a0a0a0" disabled />
-          </div>
-          <div>
             <label>{{ $t('visitType') }}</label>
             <SelectOptionVisitType />
           </div>
