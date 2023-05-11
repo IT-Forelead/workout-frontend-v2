@@ -1,11 +1,38 @@
 <script setup>
-import BellIcon from "../components/Icons/BellIcon.vue";
+import { ref } from 'vue';
+import Card from "../components/Diagramm/Card.vue";
+import Earning from "../components/Diagramm/Earning.vue";
+import DiagrammDiv from "../components/Diagramm/DiagrammDiv.vue";
+import Title from "../components/Diagramm/Title.vue";
+import Select from "../components/Diagramm/Select.vue";
+import Icon from "../components/Diagramm/Icon.vue";
+import DailyExpense from "../components/Diagramm/DailyExpense.vue";
+
+const data = ref([
+  { title: "Title Sales", total: "73,965", percentage: "23%", percentageColor: "text-red-500" },
+  { title: "Title Leads", total: "63,044", percentage: "44%", percentageColor: "text-green-500" },
+  { title: "Title Profit", total: "$406.27", percentage: "15%", percentageColor: "text-red-500" },
+  { title: "Title Cost", total: "$490.51", percentage: "31%", percentageColor: "text-green-500" }
+])
+const earningData = ref([
+  { time: "Week", total: "$490.51", width: "w-1/2" },
+  { time: "Month", total: "$490.51", width: "w-3/5" },
+  { time: "Year", total: "$490.51", width: "w-1/5" }
+])
+const dailyData = ref([
+  { title: "Grocery bills", total: 17 },
+  { title: "Banking", total: 12 },
+  { title: "Insurance", total: 26 },
+  { title: "Daily Expense", total: 8 },
+  { title: "Investmen", total: 4 }
+])
+
 </script>
 
 <template>
   <div class="px-10 py-3">
     <div class="grid grid-cols-2 gap-5">
-      <div class="bg-white rounded-xl h-[40vh] p-5 flex flex-col">
+      <div class="bg-white rounded-xl p-5 flex flex-col">
         <div class="flex justify-between font-bold text-lg">
           <h4>Spending Stats</h4>
           <div class="flex item-center gap-x-10">
@@ -15,130 +42,52 @@ import BellIcon from "../components/Icons/BellIcon.vue";
                 class="rounded-full bg-yellow-200 mr-1 h-3 w-3 inline-block"></span>Business</div>
           </div>
         </div>
-        <div class="mt-auto">
-          <div class="flex justify-between px-10">
-            <div class="flex items-end gap-x-2">
-              <div class="bg-black h-28 w-10 rounded-t-lg"></div>
-              <div class="bg-yellow-200 h-44 w-10 rounded-t-lg"></div>
-            </div>
-            <div class="flex items-end gap-x-2">
-              <div class="bg-black h-14 w-10 rounded-t-lg"></div>
-              <div class="bg-yellow-200 h-28 w-10 rounded-t-lg"></div>
-            </div>
-            <div class="flex items-end gap-x-2">
-              <div class="bg-black h-56 w-10 rounded-t-lg"></div>
-              <div class="bg-yellow-200 h-44 w-10 rounded-t-lg"></div>
-            </div>
-            <div class="flex items-end gap-x-2">
-              <div class="bg-black h-52 w-10 rounded-t-lg"></div>
-              <div class="bg-yellow-200 h-28 w-10 rounded-t-lg"></div>
-            </div>
-          </div>
-        </div>
+        <DiagrammDiv />
       </div>
       <div class="grid grid-cols-2 gap-5">
-        <div class="bg-white rounded-xl relative h-full p-5 flex flex-col">
-          <h4 class="flex items-center gap-x-2 font-bold text-lg">Total Sales
-            <BellIcon />
-          </h4>
-          <div class="mt-auto">
-            <h3 class="text-2xl font-bold">73,965</h3>
-            <div class="flex mt-2">
-              <div class="text-red-500 flex items-center gap-x-2">
-                <BellIcon /> 23%
-              </div>
-              <span class="text-gray-200 ml-2">in this year</span>
-            </div>
-          </div>
-          <div class="absolute bg-black flex items-center justify-center rounded-full w-16 h-16 top-5 right-5">
-            <BellIcon class="text-yellow-200 w-10 h-10" />
-          </div>
-        </div>
-        <div class="bg-white rounded-xl relative h-full p-5 flex flex-col">
-          <h4 class="flex items-center gap-x-2 font-bold text-lg">Total Sales
-            <BellIcon />
-          </h4>
-          <div class="mt-auto">
-            <h3 class="text-2xl font-bold">63,044</h3>
-            <div class="flex mt-2">
-              <div class="text-green-500 flex items-center gap-x-2">
-                <BellIcon /> 23%
-              </div>
-              <span class="text-gray-200 ml-2">in this year</span>
-            </div>
-          </div>
-          <div class="absolute bg-black flex items-center justify-center rounded-full w-16 h-16 top-5 right-5">
-            <BellIcon class="text-yellow-200 w-10 h-10" />
-          </div>
-        </div>
-        <div class="bg-white rounded-xl relative h-full p-5 flex flex-col">
-          <h4 class="flex items-center gap-x-2 font-bold text-lg">Total Sales
-            <BellIcon />
-          </h4>
-          <div class="mt-auto">
-            <h3 class="text-2xl font-bold">$406.27</h3>
-            <div class="flex mt-2">
-              <div class="text-green-500 flex items-center gap-x-2">
-                <BellIcon /> 23%
-              </div>
-              <span class="text-gray-200 ml-2">in this year</span>
-            </div>
-          </div>
-          <div class="absolute bg-black flex items-center justify-center rounded-full w-16 h-16 top-5 right-5">
-            <BellIcon class="text-yellow-200 w-10 h-10" />
-          </div>
-        </div>
-        <div class="bg-white rounded-xl relative h-full p-5 flex flex-col">
-          <h4 class="flex items-center gap-x-2 font-bold text-lg">Total Cost
-            <BellIcon />
-          </h4>
-          <div class="mt-auto">
-            <h3 class="text-2xl font-bold">$490.51</h3>
-            <div class="flex mt-2">
-              <div class="text-red-500 flex items-center gap-x-2">
-                <BellIcon /> 31%
-              </div>
-              <span class="text-gray-200 ml-2">in this year</span>
-            </div>
-          </div>
-          <div class="absolute bg-black flex items-center justify-center rounded-full w-16 h-16 top-5 right-5">
-            <BellIcon class="text-yellow-200 w-10 h-10" />
-          </div>
-        </div>
+        <Card v-for="(item, idx) in data" :key="idx" :item="item" />
       </div>
     </div>
     <div class="grid grid-cols-4 gap-5 mt-5">
-      <div class="bg-white rounded-xl h-[43vh] p-5 col-span-3">
+      <div class="bg-white rounded-xl h-full p-5 col-span-3">
         <div class="flex justify-between">
-          <h4 class="flex items-center gap-x-2 font-bold text-lg">Earning growth
-            <BellIcon />
-          </h4>
+          <Title :title="'Earning Growth'" />
           <div>
-            <select class="mr-5">
-              <option value="">2022</option>
-            </select>
-            <select>
-              <option value="">Q1</option>
-            </select>
+            <Select class="mr-5" />
+            <Select />
           </div>
         </div>
         <div class="border rounded mt-5">
-          <div class="flex items-center p-3 border-b">
-            <div class="bg-black flex items-center justify-center rounded-full w-16 h-16 top-5 left-5">
-              <BellIcon class="text-yellow-200 w-10 h-10" />
+          <div class="flex justify-between items-center py-3 px-10 border-b">
+            <Icon />
+            <div>
+              <h4 class="font-bold">Income top Total last Week</h4>
+              <h3 class="font-bold text-3xl mt-3">$396.84 <span class="text-gray-400 text-sm">Total</span></h3>
             </div>
+            <Earning v-for="(element, idx) in earningData" :item="element" :key="idx" />
           </div>
-          <div class="p-3">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid ipsa optio in placeat consequatur blanditiis
-            minus, rem est cum? Doloremque minus nam ut excepturi ullam architecto explicabo temporibus eveniet a.
-          </div>
+          <div class="p-3 bg-[url('/images/diagramm2.jpg')] h-[30vh] bg-cover bg-center bg-no-repeat"></div>
         </div>
       </div>
-
-
-      <div class="grid grid-cols-1 gap-5 grid-rows-4">
-        <div class="bg-white rounded-xl capitalize h-full p-5 row-span-3"></div>
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
+      <div class="grid grid-cols-1 gap-5">
+        <div class="bg-white rounded-xl p-5 row-span-3 space-y-4">
+          <Title :title="'Daily Expense'" />
+          <DailyExpense v-for="item in dailyData" :key="item" :item="item" />
+        </div>
+        <div class="">
+          <div class="">
+            <h3 class="text-2xl font-bold">Become a Pro</h3>
+            <div class="flex mt-10">
+              <div>
+                <span><b class="mr-3">$</b></span><span class="font-bold text-2xl">6.85</span><span
+                  class="text-gray-500">/month</span>
+              </div>
+              <button
+                class="ml-auto bg-yellow-200 text-black py-3 px-5 font-bold text-lg cursor-pointer duration-300 hover:bg-white hover:text-yellow-500 rounded-full">Try
+                Now</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
