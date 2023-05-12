@@ -39,7 +39,7 @@ const submitForm = reactive({
   lastname: '',
   phone: '',
   code: '',
-  smsConfirmation: true,
+  smsConfirmation: false,
 })
 
 const selectedImage = ref('')
@@ -90,7 +90,7 @@ const clearForm = () => {
   submitForm.lastname = ''
   submitForm.phone = ''
   submitForm.code = ''
-  submitForm.smsConfirmation = true
+  submitForm.smsConfirmation = false
   useDropdownStore().clearStore()
 }
 
