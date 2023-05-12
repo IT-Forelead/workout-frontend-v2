@@ -45,8 +45,8 @@ const visitTypeColor = (type) => {
 </script>
 <template>
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(visit, idx) in visits" :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-fade class="text-center">{{ idx + 1 }}</td>
+    <td v-motion-fade class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <div v-if="visit?.customer?.image">
           <img :src="URL + visit?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
@@ -62,17 +62,17 @@ const visitTypeColor = (type) => {
         </div>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-fade class="py-2 px-4 text-left">
       {{ moment(visit?.visit?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-fade class="py-2 px-4 text-center">
       <span class="p-1.5 px-3 text-sm rounded-full" :class="visitTypeColor(visit?.visit?.visitType)">
         {{ visitTypeTranslate(visit?.visit?.visitType) }}
       </span>
     </td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">
-    <td v-motion-pop colspan="10">
+    <td v-motion-fade colspan="10">
       <div class="flex items-center justify-center w-full p-2">
         <InfiniteLoading v-bind="$attrs" />
       </div>
