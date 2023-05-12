@@ -22,9 +22,7 @@ const earningData = ref([
 const dailyData = ref([
   { title: "Grocery bills", total: 17 },
   { title: "Banking", total: 12 },
-  { title: "Insurance", total: 26 },
-  { title: "Daily Expense", total: 8 },
-  { title: "Investmen", total: 4 }
+  { title: "Insurance", total: 26 }
 ])
 
 </script>
@@ -32,11 +30,11 @@ const dailyData = ref([
 <template>
   <div class="px-10 py-3">
     <div class="grid grid-cols-2 gap-5">
-      <div class="bg-white rounded-xl p-5 flex flex-col">
+      <div class="bg-white rounded-xl p-5 flex flex-col h-[40vh]">
         <div class="flex justify-between font-bold text-lg">
           <h4>Spending Stats</h4>
           <div class="flex item-center gap-x-10">
-            <div class="flex items-center"><span class="rounded-full bg-black mr-1 h-3 w-3 inline-block"></span>Personal
+            <div class="flex items-center"><span class="rounded-full bg-[#111827] mr-1 h-3 w-3 inline-block"></span>Personal
             </div>
             <div class="flex items-center"><span
                 class="rounded-full bg-yellow-200 mr-1 h-3 w-3 inline-block"></span>Business</div>
@@ -49,7 +47,7 @@ const dailyData = ref([
       </div>
     </div>
     <div class="grid grid-cols-4 gap-5 mt-5">
-      <div class="bg-white rounded-xl h-full p-5 col-span-3">
+      <div class="bg-white rounded-xl h-[53vh] p-5 col-span-3">
         <div class="flex justify-between">
           <Title :title="'Earning Growth'" />
           <div>
@@ -66,26 +64,24 @@ const dailyData = ref([
             </div>
             <Earning v-for="(element, idx) in earningData" :item="element" :key="idx" />
           </div>
-          <div class="p-3 bg-[url('/images/diagramm2.jpg')] h-[30vh] bg-cover bg-center bg-no-repeat"></div>
+          <div class="p-3 bg-[url('/images/diagramm2.jpg')] h-[31vh] bg-cover bg-center bg-no-repeat"></div>
         </div>
       </div>
       <div class="grid grid-cols-1 gap-5">
-        <div class="bg-white rounded-xl p-5 row-span-3 space-y-4">
+        <div class="bg-white rounded-xl p-5 h-full row-span-3 space-y-4">
           <Title :title="'Daily Expense'" />
           <DailyExpense v-for="item in dailyData" :key="item" :item="item" />
         </div>
-        <div class="">
-          <div class="">
-            <h3 class="text-2xl font-bold">Become a Pro</h3>
-            <div class="flex mt-10">
-              <div>
-                <span><b class="mr-3">$</b></span><span class="font-bold text-2xl">6.85</span><span
-                  class="text-gray-500">/month</span>
-              </div>
-              <button
-                class="ml-auto bg-yellow-200 text-black py-3 px-5 font-bold text-lg cursor-pointer duration-300 hover:bg-white hover:text-yellow-500 rounded-full">Try
-                Now</button>
+        <div class="bg-[#111827] rounded-xl p-5 right-10 bottom-1 text-white">
+          <h3 class="text-2xl font-bold">Become a Pro</h3>
+          <div class="flex mt-10">
+            <div>
+              <span><b class="mr-3">$</b></span><span class="font-bold text-2xl">6.85</span><span
+                class="text-gray-500">/month</span>
             </div>
+            <button
+              class="ml-auto bg-[#e9d965] text-black py-3 px-5 font-bold text-lg cursor-pointer duration-300 hover:bg-white hover:text-yellow-500 rounded-full">Try
+              Now</button>
           </div>
         </div>
       </div>

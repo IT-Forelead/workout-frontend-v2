@@ -6,7 +6,7 @@ defineProps({ item: Object })
         <h4>Earning per {{ item?.time }}</h4>
         <h3 class="text-xl mb-3">{{ item?.total }}</h3>
         <div class="h-3 rounded-full border">
-            <span class="h-3 block rounded-full bg-black" :class="item?.width"></span>
+            <span class="h-3 block rounded-full bg-[#111827]" :class="item?.width"></span>
         </div>
     </div>
 </template>
