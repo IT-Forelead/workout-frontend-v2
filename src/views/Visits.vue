@@ -97,9 +97,6 @@ const autoRefresher =
 onMounted(() => {
   useVisitStore().clearStore()
   autoRefresher
-
-  console.log(moment().startOf('day').calendar());
-  console.log(moment().endOf('day').calendar());
 })
 
 onUnmounted(() => {
