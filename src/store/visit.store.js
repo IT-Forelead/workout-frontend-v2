@@ -12,6 +12,13 @@ export const useVisitStore = defineStore('visit', {
     setSelectedVisit(data) {
       this.selectedVisit = data
     },
+    setAutoRefreshVisits(data) {
+      data.map((visit) => {
+        if (!this.visits.map(v => v?.createdAt).includes(visit?.createdAt)) {
+          this.visits.push(visit)
+        }
+      })
+    },
     clearStore() {
       this.visits = []
     },
