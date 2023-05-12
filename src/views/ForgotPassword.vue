@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from '@vue/reactivity'
-import AuthService from '../services/auth.service'
-import { onMounted } from 'vue'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
+import { vMaska } from "maska"
+import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useSidebarStore } from '../store/sidebar.store.js'
 import CheckIcon from '../components/Icons/EnvelopeIcon.vue'
 import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
+import AuthService from '../services/auth.service'
+import { useSidebarStore } from '../store/sidebar.store.js'
 
 const { t } = useI18n()
 const lang = ref('')
@@ -71,7 +72,7 @@ onMounted(() => {
         <div class="flex flex-col space-y-6">
           <label for="phone">
             <p class="font-medium text-gray-700 pb-2">{{ $t('mobilePhone') }}</p>
-            <input id="phone" v-mask="'+998(##) ###-##-##'" v-model="phone" type="text" class="w-full py-2 border border-gray-300 rounded focus:outline-none focus:border-slate-500 hover:shadow" placeholder="+998(00) 000-00-00" />
+            <input id="phone" v-maska data-maska="+998(##) ###-##-##" v-model="phone" type="text" class="w-full py-2 border border-gray-300 rounded focus:outline-none focus:border-slate-500 hover:shadow" placeholder="+998(00) 000-00-00" />
           </label>
           <div class="text-gray-500">{{ $t('resetPasswordReference') }}</div>
           <div v-if="isLoading" class="w-full select-none bg-gray-600 py-3 font-light text-white rounded flex items-center justify-center">

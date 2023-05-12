@@ -2,6 +2,7 @@
 import { computed, reactive } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
+import { vMaska } from "maska"
 import { useI18n } from 'vue-i18n'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
 import UserService from '../../services/user.service'
@@ -114,7 +115,7 @@ const submitUserData = () => {
           <div>
             <label for="phone">{{ $t('phone') }}</label>
             <input v-model="userForm.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
-              type="text" v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
+              type="text" v-maska data-maska="+998(##) ###-##-##" placeholder="+998(00) 000-00-00" />
           </div>
           <div>
             <label>{{ $t('role') }}</label>
