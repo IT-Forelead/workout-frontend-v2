@@ -76,7 +76,7 @@ input[type='radio'].toggle.toggle-right+label:after {
 
 input[type='radio'].toggle:checked+label {
   @apply cursor-default;
-  @apply text-gray-900;
+  @apply text-blue-500;
   @apply bg-white;
   @apply border-4;
   @apply border-gray-100;
@@ -91,4 +91,3 @@ input[type='radio'].toggle:checked+label:after {
   @apply left-0;
 }
 </style>
-
