@@ -23,6 +23,7 @@
   "n": "No",
   "welcome": "Welcome to our system!",
   "search": "Search",
+  "status": "Status",
   "sortBy": "Sort by",
   "save": "Save",
   "saving": "Saving",
@@ -276,5 +277,7 @@
   "qrCodeId":"QR code id",
   "deleteQrCode":"Delete QR code",
   "addQrCode":"Add QR code",
-  "noQrCodeAvailable":"No QR code available"
+  "noQrCodeAvailable":"No QR code available",
+  "active": "Active",
+  "notActive": "Not active"
 }

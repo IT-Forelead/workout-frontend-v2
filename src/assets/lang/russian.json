@@ -24,6 +24,7 @@
   "welcome": "Добро пожаловать в нашу систему!",
   "search": "Поиск",
   "sortBy": "Сортировать по",
+  "status": "Статус",
   "save": "Сохранить",
   "saving": "Сохранение",
   "reset": "Сброс",
@@ -276,5 +277,7 @@
   "qrCodeId":"QR кода ид",
   "deleteQrCode":"Удалить QR-код",
   "addQrCode":"Добавить QR-код",
-  "noQrCodeAvailable":"QR-код недоступен"
+  "noQrCodeAvailable":"QR-код недоступен",
+  "active": "Активный",
+  "notActive": "Не активен"
 }
