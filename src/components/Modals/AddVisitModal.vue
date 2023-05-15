@@ -9,7 +9,7 @@ import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
-import SelectOptionVisitType from '../Inputs/SelectOptionVisitType.vue'
+import RadionVisitType from '../Inputs/RadionVisitType.vue'
 
 const { t } = useI18n()
 
@@ -90,7 +90,7 @@ const submitData = () => {
           </div>
           <div>
             <label>{{ $t('visitType') }}</label>
-            <SelectOptionVisitType />
+            <RadionVisitType />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">

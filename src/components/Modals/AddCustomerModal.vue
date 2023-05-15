@@ -12,7 +12,7 @@ import CheckIcon from '../Icons/CheckIcon.vue'
 import ClockCountdownIcon from '../Icons/ClockCountdownIcon.vue'
 import ImageIcon from '../Icons/ImageIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
-import SelectOptionGender from '../Inputs/SelectOptionGender.vue'
+import RadioGender from '../Inputs/RadioGender.vue'
 
 const { t } = useI18n()
 
@@ -323,7 +323,7 @@ const createCustomer = () => {
             </div>
             <div>
               <label>{{ $t('gender') }}</label>
-              <SelectOptionGender />
+              <RadioGender />
             </div>
           </div>
           <!-- Step 2 -->

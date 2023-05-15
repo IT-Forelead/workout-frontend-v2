@@ -1,11 +1,18 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref } from '@vue/reactivity'
+import { computed } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
-import GenderMaleIcon from '../Icons/GenderMaleIcon.vue'
-import GenderFemaleIcon from '../Icons/GenderFemaleIcon.vue'
+import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
+import XIcon from '../Icons/XIcon.vue'
 
 const { t } = useI18n()
+
+const selectedOption = computed(() => {
+  return useDropdownStore().selectGenderOption
+})
+const dropdown = ref(null)
 
 const list = [
   {
@@ -18,73 +25,39 @@ const list = [
   },
 ]
 
-const optionClicked = (data) => {
-  useDropdownStore().setSelectGenderOption(data)
+const clearSelectedOptionData = () => {
+  useDropdownStore().setSelectGenderOption('')
 }
 
-onMounted(() => {
-  useDropdownStore().setSelectGenderOption(list[0])
+onClickOutside(dropdown, () => {
+  useDropdownStore().closeGenderDropDown()
 })
+
+const optionClicked = (data) => {
+  useDropdownStore().setSelectGenderOption(data)
+  useDropdownStore().closeGenderDropDown()
+}
 </script>
 <template>
   <div class="select-none">
-    <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
-      <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked />
-      <label for="toggle-on" @click="optionClicked(list[0])"
-        class="relative flex items-center justify-center space-x-3 py-2">
-        <GenderMaleIcon class="w-5 h-5" />
-        <span>{{ $t('male') }}</span>
-      </label>
-      <input id="toggle-off" @click="optionClicked(list[1])" class="toggle toggle-right" name="toggle" value="true"
-        type="radio" />
-      <label for="toggle-off" class="relative flex items-center justify-center space-x-3 py-2">
-        <GenderFemaleIcon class="w-5 h-5" />
-        <span>{{ $t('female') }}</span>
-      </label>
-    </div>
+    <label ref="dropdown" class="flex items-center w-full relative">
+      <div v-if="selectedOption"
+        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2"
+        v-text="selectedOption?.name"></div>
+      <div @click="useDropdownStore().openGenderDropDown()" v-else
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">{{ $t('select')
+        }}</div>
+      <ChevronRightIcon @click="useDropdownStore().openGenderDropDown()" v-if="!selectedOption"
+        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
+      <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
+        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
+      <ul v-if="useDropdownStore().isOpenGenderDropDown"
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 divide-y divide-gray-200">
+        <li v-for="(gender, idx) in list" :key="idx" @click="optionClicked(gender)"
+          class="hover:bg-gray-200 cursor-pointer p-2 ">
+          {{ gender?.name }}
+        </li>
+      </ul>
+    </label>
   </div>
 </template>
-<style scoped>
-input[type='radio'].toggle {
-  @apply hidden;
-}
-
-input[type='radio'].toggle+label {
-  @apply cursor-pointer;
-  @apply text-gray-900;
-  @apply w-1/2;
-}
-
-input[type='radio'].toggle.toggle-left+label {
-  @apply border-r-0;
-}
-
-input[type='radio'].toggle.toggle-left+label:after {
-  @apply left-full;
-}
-
-input[type='radio'].toggle.toggle-right+label {
-  @apply -ml-1;
-}
-
-input[type='radio'].toggle.toggle-right+label:after {
-  @apply -left-full;
-}
-
-input[type='radio'].toggle:checked+label {
-  @apply cursor-default;
-  @apply text-blue-500;
-  @apply bg-white;
-  @apply border-4;
-  @apply border-gray-100;
-  @apply rounded-lg;
-}
-
-input[type='radio'].toggle:checked+label>span {
-  @apply inline-block;
-}
-
-input[type='radio'].toggle:checked+label:after {
-  @apply left-0;
-}
-</style>
