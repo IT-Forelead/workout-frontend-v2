@@ -1,20 +1,21 @@
 <script setup>
-import { ref, reactive } from '@vue/reactivity'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../store/auth.store'
-import AuthService from '../services/auth.service'
+import { reactive, ref } from '@vue/reactivity';
+import notify from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+import { vMaska } from "maska";
+import { onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 import { Vue3Marquee } from "vue3-marquee";
 import "vue3-marquee/dist/style.css";
-import { onMounted } from 'vue'
-import notify from 'izitoast'
-import 'izitoast/dist/css/iziToast.min.css'
-import { useI18n } from 'vue-i18n'
-import decodeJwt from '../mixins/utils'
-import { useSidebarStore } from '../store/sidebar.store.js'
-import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
-import EyeIcon from '../components/Icons/EyeIcon.vue'
-import EyeSlashIcon from '../components/Icons/EyeSlashIcon.vue'
-import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import EyeIcon from '../components/Icons/EyeIcon.vue';
+import EyeSlashIcon from '../components/Icons/EyeSlashIcon.vue';
+import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue';
+import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue';
+import decodeJwt from '../mixins/utils';
+import AuthService from '../services/auth.service';
+import { useAuthStore } from '../store/auth.store';
+import { useSidebarStore } from '../store/sidebar.store.js';
 
 const { t } = useI18n()
 const isLoading = ref(false)
@@ -79,7 +80,8 @@ onMounted(() => {
         <div class="flex flex-col space-y-6">
           <label for="phone">
             <p class="font-medium text-gray-500 pb-2">{{ $t('mobilePhone') }}</p>
-            <input id="phone" v-mask="'+998(##) ###-##-##'" v-model="loginFormData.phone" type="text"
+            <input id="phone" v-maska data-maska="+998(##) ###-##-##" data-maska-tokens="998"
+              v-model="loginFormData.phone" type="text"
               class="w-full py-2 border border-gray-300 rounded focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="+998(00) 000-00-00" />
           </label>

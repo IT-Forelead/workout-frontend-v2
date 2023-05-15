@@ -1,19 +1,20 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import { vMaska } from "maska"
 import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import SelectOptionDeliveryStatus from '../components/Inputs/SelectOptionDeliveryStatus.vue'
+import SelectOptionMessageType from '../components/Inputs/SelectOptionMessageType.vue'
 import SmsMessageItem from '../components/Items/SmsMessageItem.vue'
 import authHeader from '../mixins/auth-header'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import AxiosService from "../services/axios.service.js"
 import SmsMessageService from '../services/smsMessage.service'
-import { useModalStore } from '../store/modal.store'
 import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
 import { useSmsMessageStore } from '../store/smsMessage.store'
-import SelectOptionDeliveryStatus from '../components/Inputs/SelectOptionDeliveryStatus.vue'
-import SelectOptionMessageType from '../components/Inputs/SelectOptionMessageType.vue'
 
 const isLoading = ref(false)
 
@@ -122,7 +123,7 @@ const submitFilterData = () => {
               <div>
                 <label for="phone">{{ $t('phone') }}</label>
                 <input v-model="filterData.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full"
-                  type="text" v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
+                  type="text" v-maska data-maska="+998(##) ###-##-##" placeholder="+998(00) 000-00-00" />
               </div>
               <div>
                 <label>{{ $t('messageType') }}</label>

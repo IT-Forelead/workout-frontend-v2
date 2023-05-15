@@ -5,7 +5,6 @@ import money from 'v-money3'
 import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 import { createApp } from 'vue'
-import VueTheMask from 'vue-the-mask'
 import Vue3Marquee from 'vue3-marquee'
 import VueApexCharts from 'vue3-apexcharts'
 import VOtpInput from 'vue3-otp-input'
@@ -23,7 +22,6 @@ app.use(pinia)
 app.use(router)
 app.use(money)
 app.use(i18n)
-app.use(VueTheMask)
 app.use(MotionPlugin)
 app.use(VueApexCharts)
 app.use(Vue3Marquee)

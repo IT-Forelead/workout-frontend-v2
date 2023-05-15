@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
@@ -14,8 +14,16 @@ import VisitService from '../services/visit.service'
 import { useVisitStore } from '../store/visit.store'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
+import moment from 'moment'
 
 const isLoading = ref(false)
+
+const filterData = reactive({
+  customerId: '',
+  visitType: '',
+  startDate: moment().startOf('day').format().slice(0, 16),
+  endDate: moment().endOf('day').format().slice(0, 16),
+})
 
 const total = ref(1)
 const visits = computed(() => {
@@ -59,8 +67,40 @@ const loadVisits = async ($state) => {
   } else $state.loaded()
 }
 
+/* REFRESH FUNCTION */
+const isRefresh = ref(false)
+
+const autoRefresher =
+  setInterval(() => {
+    isRefresh.value = true
+    AxiosService.post(
+      '/visit/report',
+      cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
+        visitType: selectedVisitType.value?.id,
+        startDate: filterData.startDate,
+        endDate: filterData.endDate,
+        page: 1,
+        limit: 30,
+      }),
+      { headers: authHeader() }
+    )
+      .then((result) => {
+        total.value = result?.total
+        useVisitStore().setAutoRefreshVisits(result?.data)
+        isRefresh.value = false
+      }).catch((err) => {
+        console.log("Error:", err);
+      })
+  }, 3000);
+
 onMounted(() => {
   useVisitStore().clearStore()
+  autoRefresher
+})
+
+onUnmounted(() => {
+  clearInterval(autoRefresher)
 })
 
 const dropdown = ref(null)
@@ -69,13 +109,6 @@ onClickOutside(dropdown, () => {
   if (useModalStore().isOpenFilterBy) {
     useModalStore().toggleFilterBy()
   }
-})
-
-const filterData = reactive({
-  customerId: '',
-  visitType: '',
-  startDate: '',
-  endDate: '',
 })
 
 const submitFilterData = () => {
@@ -104,7 +137,10 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('visitsReport') }}</p>
+        <p class="text-3xl font-bold flex items-center">
+          {{ $t('visitsReport') }}
+          <Spinners270RingIcon v-show="isRefresh" class="ml-3 w-7 h-7 text-gray-300" />
+        </p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"

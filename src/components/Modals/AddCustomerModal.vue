@@ -2,10 +2,11 @@
 import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
+import { vMaska } from "maska"
 import { useI18n } from 'vue-i18n'
 import CustomerService from '../../services/customer.service'
-import { useDropdownStore } from '../../store/dropdown.store'
 import { useCustomerStore } from '../../store/customer.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import CheckCircleIcon from '../Icons/CheckCircleIcon.vue'
 import CheckIcon from '../Icons/CheckIcon.vue'
@@ -39,7 +40,7 @@ const submitForm = reactive({
   lastname: '',
   phone: '',
   code: '',
-  smsConfirmation: true,
+  smsConfirmation: false,
 })
 
 const selectedImage = ref('')
@@ -90,7 +91,7 @@ const clearForm = () => {
   submitForm.lastname = ''
   submitForm.phone = ''
   submitForm.code = ''
-  submitForm.smsConfirmation = true
+  submitForm.smsConfirmation = false
   useDropdownStore().clearStore()
 }
 
@@ -319,7 +320,7 @@ const createCustomer = () => {
             <div>
               <label for="phone">{{ $t('phone') }}</label>
               <input v-model="submitForm.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
-                type="text" v-mask="'+998(##) ###-##-##'" placeholder="+998(00) 000-00-00" />
+                type="text" v-maska data-maska="+998(##) ###-##-##" placeholder="+998(00) 000-00-00" />
             </div>
             <div>
               <label>{{ $t('gender') }}</label>
