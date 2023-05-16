@@ -18,6 +18,7 @@ import AddVisitModal from './Modals/AddVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
+import ShowCustomerInformationModal from './Modals/ShowCustomerInformationModal.vue'
 
 const { t } = useI18n()
 const payload = ref({})
@@ -75,6 +76,7 @@ onMounted(() => {
   <AddPaymentModal />
   <AddVisitModal />
   <AddQrCodeModal />
+  <ShowCustomerInformationModal />
 </template>
 
 <style scoped></style>

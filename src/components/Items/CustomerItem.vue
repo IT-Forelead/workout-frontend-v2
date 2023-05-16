@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
 import { useModalStore } from '../../store/modal.store'
 import UserIcon from '../Icons/UserIcon.vue'
+import EyeIcon from '../Icons/EyeIcon.vue'
 import QrCodeIcon from '../Icons/QrCodeIcon.vue'
 import { useCustomerStore } from '../../store/customer.store'
 
@@ -42,6 +43,11 @@ const openAddQrCodeModal = (customer) => {
   useModalStore().openAddQrCodeModal()
 }
 
+const openShowCustomerInformationModal = (customer) => {
+  useCustomerStore().setSelectedCustomer(customer)
+  useModalStore().openShowCustomerInformationModal()
+}
+
 onMounted(() => {
   payload.value = parseJwt()
 })
@@ -69,9 +75,10 @@ onMounted(() => {
     <td v-motion-pop class="py-2 px-4 text-left">
       {{ moment(customer?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-pop class="py-2 px-4 text-center flex justify-center gap-x-5">
       <div class="flex item-center justify-center">
-        <div @click="openAddQrCodeModal(customer)" class="w-4 mr-3 transform hover:scale-110 cursor-pointer" :class="customer?.barcode ? 'text-blue-500 hover:text-purple-500' : 'text-red-500 hover:text-red-600'">
+        <div @click="openAddQrCodeModal(customer)" class="w-4 mr-3 transform hover:scale-110 cursor-pointer"
+          :class="customer?.barcode ? 'text-blue-500 hover:text-purple-500' : 'text-red-500 hover:text-red-600'">
           <QrCodeIcon class="w-6 h-6" />
         </div>
         <!-- <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
@@ -80,6 +87,12 @@ onMounted(() => {
         <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
           <TrashIcon class="w-6 h-6" />
         </div> -->
+      </div>
+      <div class="flex item-center justify-center">
+        <div @click="openShowCustomerInformationModal(customer)"
+          class="w-4 mr-3 transform hover:scale-110 cursor-pointer text-blue-500 hover:text-blue-600">
+          <EyeIcon class="w-6 h-6" />
+        </div>
       </div>
     </td>
   </tr>
