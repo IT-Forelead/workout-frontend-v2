@@ -92,7 +92,6 @@ const clearForm = () => {
   submitForm.phone = ''
   submitForm.code = ''
   submitForm.smsConfirmation = false
-  useDropdownStore().clearStore()
 }
 
 const closeModal = () => {
