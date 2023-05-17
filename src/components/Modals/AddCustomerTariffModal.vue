@@ -11,6 +11,7 @@ import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 import SelectOptionService from '../Inputs/SelectOptionService.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -35,6 +36,8 @@ const closeModal = () => {
   clearForm()
 }
 
+const isLoading = ref(false)
+
 const submitServiceData = () => {
   if (!selectedCustomer.value?.id) {
     notify.warning({
@@ -45,6 +48,7 @@ const submitServiceData = () => {
       message: t('plsSelectService'),
     })
   } else {
+    isLoading.value = true
     CustomerTariffService.createCustomerTariff(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
@@ -56,6 +60,7 @@ const submitServiceData = () => {
         notify.success({
           message: t('customerTariffCreated'),
         })
+        isLoading.value = false
         CustomerTariffService.getCustomerTariffs({})
           .then((res) => {
             useCustomerTariffStore().clearStore()
@@ -74,6 +79,7 @@ const submitServiceData = () => {
         notify.error({
           message: t('errorCreatingCustomerTariff'),
         })
+        isLoading.value = false
       })
   }
 }
@@ -110,9 +116,16 @@ const submitServiceData = () => {
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
             {{ $t('reset') }}
           </button>
-          <button @click="submitServiceData()"
+          <button v-if="!isLoading" @click="submitServiceData()"
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
             {{ $t('save') }}
+          </button>
+          <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+            <div class="flex items-center justify-center">
+              <Spinners270RingIcon
+                class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+              <span>{{ $t('saving') }}</span>
+            </div>
           </button>
         </div>
       </div>

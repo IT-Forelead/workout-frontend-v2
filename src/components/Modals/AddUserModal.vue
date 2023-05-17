@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { vMaska } from "maska"
@@ -11,6 +11,7 @@ import { useModalStore } from '../../store/modal.store'
 import { useUserStore } from '../../store/user.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionRole from '../Inputs/SelectOptionRole.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -36,6 +37,8 @@ const closeModal = () => {
   clearForm()
 }
 
+const isLoading = ref(false)
+
 const submitUserData = () => {
   if (!userForm.firstname) {
     notify.warning({
@@ -54,6 +57,7 @@ const submitUserData = () => {
       message: t('plsSelectRole'),
     })
   } else {
+    isLoading.value = true
     UserService.createUser(
       cleanObjectEmptyFields({
         firstname: userForm.firstname,
@@ -66,6 +70,7 @@ const submitUserData = () => {
         notify.success({
           message: t('userCreated'),
         })
+        isLoading.value = false
         UserService.getUsers({})
           .then((res) => {
             useUserStore().clearStore()
@@ -84,6 +89,7 @@ const submitUserData = () => {
         notify.error({
           message: t('errorCreatingUser'),
         })
+        isLoading.value = false
       })
   }
 }
@@ -126,9 +132,16 @@ const submitUserData = () => {
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
               {{ $t('reset') }}
             </button>
-            <button @click="submitUserData()"
+            <button v-if="!isLoading" @click="submitUserData()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('save') }}
+            </button>
+            <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+              <div class="flex items-center justify-center">
+                <Spinners270RingIcon
+                  class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+                <span>{{ $t('saving') }}</span>
+              </div>
             </button>
           </div>
         </div>
