@@ -12,6 +12,7 @@ import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 import SelectOptionCustomerTrainerTariff from '../Inputs/SelectOptionCustomerTrainerTariff.vue'
 import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -47,6 +48,8 @@ const closeModal = () => {
   clearForm()
 }
 
+const isLoading = ref(false)
+
 const submitServiceData = () => {
   if (!selectedPaymentType?.value?.id) {
     notify.warning({
@@ -61,6 +64,7 @@ const submitServiceData = () => {
       message: t('plsEnterPrice'),
     })
   } else {
+    isLoading.value = true
     PaymentService.createPayment(
       cleanObjectEmptyFields({
         customerTariffId: selectedCustomerTariffOption?.value?.customerTariff?.id,
@@ -72,6 +76,7 @@ const submitServiceData = () => {
         notify.success({
           message: t('paymentCreated'),
         })
+        isLoading.value = false
         PaymentService.getPayments({})
           .then((res) => {
             usePaymentStore().clearStore()
@@ -90,6 +95,7 @@ const submitServiceData = () => {
         notify.error({
           message: t('errorCreatingPayment'),
         })
+        isLoading.value = false
       })
   }
 }
@@ -130,9 +136,16 @@ const submitServiceData = () => {
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
             {{ $t('reset') }}
           </button>
-          <button @click="submitServiceData()"
+          <button v-if="!isLoading" @click="submitServiceData()"
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
             {{ $t('save') }}
+          </button>
+          <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+            <div class="flex items-center justify-center">
+              <Spinners270RingIcon
+                class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+              <span>{{ $t('saving') }}</span>
+            </div>
           </button>
         </div>
       </div>

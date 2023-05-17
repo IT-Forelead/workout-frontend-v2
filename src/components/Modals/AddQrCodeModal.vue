@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -9,6 +9,7 @@ import CustomerService from '../../services/customer.service'
 import XIcon from '../Icons/XIcon.vue'
 import UserIcon from '../Icons/UserIcon.vue'
 import QrCodeIcon from '../Icons/QrCodeIcon.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -22,18 +23,23 @@ const closeModal = () => {
   useModalStore().closeAddQrCodeModal()
 }
 
+const isLoading = ref(false)
+
 const submitServiceData = (customerId) => {
+  isLoading.value = true
   CustomerService.addQrCodeToCustomer(customerId)
     .then(() => {
       notify.success({
         message: t('addedQrCode'),
       })
+      isLoading.value = false
       closeModal()
     })
     .catch((err) => {
       notify.error({
         message: t('errorAddingQrCode'),
       })
+      isLoading.value = false
     })
 }
 
@@ -76,14 +82,23 @@ const submitServiceData = (customerId) => {
               :placeholder="t('noQrCodeAvailable')" disabled />
             <QrCodeIcon class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 left-3 w-7 h-7 cursor-pointer" />
           </div>
-          <div class="flex items-center justify-end space-x-2">
-            <button v-if="selectedCustomer?.barcode"
+          <div v-if="selectedCustomer?.barcode" class="flex items-center justify-end space-x-2">
+            <button 
               class="py-2 px-4 rounded-md text-white text-base bg-red-600 cursor-pointer hover:bg-red-800">
               {{ $t('deleteQrCode') }}
             </button>
-            <button v-else @click="submitServiceData(selectedCustomer?.id)"
+          </div>
+          <div v-else class="flex items-center justify-end space-x-2">
+            <button v-if="!isLoading" @click="submitServiceData(selectedCustomer?.id)"
               class="py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('addQrCode') }}
+            </button>
+            <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+              <div class="flex items-center justify-center">
+                <Spinners270RingIcon
+                  class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+                <span>{{ $t('saving') }}</span>
+              </div>
             </button>
           </div>
         </div>

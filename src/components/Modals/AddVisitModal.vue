@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -10,6 +10,7 @@ import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 import RadionVisitType from '../Inputs/RadionVisitType.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -31,6 +32,8 @@ const closeModal = () => {
   clearForm()
 }
 
+const isLoading = ref(false)
+
 const submitData = () => {
   if (!selectedCustomer.value?.id) {
     notify.warning({
@@ -41,6 +44,7 @@ const submitData = () => {
       message: t('plsSelectVisitType'),
     })
   } else {
+    isLoading.value = true
     VisitService.createVisit({
       customerId: selectedCustomer.value?.id,
       visitType: selectedVisitType.value?.id,
@@ -49,6 +53,7 @@ const submitData = () => {
         notify.success({
           message: t('visitCreated'),
         })
+        isLoading.value = false
         VisitService.getVisits({})
           .then((res) => {
             useVisitStore().clearStore()
@@ -67,6 +72,7 @@ const submitData = () => {
         notify.error({
           message: t('errorCreatingVisit'),
         })
+        isLoading.value = false
       })
   }
 }
@@ -98,9 +104,16 @@ const submitData = () => {
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
             {{ $t('reset') }}
           </button>
-          <button @click="submitData()"
+          <button v-if="!isLoading" @click="submitData()"
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
             {{ $t('save') }}
+          </button>
+          <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+            <div class="flex items-center justify-center">
+              <Spinners270RingIcon
+                class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+              <span>{{ $t('saving') }}</span>
+            </div>
           </button>
         </div>
       </div>
