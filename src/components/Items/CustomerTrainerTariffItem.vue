@@ -151,15 +151,18 @@ const monthlyVisitTranslate = (n) => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 text-sm inline-block w-28 rounded-full"
-        :class="statusColor(tariff?.customerTrainerTariff?.expireAt)">
-        {{ checkStatus(tariff?.customerTrainerTariff?.expireAt) }}
-      </span>
+      {{ tariff?.numberOfVisit + " / " + tariff?.trainerService?.monthlyVisit }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
       <span class="p-1.5 px-3 text-sm rounded-full inline-block w-28"
         :class="paymentStatusColor(tariff?.customerTrainerTariff?.paymentStatus)">
         {{ paymentStatusTranslate(tariff?.customerTrainerTariff?.paymentStatus) }}
+      </span>
+    </td>
+    <td v-motion-pop class="py-2 px-4 text-center">
+      <span class="p-1.5 px-3 text-sm inline-block w-28 rounded-full"
+        :class="statusColor(tariff?.customerTrainerTariff?.expireAt)">
+        {{ checkStatus(tariff?.customerTrainerTariff?.expireAt) }}
       </span>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
