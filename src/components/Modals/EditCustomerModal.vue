@@ -51,17 +51,6 @@ const submitForm = reactive({
 
 const selectedImage = ref('')
 
-const list = [
-  {
-    id: 'male',
-    name: t('male')
-  },
-  {
-    id: 'female',
-    name: t('female')
-  },
-]
-
 function getImage(e) {
   if (e.target.files[0].type.includes('image')) {
     submitForm.image = e.target.files[0]
@@ -120,15 +109,13 @@ watch(
       submitForm.firstname = data?.firstname
       submitForm.lastname = data?.lastname
       submitForm.phone = data?.phone
-      useDropdownStore().setSelectGenderOption(
-        data?.gender === 'male' ? list[0] : list[1]
-      )
     }
   }
 )
 
 const closeModal = () => {
   useModalStore().closeEditCustomerModal()
+  useCustomerStore().setSelectedCustomer({})
   registerProcess.registerMode = true
   registerProcess.checkingMode = false
   registerProcess.congratulationMode = false
