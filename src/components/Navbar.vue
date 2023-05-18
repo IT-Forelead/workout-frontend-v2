@@ -16,6 +16,7 @@ import AddCustomerTrainerTariffModal from './Modals/AddCustomerTrainerTariffModa
 import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddVisitModal from './Modals/AddVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
+import EditCustomerModal from './Modals/EditCustomerModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
 
@@ -75,6 +76,7 @@ onMounted(() => {
   <AddPaymentModal />
   <AddVisitModal />
   <AddQrCodeModal />
+  <EditCustomerModal />
 </template>
 
 <style scoped></style>

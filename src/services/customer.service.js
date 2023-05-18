@@ -11,6 +11,14 @@ class CustomerService {
       },
     })
   }
+  async editCustomer(data) {
+    return AxiosService.post('/customer/edit', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: authHeaderForMultipart(),
+      },
+    })
+  }
   async getCustomers(filter) {
     return AxiosService.post('/customer/report', filter, { headers: authHeader() })
   }
