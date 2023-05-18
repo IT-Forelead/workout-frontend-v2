@@ -96,7 +96,7 @@ const submitServiceData = () => {
           message: t('serviceCreated'),
         })
         isLoading.value = false
-        ServicesService.getAllServices()
+        ServicesService.getServices({})
           .then((res) => {
             useServiceStore().clearStore()
             setTimeout(() => {

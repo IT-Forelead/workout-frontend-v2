@@ -34,7 +34,7 @@ const optionClicked = (data) => {
 }
 
 onMounted(() => {
-  ServicesService.getAllServices().then((res) => {
+  ServicesService.getServices({}).then((res) => {
     useServiceStore().clearStore()
     useServiceStore().setServices(res)
   })
