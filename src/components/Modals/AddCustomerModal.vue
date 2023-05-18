@@ -329,7 +329,7 @@ const createCustomer = () => {
             </div>
             <div>
               <label>{{ $t('gender') }}</label>
-              <RadioGender />
+              <RadioGender :gender="'male'"/>
             </div>
           </div>
           <!-- Step 2 -->

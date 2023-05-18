@@ -1,9 +1,13 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
 import GenderMaleIcon from '../Icons/GenderMaleIcon.vue'
 import GenderFemaleIcon from '../Icons/GenderFemaleIcon.vue'
+
+const props = defineProps({
+  gender: null,
+})
 
 const { t } = useI18n()
 
@@ -22,21 +26,29 @@ const optionClicked = (data) => {
   useDropdownStore().setSelectGenderOption(data)
 }
 
+const isMale = ref(true)
+
 onMounted(() => {
-  useDropdownStore().setSelectGenderOption(list[0])
+  if (props.gender === 'male') {
+    useDropdownStore().setSelectGenderOption(list[0])
+    isMale.value = true
+  } else {
+    useDropdownStore().setSelectGenderOption(list[1])
+    isMale.value = false
+  }
 })
 </script>
 <template>
   <div class="select-none">
     <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
-      <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked />
+      <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" :checked="isMale" />
       <label for="toggle-on" @click="optionClicked(list[0])"
         class="relative flex items-center justify-center space-x-3 py-2">
         <GenderMaleIcon class="w-5 h-5" />
         <span>{{ $t('male') }}</span>
       </label>
       <input id="toggle-off" @click="optionClicked(list[1])" class="toggle toggle-right" name="toggle" value="true"
-        type="radio" />
+        type="radio" :checked="!isMale"/>
       <label for="toggle-off" class="relative flex items-center justify-center space-x-3 py-2">
         <GenderFemaleIcon class="w-5 h-5" />
         <span>{{ $t('female') }}</span>
