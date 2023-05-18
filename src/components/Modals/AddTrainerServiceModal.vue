@@ -99,7 +99,7 @@ const submitTrainerServiceData = () => {
           message: t('trainerServiceCreated'),
         })
         isLoading.value = false
-        TrainerServiceService.getAllTrainerServices()
+        TrainerServiceService.getTrainerServices({})
           .then((res) => {
             useTrainerServiceStore().clearStore()
             setTimeout(() => {

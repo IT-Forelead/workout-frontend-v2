@@ -38,7 +38,7 @@ watch(
   (data) => {
     if (data) {
       trainerServiceService.getTrainerServicesByUserId(selectedTrainer.value?.id).then((res) => {
-        useTrainerServiceStore().clearStore()
+        useTrainerServiceStore().clearTrainerServicesByUserId()
         useTrainerServiceStore().setTrainerServicesByUserId(res)
       })
     }
