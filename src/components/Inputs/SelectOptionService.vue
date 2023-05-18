@@ -1,15 +1,20 @@
 <script setup>
 import { ref } from '@vue/reactivity'
-import { computed, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import { useDropdownStore } from '../../store/dropdown.store'
+import { computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
-import { useServiceStore } from '../../store/service.store'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
 import ServicesService from '../../services/services.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useServiceStore } from '../../store/service.store'
+import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
+import SearchIcon from '../Icons/SearchIcon.vue'
+import XIcon from '../Icons/XIcon.vue'
 
 const { t } = useI18n()
+
+const isLoading = ref(false)
+const search = ref('')
 
 const selectedOption = computed(() => {
   return useDropdownStore().selectServiceOption
@@ -40,6 +45,25 @@ onMounted(() => {
   })
 })
 
+const submitFilterData = () => {
+  isLoading.value = true
+  ServicesService.getServices(
+    cleanObjectEmptyFields({
+      name: search.value ? `%${search.value}%` : '',
+    })
+  ).then((res) => {
+    useServiceStore().clearStore()
+    useServiceStore().setServices(res)
+    isLoading.value = false
+  })
+}
+
+const whenPressEnter = (e) => {
+  if (e.keyCode === 13) {
+    submitFilterData()
+  }
+}
+
 const durationDayTranslate = (n) => {
   switch (n) {
     case 1:
@@ -67,22 +91,34 @@ const monthlyVisitTranslate = (n) => {
 <template>
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
-      <div v-if="selectedOption" class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg p-2">
-        {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyVisitTranslate(selectedOption?.monthlyVisit) + ')' }}
+      <div v-if="useDropdownStore().selectServiceOption"
+        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
+        {{ useDropdownStore().selectServiceOption?.name + ' ' +
+          durationDayTranslate(useDropdownStore().selectServiceOption?.durationDay) + ' (' +
+          monthlyVisitTranslate(useDropdownStore().selectServiceOption?.monthlyVisit) + ')' }}
       </div>
-      <div @click="useDropdownStore().openServiceDropDown()" v-else
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
+      <input type="text" v-model="search" v-on:keypress="whenPressEnter($event)"
+        v-if="useDropdownStore().isOpenServiceDropDown"
+        class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
+        :placeholder="$t('enterCustomerName')" />
+      <SearchIcon v-if="useDropdownStore().isOpenServiceDropDown" @click="submitFilterData()"
+        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500" />
+      <div @click="useDropdownStore().openServiceDropDown()"
+        v-if="!useDropdownStore().isOpenServiceDropDown && !useDropdownStore().selectServiceOption"
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2">
         {{ $t('select') }}
       </div>
-      <ChevronRightIcon @click="useDropdownStore().openServiceDropdown()" v-if="!selectedOption"
+      <ChevronRightIcon @click="useDropdownStore().openServiceDropDown()"
+        v-if="!useDropdownStore().isOpenServiceDropDown && !useDropdownStore().selectServiceOption"
         class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
-      <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
+      <XIcon @click="clearSelectedOptionData()" v-if="useDropdownStore().selectServiceOption"
         class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
       <ul v-if="useDropdownStore().isOpenServiceDropDown"
         class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
         <li v-for="(service, idx) in services" :key="idx" @click="optionClicked(service)"
           class="hover:bg-gray-200 cursor-pointer p-2 ">
-          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
+          {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' +
+            monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
         </li>
       </ul>
     </label>
