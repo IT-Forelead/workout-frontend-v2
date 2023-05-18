@@ -165,6 +165,7 @@ const isLoading = ref(false)
 const editCustomer = () => {
   isLoading.value = true
   const formData = new FormData()
+  formData.append('id', submitForm.id)
   formData.append('firstname', submitForm.firstname)
   formData.append('lastname', submitForm.lastname)
   formData.append('gender', selectGender.value?.id)
