@@ -14,6 +14,9 @@ class TrainerServicesService {
   async getTrainerServicesByUserId(userId) {
     return AxiosService.get(`/trainer-service/${userId}`, { headers: authHeader() })
   }
+  async deleteTrainerService(serviceId) {
+    return AxiosService.get(`/trainer-service/delete/${serviceId}`, { headers: authHeader() })
+  }
 }
 
 export default new TrainerServicesService()

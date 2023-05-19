@@ -4,32 +4,32 @@ import 'izitoast/dist/css/iziToast.min.css'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
-import ServicesService from '../../services/services.service'
+import TrainerServicesService from '../../services/trainerService.service'
 import { useModalStore } from '../../store/modal.store'
-import { useServiceStore } from '../../store/service.store'
+import { useTrainerServiceStore } from '../../store/trainerService.store'
 import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 
 const { t } = useI18n()
 
-const selectedService = computed(() => {
-  return useServiceStore().selectedService
+const selectedTrainerService = computed(() => {
+  return useTrainerServiceStore().selectedTrainerService
 })
 
 const closeModal = () => {
-  useServiceStore().setSelectedService({})
-  useModalStore().closeDeleteServiceModal()
+  useTrainerServiceStore().setSelectedTrainerService({})
+  useModalStore().closeDeleteTrainerServiceModal()
 }
 
 const deleteData = (id) => {
-  ServicesService.deleteService(id)
+  TrainerServicesService.deleteTrainerService(id)
     .then(() => {
       notify.success({
         message: t('deletedService'),
       })
-      ServicesService.getServices({}).then((res) => {
-        useServiceStore().clearStore()
-        useServiceStore().setServices(res)
+      TrainerServicesService.getTrainerServices({}).then((res) => {
+        useTrainerServiceStore().clearStore()
+        useTrainerServiceStore().setTrainerServices(res)
       })
       closeModal()
     })
@@ -76,7 +76,7 @@ const monthlyVisitTranslate = (n) => {
 }
 </script>
 <template>
-  <div v-if="useModalStore().isDeleteServiceModalOpen"
+  <div v-if="useModalStore().isDeleteTrainerServiceModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative max-w-xl p-4 w-full h-full md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -90,29 +90,31 @@ const monthlyVisitTranslate = (n) => {
         <div class="py-4 px-6 text-center space-y-6">
           <div>
             <div class="flex items-center space-x-2">
+              <div class="text-base text-gray-500">{{ $t('customer') }}:</div>
+              <div class="text-lg text-gray-700">{{ selectedTrainerService?.trainerFirstName + ' ' +
+                selectedTrainerService?.trainerLastName }}
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
               <div class="text-base text-gray-500">{{ $t('serviceName') }}:</div>
-              <div class="text-lg text-gray-700">{{ selectedService?.name }}
+              <div class="text-lg text-gray-700">{{ selectedTrainerService?.name }}
               </div>
             </div>
             <div class="flex items-center space-x-2">
               <div class="text-base text-gray-500">{{ $t('serviceType') }}:</div>
-              <div class="text-lg text-gray-700">{{ serviceTypeTranslate(selectedService?.serviceType) }}</div>
+              <div class="text-lg text-gray-700">{{ serviceTypeTranslate(selectedTrainerService?.serviceType) }}</div>
             </div>
             <div class="flex items-center space-x-2">
               <div class="text-base text-gray-500">{{ $t('duration') }}:</div>
-              <div class="text-lg text-gray-700">{{ durationDayTranslate(selectedService?.durationDay) }}</div>
+              <div class="text-lg text-gray-700">{{ durationDayTranslate(selectedTrainerService?.durationDay) }}</div>
             </div>
             <div class="flex items-center space-x-2">
               <div class="text-base text-gray-500">{{ $t('monthlyVisit') }}:</div>
-              <div class="text-lg text-gray-700">{{ monthlyVisitTranslate(selectedService?.monthlyVisit) }}</div>
+              <div class="text-lg text-gray-700">{{ monthlyVisitTranslate(selectedTrainerService?.monthlyVisit) }}</div>
             </div>
             <div class="flex items-center space-x-2">
-              <div class="text-base text-gray-500">{{ $t('priceForMale') }}:</div>
-              <div class="text-lg text-gray-700">{{ useMoneyFormatter(selectedService?.priceForMale) }}</div>
-            </div>
-            <div class="flex items-center space-x-2">
-              <div class="text-base text-gray-500">{{ $t('priceForFemale') }}:</div>
-              <div class="text-lg text-gray-700">{{ useMoneyFormatter(selectedService?.priceForFemale) }}</div>
+              <div class="text-base text-gray-500">{{ $t('price') }}:</div>
+              <div class="text-lg text-gray-700">{{ useMoneyFormatter(selectedTrainerService?.price) }}</div>
             </div>
           </div>
           <h3
@@ -120,7 +122,7 @@ const monthlyVisitTranslate = (n) => {
             <WarningCircleIcon class="w-7 h-7 mr-2" />
             {{ $t('doYouDelete') }}
           </h3>
-          <button @click="deleteData(selectedService?.id)" type="button"
+          <button @click="deleteData(selectedTrainerService?.id)" type="button"
             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
             {{ $t('yesImSure') }}
           </button>

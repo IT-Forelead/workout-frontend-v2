@@ -19,6 +19,7 @@ import AddUserModal from './Modals/AddUserModal.vue'
 import EditCustomerModal from './Modals/EditCustomerModal.vue'
 import DeleteCustomerModal from './Modals/DeleteCustomerModal.vue'
 import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
+import DeleteTrainerServiceModal from './Modals/DeleteTrainerServiceModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
 
@@ -81,6 +82,7 @@ onMounted(() => {
   <EditCustomerModal />
   <DeleteCustomerModal />
   <DeleteServiceModal />
+  <DeleteTrainerServiceModal />
 </template>
 
 <style scoped></style>

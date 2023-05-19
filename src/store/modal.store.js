@@ -9,12 +9,12 @@ export const useModalStore = defineStore('modal', {
     isAddServiceModalOpen: false,
     isDeleteServiceModalOpen: false,
     isAddTrainerServiceModalOpen: false,
+    isDeleteTrainerServiceModalOpen: false,
     isAddCustomerTariffModalOpen: false,
     isAddCustomerTrainerTariffModalOpen: false,
     isAddVisitModalOpen: false,
     isAddQrCodeModalOpen: false,
     isAddPaymentModalOpen: false,
-    isOpenDeleteAlertModal: false,
     isOpenFilterBy: false,
     isOpenNotification: false,
     isOpenProfileDropDown: false,
@@ -62,6 +62,12 @@ export const useModalStore = defineStore('modal', {
     closeAddTrainerServiceModal() {
       this.isAddTrainerServiceModalOpen = false
     },
+    openDeleteTrainerServiceModal() {
+      this.isDeleteTrainerServiceModalOpen = true
+    },
+    closeDeleteTrainerServiceModal() {
+      this.isDeleteTrainerServiceModalOpen = false
+    },
     openAddCustomerTariffModal() {
       this.isAddCustomerTariffModalOpen = true
     },
@@ -91,12 +97,6 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddPaymentModal() {
       this.isAddPaymentModalOpen = false
-    },
-    openDeleteAlertModal() {
-      this.isOpenDeleteAlertModal = true
-    },
-    closeDeleteAlertModal() {
-      this.isOpenDeleteAlertModal = false
     },
     toggleFilterBy() {
       this.isOpenFilterBy = !this.isOpenFilterBy
