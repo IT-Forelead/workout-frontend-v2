@@ -279,5 +279,6 @@
   "addQrCode":"Добавить QR-код",
   "noQrCodeAvailable":"QR-код недоступен",
   "active": "Активный",
-  "notActive": "Не активен"
+  "notActive": "Не активен",
+  "qrcode": "QR код"
 }

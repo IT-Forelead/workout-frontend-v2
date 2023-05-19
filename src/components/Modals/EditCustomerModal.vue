@@ -57,9 +57,7 @@ function getImage(e) {
     selectedImage.value = URL.createObjectURL(submitForm.image)
   } else {
     notify.warning({
-      title: 'Diqqat!',
-      message: 'Siz faqat rasm fayl joylashtira olasiz!',
-      position: 'bottomLeft',
+      message: t('onlyImageCanBeUploaded'),
     })
   }
 }

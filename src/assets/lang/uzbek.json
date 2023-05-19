@@ -280,5 +280,6 @@
   "addQrCode":"QR kod qo'shish",
   "noQrCodeAvailable":"QR kod mavjud emas",
   "active": "Faol",
-  "notActive": "Faol emas"
+  "notActive": "Faol emas",
+  "qrcode": "QR kod"
 }

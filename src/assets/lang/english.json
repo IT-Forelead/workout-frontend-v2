@@ -279,5 +279,12 @@
   "addQrCode":"Add QR code",
   "noQrCodeAvailable":"No QR code available",
   "active": "Active",
-  "notActive": "Not active"
+  "notActive": "Not active",
+  "qrcode": "QR-code",
+
+  "deletedCustomer": "Successfully deleted customer!",
+  "errorDeletingCustomer": "Error while deleting customer!",
+  "customerEdited": "Successfully edited customer!",
+  "errorEditingCustomer": "Error while editing customer!",
+  "onlyImageCanBeUploaded": "Only image can be uploaded"
 }

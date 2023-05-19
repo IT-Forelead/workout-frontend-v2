@@ -10,6 +10,7 @@ import { useModalStore } from '../../store/modal.store'
 import UserIcon from '../Icons/UserIcon.vue'
 import QrCodeIcon from '../Icons/QrCodeIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
+import TrashIcon from '../Icons/TrashIcon.vue'
 import { useCustomerStore } from '../../store/customer.store'
 
 const { t } = useI18n()
@@ -43,9 +44,14 @@ const openAddQrCodeModal = (customer) => {
   useModalStore().openAddQrCodeModal()
 }
 
-const openEditCustomerModal = (customer) => {
+const openEditModal = (customer) => {
   useCustomerStore().setSelectedCustomer(customer)
   useModalStore().openEditCustomerModal()
+}
+
+const openDeleteModal = (customer) => {
+  useCustomerStore().setSelectedCustomer(customer)
+  useModalStore().openDeleteCustomerModal()
 }
 
 onMounted(() => {
@@ -80,12 +86,12 @@ onMounted(() => {
         <div @click="openAddQrCodeModal(customer)" class="w-4 mr-3 transform hover:scale-110 cursor-pointer" :class="customer?.barcode ? 'text-blue-500 hover:text-purple-500' : 'text-red-500 hover:text-red-600'">
           <QrCodeIcon class="w-6 h-6" />
         </div>
-        <div @click="openEditCustomerModal(customer)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+        <div @click="openEditModal(customer)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
         </div>
-        <!-- <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
+        <div @click="openDeleteModal(customer)" class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
           <TrashIcon class="w-6 h-6" />
-        </div> -->
+        </div>
       </div>
     </td>
   </tr>

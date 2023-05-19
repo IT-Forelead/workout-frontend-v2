@@ -28,6 +28,9 @@ class CustomerService {
   async addQrCodeToCustomer(customerId) {
     return AxiosService.get(`/customer/add-qrcode/${customerId}`, { headers: authHeader() })
   }
+  async deleteCustomer(customerId) {
+    return AxiosService.get(`/customer/delete/${customerId}`, { headers: authHeader() })
+  }
 }
 
 export default new CustomerService()

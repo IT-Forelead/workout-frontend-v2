@@ -83,8 +83,7 @@ const submitServiceData = (customerId) => {
             <QrCodeIcon class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 left-3 w-7 h-7 cursor-pointer" />
           </div>
           <div v-if="selectedCustomer?.barcode" class="flex items-center justify-end space-x-2">
-            <button 
-              class="py-2 px-4 rounded-md text-white text-base bg-red-600 cursor-pointer hover:bg-red-800">
+            <button class="py-2 px-4 rounded-md text-white text-base bg-red-600 cursor-pointer hover:bg-red-800">
               {{ $t('deleteQrCode') }}
             </button>
           </div>

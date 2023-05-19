@@ -280,5 +280,6 @@
   "addQrCode":"QR код қўшиш",
   "noQrCodeAvailable":"QR код мавжуд емас",
   "active": "Фаол",
-  "notActive": "Фаол эмас"
+  "notActive": "Фаол эмас",
+  "qrcode": "QR код"
 }

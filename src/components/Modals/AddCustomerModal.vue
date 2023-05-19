@@ -52,9 +52,7 @@ function getImage(e) {
     selectedImage.value = URL.createObjectURL(submitForm.image)
   } else {
     notify.warning({
-      title: 'Diqqat!',
-      message: 'Siz faqat rasm fayl joylashtira olasiz!',
-      position: 'bottomLeft',
+      message: t('onlyImageCanBeUploaded'),
     })
   }
 }
@@ -171,7 +169,6 @@ const createCustomer = () => {
           }, 500)
         })
         .catch((err) => {
-          console.log(err);
           notify.error({
             message: t('errorGettingCustomers'),
           })
