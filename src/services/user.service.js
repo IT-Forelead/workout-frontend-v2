@@ -8,6 +8,9 @@ class UserService {
   async getUsers(filter) {
     return AxiosService.post('/user/report', filter, { headers: authHeader() })
   }
+  async deleteUser(userId) {
+    return AxiosService.get(`/user/delete/${userId}`, { headers: authHeader() })
+  }
 }
 
 export default new UserService()
