@@ -11,6 +11,9 @@ class ServicesService {
   async getAllServices() {
     return AxiosService.get('/service/all', { headers: authHeader() })
   }
+  async editService(data) {
+    return AxiosService.post('/service/edit', data, { headers: authHeader() })
+  }
   async deleteService(serviceId) {
     return AxiosService.get(`/service/delete/${serviceId}`, { headers: authHeader() })
   }

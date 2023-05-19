@@ -17,6 +17,7 @@ import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddVisitModal from './Modals/AddVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import EditCustomerModal from './Modals/EditCustomerModal.vue'
+import EditServiceModal from './Modals/EditServiceModal.vue'
 import DeleteUserModal from './Modals/DeleteUserModal.vue'
 import DeleteCustomerModal from './Modals/DeleteCustomerModal.vue'
 import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
@@ -81,6 +82,7 @@ onMounted(() => {
   <AddVisitModal />
   <AddQrCodeModal />
   <EditCustomerModal />
+  <EditServiceModal />
   <DeleteUserModal />
   <DeleteCustomerModal />
   <DeleteServiceModal />
