@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="fixed block h-screen bg-gray-900 w-80 text-gray-400">
+  <div class="fixed block h-screen bg-gray-900 w-80 text-gray-400 z-50">
     <div class="bg-gray-600 h-20 flex items-center justify-center">
       <img src="/images/alpha-sport-urgench-logo.png" class="h-14 w-auto" alt="#" />
     </div>

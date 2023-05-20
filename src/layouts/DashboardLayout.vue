@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar.vue'
 import Navbar from '../components/Navbar.vue'
 </script>
 <template>
-  <div class="flex bg-gray-100 h-screen">
+  <div class="bg-gray-100 h-screen w-full">
     <Sidebar />
     <div class="flex-1 ml-80">
       <Navbar />
