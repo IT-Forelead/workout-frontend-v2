@@ -281,5 +281,22 @@
   "noQrCodeAvailable":"QR kod mavjud emas",
   "active": "Faol",
   "notActive": "Faol emas",
-  "qrcode": "QR kod"
+  "qrcode": "QR kod",
+  "deletedCustomer": "Mijoz muvaffaqiyatli o'chirildi!",
+  "errorDeletingCustomer": "Mijozni o'chirishda xatolik yuz berdi!",
+  "customerEdited": "Mijoz muvaffaqiyatli tahrirlandi!",
+  "errorEditingCustomer": "Mijozni tahrirlashda xatolik yuz berdi!",
+  "onlyImageCanBeUploaded": "Faqat rasmni yuklash mumkin",
+  "sales": "Sotuvlar",
+  "dailySales": "Kundalik savdo",
+  "salesReport": "Sotuvlar hisoboti",
+  "addSales": "Sotuv qo'shish",
+  "product": "Mahsulot",
+  "productType": "Mahsulot turi",
+  "quantity": "Miqdori",
+  "plsSelectProductType": "Mahsulot turini tanlang",
+  "plsSelectQuantity": "Miqdorni tanlang",
+  "soldProductCreated": "Sotilgan mahsulot muvaffaqiyatli yaratildi!",
+  "errorCreatingSoldProduct": "Sotilgan mahsulotni yaratishda xatolik yuz berdi!",
+  "water": "Suv"
 }

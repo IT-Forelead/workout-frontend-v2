@@ -17,6 +17,7 @@ export const useModalStore = defineStore('modal', {
     isAddVisitModalOpen: false,
     isAddQrCodeModalOpen: false,
     isAddPaymentModalOpen: false,
+    isAddSoldProdoctModalOpen: false,
     isOpenFilterBy: false,
     isOpenNotification: false,
     isOpenProfileDropDown: false,
@@ -111,6 +112,12 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddPaymentModal() {
       this.isAddPaymentModalOpen = false
+    },
+    openAddSoldProdoctModal() {
+      this.isAddSoldProdoctModalOpen = true
+    },
+    closeAddSoldProdoctModal() {
+      this.isAddSoldProdoctModalOpen = false
     },
     toggleFilterBy() {
       this.isOpenFilterBy = !this.isOpenFilterBy

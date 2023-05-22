@@ -281,5 +281,22 @@
   "noQrCodeAvailable":"QR код мавжуд емас",
   "active": "Фаол",
   "notActive": "Фаол эмас",
-  "qrcode": "QR код"
+  "qrcode": "QR код",
+  "deletedCustomer": "Мижоз муваффақиятли ўчирилди!",
+  "errorDeletingCustomer": "Мижозни ўчиришда хатолик юз берди!",
+  "customerEdited": "Мижоз муваффақиятли таҳрирланди!",
+  "errorEditingCustomer": "Мижозни таҳрирлашда хатолик юз берди!",
+  "onlyImageCanBeUploaded": "Фақат расмни юклаш мумкин",
+  "sales": "Сотувлар",
+  "dailySales": "Кундалик савдо",
+  "salesReport": "Сотувлар ҳисоботи",
+  "addSales": "Сотув қўшиш",
+  "product": "Маҳсулот",
+  "productType": "Маҳсулот тури",
+  "quantity": "Миқдори",
+  "plsSelectProductType": "Маҳсулот турини танланг",
+  "plsSelectQuantity": "Миқдорни танланг",
+  "soldProductCreated": "Сотилган маҳсулот муваффақиятли яратилди!",
+  "errorCreatingSoldProduct": "Сотилган маҳсулотни яратишда хатолик юз берди!",
+  "water": "Сув"
 }

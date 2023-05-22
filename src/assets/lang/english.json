@@ -281,10 +281,21 @@
   "active": "Active",
   "notActive": "Not active",
   "qrcode": "QR-code",
-
   "deletedCustomer": "Successfully deleted customer!",
   "errorDeletingCustomer": "Error while deleting customer!",
   "customerEdited": "Successfully edited customer!",
   "errorEditingCustomer": "Error while editing customer!",
-  "onlyImageCanBeUploaded": "Only image can be uploaded"
+  "onlyImageCanBeUploaded": "Only image can be uploaded",
+  "sales": "Sales",
+  "dailySales": "Daily sales",
+  "salesReport": "Sales report",
+  "addSales": "Add sales",
+  "product": "Product",
+  "productType": "Product type",
+  "quantity": "Quantity",
+  "plsSelectProductType": "Please select product type",
+  "plsSelectQuantity": "Please select quantity",
+  "soldProductCreated": "Sold product successfully created!",
+  "errorCreatingSoldProduct": "Error while creating sold product!",
+  "water": "Water"
 }

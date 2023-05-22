@@ -91,6 +91,24 @@ const routes = [
     beforeEnter: navigationGuards(['super_manager']),
   },
   {
+    path: '/sales',
+    name: 'Sales',
+    meta: { layout: 'dashboard' },
+    children: [
+      {
+        path: '',
+        name: 'Daily sales',
+        component: () => import('../components/SalesTabs/DailySales.vue'),
+      },
+      {
+        path: 'report',
+        name: 'Sales report',
+        component: () => import('../components/SalesTabs/SalesReport.vue'),
+      },
+    ],
+    beforeEnter: navigationGuards(['cashier', 'super_manager', 'tech_admin']),
+  },
+  {
     path: '/notfound',
     name: 'Not-Found',
     component: () => import('../components/NotFound.vue'),
