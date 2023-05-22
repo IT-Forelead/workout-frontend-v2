@@ -379,7 +379,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
 </script>
 
 <template>
-  <div class="px-10 py-3">
+  <div class="px-4 py-2">
     <div class="grid grid-cols-2 gap-x-5 mb-6 overflow-hidden">
       <div class="bg-white rounded-lg">
         <div class="flex items-center justify-between p-5">
