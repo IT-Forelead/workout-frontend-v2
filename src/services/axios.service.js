@@ -1,60 +1,55 @@
 import axios from 'axios'
-import refreshToken from "../mixins/refresh.token";
-import authHeader from '../mixins/auth-header';
+import { memorizedRefreshToken } from '../mixins/refresh.token.js'
 
-const API_URL = import.meta.env.VITE_BASE_URL;
+// axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
+// axios.defaults.withCredentials = true
 
-class AxiosService {
+/* ALL AXIOS REQUESTS */
+axios.interceptors.request.use(
+  async (config) => {
+    const session = JSON.parse(localStorage.getItem('session'))
 
-    async post(url, data, config) {
-        const response = await axios.post(API_URL + url, data, config)
-            .catch(async (err) => {
-                if (err?.response?.status === 403) {
-                    const response2 = await axios.post(API_URL + url, data, { headers: authHeader() })
-                        .catch((err) => {
-                            if (err?.response?.status === 403) {
-                                alert('Your token is expired!')
-                                localStorage.clear()
-                                window.location.reload()
-                            } else {
-                                refreshToken(err?.response)
-                                throw Error(err)
-                            }
-                        })
-                    return response2
-                } else {
-                    refreshToken(err?.response)
-                    throw Error(err)
-                }
-            })
-        refreshToken(response)
-        return response.data
+    if (session?.accessToken) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${session?.accessToken}`,
+      }
     }
 
-    async get(url, config) {
-        const response = await axios.get(API_URL + url, config)
-            .catch(async (err) => {
-                if (err?.response?.status === 403) {
-                    const response2 = await axios.get(API_URL + url, { headers: authHeader() })
-                        .catch((err) => {
-                            if (err?.response?.status === 403) {
-                                alert('Your token is expired!')
-                                localStorage.clear()
-                                window.location.reload()
-                            } else {
-                                refreshToken(err?.response)
-                                throw Error(err)
-                            }
-                        })
-                    return response2
-                } else {
-                    refreshToken(err?.response)
-                    throw Error(err)
-                }
-            })
-        refreshToken(response)
-        return response.data
-    }
-}
+    return config
+  },
+  (error) => Promise.reject(error)
+)
 
-export default new AxiosService()
+/* ALL AXIOS RESPONSES */
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error?.config
+
+    if (error?.response?.status === 403 && !config?.sent) {
+      config.sent = true
+
+      const result = await memorizedRefreshToken()
+
+      if (result?.accessToken) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${result?.accessToken}`,
+        }
+      }
+
+      return axios(config)
+    }
+    return Promise.reject(error)
+  }
+)
+
+export const PublicAxiosService = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+})
+export const AxiosService = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+})

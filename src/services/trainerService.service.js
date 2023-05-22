@@ -1,21 +1,20 @@
-import authHeader from '../mixins/auth-header'
-import AxiosService from './axios.service'
+import { AxiosService } from './axios.service'
 
 class TrainerServicesService {
   async createTrainerService(data) {
-    return AxiosService.post('/trainer-service/create', data, { headers: authHeader() })
+    return AxiosService.post('/trainer-service/create', data)
   }
   async getTrainerServices(filter) {
-    return AxiosService.post('/trainer-service/report', filter, { headers: authHeader() })
+    return AxiosService.post('/trainer-service/report', filter)
   }
   async getAllTrainerServices() {
-    return AxiosService.get('/trainer-service/all', { headers: authHeader() })
+    return AxiosService.get('/trainer-service/all')
   }
   async getTrainerServicesByUserId(userId) {
-    return AxiosService.get(`/trainer-service/${userId}`, { headers: authHeader() })
+    return AxiosService.get(`/trainer-service/${userId}`)
   }
   async deleteTrainerService(serviceId) {
-    return AxiosService.get(`/trainer-service/delete/${serviceId}`, { headers: authHeader() })
+    return AxiosService.get(`/trainer-service/delete/${serviceId}`)
   }
 }
 

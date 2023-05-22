@@ -1,12 +1,11 @@
-import authHeader from '../mixins/auth-header'
-import AxiosService from './axios.service'
+import { AxiosService } from './axios.service'
 
 class VisitService {
   async createVisit(data) {
-    return AxiosService.post('/visit/create', data, { headers: authHeader() })
+    return AxiosService.post('/visit/create', data)
   }
   async getVisits(filter) {
-    return AxiosService.post('/visit/report', filter, { headers: authHeader() })
+    return AxiosService.post('/visit/report', filter)
   }
 }
 
