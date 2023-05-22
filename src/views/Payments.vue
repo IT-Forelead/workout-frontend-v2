@@ -1,16 +1,14 @@
 <script setup>
-import PaymentItem from '../components/Items/PaymentItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { usePaymentStore } from '../store/payment.store'
-import { useModalStore } from '../store/modal.store'
-import { onMounted } from 'vue'
-import PaymentService from '../services/payment.service'
-import AxiosService from "../services/axios.service.js";
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import PaymentItem from '../components/Items/PaymentItem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import PaymentService from '../services/payment.service'
+import { useModalStore } from '../store/modal.store'
+import { usePaymentStore } from '../store/payment.store'
 
 const isLoading = ref(false)
 
@@ -26,23 +24,20 @@ const loadPayments = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/payment/report',
+    PaymentService.getPayments(
       cleanObjectEmptyFields({
         startDate: filterData.startDate,
         endDate: filterData.endDate,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        usePaymentStore().setPayments(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      usePaymentStore().setPayments(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 

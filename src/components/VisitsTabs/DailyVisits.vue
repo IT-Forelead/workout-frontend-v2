@@ -1,28 +1,24 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import moment from 'moment'
 import { onMounted, onUnmounted } from 'vue'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import VisitService from '../../services/visit.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
+import { useVisitStore } from '../../store/visit.store'
 import FunnelIcon from '../Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 import SelectOptionVisitType from '../Inputs/SelectOptionVisitType.vue'
 import VisitItem from '../Items/VisitItem.vue'
-import authHeader from '../../mixins/auth-header'
-import { cleanObjectEmptyFields } from '../../mixins/utils'
-import AxiosService from '../../services/axios.service'
-import VisitService from '../../services/visit.service'
-import { useVisitStore } from '../../store/visit.store'
-import { useDropdownStore } from '../../store/dropdown.store'
-import { useModalStore } from '../../store/modal.store'
-import moment from 'moment'
 
 const isLoading = ref(false)
 
 const filterData = reactive({
   customerId: '',
   visitType: '',
-  startDate: moment().startOf('day').format().slice(0, 16),
-  endDate: moment().endOf('day').format().slice(0, 16),
 })
 
 const total = ref(1)
@@ -45,8 +41,7 @@ const loadVisits = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/visit/report',
+    VisitService.getVisits(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
         visitType: selectedVisitType.value?.id,
@@ -54,16 +49,14 @@ const loadVisits = async ($state) => {
         endDate: moment().endOf('day').format().slice(0, 16),
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useVisitStore().setVisits(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useVisitStore().setVisits(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
@@ -73,8 +66,7 @@ const isRefresh = ref(false)
 const autoRefresher =
   setInterval(() => {
     isRefresh.value = true
-    AxiosService.post(
-      '/visit/report',
+    VisitService.getVisits(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
         visitType: selectedVisitType.value?.id,
@@ -82,16 +74,14 @@ const autoRefresher =
         endDate: moment().endOf('day').format().slice(0, 16),
         page: 1,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useVisitStore().setAutoRefreshVisits(result?.data)
-        isRefresh.value = false
-      }).catch((err) => {
-        console.log("Error:", err);
       })
+    ).then((result) => {
+      total.value = result?.total
+      useVisitStore().setAutoRefreshVisits(result?.data)
+      isRefresh.value = false
+    }).catch((err) => {
+      console.log("Error:", err);
+    })
   }, 3000);
 
 onMounted(() => {

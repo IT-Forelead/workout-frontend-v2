@@ -2,9 +2,7 @@
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
 import { onMounted } from 'vue'
-import authHeader from '../../mixins/auth-header'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
-import AxiosService from '../../services/axios.service'
 import VisitService from '../../services/visit.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
@@ -44,8 +42,7 @@ const loadVisits = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/visit/report',
+    VisitService.getVisits(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
         visitType: selectedVisitType.value?.id,
@@ -53,11 +50,10 @@ const loadVisits = async ($state) => {
         endDate: filterData.endDate,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
+      })
+    ).then((result) => {
         total.value = result?.total
+        useVisitStore().clearStore()
         useVisitStore().setVisits(result?.data)
         $state.loaded()
       }).catch(() => {

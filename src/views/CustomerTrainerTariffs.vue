@@ -1,18 +1,16 @@
 <script setup>
-import CustomerTrainerTariffItem from '../components/Items/CustomerTrainerTariffItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
-import { useModalStore } from '../store/modal.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { onMounted } from 'vue'
-import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
-import AxiosService from '../services/axios.service';
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
-import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
+import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
+import CustomerTrainerTariffItem from '../components/Items/CustomerTrainerTariffItem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
+import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
 
 const isLoading = ref(false)
 
@@ -28,8 +26,7 @@ const loadCustomerTrainerTariffs = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/trainer-tariff/report',
+    CustomerTrainerTariffService.getCustomerTrainerTariffs(
       cleanObjectEmptyFields({
         paymentStatus: selectPaymentStatus.value?.id,
         startDate: filterData.startDate,
@@ -38,16 +35,14 @@ const loadCustomerTrainerTariffs = async ($state) => {
         expireAtTo: filterData.expireAtTo,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerTrainerTariffStore().setCustomerTrainerTariffs(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useCustomerTrainerTariffStore().setCustomerTrainerTariffs(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 

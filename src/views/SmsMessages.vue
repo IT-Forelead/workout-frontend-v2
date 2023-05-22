@@ -8,9 +8,7 @@ import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionDeliveryStatus from '../components/Inputs/SelectOptionDeliveryStatus.vue'
 import SelectOptionMessageType from '../components/Inputs/SelectOptionMessageType.vue'
 import SmsMessageItem from '../components/Items/SmsMessageItem.vue'
-import authHeader from '../mixins/auth-header'
 import { cleanObjectEmptyFields } from '../mixins/utils'
-import AxiosService from "../services/axios.service.js"
 import SmsMessageService from '../services/smsMessage.service'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
@@ -38,8 +36,7 @@ const loadSmsMessages = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/message/report',
+    SmsMessageService.getSmsMessages(
       cleanObjectEmptyFields({
         phone: filterData.phone.replace(/([() -])/g, ''),
         messageType: selectedMessageType.value?.id,
@@ -48,16 +45,14 @@ const loadSmsMessages = async ($state) => {
         endDate: filterData.endDate,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useSmsMessageStore().setSmsMessages(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useSmsMessageStore().setSmsMessages(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
