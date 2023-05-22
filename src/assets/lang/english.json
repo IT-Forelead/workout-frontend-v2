@@ -262,6 +262,7 @@
   "deliveryStatus": "Delivery status",
   "sentCode": "Sent code",
   "visits": "Visits",
+  "dailyVisits": "Daily visits",
   "visit": "Visit",
   "visitsReport": "Visits report",
   "visitTime": "Visit time",

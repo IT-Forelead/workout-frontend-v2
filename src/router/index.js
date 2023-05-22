@@ -79,8 +79,19 @@ const routes = [
   {
     path: '/visits',
     name: 'Visits',
-    component: () => import('../views/Visits.vue'),
     meta: { layout: 'dashboard' },
+    children: [
+      {
+        path: '',
+        name: 'Daily visits',
+        component: () => import('../components/VisitsTabs/DailyVisits.vue'),
+      },
+      {
+        path: 'report',
+        name: 'Visits report',
+        component: () => import('../components/VisitsTabs/Visits.vue'),
+      },
+    ],
     beforeEnter: navigationGuards(['super_manager', 'tech_admin', 'admin']),
   },
   {

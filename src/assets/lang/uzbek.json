@@ -263,6 +263,7 @@
   "deliveryStatus": "Yetkazilganlik holati",
   "sentCode": "Kod yuborilgan",
   "visits": "Tashriflar",
+  "dailyVisits": "Kunlik tashriflar",
   "visit": "Tashrif",
   "visitsReport": "Tashriflar hisoboti",
   "visitTime": "Tashrif vaqti",
