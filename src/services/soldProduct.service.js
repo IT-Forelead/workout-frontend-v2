@@ -1,7 +1,7 @@
 import authHeader from '../mixins/auth-header'
 import AxiosService from './axios.service'
 
-class ProductService {
+class SoldProductService {
   async createSaleProduct(data) {
     return AxiosService.post('/product/create', data, { headers: authHeader() })
   }
@@ -10,4 +10,4 @@ class ProductService {
   }
 }
 
-export default new ProductService()
+export default new SoldProductService()

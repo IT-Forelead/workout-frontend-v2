@@ -3,13 +3,11 @@ import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
-import ProductService from '../../services/product.service'
-import { useVisitStore } from '../../store/visit.store'
+import SoldProductService from '../../services/soldProduct.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
-import RadionVisitType from '../Inputs/RadionVisitType.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
@@ -51,7 +49,7 @@ const submitData = () => {
     })
   } else {
     isLoading.value = true
-    ProductService.createSaleProduct({
+    SoldProductService.createSaleProduct({
       customerId: selectedCustomer.value?.id,
       productType: submitForm.productType,
       quantity: submitForm.quantity,
