@@ -1,11 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useDropdownStore } from '../../store/dropdown.store'
 import CheckIcon from '../Icons/CheckIcon.vue'
+import { useDropdownStore } from '../../store/dropdown.store'
 
 const { t } = useI18n()
-
 const list = [
   {
     id: 'come_in',
@@ -25,6 +24,7 @@ onMounted(() => {
   useDropdownStore().setSelectVisitTypeOption(list[0])
 })
 </script>
+
 <template>
   <div class="select-none">
     <div
@@ -48,6 +48,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
 <style scoped>
 input[type='radio'].toggle {
   @apply hidden;

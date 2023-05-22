@@ -1,9 +1,9 @@
 <script setup>
 import { onMounted } from 'vue'
-import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
 import GenderMaleIcon from '../Icons/GenderMaleIcon.vue'
 import GenderFemaleIcon from '../Icons/GenderFemaleIcon.vue'
+import { useDropdownStore } from '../../store/dropdown.store'
 
 const { t } = useI18n()
 
@@ -26,9 +26,11 @@ onMounted(() => {
   useDropdownStore().setSelectGenderOption(list[0])
 })
 </script>
+
 <template>
   <div class="select-none">
-    <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+    <div
+      class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
       <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked />
       <label for="toggle-on" @click="optionClicked(list[0])"
         class="relative flex items-center justify-center space-x-3 py-2">
@@ -44,6 +46,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
 <style scoped>
 input[type='radio'].toggle {
   @apply hidden;
