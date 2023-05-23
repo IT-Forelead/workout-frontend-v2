@@ -125,7 +125,7 @@ const monthlyVisitTranslate = (n) => {
             <div>{{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}</div>
           </div>
         </div>
-        <div v-if="moment().isBefore(tariff?.customerTariff?.expireAt)" class="">
+        <div v-if="moment().isBefore(tariff?.customerTariff?.expireAt)">
           <CheckIcon class="w-5 h-5 text-green-700" />
         </div>
         <div v-else>
