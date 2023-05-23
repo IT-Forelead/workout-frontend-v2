@@ -1,18 +1,17 @@
-import mem from 'mem'
+// import mem from 'mem'
+import { PublicAxiosService } from "../services/axios.service"
 
-async function refreshTokenFn() {
+export async function refreshToken() {
   const oldSession = JSON.parse(localStorage.getItem('session'))
-
   try {
     /* REFRESH TOKEN REQUEST */
-    const response = await axios.get('/auth/refresh', {
+    const response = await PublicAxiosService.get('/auth/user/refresh', {
       headers: {
-        Authorization: oldSession?.refreshToken,
+        Authorization: `Bearer ${oldSession?.refreshToken}`,
       },
     })
 
-    const { session } = response.data
-
+    const session = response?.data
     if (!session?.accessToken) {
       localStorage.removeItem('session')
       localStorage.removeItem('user')
@@ -20,15 +19,19 @@ async function refreshTokenFn() {
 
     localStorage.setItem('session', JSON.stringify(session))
 
-    return session
+    return response?.data
   } catch (error) {
+    if (error?.response?.status === 403) {
+      alert("Your session has been expired!")
+      window.location.reload()
+    }
     localStorage.removeItem('session')
     localStorage.removeItem('user')
   }
 }
 
-const maxAge = 10000
+// const maxAge = 10000
 
-export const memorizedRefreshToken = mem(refreshTokenFn, {
-  maxAge,
-})
+// export const memorizedRefreshToken = mem(refreshTokenFn, {
+//   maxAge,
+// })

@@ -7,9 +7,9 @@ class AuthService {
         password: user.password,
       })
       .then((res) => {
-        localStorage.setItem('session', res?.data)
+        localStorage.setItem('session', JSON.stringify(res?.data))
       })
-    return localStorage.getItem('session')
+    return JSON.parse(localStorage.getItem('session'))
   }
 
   async resetPassword(phone) {
