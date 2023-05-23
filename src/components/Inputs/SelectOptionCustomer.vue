@@ -4,7 +4,6 @@ import { onClickOutside } from '@vueuse/core'
 import { onMounted } from 'vue'
 import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
-import { AxiosService } from "../../services/axios.service.js"
 import CustomerService from '../../services/customer.service'
 import { useCustomerStore } from '../../store/customer.store'
 import { useDropdownStore } from '../../store/dropdown.store'
@@ -29,22 +28,19 @@ const loadCustomers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/customer/report',
+    CustomerService.getCustomers(
       cleanObjectEmptyFields({
-        firstName: searchCustomer.value != '' ? `%${searchCustomer.value}%` : '',
-        // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+        firstName: searchCustomer.value ? `%${searchCustomer.value}%` : '',
         page: page,
         limit: 8,
       })
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerStore().setCustomers(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
-      })
+    ).then((result) => {
+      total.value = result?.total
+      useCustomerStore().setCustomers(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
@@ -67,7 +63,6 @@ const submitFilterData = () => {
   CustomerService.getCustomers(
     cleanObjectEmptyFields({
       firstName: searchCustomer.value ? `%${searchCustomer.value}%` : '',
-      // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
       page: 1,
       limit: 8,
     })
