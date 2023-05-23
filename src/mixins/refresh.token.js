@@ -1,4 +1,3 @@
-// import mem from 'mem'
 import { PublicAxiosService } from "../services/axios.service"
 
 export async function refreshToken() {
@@ -29,9 +28,3 @@ export async function refreshToken() {
     localStorage.removeItem('user')
   }
 }
-
-// const maxAge = 10000
-
-// export const memorizedRefreshToken = mem(refreshTokenFn, {
-//   maxAge,
-// })
