@@ -5,6 +5,7 @@ import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
+import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import CustomerTariffService from '../services/customerTariff.service'
@@ -21,6 +22,10 @@ const customerTariffs = computed(() => {
 const target = ref('.customer-tariffs-wrapper')
 const distance = ref(0)
 
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
+
 const selectPaymentStatus = computed(() => {
   return useDropdownStore().selectPaymentStatusOption
 })
@@ -32,6 +37,7 @@ const loadCustomerTariffs = async ($state) => {
   if (total.value !== 0 && total.value / 30 + additional >= page) {
     CustomerTariffService.getCustomerTariffs(
       cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
         paymentStatus: selectPaymentStatus.value?.id,
         startDate: filterData.startDate,
         endDate: filterData.endDate,
@@ -76,6 +82,7 @@ const submitFilterData = () => {
   isLoading.value = true
   CustomerTariffService.getCustomerTariffs(
     cleanObjectEmptyFields({
+      customerId: selectedCustomer.value?.id,
       paymentStatus: selectPaymentStatus.value?.id,
       startDate: filterData.startDate,
       endDate: filterData.endDate,
@@ -111,6 +118,10 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              <div>
+                <label>{{ $t('customer') }}</label>
+                <SelectOptionCustomer />
+              </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />
