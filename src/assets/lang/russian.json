@@ -298,5 +298,10 @@
   "plsSelectQuantity": "Выберите количество",
   "soldProductCreated": "Проданный товар успешно создан!",
   "errorCreatingSoldProduct": "Ошибка при создании проданного товара!",
-  "water": "Вода"
+  "water": "Вода",
+  "editTrainerService": "Редактировать сервис тренера",
+  "trainerServiceEdited": "Служба тренера успешно изменена!",
+  "errorEditingTrainerService": "Ошибка при редактировании сервиса трейнера!",
+  "addedQrCode": "Клиент успешно добавил QR-код!",
+  "errorAddingQrCode": "Ошибка при добавлении QR-кода для клиента!"
 }

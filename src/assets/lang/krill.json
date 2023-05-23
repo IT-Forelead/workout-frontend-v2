@@ -299,5 +299,10 @@
   "plsSelectQuantity": "Миқдорни танланг",
   "soldProductCreated": "Сотилган маҳсулот муваффақиятли яратилди!",
   "errorCreatingSoldProduct": "Сотилган маҳсулотни яратишда хатолик юз берди!",
-  "water": "Сув"
+  "water": "Сув",
+  "editTrainerService": "Мураббий хизматини таҳрирлаш",
+  "trainerServiceEdited": "Мураббий хизмати муваффақиятли таҳрирланди!",
+  "errorEditingTrainerService": "Мураббий хизматини таҳрирлашда хатолик юз берди!",
+  "addedQrCode": "Мижозга ҚР код муваффақиятли қўшилди!",
+  "errorAddingQrCode": "Мижозга ҚР кодини қўшишда хатолик юз берди!"
 }

@@ -33,6 +33,16 @@ const submitServiceData = (customerId) => {
         message: t('addedQrCode'),
       })
       isLoading.value = false
+      CustomerService.getCustomers({})
+        .then((res) => {
+          useCustomerStore().clearStore()
+          useCustomerStore().setCustomers(res?.data)
+        })
+        .catch((err) => {
+          notify.error({
+            message: t('errorGettingCustomers'),
+          })
+        })
       closeModal()
     })
     .catch((err) => {

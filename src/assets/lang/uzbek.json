@@ -299,5 +299,10 @@
   "plsSelectQuantity": "Miqdorni tanlang",
   "soldProductCreated": "Sotilgan mahsulot muvaffaqiyatli yaratildi!",
   "errorCreatingSoldProduct": "Sotilgan mahsulotni yaratishda xatolik yuz berdi!",
-  "water": "Suv"
+  "water": "Suv",
+  "editTrainerService": "Murabbiy xizmatini tahrirlash",
+  "trainerServiceEdited": "Murabbiy xizmati muvaffaqiyatli tahrirlandi!",
+  "errorEditingTrainerService": "Murabbiy xizmatini tahrirlashda xatolik yuz berdi!",
+  "addedQrCode": "Mijozga QR kod muvaffaqiyatli qo'shildi!",
+  "errorAddingQrCode": "Mijozga QR kodini qo'shishda xatolik yuz berdi!"
 }

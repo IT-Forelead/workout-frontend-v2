@@ -13,6 +13,9 @@ class TrainerServicesService {
   async getTrainerServicesByUserId(userId) {
     return AxiosService.get(`/trainer-service/${userId}`)
   }
+  async editTrainerService(data) {
+    return AxiosService.post('/trainer-service/edit', data)
+  }
   async deleteTrainerService(serviceId) {
     return AxiosService.get(`/trainer-service/delete/${serviceId}`)
   }

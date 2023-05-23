@@ -43,7 +43,7 @@
   "help": "Help",
   "settings": "Settings",
   "logout": "Logout",
-  "trainerServices": "Trainer Services",
+  "trainerServices": "Trainer services",
   "payments": "Payments",
   "addPayment": "Add payment",
   "payment": "Payment",
@@ -298,5 +298,10 @@
   "plsSelectQuantity": "Please select quantity",
   "soldProductCreated": "Sold product successfully created!",
   "errorCreatingSoldProduct": "Error while creating sold product!",
-  "water": "Water"
+  "water": "Water",
+  "editTrainerService": "Edit trainer service",
+  "trainerServiceEdited": "Successfully edited trainer service!",
+  "errorEditingTrainerService": "Error while editing trainer service!",
+  "addedQrCode": "Successfully added QR code tom customer!",
+  "errorAddingQrCode": "Error while adding  QR code tom customer!"
 }
