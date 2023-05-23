@@ -189,7 +189,6 @@ const editCustomer = () => {
           }, 500)
         })
         .catch((err) => {
-          console.log(err);
           notify.error({
             message: t('errorGettingCustomers'),
           })

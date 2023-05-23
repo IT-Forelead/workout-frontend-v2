@@ -139,7 +139,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = ['/', '/forgot-password', '/reset-password']
   const authNotRequired = !publicPages.includes(to.path)
-  const notLoggedIn = localStorage.getItem('token')
+  const notLoggedIn = localStorage.getItem('session')
   if ((authNotRequired && notLoggedIn) || publicPages.includes(`/${to.path.split('/')[1]}`)) {
     next()
   } else {
@@ -149,9 +149,8 @@ router.beforeEach((to, from, next) => {
 
 function navigationGuards(access) {
   return () => {
-    if (localStorage.getItem('token') && !access.includes(parseJwt()?.role)) {
+    if (localStorage.getItem('session') && !access.includes(parseJwt()?.role)) {
       router.push('/notfound')
-      console.log('Oops!')
     }
     return access.includes(parseJwt()?.role)
   }

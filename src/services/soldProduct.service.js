@@ -1,12 +1,11 @@
-import authHeader from '../mixins/auth-header'
-import AxiosService from './axios.service'
+import { AxiosService } from './axios.service'
 
 class SoldProductService {
   async createSaleProduct(data) {
-    return AxiosService.post('/product/create', data, { headers: authHeader() })
+    return AxiosService.post('/product/create', data)
   }
   async getSales(filter) {
-    return AxiosService.post('/product/report', filter, { headers: authHeader() })
+    return AxiosService.post('/product/report', filter)
   }
 }
 

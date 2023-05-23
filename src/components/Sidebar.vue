@@ -28,7 +28,7 @@ const navigationGuard = (access) => {
 }
 
 onMounted(() => {
-  useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
+  useAuthStore().setUser(decodeJwt(JSON.parse(localStorage.getItem('session'))?.accessToken))
   payload.value = parseJwt()
 })
 </script>

@@ -14,11 +14,11 @@ export function cleanObjectEmptyFields(obj) {
 }
 
 export function parseJwt() {
+  let accessToken = JSON.parse(localStorage.getItem('session'))?.accessToken
   try {
-    return jwt_decode(localStorage.getItem('token'))
+    return jwt_decode(accessToken)
   } catch (err) {
-    let token = localStorage.getItem('token')
-    if (token) {
+    if (accessToken) {
       alert("Your token is not valid!")
       localStorage.clear()
       window.location.reload()

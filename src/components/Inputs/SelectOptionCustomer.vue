@@ -1,19 +1,18 @@
 <script setup>
-import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
-import authHeader from '../../mixins/auth-header'
+import { computed, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useCustomerStore } from '../../store/customer.store'
-import { useModalStore } from '../../store/modal.store'
-import { useDropdownStore } from '../../store/dropdown.store'
 import { onMounted } from 'vue'
-import CustomerService from '../../services/customer.service'
-import AxiosService from "../../services/axios.service.js";
+import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
-import UserIcon from '../Icons/UserIcon.vue'
+import { AxiosService } from "../../services/axios.service.js"
+import CustomerService from '../../services/customer.service'
+import { useCustomerStore } from '../../store/customer.store'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
 import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
 import SearchIcon from '../Icons/SearchIcon.vue'
+import UserIcon from '../Icons/UserIcon.vue'
+import XIcon from '../Icons/XIcon.vue'
 
 const isLoading = ref(false)
 const dropdown = ref(null)
@@ -37,8 +36,7 @@ const loadCustomers = async ($state) => {
         // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
         page: page,
         limit: 8,
-      }),
-      { headers: authHeader() }
+      })
     )
       .then((result) => {
         total.value = result?.total
@@ -100,7 +98,8 @@ const whenPressEnter = (e) => {
         class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
         {{ useDropdownStore().selectCustomerOption?.firstname + ' ' + useDropdownStore().selectCustomerOption?.lastname }}
       </div>
-      <input type="text" v-model="searchCustomer" v-on:keypress="whenPressEnter($event)" v-if="useDropdownStore().isOpenCustomerDropDown"
+      <input type="text" v-model="searchCustomer" v-on:keypress="whenPressEnter($event)"
+        v-if="useDropdownStore().isOpenCustomerDropDown"
         class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
         :placeholder="$t('enterCustomerName')" />
       <SearchIcon v-if="useDropdownStore().isOpenCustomerDropDown" @click="submitFilterData()"
