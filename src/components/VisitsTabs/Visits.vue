@@ -53,7 +53,6 @@ const loadVisits = async ($state) => {
       })
     ).then((result) => {
         total.value = result?.total
-        useVisitStore().clearStore()
         useVisitStore().setVisits(result?.data)
         $state.loaded()
       }).catch(() => {

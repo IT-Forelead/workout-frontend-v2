@@ -43,7 +43,6 @@ const loadCustomers = async ($state) => {
       })
     ).then((result) => {
       total.value = result?.total
-      useCustomerStore().clearStore()
       useCustomerStore().setCustomers(result?.data)
       $state.loaded()
     }).catch(() => {
