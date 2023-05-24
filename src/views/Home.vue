@@ -1,12 +1,13 @@
 <script setup>
 import moment from 'moment'
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import ChartBarHorizontalIcon from '../components/Icons/ChartBarHorizontalIcon.vue'
+import { computed, onMounted, ref } from 'vue'
+import CustomerService from '../services/customer.service'
 import ChartBarIcon from '../components/Icons/ChartBarIcon.vue'
 import FootPrintsIcon from '../components/Icons/FootPrintsIcon.vue'
 import UsersThreeIcon from '../components/Icons/UsersThreeIcon.vue'
-const { t } = useI18n()
+import ChartBarHorizontalIcon from '../components/Icons/ChartBarHorizontalIcon.vue'
+
+const total = ref(0)
 
 // Daily visits chart
 const numberOfDailyVisitsSeries = computed(() => [
@@ -376,6 +377,14 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
     },
   }
 })
+
+onMounted(() => {
+  CustomerService.getCustomers({})
+    .then((result) => {
+      total.value = result?.total
+    })
+})
+
 </script>
 
 <template>
@@ -432,7 +441,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
             <div class="flex justify-between mb-3">
               <div>
                 <p>{{ $t('customers') }}</p>
-                <p class="text-2xl font-bold">231</p>
+                <p class="text-2xl font-bold">{{ total }}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <UsersThreeIcon class="w-8 h-8 text-gray-900" />
