@@ -1,12 +1,12 @@
 <script setup>
-import { computed, reactive, ref } from '@vue/reactivity'
 import { onMounted } from 'vue'
-import SelectedUserItem from '../components/Items/SelectedCustomertem.vue'
 import authHeader from '../mixins/auth-header'
-import { cleanObjectEmptyFields } from '../mixins/utils'
 import AxiosService from '../services/axios.service'
-import { useCustomerTariffStore } from '../store/customerTariff.store'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import { computed, reactive, ref } from '@vue/reactivity'
 import { useDropdownStore } from '../store/dropdown.store'
+import { useCustomerTariffStore } from '../store/customerTariff.store'
+import SelectedUserItem from '../components/Items/SelectedCustomertem.vue'
 
 const props = defineProps({ id: String })
 
