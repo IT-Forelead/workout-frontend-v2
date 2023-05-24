@@ -1,66 +1,27 @@
 <script setup>
-import notify from 'izitoast'
-import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import XIcon from '../Icons/XIcon.vue'
 import 'izitoast/dist/css/iziToast.min.css'
 import UserIcon from '../Icons/UserIcon.vue'
 import { computed, ref } from '@vue/reactivity'
-import authHeader from '../../mixins/auth-header'
-import AxiosService from '../../services/axios.service'
 import { useModalStore } from '../../store/modal.store'
-import { cleanObjectEmptyFields } from '../../mixins/utils'
 import { useCustomerStore } from '../../store/customer.store'
-import SelectedCustomerInfo from '../Items/SelectedCustomerInfo.vue'
-import { useCustomerTariffStore } from '../../store/customerTariff.store'
+import SelectedCustomer from '../../views/SelectedCustomer.vue'
 
-let page = 0
-const total = ref(1)
 const { t } = useI18n()
-const distance = ref(0)
-const target = ref('.customer-tariffs-wrapper')
 const CUSTOMER_IMAGE_URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL
 
 const selectedCustomer = computed(() => {
   return useCustomerStore().selectedCustomer
 })
 
-const customerTariffs = computed(() => {
-  return useCustomerTariffStore().customerTariffs
-})
-
 const closeModal = () => {
-  useCustomerTariffStore().setSelectedCustomerTariff({})
-
   useModalStore().closeShowCustomerInformationModal()
 }
 
 const checkGender = (val) => {
   if (val == 'male') return t('male')
   return t('male')
-}
-
-const loadCustomerTariffs = async ($state) => {
-  page++
-  let additional = total.value % 30 === 0 ? 0 : 1
-  if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/tariff/report',
-      cleanObjectEmptyFields({
-        customerId: selectedCustomer.value?.id,
-        page,
-        limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerTariffStore().setCustomerTariffs(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
-      })
-  } else $state.loaded()
 }
 
 </script>
@@ -100,7 +61,8 @@ const loadCustomerTariffs = async ($state) => {
           </div>
         </div>
         <div class="overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
-          <table class="min-w-max w-full table-auto mb-5">
+          <SelectedCustomer :id="selectedCustomer.id" />
+          <!-- <table class="min-w-max w-full table-auto mb-5">
             <thead class="sticky z-10 top-0 bg-white shadow">
               <tr class="text-gray-600 capitalize text-lg leading-normal">
                 <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
@@ -114,7 +76,7 @@ const loadCustomerTariffs = async ($state) => {
               <SelectedCustomerInfo :customerTariffs="customerTariffs" :selectedCustomer="selectedCustomer"
                 :distance="distance" :target="target" @infinite="loadCustomerTariffs" />
             </tbody>
-          </table>
+          </table> -->
           <div v-if="selectedCustomer?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
         </div>
       </div>

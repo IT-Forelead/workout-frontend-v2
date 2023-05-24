@@ -1,0 +1,125 @@
+<script setup>
+import moment from 'moment'
+import { useI18n } from 'vue-i18n'
+import 'v3-infinite-loading/lib/style.css'
+import { onMounted, ref, toRefs } from 'vue'
+import { parseJwt } from '../../mixins/utils.js'
+import InfiniteLoading from 'v3-infinite-loading'
+import CalendarXIcon from '../Icons/CalendarXIcon.vue'
+import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
+
+const { t } = useI18n()
+const payload = ref({})
+
+const props = defineProps({
+    customerTariffs: { type: Array, required: true },
+    id: String
+})
+
+// const { customerTariffs } = toRefs(props)
+
+onMounted(() => {
+    payload.value = parseJwt()
+})
+
+const paymentStatusTranslate = (status) => {
+    switch (status) {
+        case 'fully_paid':
+            return t('fullyPaid')
+        case 'not_paid':
+            return t('notPaid')
+        case 'partially_paid':
+            return t('partiallyPaid')
+        case 'canceled':
+            return t('canceled')
+    }
+}
+
+const paymentStatusColor = (status) => {
+    switch (status) {
+        case 'fully_paid':
+            return 'bg-green-500 text-white'
+        case 'not_paid':
+            return 'bg-red-500 text-white'
+        case 'partially_paid':
+            return 'bg-orange-500 text-white'
+        case 'canceled':
+            return 'bg-teal-500 text-white'
+    }
+}
+
+const checkStatus = (endDate) => moment().isBefore(endDate) ? t('active') : t('notActive')
+
+const statusColor = (endDate) => moment().isBefore(endDate) ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+
+const durationDayTranslate = (n) => {
+    switch (n) {
+        case 1:
+            return t('oneDay')
+        case 30:
+            return t('oneMonth')
+        case 90:
+            return t('threeMonths')
+        case 180:
+            return t('sixMonths')
+        case 365:
+            return t('oneYear')
+    }
+}
+
+const monthlyVisitTranslate = (n) => {
+    switch (n) {
+        case 30:
+            return t('everyDay')
+        case 15:
+            return t('fifteenDays')
+    }
+}
+
+</script>
+<template>
+    <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"
+        :key="idx">
+        <td v-motion-pop class="py-2 px-4 text-left" v-if="tariff?.customerTariff?.customerId == id">
+            <div class="">
+                {{ tariff?.service?.name }}
+            </div>
+            <div class="text-sm">
+                {{ durationDayTranslate(tariff?.service?.durationDay) + ' (' +
+                    monthlyVisitTranslate(tariff?.service?.monthlyVisit) + ')' }}
+            </div>
+        </td>
+        <td v-motion-pop class="py-2 px-4 text-left" v-if="tariff?.customerTariff?.customerId == id">
+            <div class="flex items-center space-x-1">
+                <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
+                <div>
+                    {{ moment(tariff?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
+                </div>
+            </div>
+            <div class="flex items-center space-x-1">
+                <CalendarXIcon class="w-5 h-5 text-gray-500" />
+                <div>
+                    {{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
+                </div>
+            </div>
+        </td>
+        <td v-motion-pop class="py-2 px-4 text-center" v-if="tariff?.customerTariff?.customerId == id">
+            <span class="p-1.5 px-3 inline-block w-28 text-sm rounded-full"
+                :class="statusColor((tariff?.customerTariff?.expireAt))">{{
+                    checkStatus(tariff?.customerTariff?.expireAt) }}</span>
+        </td>
+        <td v-motion-pop class="py-2 px-4 text-center" v-if="tariff?.customerTariff?.customerId == id">
+            <span class="p-1.5 inline-block w-28 px-3 text-sm rounded-full"
+                :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
+                {{ paymentStatusTranslate(tariff?.customerTariff?.paymentStatus) }}
+            </span>
+        </td>
+    </tr>
+    <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">
+        <td v-motion-pop colspan="10">
+            <div class="flex items-center justify-center w-full p-2">
+                <InfiniteLoading v-bind="$attrs" />
+            </div>
+        </td>
+    </tr>
+</template>
