@@ -1,19 +1,28 @@
 <script setup>
 import moment from 'moment'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useVisitStore } from '../store/visit.store'
 import ChartBarHorizontalIcon from '../components/Icons/ChartBarHorizontalIcon.vue'
 import ChartBarIcon from '../components/Icons/ChartBarIcon.vue'
+import VisitService from '../services/visit.service'
+import CustomerService from '../services/customer.service'
 import FootPrintsIcon from '../components/Icons/FootPrintsIcon.vue'
 import UsersThreeIcon from '../components/Icons/UsersThreeIcon.vue'
+
 const { t } = useI18n()
+const numberOfAllCustomers = ref(0)
+
+const dailyVisits = computed(() => {
+  return useVisitStore().dailyVisits
+})
 
 // Daily visits chart
 const numberOfDailyVisitsSeries = computed(() => [
   {
-    name: 'series1',
-    data: [31, 40, 28, 51, 42, 109, 100]
-  }
+    name: t('numberOfVisits'),
+    data: dailyVisits.value?.map((a) => a.y),
+  },
 ])
 
 const numberOfDailyVisitsChartOptions = computed(() => {
@@ -72,13 +81,13 @@ const numberOfDailyVisitsChartOptions = computed(() => {
       show: false,
     },
     xaxis: {
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"],
+      categories: dailyVisits.value?.map((a) => a.x),
       labels: {
         style: {
           fontSize: '12px',
         },
         formatter: function (val) {
-          return moment(val).format('D-MMM')
+          return moment(val).format('D-MMMM')
         },
       },
       tooltip: {
@@ -376,6 +385,18 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
     },
   }
 })
+
+onMounted(() => {
+  VisitService.getNumberOfDailyVisit()
+  .then((res) => {
+    useVisitStore().clearStore()
+    useVisitStore().setDailyVisits(res)
+  })
+  CustomerService.getCustomers({})
+    .then((result) => {
+      numberOfAllCustomers.value = result?.total
+    })
+})
 </script>
 
 <template>
@@ -384,8 +405,8 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
       <div class="bg-white rounded-lg">
         <div class="flex items-center justify-between p-5">
           <div>
-            <h1 class="text-3xl font-bold">Visit statistics</h1>
-            <p class="font-medium text-lg">Statistics for a week</p>
+            <h1 class="text-3xl font-bold">{{ $t('visitStatistics') }}</h1>
+            <p class="font-medium text-lg">{{ $t('sevenBusinessDayStatistics') }}</p>
           </div>
           <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
             <ChartBarIcon class="w-9 h-9 text-gray-900" />
@@ -432,13 +453,13 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
             <div class="flex justify-between mb-3">
               <div>
                 <p>{{ $t('customers') }}</p>
-                <p class="text-2xl font-bold">231</p>
+                <p class="text-2xl font-bold">{{ numberOfAllCustomers }}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <UsersThreeIcon class="w-8 h-8 text-gray-900" />
               </div>
             </div>
-            <p>Number ofregistered customers</p>
+            <p>{{ $t('numberOfRegisteredCustomers') }}</p>
           </div>
           <div class="bg-white rounded-lg w-full p-5 space-y-2">
             <div class="flex justify-between mb-3">

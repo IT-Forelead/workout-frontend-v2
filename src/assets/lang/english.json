@@ -303,5 +303,9 @@
   "trainerServiceEdited": "Successfully edited trainer service!",
   "errorEditingTrainerService": "Error while editing trainer service!",
   "addedQrCode": "Successfully added QR code tom customer!",
-  "errorAddingQrCode": "Error while adding  QR code tom customer!"
+  "errorAddingQrCode": "Error while adding  QR code tom customer!",
+  "visitStatistics": "Visit statistics",
+  "numberOfVisits": "Number of visits",
+  "sevenBusinessDayStatistics": "Seven business day statistics",
+  "numberOfRegisteredCustomers": "Number of registered customers"
 }

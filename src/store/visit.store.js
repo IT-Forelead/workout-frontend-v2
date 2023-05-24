@@ -3,11 +3,15 @@ import { defineStore } from 'pinia'
 export const useVisitStore = defineStore('visit', {
   state: () => ({
     visits: [],
+    dailyVisits: [],
     selectedVisit: {},
   }),
   actions: {
     setVisits(data) {
       this.visits.push(...data)
+    },
+    setDailyVisits(data) {
+      this.dailyVisits.push(...data)
     },
     setSelectedVisit(data) {
       this.selectedVisit = data
@@ -23,6 +27,7 @@ export const useVisitStore = defineStore('visit', {
     },
     clearStore() {
       this.visits = []
+      this.dailyVisits = []
     },
   },
 })

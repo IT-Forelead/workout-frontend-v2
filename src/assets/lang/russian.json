@@ -303,5 +303,9 @@
   "trainerServiceEdited": "Служба тренера успешно изменена!",
   "errorEditingTrainerService": "Ошибка при редактировании сервиса трейнера!",
   "addedQrCode": "Клиент успешно добавил QR-код!",
-  "errorAddingQrCode": "Ошибка при добавлении QR-кода для клиента!"
+  "errorAddingQrCode": "Ошибка при добавлении QR-кода для клиента!",
+  "visitStatistics": "Статистика посещений",
+  "numberOfVisits": "Количество посещений",
+  "sevenBusinessDayStatistics": "Статистика за семь рабочих дней",
+  "numberOfRegisteredCustomers": "Количество зарегистрированных клиентов"
 }

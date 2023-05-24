@@ -7,6 +7,9 @@ class VisitService {
   async getVisits(filter) {
     return AxiosService.post('/visit/report', filter)
   }
+  async getNumberOfDailyVisit() {
+    return AxiosService.get('/visit/daily-visits')
+  }
 }
 
 export default new VisitService()

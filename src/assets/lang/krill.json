@@ -304,5 +304,9 @@
   "trainerServiceEdited": "Мураббий хизмати муваффақиятли таҳрирланди!",
   "errorEditingTrainerService": "Мураббий хизматини таҳрирлашда хатолик юз берди!",
   "addedQrCode": "Мижозга ҚР код муваффақиятли қўшилди!",
-  "errorAddingQrCode": "Мижозга ҚР кодини қўшишда хатолик юз берди!"
+  "errorAddingQrCode": "Мижозга ҚР кодини қўшишда хатолик юз берди!",
+  "visitStatistics": "Ташрифлар статистикаси",
+  "numberOfVisits": "Ташрифлар сони",
+  "sevenBusinessDayStatistics": "Йетти иш куни статистикаси",
+  "numberOfRegisteredCustomers": "Рўйхатдан ўтган мижозлар сони"
 }
