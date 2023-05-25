@@ -1,12 +1,11 @@
 <script setup>
-import { onMounted } from 'vue'
-import authHeader from '../mixins/auth-header'
-import AxiosService from '../services/axios.service'
-import { cleanObjectEmptyFields } from '../mixins/utils'
 import { computed, reactive, ref } from '@vue/reactivity'
-import { useDropdownStore } from '../store/dropdown.store'
-import { useCustomerTariffStore } from '../store/customerTariff.store'
+import { onMounted } from 'vue'
 import SelectedUserItem from '../components/Items/SelectedCustomertem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import CustomerTariffService from '../services/customerTariff.service'
+import { useCustomerTariffStore } from '../store/customerTariff.store'
+import { useDropdownStore } from '../store/dropdown.store'
 
 const props = defineProps({ id: String })
 
@@ -26,8 +25,7 @@ const loadCustomerTariffs = async ($state) => {
     page++
     let additional = total.value % 30 === 0 ? 0 : 1
     if (total.value !== 0 && total.value / 30 + additional >= page) {
-        AxiosService.post(
-            '/tariff/report',
+        CustomerTariffService.getCustomerTariffs(
             cleanObjectEmptyFields({
                 paymentStatus: selectPaymentStatus.value?.id,
                 startDate: filterData.startDate,
@@ -36,16 +34,14 @@ const loadCustomerTariffs = async ($state) => {
                 expireAtTo: filterData.expireAtTo,
                 page: page,
                 limit: 30,
-            }),
-            { headers: authHeader() }
-        )
-            .then((result) => {
-                total.value = result?.total
-                useCustomerTariffStore().setCustomerTariffs(result?.data)
-                $state.loaded()
-            }).catch(() => {
-                $state.error()
             })
+        ).then((result) => {
+            total.value = result?.total
+            useCustomerTariffStore().setCustomerTariffs(result?.data)
+            $state.loaded()
+        }).catch(() => {
+            $state.error()
+        })
     } else $state.loaded()
 }
 
