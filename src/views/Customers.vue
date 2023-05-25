@@ -12,14 +12,14 @@ import { useCustomerStore } from '../store/customer.store'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
 
-const isLoading = ref(false)
-
 const total = ref(1)
+const distance = ref(0)
+const isLoading = ref(false)
+const target = ref('.customers-wrapper')
+
 const customers = computed(() => {
   return useCustomerStore().customers
 })
-const target = ref('.customers-wrapper')
-const distance = ref(0)
 
 const selectGender = computed(() => {
   return useDropdownStore().selectGenderOption

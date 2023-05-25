@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
-import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
 import { useModalStore } from '../../store/modal.store'
+import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
 
 const isLoading = ref(false)
 const dropdown = ref(null)

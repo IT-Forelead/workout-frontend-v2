@@ -1,19 +1,91 @@
 <script setup>
-import { ref } from '@vue/reactivity'
+import { onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
-import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
-import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
 import { useModalStore } from '../../store/modal.store'
+import { ref, computed, reactive } from '@vue/reactivity'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
+import SoldProductService from '../../services/soldProduct.service'
+import { useSalesReportStore } from '../../store/soldProduct.store'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
 
-const isLoading = ref(false)
+const total = ref(1)
+const distance = ref(0)
 const dropdown = ref(null)
+const isLoading = ref(false)
+const target = ref('.customers-wrapper')
+const filterData = reactive({
+    firstName: '',
+    lastName: '',
+    product: '',
+    startDate: '',
+    endDate: '',
+})
+
+const salesReports = computed(() => {
+    return useSalesReportStore().salesReports
+})
+
+let page = 0
+const loadCustomers = async ($state) => {
+    page++
+    let additional = total.value % 30 === 0 ? 0 : 1
+    if (total.value !== 0 && total.value / 30 + additional >= page) {
+        SoldProductService.getSales(
+            cleanObjectEmptyFields({
+                firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
+                lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+                product: filterData.product,
+                startDate: filterData.startDate,
+                endDate: filterData.endDate,
+                page: page,
+                limit: 30,
+            })
+        ).then((result) => {
+            total.value = result?.total
+            useSalesReportStore().setSalesReports(result?.data)
+            $state.loaded()
+        }).catch(() => {
+            $state.error()
+        })
+    } else $state.loaded()
+}
+
+onMounted(() => {
+    useSalesReportStore().clearStore()
+})
+
+const submitFilterData = () => {
+    isLoading.value = true
+    SoldProductService.getSales(
+        cleanObjectEmptyFields({
+            firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
+            lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
+            gender: selectGender.value?.id,
+            product: filterData.product?.id,
+            startDate: filterData.startDate,
+            endDate: filterData.endDate,
+            page: 1,
+            limit: 30,
+        })
+    ).then((res) => {
+        useSalesReportStore().clearStore()
+        useSalesReportStore().setSalesReports(res?.data)
+        isLoading.value = false
+        if (useModalStore().isOpenFilterBy) {
+            useModalStore().toggleFilterBy()
+        }
+    })
+}
 
 onClickOutside(dropdown, () => {
     if (useModalStore().isOpenFilterBy) {
         useModalStore().toggleFilterBy()
     }
 })
+
+
 
 </script>
 
@@ -22,7 +94,8 @@ onClickOutside(dropdown, () => {
         <div class="bg-white rounded p-5">
             <div class="flex items-center justify-between mb-1">
                 <div class="flex items-center space-x-3">
-                    <router-link to="/sales" class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
+                    <router-link to="/sales"
+                        class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
                         {{ $t('dailySales') }}
                     </router-link>
                     <div>|</div>
@@ -95,7 +168,7 @@ onClickOutside(dropdown, () => {
                         <UserItem :users="users" :distance="distance" :target="target" @infinite="loadUsers" />
                     </tbody> -->
                 </table>
-                <!-- <div v-if="users?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div> -->
+                <div v-if="salesReports?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
             </div>
         </div>
     </div>
