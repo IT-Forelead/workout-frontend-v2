@@ -12,6 +12,10 @@ import UserIcon from '../Icons/UserIcon.vue'
 
 const { t } = useI18n()
 
+const props = defineProps({
+  userId: null,
+})
+
 const selectedOption = computed(() => {
   return useDropdownStore().selectTrainerOption
 })
@@ -38,6 +42,9 @@ onMounted(() => {
   userService.getUsers({ role: "trainer", page: 1, limit: 1000 }).then((res) => {
     useUserStore().clearStore()
     useUserStore().setUsers(res.data)
+    useDropdownStore().setSelectTrainerOption(
+      res?.data.filter(u => u?.id === props.userId)[0]
+    )
   }).catch(() => {
     console.log("Error while getting trainers");
   })

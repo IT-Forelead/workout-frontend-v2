@@ -16,6 +16,14 @@ import AddCustomerTrainerTariffModal from './Modals/AddCustomerTrainerTariffModa
 import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddVisitModal from './Modals/AddVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
+import AddSoldProductModal from './Modals/AddSoldProductModal.vue'
+import EditCustomerModal from './Modals/EditCustomerModal.vue'
+import EditServiceModal from './Modals/EditServiceModal.vue'
+import EditTrainerServiceModal from './Modals/EditTrainerServiceModal.vue'
+import DeleteUserModal from './Modals/DeleteUserModal.vue'
+import DeleteCustomerModal from './Modals/DeleteCustomerModal.vue'
+import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
+import DeleteTrainerServiceModal from './Modals/DeleteTrainerServiceModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
 import ShowCustomerInformationModal from './Modals/ShowCustomerInformationModal.vue'
@@ -32,7 +40,7 @@ onClickOutside(notificationDropdown, () => {
 })
 
 onMounted(() => {
-  useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
+  useAuthStore().setUser(decodeJwt(JSON.parse(localStorage.getItem('session'))?.accessToken))
   payload.value = parseJwt()
 })
 </script>
@@ -76,6 +84,14 @@ onMounted(() => {
   <AddPaymentModal />
   <AddVisitModal />
   <AddQrCodeModal />
+  <AddSoldProductModal />
+  <EditCustomerModal />
+  <EditServiceModal />
+  <EditTrainerServiceModal />
+  <DeleteUserModal />
+  <DeleteCustomerModal />
+  <DeleteServiceModal />
+  <DeleteTrainerServiceModal />
   <ShowCustomerInformationModal />
 </template>
 

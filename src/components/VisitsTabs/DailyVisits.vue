@@ -1,28 +1,24 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { onMounted, onUnmounted } from 'vue'
-import FunnelIcon from '../components/Icons/FunnelIcon.vue'
-import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
-import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
-import SelectOptionVisitType from '../components/Inputs/SelectOptionVisitType.vue'
-import VisitItem from '../components/Items/VisitItem.vue'
-import authHeader from '../mixins/auth-header'
-import { cleanObjectEmptyFields } from '../mixins/utils'
-import AxiosService from '../services/axios.service'
-import VisitService from '../services/visit.service'
-import { useVisitStore } from '../store/visit.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { useModalStore } from '../store/modal.store'
 import moment from 'moment'
+import { onMounted, onUnmounted } from 'vue'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import VisitService from '../../services/visit.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
+import { useVisitStore } from '../../store/visit.store'
+import FunnelIcon from '../Icons/FunnelIcon.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SelectOptionVisitType from '../Inputs/SelectOptionVisitType.vue'
+import VisitItem from '../Items/VisitItem.vue'
 
 const isLoading = ref(false)
 
 const filterData = reactive({
   customerId: '',
   visitType: '',
-  startDate: moment().startOf('day').format().slice(0, 16),
-  endDate: moment().endOf('day').format().slice(0, 16),
 })
 
 const total = ref(1)
@@ -45,25 +41,22 @@ const loadVisits = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/visit/report',
+    VisitService.getVisits(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
         visitType: selectedVisitType.value?.id,
-        startDate: filterData.startDate,
-        endDate: filterData.endDate,
+        startDate: moment().startOf('day').format().slice(0, 16),
+        endDate: moment().endOf('day').format().slice(0, 16),
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useVisitStore().setVisits(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useVisitStore().setVisits(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
@@ -73,25 +66,22 @@ const isRefresh = ref(false)
 const autoRefresher =
   setInterval(() => {
     isRefresh.value = true
-    AxiosService.post(
-      '/visit/report',
+    VisitService.getVisits(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
         visitType: selectedVisitType.value?.id,
-        startDate: filterData.startDate,
-        endDate: filterData.endDate,
+        startDate: moment().startOf('day').format().slice(0, 16),
+        endDate: moment().endOf('day').format().slice(0, 16),
         page: 1,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useVisitStore().setAutoRefreshVisits(result?.data)
-        isRefresh.value = false
-      }).catch((err) => {
-        console.log("Error:", err);
       })
+    ).then((result) => {
+      total.value = result?.total
+      useVisitStore().setAutoRefreshVisits(result?.data)
+      isRefresh.value = false
+    }).catch((err) => {
+      console.log("Error:", err);
+    })
   }, 3000);
 
 onMounted(() => {
@@ -137,10 +127,17 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold flex items-center">
-          {{ $t('visitsReport') }}
+        <div class="flex items-center space-x-3">
+          <div class="bg-yellow-300 rounded-lg p-1.5 px-3">
+            {{ $t('dailyVisits') }}
+          </div>
+          <div>|</div>
+          <router-link to="/visits/report"
+            class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
+            {{ $t('visitsReport') }}
+          </router-link>
           <Spinners270RingIcon v-show="isRefresh" class="ml-3 w-7 h-7 text-gray-300" />
-        </p>
+        </div>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -151,7 +148,7 @@ const submitFilterData = () => {
               </span>
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
-              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              class="absolute bg-white shadow rounded-xl w-96 p-3 z-20 top-12 right-0 space-y-3">
               <div>
                 <label>{{ $t('customer') }}</label>
                 <SelectOptionCustomer />
@@ -159,21 +156,6 @@ const submitFilterData = () => {
               <div>
                 <label>{{ $t('visitType') }}</label>
                 <SelectOptionVisitType />
-              </div>
-              <div>
-                <label>{{ $t('visitTime') }}</label>
-                <div class="flex items-center space-x-1">
-                  <div class="relative">
-                    <input v-model="filterData.startDate" type="datetime-local"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
-                  </div>
-                  <div class="relative">
-                    <input v-model="filterData.endDate" type="datetime-local"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
-                  </div>
-                </div>
               </div>
               <div v-if="isLoading"
                 class="w-full bg-gray-600 py-3 select-none text-white rounded-lg flex items-center justify-center">

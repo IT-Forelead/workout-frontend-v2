@@ -1,18 +1,16 @@
 <script setup>
-import CustomerItem from '../components/Items/CustomerItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useCustomerStore } from '../store/customer.store'
-import { useModalStore } from '../store/modal.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { onMounted } from 'vue'
-import CustomerService from '../services/customer.service'
-import AxiosService from "../services/axios.service.js";
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionGender from '../components/Inputs/SelectOptionGender.vue'
+import CustomerItem from '../components/Items/CustomerItem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import CustomerService from '../services/customer.service'
+import { useCustomerStore } from '../store/customer.store'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
 
 const isLoading = ref(false)
 
@@ -32,8 +30,7 @@ const loadCustomers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/customer/report',
+    CustomerService.getCustomers(
       cleanObjectEmptyFields({
         firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
         lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
@@ -43,16 +40,14 @@ const loadCustomers = async ($state) => {
         endDate: filterData.endDate,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerStore().setCustomers(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useCustomerStore().setCustomers(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 

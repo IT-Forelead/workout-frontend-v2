@@ -3,6 +3,7 @@ import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { vMaska } from "maska"
+import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CustomerService from '../../services/customer.service'
 import { useCustomerStore } from '../../store/customer.store'
@@ -20,6 +21,10 @@ const { t } = useI18n()
 
 const timer = ref('02:00')
 const showResendSMS = ref(false)
+
+const selectedCustomer = computed(() => {
+  return useCustomerStore().selectedCustomer
+})
 
 const selectGender = computed(() => {
   return useDropdownStore().selectGenderOption
@@ -85,6 +90,7 @@ function startTimer() {
 }
 
 const clearForm = () => {
+  submitForm.id = ''
   submitForm.image = null
   submitForm.firstname = ''
   submitForm.lastname = ''
@@ -93,8 +99,21 @@ const clearForm = () => {
   submitForm.smsConfirmation = false
 }
 
+watch(
+  () => selectedCustomer.value,
+  (data) => {
+    if (data) {
+      submitForm.id = data?.id
+      submitForm.firstname = data?.firstname
+      submitForm.lastname = data?.lastname
+      submitForm.phone = data?.phone
+    }
+  }
+)
+
 const closeModal = () => {
-  useModalStore().closeAddCustomerModal()
+  useModalStore().closeEditCustomerModal()
+  useCustomerStore().setSelectedCustomer({})
   registerProcess.registerMode = true
   registerProcess.checkingMode = false
   registerProcess.congratulationMode = false
@@ -136,14 +155,15 @@ const sendActivationCode = () => {
     registerProcess.registerMode = false
     registerProcess.checkingMode = true
     showResendSMS.value = false
-  } else createCustomer()
+  } else editCustomer()
 }
 
 const isLoading = ref(false)
 
-const createCustomer = () => {
+const editCustomer = () => {
   isLoading.value = true
   const formData = new FormData()
+  formData.append('id', submitForm.id)
   formData.append('firstname', submitForm.firstname)
   formData.append('lastname', submitForm.lastname)
   formData.append('gender', selectGender.value?.id)
@@ -151,14 +171,14 @@ const createCustomer = () => {
   formData.append('phone', submitForm.phone.replace(/([() -])/g, ''))
   formData.append('smsConfirmation', submitForm.smsConfirmation)
   formData.append('code', submitForm.smsConfirmation ? submitForm.code : '7777')
-  CustomerService.createCustomer(formData)
+  CustomerService.editCustomer(formData)
     .then(() => {
       registerProcess.registerMode = false
       registerProcess.checkingMode = false
       registerProcess.congratulationMode = true
       clearInterval(interval)
       notify.success({
-        message: t('customerCreated'),
+        message: t('customerEdited'),
       })
       isLoading.value = false
       CustomerService.getCustomers({})
@@ -176,7 +196,7 @@ const createCustomer = () => {
     })
     .catch((err) => {
       notify.error({
-        message: t('errorCreatingCustomer'),
+        message: t('errorEditingCustomer'),
       })
       isLoading.value = false
     })
@@ -184,12 +204,12 @@ const createCustomer = () => {
 
 </script>
 <template>
-  <div v-if="useModalStore().isAddCustomerModalOpen"
+  <div v-if="useModalStore().isEditCustomerModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-4xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('addCustomer') }}</div>
+          <div class="text-xl font-medium">{{ $t('editCustomer') }}</div>
           <button @click="closeModal()"
             class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
@@ -285,7 +305,7 @@ const createCustomer = () => {
             </div>
           </div>
         </div>
-        <form @submit.prevent="createCustomer()" method="post" enctype="multipart/form-data">
+        <form @submit.prevent="editCustomer()" method="post" enctype="multipart/form-data">
           <!-- Step 1 -->
           <div v-if="registerProcess.registerMode" class="grid gap-5 grid-cols-2 p-5">
             <div class="flex flex-col col-span-2 mb-10">
@@ -326,7 +346,7 @@ const createCustomer = () => {
             </div>
             <div>
               <label>{{ $t('gender') }}</label>
-              <RadioGender :gender="'male'"/>
+              <RadioGender :gender="selectedCustomer?.gender" />
             </div>
           </div>
           <!-- Step 2 -->
@@ -392,7 +412,7 @@ const createCustomer = () => {
                 <span>{{ $t('saving') }}</span>
               </div>
             </button>
-            <button v-if="registerProcess.checkingMode" @click="createCustomer()"
+            <button v-if="registerProcess.checkingMode" @click="editCustomer()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('confirmation') }}
             </button>

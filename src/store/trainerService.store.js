@@ -16,6 +16,9 @@ export const useTrainerServiceStore = defineStore('trainerService', {
     setSelectedTrainerService(data) {
       this.selectedTrainerService = data
     },
+    clearTrainerServicesByUserId() {
+      this.trainerServicesByUserId = []
+    },
     clearStore() {
       this.trainerServices = []
       this.trainerServicesByUserId = []

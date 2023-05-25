@@ -2,47 +2,67 @@
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
 import { onMounted } from 'vue'
-import FunnelIcon from '../components/Icons/FunnelIcon.vue'
-import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
-import PaymentItem from '../components/Items/PaymentItem.vue'
-import { cleanObjectEmptyFields } from '../mixins/utils'
-import PaymentService from '../services/payment.service'
-import { useModalStore } from '../store/modal.store'
-import { usePaymentStore } from '../store/payment.store'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import VisitService from '../../services/visit.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
+import { useVisitStore } from '../../store/visit.store'
+import FunnelIcon from '../Icons/FunnelIcon.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SelectOptionVisitType from '../Inputs/SelectOptionVisitType.vue'
+import VisitItem from '../Items/VisitItem.vue'
 
 const isLoading = ref(false)
 
-const total = ref(1)
-const payments = computed(() => {
-  return usePaymentStore().payments
+const filterData = reactive({
+  customerId: '',
+  visitType: '',
+  startDate: '',
+  endDate: '',
 })
-const target = ref('.payments-wrapper')
+
+const total = ref(1)
+const visits = computed(() => {
+  return useVisitStore().visits
+})
+const target = ref('.customer-tariffs-wrapper')
 const distance = ref(0)
 
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
+
+const selectedVisitType = computed(() => {
+  return useDropdownStore().selectVisitTypeOption
+})
+
 let page = 0
-const loadPayments = async ($state) => {
+const loadVisits = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    PaymentService.getPayments(
+    VisitService.getVisits(
       cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
+        visitType: selectedVisitType.value?.id,
         startDate: filterData.startDate,
         endDate: filterData.endDate,
         page: page,
         limit: 30,
       })
     ).then((result) => {
-      total.value = result?.total
-      usePaymentStore().setPayments(result?.data)
-      $state.loaded()
-    }).catch(() => {
-      $state.error()
-    })
+        total.value = result?.total
+        useVisitStore().setVisits(result?.data)
+        $state.loaded()
+      }).catch(() => {
+        $state.error()
+      })
   } else $state.loaded()
 }
 
 onMounted(() => {
-  usePaymentStore().clearStore()
+  useVisitStore().clearStore()
 })
 
 const dropdown = ref(null)
@@ -53,23 +73,20 @@ onClickOutside(dropdown, () => {
   }
 })
 
-const filterData = reactive({
-  startDate: '',
-  endDate: '',
-})
-
 const submitFilterData = () => {
   isLoading.value = true
-  PaymentService.getPayments(
+  VisitService.getVisits(
     cleanObjectEmptyFields({
+      customerId: selectedCustomer.value?.id,
+      visitType: selectedVisitType.value?.id,
       startDate: filterData.startDate,
       endDate: filterData.endDate,
       page: 1,
       limit: 30,
     })
   ).then((res) => {
-    usePaymentStore().clearStore()
-    usePaymentStore().setPayments(res?.data)
+    useVisitStore().clearStore()
+    useVisitStore().setVisits(res?.data)
     isLoading.value = false
     if (useModalStore().isOpenFilterBy) {
       useModalStore().toggleFilterBy()
@@ -82,7 +99,16 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('paymentsReport') }}</p>
+        <div class="flex items-center space-x-3">
+          <router-link to="/visits"
+            class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
+            {{ $t('dailyVisits') }}
+          </router-link>
+          <div>|</div>
+          <div class="bg-yellow-300 rounded-lg p-1.5 px-3">
+            {{ $t('visitsReport') }}
+          </div>
+        </div>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
@@ -95,7 +121,15 @@ const submitFilterData = () => {
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
               <div>
-                <label>{{ $t('createdAt') }}</label>
+                <label>{{ $t('customer') }}</label>
+                <SelectOptionCustomer />
+              </div>
+              <div>
+                <label>{{ $t('visitType') }}</label>
+                <SelectOptionVisitType />
+              </div>
+              <div>
+                <label>{{ $t('visitTime') }}</label>
                 <div class="flex items-center space-x-1">
                   <div class="relative">
                     <input v-model="filterData.startDate" type="datetime-local"
@@ -121,29 +155,27 @@ const submitFilterData = () => {
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openAddPaymentModal()"
+          <div @click="useModalStore().openAddVisitModal()"
             class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
-            {{ $t('addPayment') }}
+            {{ $t('addVisit') }}
           </div>
         </div>
       </div>
-      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden payments-wrapper">
+      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
         <table class="min-w-max w-full table-auto">
           <thead class="sticky z-10 top-0 bg-white shadow">
             <tr class="text-gray-600 capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
+              <th class="py-2 px-4 text-left">{{ $t('visitTime') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('visitType') }}</th>
             </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light">
-            <PaymentItem :payments="payments" :distance="distance" :target="target" @infinite="loadPayments" />
+            <VisitItem :visits="visits" :distance="distance" :target="target" @infinite="loadVisits" />
           </tbody>
         </table>
-        <div v-if="payments?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+        <div v-if="visits?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
       </div>
     </div>
   </div>

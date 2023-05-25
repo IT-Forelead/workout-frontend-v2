@@ -6,7 +6,10 @@ import { onMounted, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
+import { useModalStore } from '../../store/modal.store'
+import { useUserStore } from '../../store/user.store'
 import UserIcon from '../Icons/UserIcon.vue'
+import TrashIcon from '../Icons/TrashIcon.vue'
 
 const { t } = useI18n()
 
@@ -36,6 +39,11 @@ const roleTranslate = (role) => {
   }
 }
 
+const openDeleteModal = (user) => {
+  useUserStore().setSelectedUser(user)
+  useModalStore().openDeleteUserModal()
+}
+
 onMounted(() => {
   payload.value = parseJwt()
 })
@@ -57,14 +65,15 @@ onMounted(() => {
       {{ moment(user?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <!-- <div class="flex item-center justify-center">
-        <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+      <div class="flex item-center justify-center">
+        <!-- <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
-        </div>
-        <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
+        </div> -->
+        <div v-if="!user?.role?.includes('super_manager')" @click="openDeleteModal(user)"
+          class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
           <TrashIcon class="w-6 h-6" />
         </div>
-      </div> -->
+      </div>
     </td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">

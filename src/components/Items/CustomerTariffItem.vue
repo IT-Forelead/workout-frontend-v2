@@ -9,6 +9,8 @@ import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { parseJwt } from '../../mixins/utils.js'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
+import CheckIcon from '../Icons/CheckCircleIcon.vue'
+import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
 import UserIcon from '../Icons/UserIcon.vue'
 
 const { t } = useI18n()
@@ -57,10 +59,6 @@ const paymentStatusColor = (status) => {
       return 'bg-teal-500 text-white'
   }
 }
-
-const checkStatus = (endDate) => moment().isBefore(endDate) ? t('active') : t('notActive')
-
-const statusColor = (endDate) => moment().isBefore(endDate) ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
 
 const durationDayTranslate = (n) => {
   switch (n) {
@@ -116,16 +114,22 @@ const monthlyVisitTranslate = (n) => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      <div class="flex items-center space-x-1">
-        <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
+      <div class="flex items-center space-x-2">
         <div>
-          {{ moment(tariff?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
+          <div class="flex items-center space-x-1">
+            <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
+            <div>{{ moment(tariff?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}</div>
+          </div>
+          <div class="flex items-center space-x-1">
+            <CalendarXIcon class="w-5 h-5 text-gray-500" />
+            <div>{{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}</div>
+          </div>
         </div>
-      </div>
-      <div class="flex items-center space-x-1">
-        <CalendarXIcon class="w-5 h-5 text-gray-500" />
-        <div>
-          {{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
+        <div v-if="moment().isBefore(tariff?.customerTariff?.expireAt)">
+          <CheckIcon class="w-5 h-5 text-green-700" />
+        </div>
+        <div v-else>
+          <WarningCircleIcon class="w-5 h-5 text-gray-300" />
         </div>
       </div>
     </td>
@@ -148,9 +152,7 @@ const monthlyVisitTranslate = (n) => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 px-3 inline-block w-28 text-sm rounded-full"
-        :class="statusColor((tariff?.customerTariff?.expireAt))">{{
-          checkStatus(tariff?.customerTariff?.expireAt) }}</span>
+      {{ tariff?.numberOfVisit + " / " + tariff?.service?.monthlyVisit }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
       <span class="p-1.5 inline-block w-28 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">

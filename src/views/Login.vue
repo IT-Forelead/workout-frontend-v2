@@ -28,7 +28,7 @@ const loginFormData = reactive({
 const togglePassword = () => (hidePassword.value = !hidePassword.value)
 
 const login = () => {
-  localStorage.removeItem('token')
+  localStorage.removeItem('session')
   if (!loginFormData.phone || !loginFormData.password) {
     notify.warning({
       message: t('phoneOrPasswordIncorrect'),
@@ -41,10 +41,10 @@ const login = () => {
     })
       .then((res) => {
         if (res) {
-          useAuthStore().setToken(res)
-          useAuthStore().setUser(decodeJwt(res))
+          useAuthStore().setToken(res?.accessToken)
+          useAuthStore().setUser(decodeJwt(res?.accessToken))
           isLoading.value = false
-          if (localStorage.getItem('token')) {
+          if (localStorage.getItem('session')) {
             setTimeout(() => {
               router.push('/dashboard')
             }, 200)

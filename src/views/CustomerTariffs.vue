@@ -5,10 +5,9 @@ import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionPaymentStatus from '../components/Inputs/SelectOptionPaymentStatus.vue'
+import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
-import authHeader from '../mixins/auth-header'
 import { cleanObjectEmptyFields } from '../mixins/utils'
-import AxiosService from '../services/axios.service'
 import CustomerTariffService from '../services/customerTariff.service'
 import { useCustomerTariffStore } from '../store/customerTariff.store'
 import { useDropdownStore } from '../store/dropdown.store'
@@ -23,6 +22,10 @@ const customerTariffs = computed(() => {
 const target = ref('.customer-tariffs-wrapper')
 const distance = ref(0)
 
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
+
 const selectPaymentStatus = computed(() => {
   return useDropdownStore().selectPaymentStatusOption
 })
@@ -32,9 +35,9 @@ const loadCustomerTariffs = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/tariff/report',
+    CustomerTariffService.getCustomerTariffs(
       cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
         paymentStatus: selectPaymentStatus.value?.id,
         startDate: filterData.startDate,
         endDate: filterData.endDate,
@@ -42,16 +45,14 @@ const loadCustomerTariffs = async ($state) => {
         expireAtTo: filterData.expireAtTo,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerTariffStore().setCustomerTariffs(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useCustomerTariffStore().setCustomerTariffs(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
@@ -81,6 +82,7 @@ const submitFilterData = () => {
   isLoading.value = true
   CustomerTariffService.getCustomerTariffs(
     cleanObjectEmptyFields({
+      customerId: selectedCustomer.value?.id,
       paymentStatus: selectPaymentStatus.value?.id,
       startDate: filterData.startDate,
       endDate: filterData.endDate,
@@ -116,6 +118,10 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              <div>
+                <label>{{ $t('customer') }}</label>
+                <SelectOptionCustomer />
+              </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />
@@ -177,7 +183,7 @@ const submitFilterData = () => {
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
-              <th class="py-2 px-4 text-center">{{ $t('status') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('monthlyVisit') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('paymentStatus') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>

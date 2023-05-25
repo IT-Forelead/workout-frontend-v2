@@ -3,15 +3,22 @@ import { defineStore } from 'pinia'
 export const useModalStore = defineStore('modal', {
   state: () => ({
     isAddUserModalOpen: false,
+    isDeleteUserModalOpen: false,
     isAddCustomerModalOpen: false,
+    isEditCustomerModalOpen: false,
+    isDeleteCustomerModalOpen: false,
     isAddServiceModalOpen: false,
+    isEditServiceModalOpen: false,
+    isDeleteServiceModalOpen: false,
     isAddTrainerServiceModalOpen: false,
+    isEditTrainerServiceModalOpen: false,
+    isDeleteTrainerServiceModalOpen: false,
     isAddCustomerTariffModalOpen: false,
     isAddCustomerTrainerTariffModalOpen: false,
     isAddVisitModalOpen: false,
     isAddQrCodeModalOpen: false,
     isAddPaymentModalOpen: false,
-    isOpenDeleteAlertModal: false,
+    isAddSoldProdoctModalOpen: false,
     isOpenFilterBy: false,
     isOpenNotification: false,
     isOpenProfileDropDown: false,
@@ -24,11 +31,29 @@ export const useModalStore = defineStore('modal', {
     closeAddUserModal() {
       this.isAddUserModalOpen = false
     },
+    openDeleteUserModal() {
+      this.isDeleteUserModalOpen = true
+    },
+    closeDeleteUserModal() {
+      this.isDeleteUserModalOpen = false
+    },
     openAddCustomerModal() {
       this.isAddCustomerModalOpen = true
     },
     closeAddCustomerModal() {
       this.isAddCustomerModalOpen = false
+    },
+    openEditCustomerModal() {
+      this.isEditCustomerModalOpen = true
+    },
+    closeEditCustomerModal() {
+      this.isEditCustomerModalOpen = false
+    },
+    openDeleteCustomerModal() {
+      this.isDeleteCustomerModalOpen = true
+    },
+    closeDeleteCustomerModal() {
+      this.isDeleteCustomerModalOpen = false
     },
     openAddServiceModal() {
       this.isAddServiceModalOpen = true
@@ -36,11 +61,35 @@ export const useModalStore = defineStore('modal', {
     closeAddServiceModal() {
       this.isAddServiceModalOpen = false
     },
+    openEditServiceModal() {
+      this.isEditServiceModalOpen = true
+    },
+    closeEditServiceModal() {
+      this.isEditServiceModalOpen = false
+    },
+    openDeleteServiceModal() {
+      this.isDeleteServiceModalOpen = true
+    },
+    closeDeleteServiceModal() {
+      this.isDeleteServiceModalOpen = false
+    },
     openAddTrainerServiceModal() {
       this.isAddTrainerServiceModalOpen = true
     },
     closeAddTrainerServiceModal() {
       this.isAddTrainerServiceModalOpen = false
+    },
+    openEditTrainerServiceModal() {
+      this.isEditTrainerServiceModalOpen = true
+    },
+    closeEditTrainerServiceModal() {
+      this.isEditTrainerServiceModalOpen = false
+    },
+    openDeleteTrainerServiceModal() {
+      this.isDeleteTrainerServiceModalOpen = true
+    },
+    closeDeleteTrainerServiceModal() {
+      this.isDeleteTrainerServiceModalOpen = false
     },
     openAddCustomerTariffModal() {
       this.isAddCustomerTariffModalOpen = true
@@ -72,11 +121,11 @@ export const useModalStore = defineStore('modal', {
     closeAddPaymentModal() {
       this.isAddPaymentModalOpen = false
     },
-    openDeleteAlertModal() {
-      this.isOpenDeleteAlertModal = true
+    openAddSoldProdoctModal() {
+      this.isAddSoldProdoctModalOpen = true
     },
-    closeDeleteAlertModal() {
-      this.isOpenDeleteAlertModal = false
+    closeAddSoldProdoctModal() {
+      this.isAddSoldProdoctModalOpen = false
     },
     openShowCustomerInformationModal() {
       this.isShowCustomerInformationModal = true

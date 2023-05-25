@@ -4,6 +4,8 @@ import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { useI18n } from 'vue-i18n'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
+import { useServiceStore } from '../../store/service.store'
+import { useModalStore } from '../../store/modal.store'
 
 const { t } = useI18n()
 
@@ -47,6 +49,16 @@ const monthlyVisitTranslate = (n) => {
       return t('fifteenDays')
   }
 }
+
+const openEditModal = (service) => {
+  useServiceStore().setSelectedService(service)
+  useModalStore().openEditServiceModal()
+}
+
+const openDeleteModal = (service) => {
+  useServiceStore().setSelectedService(service)
+  useModalStore().openDeleteServiceModal()
+}
 </script>
 <template>
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(service, idx) in services"
@@ -60,14 +72,15 @@ const monthlyVisitTranslate = (n) => {
     <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForMale) }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForFemale) }}</td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <!-- <div class="flex item-center justify-center">
-        <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+      <div class="flex item-center justify-center">
+        <div @click="openEditModal(service)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
         </div>
-        <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
+        <div @click="openDeleteModal(service)"
+          class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
           <TrashIcon class="w-6 h-6" />
         </div>
-      </div> -->
+      </div>
     </td>
   </tr>
 </template>

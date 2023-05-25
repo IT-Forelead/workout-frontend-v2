@@ -1,53 +1,46 @@
 <script setup>
-import { onMounted } from 'vue'
-import XIcon from '../Icons/XIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
+import { computed, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import SearchIcon from '../Icons/SearchIcon.vue'
-import authHeader from '../../mixins/auth-header'
-import { useModalStore } from '../../store/modal.store'
-import { computed, ref, reactive } from '@vue/reactivity'
-import AxiosService from "../../services/axios.service.js"
+import { onMounted } from 'vue'
+import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
 import { cleanObjectEmptyFields } from '../../mixins/utils'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
 import CustomerService from '../../services/customer.service'
 import { useCustomerStore } from '../../store/customer.store'
 import { useDropdownStore } from '../../store/dropdown.store'
-import SelectOptionCustomerItem from '../../components/Items/SelectOptionCustomerItem.vue'
+import { useModalStore } from '../../store/modal.store'
+import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
+import SearchIcon from '../Icons/SearchIcon.vue'
+import UserIcon from '../Icons/UserIcon.vue'
+import XIcon from '../Icons/XIcon.vue'
 
-let page = 0
-const total = ref(1)
-const distance = ref(20)
-const dropdown = ref(null)
 const isLoading = ref(false)
-const searchCustomer = ref('')
-const target = ref('.customers-wrapper')
+const dropdown = ref(null)
 
+const total = ref(1)
 const customers = computed(() => {
   return useCustomerStore().customers
 })
+const target = ref('.customers-wrapper')
+const distance = ref(20)
 
+let page = 0
 const loadCustomers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/customer/report',
+    CustomerService.getCustomers(
       cleanObjectEmptyFields({
-        firstName: searchCustomer.value != '' ? `%${searchCustomer.value}%` : '',
-        // lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
-        page,
+        firstName: searchCustomer.value ? `%${searchCustomer.value}%` : '',
+        page: page,
         limit: 8,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useCustomerStore().setCustomers(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useCustomerStore().setCustomers(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 
@@ -62,6 +55,8 @@ onClickOutside(dropdown, () => {
 const clearSelectedOptionData = () => {
   useDropdownStore().setSelectCustomerOption('')
 }
+
+const searchCustomer = ref('')
 
 const submitFilterData = () => {
   isLoading.value = true
@@ -87,7 +82,6 @@ const whenPressEnter = (e) => {
   }
 }
 </script>
-
 <template>
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
@@ -126,3 +120,4 @@ const whenPressEnter = (e) => {
     </label>
   </div>
 </template>
+<style scoped></style>

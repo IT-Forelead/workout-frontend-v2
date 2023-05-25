@@ -28,13 +28,13 @@ const navigationGuard = (access) => {
 }
 
 onMounted(() => {
-  useAuthStore().setUser(decodeJwt(localStorage.getItem('token')))
+  useAuthStore().setUser(decodeJwt(JSON.parse(localStorage.getItem('session'))?.accessToken))
   payload.value = parseJwt()
 })
 </script>
 
 <template>
-  <div class="fixed block h-screen bg-gray-900 w-80 text-gray-400">
+  <div class="fixed block h-screen bg-gray-900 w-80 text-gray-400 z-50">
     <div class="bg-gray-600 h-20 flex items-center justify-center">
       <img src="/images/alpha-sport-urgench-logo.png" class="h-14 w-auto" alt="#" />
     </div>
@@ -76,6 +76,14 @@ onMounted(() => {
           </div>
         </router-link>
       </div>
+      <router-link to="/sales" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
+        class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
+        <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
+        <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
+          <MoneyIcon class="w-6 h-6" />
+        </div>
+        <div>{{ $t('sales') }}</div>
+      </router-link>
       <router-link to="/payments" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
@@ -13,6 +13,7 @@ import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
 import SelectOptionMonthlyVisit from '../Inputs/SelectOptionMonthlyVisit.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -54,6 +55,8 @@ const closeModal = () => {
   clearForm()
 }
 
+const isLoading = ref(false)
+
 const submitTrainerServiceData = () => {
   if (!selectTrainer?.value?.id) {
     notify.warning({
@@ -80,6 +83,7 @@ const submitTrainerServiceData = () => {
       message: t('plsEnterPrice'),
     })
   } else {
+    isLoading.value = true
     TrainerServiceService.createTrainerService(
       cleanObjectEmptyFields({
         userId: selectTrainer?.value?.id,
@@ -94,7 +98,8 @@ const submitTrainerServiceData = () => {
         notify.success({
           message: t('trainerServiceCreated'),
         })
-        TrainerServiceService.getAllTrainerServices()
+        isLoading.value = false
+        TrainerServiceService.getTrainerServices({})
           .then((res) => {
             useTrainerServiceStore().clearStore()
             setTimeout(() => {
@@ -112,6 +117,7 @@ const submitTrainerServiceData = () => {
         notify.error({
           message: t('errorCreatingTrainerService'),
         })
+        isLoading.value = false
       })
   }
 }
@@ -167,9 +173,16 @@ const submitTrainerServiceData = () => {
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
             {{ $t('reset') }}
           </button>
-          <button @click="submitTrainerServiceData()"
+          <button v-if="!isLoading" @click="submitTrainerServiceData()"
             class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
             {{ $t('save') }}
+          </button>
+          <button v-else class="w-36 p-2 rounded-md text-white text-base bg-blue-500 select-none">
+            <div class="flex items-center justify-center">
+              <Spinners270RingIcon
+                class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
+              <span>{{ $t('saving') }}</span>
+            </div>
           </button>
         </div>
       </div>

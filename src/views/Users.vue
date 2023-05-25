@@ -1,18 +1,16 @@
 <script setup>
-import UserItem from '../components/Items/UserItem.vue'
-import authHeader from '../mixins/auth-header'
-import { computed, ref, reactive } from '@vue/reactivity'
-import { useUserStore } from '../store/user.store'
-import { useModalStore } from '../store/modal.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import { onMounted } from 'vue'
-import UserService from '../services/user.service'
-import AxiosService from "../services/axios.service.js";
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
-import { cleanObjectEmptyFields } from '../mixins/utils'
+import { onMounted } from 'vue'
 import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import SelectOptionRole from '../components/Inputs/SelectOptionRole.vue'
+import UserItem from '../components/Items/UserItem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import UserService from '../services/user.service'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
+import { useUserStore } from '../store/user.store'
 
 const isLoading = ref(false)
 
@@ -32,8 +30,7 @@ const loadUsers = async ($state) => {
   page++
   let additional = total.value % 30 === 0 ? 0 : 1
   if (total.value !== 0 && total.value / 30 + additional >= page) {
-    AxiosService.post(
-      '/user/report',
+    UserService.getUsers(
       cleanObjectEmptyFields({
         firstName: filterData.firstName ? `%${filterData.firstName}%` : '',
         lastName: filterData.lastName ? `%${filterData.lastName}%` : '',
@@ -43,16 +40,14 @@ const loadUsers = async ($state) => {
         endDate: filterData.endDate,
         page: page,
         limit: 30,
-      }),
-      { headers: authHeader() }
-    )
-      .then((result) => {
-        total.value = result?.total
-        useUserStore().setUsers(result?.data)
-        $state.loaded()
-      }).catch(() => {
-        $state.error()
       })
+    ).then((result) => {
+      total.value = result?.total
+      useUserStore().setUsers(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
   } else $state.loaded()
 }
 

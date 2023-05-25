@@ -79,8 +79,19 @@ const routes = [
   {
     path: '/visits',
     name: 'Visits',
-    component: () => import('../views/Visits.vue'),
     meta: { layout: 'dashboard' },
+    children: [
+      {
+        path: '',
+        name: 'Daily visits',
+        component: () => import('../components/VisitsTabs/DailyVisits.vue'),
+      },
+      {
+        path: 'report',
+        name: 'Visits report',
+        component: () => import('../components/VisitsTabs/Visits.vue'),
+      },
+    ],
     beforeEnter: navigationGuards(['super_manager', 'tech_admin', 'admin']),
   },
   {
@@ -89,6 +100,24 @@ const routes = [
     component: () => import('../views/SmsMessages.vue'),
     meta: { layout: 'dashboard' },
     beforeEnter: navigationGuards(['super_manager']),
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    meta: { layout: 'dashboard' },
+    children: [
+      {
+        path: '',
+        name: 'Daily sales',
+        component: () => import('../components/SalesTabs/DailySales.vue'),
+      },
+      {
+        path: 'report',
+        name: 'Sales report',
+        component: () => import('../components/SalesTabs/SalesReport.vue'),
+      },
+    ],
+    beforeEnter: navigationGuards(['cashier', 'super_manager', 'tech_admin']),
   },
   {
     path: '/notfound',
@@ -110,7 +139,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = ['/', '/forgot-password', '/reset-password']
   const authNotRequired = !publicPages.includes(to.path)
-  const notLoggedIn = localStorage.getItem('token')
+  const notLoggedIn = localStorage.getItem('session')
   if ((authNotRequired && notLoggedIn) || publicPages.includes(`/${to.path.split('/')[1]}`)) {
     next()
   } else {
@@ -120,9 +149,8 @@ router.beforeEach((to, from, next) => {
 
 function navigationGuards(access) {
   return () => {
-    if (localStorage.getItem('token') && !access.includes(parseJwt()?.role)) {
+    if (localStorage.getItem('session') && !access.includes(parseJwt()?.role)) {
       router.push('/notfound')
-      console.log('Oops!')
     }
     return access.includes(parseJwt()?.role)
   }
