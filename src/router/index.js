@@ -63,6 +63,13 @@ const routes = [
     beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
   },
   {
+    path: '/customer',
+    name: 'Customer',
+    component: () => import('../views/Customer.vue'),
+    meta: { layout: 'dashboard' },
+    beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
+  },
+  {
     path: '/payments',
     name: 'Payments',
     component: () => import('../views/Payments.vue'),

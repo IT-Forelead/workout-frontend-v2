@@ -85,10 +85,9 @@ const monthlyVisitTranslate = (n) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"
-    :key="idx">
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs" :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <div v-if="tariff?.customer?.image">
           <img :src="URL + tariff?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
@@ -159,7 +158,7 @@ const monthlyVisitTranslate = (n) => {
         {{ paymentStatusTranslate(tariff?.customerTariff?.paymentStatus) }}
       </span>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-center">
       <!-- <div class="flex item-center justify-center">
         <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />

@@ -9,6 +9,7 @@ import { parseJwt } from '../../mixins/utils.js'
 import { useModalStore } from '../../store/modal.store'
 import UserIcon from '../Icons/UserIcon.vue'
 import QrCodeIcon from '../Icons/QrCodeIcon.vue'
+import EyeIcon from '../Icons/EyeIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
 import { useCustomerStore } from '../../store/customer.store'
@@ -54,6 +55,11 @@ const openDeleteModal = (customer) => {
   useModalStore().openDeleteCustomerModal()
 }
 
+const oprnCustomerPage = (customer) => {
+  useCustomerStore().setSelectedCustomer(customer)
+  router.push('/customer')
+}
+
 onMounted(() => {
   payload.value = parseJwt()
 })
@@ -83,6 +89,9 @@ onMounted(() => {
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
       <div class="flex item-center justify-center">
+        <div @click="oprnCustomerPage(customer)" class="w-4 mr-3 text-blue-500 hover:text-purple-500 transform hover:scale-110 cursor-pointer">
+          <EyeIcon class="w-6 h-6" />
+        </div>
         <div @click="openAddQrCodeModal(customer)" class="w-4 mr-3 transform hover:scale-110 cursor-pointer" :class="customer?.barcode ? 'text-blue-500 hover:text-purple-500' : 'text-red-500 hover:text-red-600'">
           <QrCodeIcon class="w-6 h-6" />
         </div>

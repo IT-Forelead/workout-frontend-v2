@@ -46,7 +46,7 @@ const visitTypeColor = (type) => {
 <template>
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(visit, idx) in visits" :key="idx">
     <td v-motion-fade class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-fade class="py-2 px-4 text-left">
+    <td v-motion-fade v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <div v-if="visit?.customer?.image">
           <img :src="URL + visit?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
