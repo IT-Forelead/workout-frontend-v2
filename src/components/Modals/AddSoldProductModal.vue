@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import SoldProductService from '../../services/soldProduct.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 
@@ -18,8 +18,8 @@ const selectedCustomer = computed(() => {
 
 const clearForm = () => {
   useDropdownStore().setSelectCustomerOption('')
-  submitForm.productType = ''
-  submitForm.quantity = ''
+  submitForm.productType = 'water'
+  submitForm.quantity = 1
 }
 
 const closeModal = () => {
@@ -30,9 +30,13 @@ const closeModal = () => {
 const isLoading = ref(false)
 
 const submitForm = reactive({
-  productType: '',
-  quantity: '',
+  productType: 'water',
+  quantity: 1,
 })
+
+const optionClicked = (data) => {
+  submitForm.quantity = data
+}
 
 const submitData = () => {
   if (!selectedCustomer.value?.id) {
@@ -87,21 +91,22 @@ const submitData = () => {
             <label>{{ $t('customer') }}</label>
             <SelectOptionCustomer />
           </div>
-          <div>
+          <div class="select-none">
             <label>{{ $t('productType') }}</label>
-            <select v-model="submitForm.productType" class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
-              <option value="">{{ $t('select') }}</option>
-              <option value="water">{{ $t('water') }}</option>
-            </select>
-          </div>
-          <div>
-            <label>{{ $t('quantity') }}</label>
-            <select v-model="submitForm.quantity" class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
-              <option value="">{{ $t('select') }}</option>
-              <option value="0.5">0.5L</option>
-              <option value="1.0">1L</option>
-              <option value="1.5">1.5L</option>
-            </select>
+            <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+              <input id="toggle-05" @click="optionClicked('0.5')" class="toggle toggle-left" name="toggle" value="false" type="radio" :checked="submitForm.quantity == 0.5" />
+              <label for="toggle-05" class="relative flex items-center justify-center py-2">
+                <img class="w-12 h-12" src="/images/0.5l.png" alt="#">
+              </label>
+              <input id="toggle-1" @click="optionClicked('1.0')" class="toggle toggle-right" name="toggle" value="true" type="radio" :checked="submitForm.quantity == 1" />
+              <label for="toggle-1" class="relative flex items-center justify-center py-2">
+                <img class="w-12 h-12" src="/images/1l.png" alt="#">
+              </label>
+              <input id="toggle-15" @click="optionClicked('1.5')" class="toggle toggle-right" name="toggle" value="true" type="radio" :checked="submitForm.quantity == 1.5" />
+              <label for="toggle-15" class="relative flex items-center justify-center py-2">
+                <img class="w-12 h-12" src="/images/1.5l.png" alt="#">
+              </label>
+            </div>
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
@@ -125,3 +130,47 @@ const submitData = () => {
     </div>
   </div>
 </template>
+<style scoped>
+input[type='radio'].toggle {
+  @apply hidden;
+}
+
+input[type='radio'].toggle+label {
+  @apply cursor-pointer;
+  @apply text-gray-900;
+  @apply w-1/2;
+}
+
+input[type='radio'].toggle.toggle-left+label {
+  @apply border-r-0;
+}
+
+input[type='radio'].toggle.toggle-left+label:after {
+  @apply left-full;
+}
+
+input[type='radio'].toggle.toggle-right+label {
+  @apply -ml-1;
+}
+
+input[type='radio'].toggle.toggle-right+label:after {
+  @apply -left-full;
+}
+
+input[type='radio'].toggle:checked+label {
+  @apply cursor-default;
+  @apply text-blue-500;
+  @apply bg-white;
+  @apply border-4;
+  @apply border-blue-200;
+  @apply rounded-lg;
+}
+
+input[type='radio'].toggle:checked+label>span {
+  @apply inline-block;
+}
+
+input[type='radio'].toggle:checked+label:after {
+  @apply left-0;
+}
+</style>
