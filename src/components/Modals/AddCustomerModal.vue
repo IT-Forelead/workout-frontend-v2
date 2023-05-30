@@ -17,24 +17,19 @@ import RadioGender from '../Inputs/RadioGender.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
-
 const timer = ref('02:00')
 const showResendSMS = ref(false)
-
 const selectGender = computed(() => {
   return useDropdownStore().selectGenderOption
 })
-
 const handleOnComplete = (code) => {
   submitForm.code = code
 }
-
 const registerProcess = reactive({
   registerMode: true,
   checkingMode: false,
   congratulationMode: false,
 })
-
 const submitForm = reactive({
   image: null,
   firstname: '',
@@ -43,9 +38,7 @@ const submitForm = reactive({
   code: '',
   smsConfirmation: false,
 })
-
 const selectedImage = ref('')
-
 function getImage(e) {
   if (e.target.files[0].type.includes('image')) {
     submitForm.image = e.target.files[0]
@@ -56,9 +49,7 @@ function getImage(e) {
     })
   }
 }
-
 var interval
-
 function startTimer() {
   clearInterval(interval)
   interval = setInterval(function () {
@@ -83,7 +74,6 @@ function startTimer() {
     }
   }, 1000)
 }
-
 const clearForm = () => {
   submitForm.image = null
   submitForm.firstname = ''
@@ -92,7 +82,6 @@ const clearForm = () => {
   submitForm.code = ''
   submitForm.smsConfirmation = false
 }
-
 const closeModal = () => {
   useModalStore().closeAddCustomerModal()
   registerProcess.registerMode = true
@@ -100,7 +89,6 @@ const closeModal = () => {
   registerProcess.congratulationMode = false
   clearForm()
 }
-
 const sendActivationCode = () => {
   if (!submitForm.firstname) {
     notify.warning({
@@ -138,9 +126,7 @@ const sendActivationCode = () => {
     showResendSMS.value = false
   } else createCustomer()
 }
-
 const isLoading = ref(false)
-
 const createCustomer = () => {
   isLoading.value = true
   const formData = new FormData()
@@ -181,7 +167,10 @@ const createCustomer = () => {
       isLoading.value = false
     })
 }
-
+const Skip = ()=>{
+  submitForm.smsConfirmation = false
+  createCustomer()
+}
 </script>
 <template>
   <div v-if="useModalStore().isAddCustomerModalOpen"
@@ -391,6 +380,11 @@ const createCustomer = () => {
                   class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
                 <span>{{ $t('saving') }}</span>
               </div>
+            </button>
+            <!--Skip button-->
+            <button v-if='registerProcess.checkingMode' @click='Skip'
+                    class='w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800'>
+              {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
