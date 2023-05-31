@@ -167,6 +167,7 @@ const submitFilterData = () => {
             <tr class="text-gray-600 capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('monthlyVisit') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('visitTime') }}</th>
               <th class="py-2 px-4 text-center">{{ $t('visitType') }}</th>
             </tr>
