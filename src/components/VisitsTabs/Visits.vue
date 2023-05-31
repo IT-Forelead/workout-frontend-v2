@@ -26,7 +26,7 @@ const total = ref(1)
 const visits = computed(() => {
   return useVisitStore().visits
 })
-const target = ref('.customer-tariffs-wrapper')
+const target = ref('.visits-wrapper')
 const distance = ref(0)
 
 const selectedCustomer = computed(() => {
@@ -161,7 +161,7 @@ const submitFilterData = () => {
           </div>
         </div>
       </div>
-      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
+      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden visits-wrapper">
         <table class="min-w-max w-full table-auto">
           <thead class="sticky z-10 top-0 bg-white shadow">
             <tr class="text-gray-600 capitalize text-lg leading-normal">
