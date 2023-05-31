@@ -25,6 +25,13 @@ const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
 }
 
+const productTypeTranslate = (type) => {
+  switch (type) {
+    case 'water':
+      return t('water')
+  }
+}
+
 onMounted(() => {
   payload.value = parseJwt()
 })
@@ -52,10 +59,10 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      {{ moment(soldProduct?.createdAt).format('DD/MM/YYYY H:mm') }}
+      {{ productTypeTranslate(soldProduct?.product?.productType) + ' ' + soldProduct?.product?.quantity + 'L' }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      {{ moment(soldProduct?.payment?.createdAt).format('DD/MM/YYYY H:mm') }}
+      {{ moment(soldProduct?.product?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">

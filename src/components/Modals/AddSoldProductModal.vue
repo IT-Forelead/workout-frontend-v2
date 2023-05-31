@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import SoldProductService from '../../services/soldProduct.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
+import { useSoldProductStore } from '../../store/soldProduct.store'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
@@ -63,6 +64,11 @@ const submitData = () => {
           message: t('soldProductCreated'),
         })
         isLoading.value = false
+        SoldProductService.getSales({})
+          .then((res) => {
+            useSoldProductStore().clearStore()
+            useSoldProductStore().setSoldProducts(res?.data)
+          })
         closeModal()
       })
       .catch((err) => {
@@ -93,16 +99,20 @@ const submitData = () => {
           </div>
           <div class="select-none">
             <label>{{ $t('productType') }}</label>
-            <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
-              <input id="toggle-05" @click="optionClicked('0.5')" class="toggle toggle-left" name="toggle" value="false" type="radio" :checked="submitForm.quantity == 0.5" />
+            <div
+              class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+              <input id="toggle-05" @click="optionClicked('0.5')" class="toggle toggle-left" name="toggle" value="false"
+                type="radio" :checked="submitForm.quantity == 0.5" />
               <label for="toggle-05" class="relative flex items-center justify-center py-2">
                 <img class="w-12 h-12" src="/images/0.5l.png" alt="#">
               </label>
-              <input id="toggle-1" @click="optionClicked('1.0')" class="toggle toggle-right" name="toggle" value="true" type="radio" :checked="submitForm.quantity == 1" />
+              <input id="toggle-1" @click="optionClicked('1.0')" class="toggle toggle-right" name="toggle" value="true"
+                type="radio" :checked="submitForm.quantity == 1" />
               <label for="toggle-1" class="relative flex items-center justify-center py-2">
                 <img class="w-12 h-12" src="/images/1l.png" alt="#">
               </label>
-              <input id="toggle-15" @click="optionClicked('1.5')" class="toggle toggle-right" name="toggle" value="true" type="radio" :checked="submitForm.quantity == 1.5" />
+              <input id="toggle-15" @click="optionClicked('1.5')" class="toggle toggle-right" name="toggle" value="true"
+                type="radio" :checked="submitForm.quantity == 1.5" />
               <label for="toggle-15" class="relative flex items-center justify-center py-2">
                 <img class="w-12 h-12" src="/images/1.5l.png" alt="#">
               </label>

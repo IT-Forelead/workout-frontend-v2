@@ -171,7 +171,6 @@ onUnmounted(() => {
                             <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
-                            <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
