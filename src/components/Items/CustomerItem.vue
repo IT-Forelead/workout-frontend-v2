@@ -12,7 +12,9 @@ import QrCodeIcon from '../Icons/QrCodeIcon.vue'
 import EyeIcon from '../Icons/EyeIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 import TrashIcon from '../Icons/TrashIcon.vue'
+import MoneyIcon from '../Icons/MoneyIcon.vue'
 import { useCustomerStore } from '../../store/customer.store'
+import { useDropdownStore } from '../../store/dropdown.store.js'
 
 const { t } = useI18n()
 
@@ -54,6 +56,10 @@ const openDeleteModal = (customer) => {
   useCustomerStore().setSelectedCustomer(customer)
   useModalStore().openDeleteCustomerModal()
 }
+const AddTariffWithPaymentModall = (customer) =>{
+  useDropdownStore().setSelectCustomerOption(customer)
+  useModalStore().openAddTariffWithPaymentModal()
+}
 
 const oprnCustomerPage = (customer) => {
   useCustomerStore().setSelectedCustomer(customer)
@@ -94,6 +100,9 @@ onMounted(() => {
         </div>
         <div @click="openAddQrCodeModal(customer)" class="w-4 mr-3 transform hover:scale-110 cursor-pointer" :class="customer?.barcode ? 'text-blue-500 hover:text-purple-500' : 'text-red-500 hover:text-red-600'">
           <QrCodeIcon class="w-6 h-6" />
+        </div>
+        <div @click="AddTariffWithPaymentModall(customer)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+          <MoneyIcon class="w-6 h-6" />
         </div>
         <div @click="openEditModal(customer)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
