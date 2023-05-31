@@ -182,6 +182,11 @@ const createCustomer = () => {
     })
 }
 
+const skipConfirmation = () => {
+  submitForm.smsConfirmation = false
+  createCustomer()
+}
+
 </script>
 <template>
   <div v-if="useModalStore().isAddCustomerModalOpen"
@@ -391,6 +396,10 @@ const createCustomer = () => {
                   class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
                 <span>{{ $t('saving') }}</span>
               </div>
+            </button>
+            <button v-if='registerProcess.checkingMode' @click="skipConfirmation"
+                    class='w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800'>
+              {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
