@@ -182,7 +182,7 @@ const createCustomer = () => {
     })
 }
 
-const Skip = ()=>{
+const skipConfirmation = ()=>{
   submitForm.smsConfirmation = false
   createCustomer()
 }
@@ -396,7 +396,7 @@ const Skip = ()=>{
                 <span>{{ $t('saving') }}</span>
               </div>
             </button>
-            <button v-if='registerProcess.checkingMode' @click='Skip'
+            <button v-if='registerProcess.checkingMode' @click="skipConfirmation"
                     class='w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800'>
               {{ $t('skip') }}
             </button>
