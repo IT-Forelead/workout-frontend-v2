@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import moment from 'moment'
 import { onMounted } from 'vue'
 import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
@@ -40,8 +41,8 @@ const loadSales = async ($state) => {
         SoldProductService.getSales(
             cleanObjectEmptyFields({
                 customerId: selectedCustomer.value?.id,
-                startDate: filterData.startDate,
-                endDate: filterData.endDate,
+                startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+                endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
                 page: page,
                 limit: 30,
             })
@@ -69,8 +70,8 @@ const submitFilterData = () => {
     SoldProductService.getSales(
         cleanObjectEmptyFields({
             customerId: selectedCustomer.value?.id,
-            startDate: filterData.startDate,
-            endDate: filterData.endDate,
+            startDate: moment(filterData.startDate).startOf('day').format().slice(0, 16),
+            endDate: moment(filterData.endDate).endOf('day').format().slice(0, 16),
             page: 1,
             limit: 30,
         })
@@ -121,14 +122,14 @@ onMounted(() => {
                                 <label>{{ $t('createdAt') }}</label>
                                 <div class="flex items-center space-x-1">
                                     <div class="relative">
-                                        <input type="datetime-local"
+                                        <input type="date" v-model="filterData.startDate"
                                             class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('from') }}</div>
                                     </div>
                                     <div class="relative">
-                                        <input type="datetime-local"
-                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                                        <input type="date" v-model="filterData.endDate"
+                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('to') }}</div>
                                     </div>
