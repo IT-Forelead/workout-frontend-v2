@@ -326,7 +326,7 @@ const createCustomer = () => {
             </div>
             <div>
               <label>{{ $t('gender') }}</label>
-              <RadioGender :gender="'male'"/>
+              <RadioGender :gender="'male'" />
             </div>
           </div>
           <!-- Step 2 -->
@@ -392,10 +392,10 @@ const createCustomer = () => {
                 <span>{{ $t('saving') }}</span>
               </div>
             </button>
-            <button v-if="registerProcess.checkingMode" @click="createCustomer()"
+            <!-- <button v-if="registerProcess.checkingMode" @click="createCustomer()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('confirmation') }}
-            </button>
+            </button> -->
             <button v-if="registerProcess.congratulationMode" @click="closeModal()"
               class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('finish') }}
