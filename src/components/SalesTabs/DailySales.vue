@@ -1,12 +1,61 @@
 <script setup>
-import { ref } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
+import { onMounted, onUnmounted } from 'vue'
+import moment from 'moment'
 import { onClickOutside } from '@vueuse/core'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
 import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
 import { useModalStore } from '../../store/modal.store'
+import { useSoldProductStore } from '../../store/soldProduct.store'
+import { useDropdownStore } from '../../store/dropdown.store'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SoldProductService from '../../services/soldProduct.service'
+import SaleItem from '../Items/SaleItem.vue'
 
 const isLoading = ref(false)
+
+const selectedCustomer = computed(() => {
+    return useDropdownStore().selectCustomerOption
+})
+
+const filterData = reactive({
+    customerId: '',
+    startDate: '',
+    endDate: '',
+})
+
+// load sold product
+const total = ref(1)
+const soldProducts = computed(() => {
+    return useSoldProductStore().soldProducts
+})
+const target = ref('.sales-wrapper')
+const distance = ref(0)
+
+let page = 0
+const loadSales = async ($state) => {
+    page++
+    let additional = total.value % 30 === 0 ? 0 : 1
+    if (total.value !== 0 && total.value / 30 + additional >= page) {
+        SoldProductService.getSales(
+            cleanObjectEmptyFields({
+                customerId: selectedCustomer.value?.id,
+                startDate: moment().startOf('day').format().slice(0, 16),
+                endDate: moment().endOf('day').format().slice(0, 16),
+                page: page,
+                limit: 30,
+            })
+        ).then((result) => {
+            total.value = result?.total
+            useSoldProductStore().setSoldProducts(result?.data)
+            $state.loaded()
+        }).catch(() => {
+            $state.error()
+        })
+    } else $state.loaded()
+}
+
 const dropdown = ref(null)
 
 onClickOutside(dropdown, () => {
@@ -15,6 +64,57 @@ onClickOutside(dropdown, () => {
     }
 })
 
+/* REFRESH FUNCTION */
+const isRefresh = ref(false)
+
+const autoRefresher =
+  setInterval(() => {
+    isRefresh.value = true
+    SoldProductService.getSales(
+        cleanObjectEmptyFields({
+            customerId: selectedCustomer.value?.id,
+            startDate: moment().startOf('day').format().slice(0, 16),
+            endDate: moment().endOf('day').format().slice(0, 16),
+            page: 1,
+            limit: 30,
+        })
+    ).then((result) => {
+      total.value = result?.total
+      useSoldProductStore().setAutoRefreshVisits(result?.data)
+      isRefresh.value = false
+    }).catch((err) => {
+      console.log("Error:", err);
+    })
+  }, 3000);
+
+const submitFilterData = () => {
+    isLoading.value = true
+    SoldProductService.getSales(
+        cleanObjectEmptyFields({
+            customerId: selectedCustomer.value?.id,
+            startDate: moment().startOf('day').format().slice(0, 16),
+            endDate: moment().endOf('day').format().slice(0, 16),
+            page: 1,
+            limit: 30,
+        })
+    ).then((res) => {
+        useSoldProductStore().clearStore()
+        useSoldProductStore().setSoldProducts(res?.data)
+        isLoading.value = false
+        if (useModalStore().isOpenFilterBy) {
+            useModalStore().toggleFilterBy()
+        }
+    })
+}
+
+onMounted(() => {
+    useSoldProductStore().clearStore()
+    autoRefresher
+})
+
+onUnmounted(() => {
+  clearInterval(autoRefresher)
+})
 </script>
 
 <template>
@@ -41,27 +141,10 @@ onClickOutside(dropdown, () => {
                             </span>
                         </div>
                         <div v-if="useModalStore().isOpenFilterBy"
-                            class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+                            class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 w-96">
                             <div>
                                 <label>{{ $t('customer') }}</label>
                                 <SelectOptionCustomer />
-                            </div>
-                            <div>
-                                <label>{{ $t('createdAt') }}</label>
-                                <div class="flex items-center space-x-1">
-                                    <div class="relative">
-                                        <input type="date"
-                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                                        <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
-                                            $t('from') }}</div>
-                                    </div>
-                                    <div class="relative">
-                                        <input type="date"
-                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
-                                        <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
-                                            $t('to') }}</div>
-                                    </div>
-                                </div>
                             </div>
                             <div v-if="isLoading"
                                 class="w-full bg-gray-600 py-3 select-none text-white rounded-lg flex items-center justify-center">
@@ -81,7 +164,7 @@ onClickOutside(dropdown, () => {
                     </div>
                 </div>
             </div>
-            <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden users-wrapper">
+            <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden sales-wrapper">
                 <table class="min-w-max w-full table-auto">
                     <thead class="sticky z-10 top-0 bg-white shadow">
                         <tr class="text-gray-600 capitalize text-lg leading-normal">
@@ -89,14 +172,14 @@ onClickOutside(dropdown, () => {
                             <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
-                            <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
                         </tr>
                     </thead>
-                    <!-- <tbody class="text-gray-600 text-sm font-light">
-                        <UserItem :users="users" :distance="distance" :target="target" @infinite="loadUsers" />
-                    </tbody> -->
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <SaleItem :soldProducts="soldProducts" :distance="distance" :target="target"
+                            @infinite="loadSales" />
+                    </tbody>
                 </table>
-                <!-- <div v-if="users?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div> -->
+                <div v-if="soldProducts?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
             </div>
         </div>
     </div>

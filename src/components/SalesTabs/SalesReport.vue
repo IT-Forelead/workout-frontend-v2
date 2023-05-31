@@ -1,12 +1,61 @@
 <script setup>
-import { ref } from '@vue/reactivity'
+import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import { onMounted } from 'vue'
 import FunnelIcon from '../../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../../components/Icons/Spinners270RingIcon.vue'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import SoldProductService from '../../services/soldProduct.service'
+import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
+import { useSoldProductStore } from '../../store/soldProduct.store'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SaleItem from '../Items/SaleItem.vue'
 
 const isLoading = ref(false)
+
+const selectedCustomer = computed(() => {
+    return useDropdownStore().selectCustomerOption
+})
+
+const filterData = reactive({
+    customerId: '',
+    startDate: '',
+    endDate: '',
+})
+
+// load sold product
+const total = ref(1)
+const soldProducts = computed(() => {
+    return useSoldProductStore().soldProducts
+})
+const target = ref('.sales-wrapper')
+const distance = ref(0)
+
+let page = 0
+const loadSales = async ($state) => {
+    page++
+    let additional = total.value % 30 === 0 ? 0 : 1
+    if (total.value !== 0 && total.value / 30 + additional >= page) {
+        SoldProductService.getSales(
+            cleanObjectEmptyFields({
+                customerId: selectedCustomer.value?.id,
+                startDate: filterData.startDate,
+                endDate: filterData.endDate,
+                page: page,
+                limit: 30,
+            })
+        ).then((result) => {
+            console.log(result);
+            total.value = result?.total
+            useSoldProductStore().setSoldProducts(result?.data)
+            $state.loaded()
+        }).catch(() => {
+            $state.error()
+        })
+    } else $state.loaded()
+}
+
 const dropdown = ref(null)
 
 onClickOutside(dropdown, () => {
@@ -15,8 +64,30 @@ onClickOutside(dropdown, () => {
     }
 })
 
-</script>
+const submitFilterData = () => {
+    isLoading.value = true
+    SoldProductService.getSales(
+        cleanObjectEmptyFields({
+            customerId: selectedCustomer.value?.id,
+            startDate: filterData.startDate,
+            endDate: filterData.endDate,
+            page: 1,
+            limit: 30,
+        })
+    ).then((res) => {
+        useSoldProductStore().clearStore()
+        useSoldProductStore().setSoldProducts(res?.data)
+        isLoading.value = false
+        if (useModalStore().isOpenFilterBy) {
+            useModalStore().toggleFilterBy()
+        }
+    })
+}
 
+onMounted(() => {
+    useSoldProductStore().clearStore()
+})
+</script>
 <template>
     <div class="px-4 py-2">
         <div class="bg-white rounded p-5">
@@ -81,7 +152,7 @@ onClickOutside(dropdown, () => {
                     </div>
                 </div>
             </div>
-            <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden users-wrapper">
+            <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden sales-wrapper">
                 <table class="min-w-max w-full table-auto">
                     <thead class="sticky z-10 top-0 bg-white shadow">
                         <tr class="text-gray-600 capitalize text-lg leading-normal">
@@ -89,14 +160,14 @@ onClickOutside(dropdown, () => {
                             <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
                             <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
-                            <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
                         </tr>
                     </thead>
-                    <!-- <tbody class="text-gray-600 text-sm font-light">
-                        <UserItem :users="users" :distance="distance" :target="target" @infinite="loadUsers" />
-                    </tbody> -->
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <SaleItem :soldProducts="soldProducts" :distance="distance" :target="target"
+                            @infinite="loadSales" />
+                    </tbody>
                 </table>
-                <!-- <div v-if="users?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div> -->
+                <div v-if="soldProducts?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
             </div>
         </div>
     </div>

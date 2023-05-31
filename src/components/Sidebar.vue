@@ -14,6 +14,7 @@ import HouseIcon from './Icons/HouseIcon.vue';
 import MoneyIcon from './Icons/MoneyIcon.vue';
 import UserListIcon from './Icons/UserListIcon.vue';
 import UsersThreeIcon from './Icons/UsersThreeIcon.vue';
+import ShoppingCartIcon from './Icons/ShoppingCartIcon.vue';
 
 const router = useRouter()
 
@@ -80,7 +81,7 @@ onMounted(() => {
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
-          <MoneyIcon class="w-6 h-6" />
+          <ShoppingCartIcon class="w-6 h-6" />
         </div>
         <div>{{ $t('sales') }}</div>
       </router-link>
