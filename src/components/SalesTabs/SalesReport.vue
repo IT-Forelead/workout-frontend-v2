@@ -22,7 +22,8 @@ onClickOutside(dropdown, () => {
         <div class="bg-white rounded p-5">
             <div class="flex items-center justify-between mb-1">
                 <div class="flex items-center space-x-3">
-                    <router-link to="/sales" class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
+                    <router-link to="/sales"
+                        class="bg-gray-200 hover:bg-gray-300 cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg p-1.5 px-3">
                         {{ $t('dailySales') }}
                     </router-link>
                     <div>|</div>
@@ -49,14 +50,14 @@ onClickOutside(dropdown, () => {
                                 <label>{{ $t('createdAt') }}</label>
                                 <div class="flex items-center space-x-1">
                                     <div class="relative">
-                                        <input type="datetime-local"
+                                        <input type="date"
                                             class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('from') }}</div>
                                     </div>
                                     <div class="relative">
-                                        <input type="datetime-local"
-                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                                        <input type="date"
+                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('to') }}</div>
                                     </div>

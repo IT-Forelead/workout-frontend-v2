@@ -50,14 +50,14 @@ onClickOutside(dropdown, () => {
                                 <label>{{ $t('createdAt') }}</label>
                                 <div class="flex items-center space-x-1">
                                     <div class="relative">
-                                        <input type="datetime-local"
+                                        <input type="date"
                                             class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('from') }}</div>
                                     </div>
                                     <div class="relative">
-                                        <input type="datetime-local"
-                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
+                                        <input type="date"
+                                            class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
                                         <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{
                                             $t('to') }}</div>
                                     </div>
