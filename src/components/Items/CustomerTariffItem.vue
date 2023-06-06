@@ -12,6 +12,9 @@ import CalendarXIcon from '../Icons/CalendarXIcon.vue'
 import CheckIcon from '../Icons/CheckCircleIcon.vue'
 import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
 import UserIcon from '../Icons/UserIcon.vue'
+import EditIcon from '../Icons/EditIcon.vue'
+import { useCustomerTariffStore } from '../../store/customerTariff.store'
+import { useModalStore } from '../../store/modal.store'
 
 const { t } = useI18n()
 
@@ -83,9 +86,15 @@ const monthlyVisitTranslate = (n) => {
       return t('fifteenDays')
   }
 }
+
+const openAddFakeVisitModal = (customerTariff) => {
+  useCustomerTariffStore().setSelectedCustomerTariff(customerTariff)
+  useModalStore().openAddFakeVisitModal()
+}
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs" :key="idx">
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"
+    :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
@@ -151,22 +160,31 @@ const monthlyVisitTranslate = (n) => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      {{ tariff?.numberOfVisit + " / " + tariff?.service?.monthlyVisit }}
+      <div class="flex item-center justify-center space-x-2">
+        <div>
+          {{ tariff?.numberOfVisit + " / " + tariff?.service?.monthlyVisit }}
+        </div>
+        <div @click="openAddFakeVisitModal(tariff)"
+          class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+          <EditIcon class="w-6 h-6" />
+        </div>
+      </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">
-      <span class="p-1.5 inline-block w-28 px-3 text-sm rounded-full" :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
+      <span class="p-1.5 inline-block w-28 px-3 text-sm rounded-full"
+        :class="paymentStatusColor(tariff?.customerTariff?.paymentStatus)">
         {{ paymentStatusTranslate(tariff?.customerTariff?.paymentStatus) }}
       </span>
     </td>
     <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-center">
       <!-- <div class="flex item-center justify-center">
-        <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
-          <EditIcon class="w-6 h-6" />
-        </div>
-        <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
-          <TrashIcon class="w-6 h-6" />
-        </div>
-      </div> -->
+          <div class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+            <EditIcon class="w-6 h-6" />
+          </div>
+          <div class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
+            <TrashIcon class="w-6 h-6" />
+          </div>
+        </div> -->
     </td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">
@@ -175,5 +193,4 @@ const monthlyVisitTranslate = (n) => {
         <InfiniteLoading v-bind="$attrs" />
       </div>
     </td>
-  </tr>
-</template>
+  </tr></template>

@@ -48,6 +48,7 @@ const submitData = () => {
     VisitService.createVisit({
       customerId: selectedCustomer.value?.id,
       visitType: selectedVisitType.value?.id,
+      fake: false,
     })
       .then(() => {
         notify.success({
