@@ -1,47 +1,95 @@
-<script setup>
-import { ref } from 'vue'
-import { useModalStore } from '../../store/modal.store.js'
-import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
-import SelectOptionCustomerTrainerTariff from '../Inputs/SelectOptionCustomerTrainerTariff.vue'
-import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
-import SelectOptionProductType from '../Inputs/SelectOptionProductType.vue'
 
-const isAddProductModalOpen = ref(false)
-const product = ref({
-  productName: '',
-  productType: '',
-  productCount: 0
+<script setup>
+import { computed, ref } from '@vue/reactivity'
+import notify from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
+import { useI18n } from 'vue-i18n'
+import { cleanObjectEmptyFields } from '../../mixins/utils'
+import CustomerTariffService from '../../services/customerTariff.service'
+import { useDropdownStore } from '../../store/dropdown.store'
+import { useModalStore } from '../../store/modal.store'
+import XIcon from '../Icons/XIcon.vue'
+import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SelectOptionService from '../Inputs/SelectOptionService.vue'
+import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import PaymentService from '../../services/payment.service.js'
+import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
+import UserIcon from '../Icons/UserIcon.vue'
+import SelectOptionCustomerItem from '../Items/SelectOptionCustomerItem.vue'
+import SearchIcon from '../Icons/SearchIcon.vue'
+import SelectProductOption from '../Inputs/SelectProductOptionType.vue'
+import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
+import SelectProductOptionType from '../Inputs/SelectProductOptionType.vue'
+import productService from '../../services/product.service.js'
+import ProductService from '../../services/product.service.js'
+const { t } = useI18n()
+
+const count = ref(0)
+
+const selectedProductType = computed(() => {
+  return useDropdownStore().selectProductTypeOption
 })
 
-const openModal = () => {
-  isAddProductModalOpen.value = true
+const clearForm = () => {
+  useDropdownStore().setSelectProductTypeOption('')
+  count.value = 0
 }
 
 const closeModal = () => {
   useModalStore().closeAddProductModal()
   clearForm()
 }
-const saveProduct = () => {
-  // Perform validation
-  if (!product.value.productName || !product.value.productType || product.value.productCount <= 0) {
-    // Show error notification or validation messages
-    return
-  }
 
-  // Close the modal
-  closeModal()
-}
+const isLoading = ref(false)
 
-const resetForm = () => {
-  product.value = {
-    productName: '',
-    productType: '',
-    productCount: 0
+const submitServiceData = () => {
+
+  if (!selectedProductType.value?.id) {
+    notify.warning({
+      message: t('plsEnterProductName'),
+    })
+  } else {
+    isLoading.value = true
+    ProductService.createProduct(
+      cleanObjectEmptyFields({
+        productId: selectedCustomer.value?.id,
+      })
+    ).then((data) => {
+      notify.success({
+        message: t('customerTariffCreated'),
+      })
+      isLoading.value = false
+      if (cost.value > 0) {
+        PaymentService.createPayment(
+          cleanObjectEmptyFields({
+            customerTariffId: data?.id,
+            price: cost.value,
+          })
+        ).then(() => {
+          notify.success({
+            message: t('paymentCreated'),
+          })
+        })
+          .catch((err) => {
+            notify.error({
+              message: t('errorCreatingPayment'),
+            })
+          })
+      }
+
+      closeModal()
+    })
+      .catch((err) => {
+        notify.error({
+          message: t('errorCreatingCustomerTariff'),
+        })
+        isLoading.value = false
+      })
   }
 }
 </script>
+
+
 
 <template>
   <div v-if="useModalStore().isAddProductModalOpen"
@@ -57,10 +105,21 @@ const resetForm = () => {
         </div>
         <div class="p-6 space-y-4">
           <div>
+            <label for="serviceName">{{ $t('productName') }}</label>
+            <input class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+                   type="text" id="serviceName" :placeholder="$t('enterProductName')" />
+          </div>
+          <div>
             <label>{{ $t('productType') }}</label>
-            <SelectOptionProductType/>
+            <SelectProductOptionType />
+          </div>
+          <div>
+            <label for="serviceName">{{ $t('productNumber') }}</label>
+            <input class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+                   type="text" id="serviceName" :placeholder="$t('enterProductNumber')" />
           </div>
         </div>
+
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
           <button @click="clearForm()"
                   class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
@@ -83,6 +142,4 @@ const resetForm = () => {
   </div>
 </template>
 
-<style scoped>
 
-</style>

@@ -319,5 +319,7 @@
   "enterProductName": "Mahsulot nomini kiriting",
   "enterProductType": "Mahsulot turini kiriting",
   "updatedAt": "Yangilangan vaqti",
-  "addProduct": "Mahsulot qo'shish"
+  "addProduct": "Mahsulot qo'shish",
+  "productNumber": "Mahsulot soni",
+  "enterProductNumber": "Mahsulot sonini kiriting"
 }
