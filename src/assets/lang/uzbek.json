@@ -309,5 +309,15 @@
   "numberOfVisits": "Tashriflar soni",
   "sevenBusinessDayStatistics": "Yetti ish kuni statistikasi",
   "numberOfRegisteredCustomers": "Ro'yxatdan o'tgan mijozlar soni",
-  "skip": "O'tkazish"
+  "skip": "O'tkazish",
+  "soldProducts": "Sotilgan mahsulotlar",
+  "historyProducts": "Mahsulotlar tarixi",
+  "products": "Mahsulotlar",
+  "productsReport": "Mahsulotlar hisoboti",
+  "number": "Soni",
+  "productName": "Mahsulot nomi",
+  "enterProductName": "Mahsulot nomini kiriting",
+  "enterProductType": "Mahsulot turini kiriting",
+  "updatedAt": "Yangilangan vaqti",
+  "addProduct": "Mahsulot qo'shish"
 }

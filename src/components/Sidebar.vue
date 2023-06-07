@@ -23,7 +23,7 @@ const payload = ref({})
 const isOpen = computed(() => useSidebarStore().isOpenSidebar)
 const isOpenSubMenuForTariffs = computed(() => useSidebarStore().isOpenSubMenuForTariffs)
 const isOpenSubMenuForServices = computed(() => useSidebarStore().isOpenSubMenuForServices)
-
+const isOpenSubMenuForSales = computed(() => useSidebarStore().isOpenSubMenuForSales)
 const navigationGuard = (access) => {
   return access.includes(payload.value?.role)
 }
@@ -77,14 +77,53 @@ onMounted(() => {
           </div>
         </router-link>
       </div>
-      <router-link to="/sales" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
-        class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
-        <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
-        <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
-          <ShoppingCartIcon class="w-6 h-6" />
+<!--    start  sales-->
+      <div @click="useSidebarStore().toggleSubMenuForSales()" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])"
+           class="relative flex items-center justify-between h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 font-medium  py-7 cursor-pointer transition-colors duration-300">
+        <div class="flex items-center space-x-4"
+             :class="router?.currentRoute?.value?.path === '/sales' || router?.currentRoute?.value?.path === '/products' || router?.currentRoute?.value?.path === '/' ? 'active' : ''">
+          <div class="w-1.5 h-10 rounded-r-xl mr-2 first-child-bg-color"></div>
+          <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
+            <ShoppingCartIcon class="w-6 h-6" />
+          </div>
+          <div>{{ $t('sales') }}</div>
         </div>
-        <div>{{ $t('sales') }}</div>
-      </router-link>
+        <ChevronRightIcon class="w-5 h-5 transition-all text-gray-400 duration-300 mx-4"
+                          :class="{ 'rotate-90': isOpenSubMenuForSales }" />
+      </div>
+      <div :class="{ hidden: !isOpenSubMenuForSales }" class="transition-all duration-300">
+        <router-link to="/sales" active-class="active"
+                     class="flex items-center justify-between hover:bg-yellow-300/10 hover:text-yellow-200 p-3 rounded-lg cursor-pointer pl-14">
+          <div class="flex items-center space-x-2">
+            <p>-</p>
+            <p>{{ $t('soldProducts') }}</p>
+          </div>
+        </router-link>
+        <router-link to="/historyproducts" active-class="active"
+                     class="flex items-center justify-between hover:bg-yellow-300/10 hover:text-yellow-200 p-3 rounded-lg cursor-pointer pl-14">
+          <div class="flex items-center space-x-2">
+            <p>-</p>
+            <p>{{ $t('historyProducts') }}</p>
+          </div>
+        </router-link>
+        <router-link to="/products" active-class="active"
+                     class="flex items-center justify-between hover:bg-yellow-300/10 hover:text-yellow-200 p-3 rounded-lg cursor-pointer pl-14">
+          <div class="flex items-center space-x-2">
+            <p>-</p>
+            <p>{{ $t('products') }}</p>
+          </div>
+        </router-link>
+      </div>
+<!--     end sales-->
+
+<!--      <router-link to="/sales" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"-->
+<!--        class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">-->
+<!--        <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>-->
+<!--        <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">-->
+<!--          <ShoppingCartIcon class="w-6 h-6" />-->
+<!--        </div>-->
+<!--        <div>{{ $t('sales') }}</div>-->
+<!--      </router-link>-->
       <router-link to="/payments" v-if="navigationGuard(['super_manager', 'tech_admin', 'admin'])" active-class="active"
         class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>

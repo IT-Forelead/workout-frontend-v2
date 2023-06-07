@@ -5,6 +5,7 @@ export const useSidebarStore = defineStore('sidebar', {
     isOpenSidebar: true,
     isOpenSubMenuForTariffs: false,
     isOpenSubMenuForServices: false,
+    isOpenSubMenuForSales: false
   }),
   actions: {
     toggleSidebar() {
@@ -14,6 +15,9 @@ export const useSidebarStore = defineStore('sidebar', {
     toggleSubMenuForTariffs() {
       this.isOpenSubMenuForTariffs = !this.isOpenSubMenuForTariffs
     },
+    toggleSubMenuForSales(){
+      this.isOpenSubMenuForSales = !this.isOpenSubMenuForSales
+    },
     toggleSubMenuForServices() {
       this.isOpenSubMenuForServices = !this.isOpenSubMenuForServices
     },
@@ -21,6 +25,7 @@ export const useSidebarStore = defineStore('sidebar', {
       this.isOpenSidebar = true
       this.isOpenSubMenuForTariffs = false
       this.isOpenSubMenuForServices = false
+      this.isOpenSubMenuForSales = false
     }
   },
 })

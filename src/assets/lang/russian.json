@@ -308,5 +308,11 @@
   "numberOfVisits": "Количество посещений",
   "sevenBusinessDayStatistics": "Статистика за семь рабочих дней",
   "numberOfRegisteredCustomers": "Количество зарегистрированных клиентов",
-  "skip":"Пропустить"
+  "skip":"Пропустить",
+  "soldProducts": "Проданные товары",
+  "historyProducts": "История продуктов",
+  "products": "Продукты",
+  "productsReport": "Отчеты продуктов",
+  "updatedAt": "Обновлено",
+  "addProduct": "Добавить товар"
 }

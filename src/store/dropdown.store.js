@@ -16,6 +16,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectMonthlyVisitOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
+    selectProductOption: '',
     selectCustomerTariffOption: '',
     selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,

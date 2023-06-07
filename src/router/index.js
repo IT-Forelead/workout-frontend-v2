@@ -127,6 +127,13 @@ const routes = [
     beforeEnter: navigationGuards(['cashier', 'super_manager', 'tech_admin']),
   },
   {
+    path: '/products',
+    name: 'Products',
+    component: ()=> import('../views/Products.vue'),
+    meta: { layout: 'dashboard' },
+    beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
+  },
+  {
     path: '/notfound',
     name: 'Not-Found',
     component: () => import('../components/NotFound.vue'),

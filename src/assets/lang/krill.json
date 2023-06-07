@@ -309,5 +309,11 @@
   "numberOfVisits": "Ташрифлар сони",
   "sevenBusinessDayStatistics": "Йетти иш куни статистикаси",
   "numberOfRegisteredCustomers": "Рўйхатдан ўтган мижозлар сони",
-  "skip":"Ўтказиш"
+  "skip":"Ўтказиш",
+  "soldProducts": "Сотилган маҳсулотлар",
+  "historyProducts": "Маҳсулотлар тарихи",
+  "products": "Маҳсулотлар",
+  "productsReport": "Маҳсулотлар ҳисоботи",
+  "updatedAt": "Янгиланган вақти",
+  "addProduct": "Маҳсулот қўшиш"
 }

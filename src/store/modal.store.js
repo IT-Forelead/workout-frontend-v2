@@ -22,6 +22,7 @@ export const useModalStore = defineStore('modal', {
     isOpenFilterBy: false,
     isOpenNotification: false,
     isOpenProfileDropDown: false,
+    isAddProductModalOpen: false
   }),
   actions: {
     openAddUserModal() {
@@ -107,6 +108,12 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddVisitModal() {
       this.isAddVisitModalOpen = false
+    },
+    openAddProductModal() {
+    this.isAddProductModalOpen = true
+    },
+    closeAddProductModal() {
+    this.isAddProductModalOpen = false
     },
     openAddQrCodeModal() {
       this.isAddQrCodeModalOpen = true

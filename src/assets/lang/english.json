@@ -308,5 +308,11 @@
   "numberOfVisits": "Number of visits",
   "sevenBusinessDayStatistics": "Seven business day statistics",
   "numberOfRegisteredCustomers": "Number of registered customers",
-  "skip": "Skip"
+  "skip": "Skip",
+  "soldProducts": "Sold products",
+  "historyProducts": "History of products",
+  "products": "Products",
+  "productsReport": "Products Report",
+  "updatedAt": "Updated At",
+  "addProduct": "Add product"
 }
