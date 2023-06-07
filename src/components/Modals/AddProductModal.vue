@@ -1,4 +1,3 @@
-
 <script setup>
 import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
@@ -9,18 +8,9 @@ import CustomerTariffService from '../../services/customerTariff.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
-import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
-import SelectOptionService from '../Inputs/SelectOptionService.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import PaymentService from '../../services/payment.service.js'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import SelectOptionCustomerItem from '../Items/SelectOptionCustomerItem.vue'
-import SearchIcon from '../Icons/SearchIcon.vue'
-import SelectProductOption from '../Inputs/SelectProductOptionType.vue'
-import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
 import SelectProductOptionType from '../Inputs/SelectProductOptionType.vue'
-import productService from '../../services/product.service.js'
 import ProductService from '../../services/product.service.js'
 const { t } = useI18n()
 
@@ -88,9 +78,6 @@ const submitServiceData = () => {
   }
 }
 </script>
-
-
-
 <template>
   <div v-if="useModalStore().isAddProductModalOpen"
        class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
