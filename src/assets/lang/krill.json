@@ -308,5 +308,8 @@
   "visitStatistics": "Ташрифлар статистикаси",
   "numberOfVisits": "Ташрифлар сони",
   "sevenBusinessDayStatistics": "Йетти иш куни статистикаси",
-  "numberOfRegisteredCustomers": "Рўйхатдан ўтган мижозлар сони"
+  "numberOfRegisteredCustomers": "Рўйхатдан ўтган мижозлар сони",
+  "skip":"Ўтказиш",
+  "visitCount": "Ташрифлар сони",
+  "plsSelectVisitCount": "Илтимос ташрифлар сонини киритинг"
 }

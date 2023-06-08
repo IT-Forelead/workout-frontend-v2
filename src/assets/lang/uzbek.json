@@ -308,5 +308,8 @@
   "visitStatistics": "Tashriflar statistikasi",
   "numberOfVisits": "Tashriflar soni",
   "sevenBusinessDayStatistics": "Yetti ish kuni statistikasi",
-  "numberOfRegisteredCustomers": "Ro'yxatdan o'tgan mijozlar soni"
+  "numberOfRegisteredCustomers": "Ro'yxatdan o'tgan mijozlar soni",
+  "skip": "O'tkazish",
+  "visitCount": "Tashriflar soni",
+  "plsSelectVisitCount": "Iltimos tashriflar sonini kiriting"
 }

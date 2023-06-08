@@ -47,7 +47,6 @@ const loadSales = async ($state) => {
                 limit: 30,
             })
         ).then((result) => {
-            console.log(result);
             total.value = result?.total
             useSoldProductStore().setSoldProducts(result?.data)
             $state.loaded()
@@ -70,8 +69,8 @@ const submitFilterData = () => {
     SoldProductService.getSales(
         cleanObjectEmptyFields({
             customerId: selectedCustomer.value?.id,
-            startDate: moment(filterData.startDate).startOf('day').format().slice(0, 16),
-            endDate: moment(filterData.endDate).endOf('day').format().slice(0, 16),
+            startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+            endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
             page: 1,
             limit: 30,
         })

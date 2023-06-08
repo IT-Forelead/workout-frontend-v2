@@ -16,8 +16,10 @@ export const useModalStore = defineStore('modal', {
     isAddCustomerTariffModalOpen: false,
     isAddCustomerTrainerTariffModalOpen: false,
     isAddVisitModalOpen: false,
+    isAddFakeVisitModalOpen: false,
     isAddQrCodeModalOpen: false,
     isAddPaymentModalOpen: false,
+    isAddTariffWithPaymentModalOpen:false,
     isAddSoldProdoctModalOpen: false,
     isOpenFilterBy: false,
     isOpenNotification: false,
@@ -108,6 +110,12 @@ export const useModalStore = defineStore('modal', {
     closeAddVisitModal() {
       this.isAddVisitModalOpen = false
     },
+    openAddFakeVisitModal() {
+      this.isAddFakeVisitModalOpen = true
+    },
+    closeAddFakeVisitModal() {
+      this.isAddFakeVisitModalOpen = false
+    },
     openAddQrCodeModal() {
       this.isAddQrCodeModalOpen = true
     },
@@ -119,6 +127,12 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddPaymentModal() {
       this.isAddPaymentModalOpen = false
+    },
+    openAddTariffWithPaymentModal() {
+      this.isAddTariffWithPaymentModalOpen = true
+    },
+    closeAddTariffWithPaymentModal() {
+      this.isAddTariffWithPaymentModalOpen = false
     },
     openAddSoldProdoctModal() {
       this.isAddSoldProdoctModalOpen = true

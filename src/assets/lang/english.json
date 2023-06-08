@@ -307,5 +307,8 @@
   "visitStatistics": "Visit statistics",
   "numberOfVisits": "Number of visits",
   "sevenBusinessDayStatistics": "Seven business day statistics",
-  "numberOfRegisteredCustomers": "Number of registered customers"
+  "numberOfRegisteredCustomers": "Number of registered customers",
+  "skip": "Skip",
+  "visitCount": "Visit count",
+  "plsSelectVisitCount": "Please enter visit count"
 }
