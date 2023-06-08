@@ -22,6 +22,7 @@ import EditCustomerModal from './Modals/EditCustomerModal.vue'
 import EditServiceModal from './Modals/EditServiceModal.vue'
 import EditTrainerServiceModal from './Modals/EditTrainerServiceModal.vue'
 import DeleteUserModal from './Modals/DeleteUserModal.vue'
+import AddTariffWithPaymentModal from './Modals/AddTariffWithPaymentModal.vue'
 import DeleteCustomerModal from './Modals/DeleteCustomerModal.vue'
 import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
 import DeleteTrainerServiceModal from './Modals/DeleteTrainerServiceModal.vue'
@@ -93,6 +94,7 @@ onMounted(() => {
   <DeleteCustomerModal />
   <DeleteServiceModal />
   <DeleteTrainerServiceModal />
+  <AddTariffWithPaymentModal />
 </template>
 
 <style scoped></style>
