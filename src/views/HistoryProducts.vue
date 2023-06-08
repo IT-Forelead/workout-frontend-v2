@@ -138,13 +138,13 @@ const submitFilterData = () => {
       <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customers-wrapper">
         <table class="min-w-max w-full table-auto">
           <thead class="sticky z-10 top-0 bg-white shadow">
-            <tr class="text-gray-600 capitalize text-lg leading-normal">
-              <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('type') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('number') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('updatedAt') }}</th>
-            </tr>
+          <tr class="text-gray-600 capitalize text-lg leading-normal">
+            <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
+            <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
+            <th class="py-2 px-4 text-left">{{ $t('type') }}</th>
+            <th class="py-2 px-4 text-left">{{ $t('number') }}</th>
+            <th class="py-2 px-4 text-left">{{ $t('updatedAt') }}</th>
+          </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light"></tbody>
         </table>
