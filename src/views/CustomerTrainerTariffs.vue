@@ -10,10 +10,15 @@ import CustomerTrainerTariffItem from '../components/Items/CustomerTrainerTariff
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
 import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
+import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
 
 const isLoading = ref(false)
+
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
 
 const total = ref(1)
 const customerTrainerTariffs = computed(() => {
@@ -29,6 +34,7 @@ const loadCustomerTrainerTariffs = async ($state) => {
   if (total.value !== 0 && total.value / 30 + additional >= page) {
     CustomerTrainerTariffService.getCustomerTrainerTariffs(
       cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
         paymentStatus: selectPaymentStatus.value?.id,
         startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
         endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
@@ -77,11 +83,12 @@ const submitFilterData = () => {
   isLoading.value = true
   CustomerTrainerTariffService.getCustomerTrainerTariffs(
     cleanObjectEmptyFields({
+      customerId: selectedCustomer.value?.id,
       paymentStatus: selectPaymentStatus.value?.id,
-      startDate: moment(filterData.startDate).startOf('day').format().slice(0, 16),
-      endDate: moment(filterData.endDate).endOf('day').format().slice(0, 16),
-      expireAtFrom: moment(filterData.expireAtFrom).startOf('day').format().slice(0, 16),
-      expireAtTo: moment(filterData.expireAtTo).endOf('day').format().slice(0, 16),
+      startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+      endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
+      expireAtFrom: filterData.expireAtFrom ? moment(filterData.expireAtFrom).startOf('day').format().slice(0, 16) : '',
+      expireAtTo: filterData.expireAtTo ? moment(filterData.expireAtTo).endOf('day').format().slice(0, 16) : '',
       page: 1,
       limit: 30,
     })
@@ -112,6 +119,10 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              <div>
+                <label>{{ $t('customer') }}</label>
+                <SelectOptionCustomer />
+              </div>
               <div>
                 <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />

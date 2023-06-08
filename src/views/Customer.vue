@@ -6,12 +6,15 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import UserIcon from '../components/Icons/UserIcon.vue'
 import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
+import CustomerTrainerTariffItem from '../components/Items/CustomerTrainerTariffItem.vue'
 import VisitItem from '../components/Items/VisitItem.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import CustomerTariffService from '../services/customerTariff.service'
+import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
 import VisitService from '../services/visit.service'
 import { useCustomerStore } from '../store/customer.store'
 import { useCustomerTariffStore } from '../store/customerTariff.store'
+import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
 import { useVisitStore } from '../store/visit.store'
 
 const { t } = useI18n()
@@ -62,6 +65,35 @@ const loadCustomerTariffs = async ($state) => {
   } else $state.loaded()
 }
 
+// load Customer Trainer Tariffs
+const customerTrainerTariffs = computed(() => {
+  return useCustomerTrainerTariffStore().customerTrainerTariffs
+})
+const customerTrainerTariffTotal = ref(1)
+const customerTrainerTariffTarget = ref('.customer-trainer-tariffs-wrapper')
+const customerTrainerTariffDistance = ref(0)
+
+let customerTrainerTarifPage = 0
+const loadCustomerTrainerTariffs = async ($state) => {
+  customerTrainerTarifPage++
+  let additional = customerTrainerTariffTotal.value % 30 === 0 ? 0 : 1
+  if (customerTrainerTariffTotal.value !== 0 && customerTrainerTariffTotal.value / 30 + additional >= customerTrainerTarifPage) {
+    CustomerTrainerTariffService.getCustomerTrainerTariffs(
+      cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
+        page: customerTrainerTarifPage,
+        limit: 5,
+      })
+    ).then((result) => {
+      customerTrainerTariffTotal.value = result?.total
+      useCustomerTrainerTariffStore().setCustomerTrainerTariffs(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
+  } else $state.loaded()
+}
+
 // load Visits
 const visits = computed(() => {
   return useVisitStore().visits
@@ -94,6 +126,7 @@ const loadVisits = async ($state) => {
 onMounted(() => {
   if (selectedCustomer.value?.id) {
     useCustomerTariffStore().clearStore()
+    useCustomerTrainerTariffStore().clearStore()
     useVisitStore().clearStore()
   } else router.push('/customers')
 })
@@ -175,6 +208,29 @@ onMounted(() => {
             </tbody>
           </table>
           <div v-if="customerTariffs?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+        </div>
+      </div>
+      <div>
+        <div class="text-xl font-bold">{{ $t('customerTrainerTariffs') }}</div>
+        <div class="max-h-48 overflow-auto xxl:overflow-x-hidden customer-trainer-tariffs-wrapper">
+          <table class="min-w-max w-full table-auto">
+            <thead class="sticky z-10 top-0 bg-white shadow">
+              <tr class="text-gray-600 capitalize text-lg leading-normal">
+                <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('trainer') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
+                <th class="py-2 px-4 text-center">{{ $t('monthlyVisit') }}</th>
+                <th class="py-2 px-4 text-center">{{ $t('paymentStatus') }}</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+              <CustomerTrainerTariffItem :customerTrainerTariffs="customerTrainerTariffs" :distance="customerTrainerTariffDistance"
+                :target="customerTrainerTariffTarget" @infinite="loadCustomerTrainerTariffs" />
+            </tbody>
+          </table>
+          <div v-if="customerTrainerTariffs?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
         </div>
       </div>
       <div>
