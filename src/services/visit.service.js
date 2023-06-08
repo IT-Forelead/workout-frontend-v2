@@ -4,6 +4,9 @@ class VisitService {
   async createVisit(data) {
     return AxiosService.post('/visit/create', data)
   }
+  async createFakeVisit(data) {
+    return AxiosService.post('/visit/create-fake-visit', data)
+  }
   async getVisits(filter) {
     return AxiosService.post('/visit/report', filter)
   }

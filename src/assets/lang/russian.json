@@ -308,5 +308,7 @@
   "numberOfVisits": "Количество посещений",
   "sevenBusinessDayStatistics": "Статистика за семь рабочих дней",
   "numberOfRegisteredCustomers": "Количество зарегистрированных клиентов",
-  "skip":"Пропустить"
+  "skip":"Пропустить",
+  "visitCount": "Количество посещений",
+  "plsSelectVisitCount": "Введите количество посещений"
 }

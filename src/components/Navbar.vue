@@ -15,6 +15,7 @@ import AddCustomerTariffModal from './Modals/AddCustomerTariffModal.vue'
 import AddCustomerTrainerTariffModal from './Modals/AddCustomerTrainerTariffModal.vue'
 import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddVisitModal from './Modals/AddVisitModal.vue'
+import AddFakeVisitModal from './Modals/AddFakeVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import AddSoldProductModal from './Modals/AddSoldProductModal.vue'
 import EditCustomerModal from './Modals/EditCustomerModal.vue'
@@ -83,6 +84,7 @@ onMounted(() => {
   <AddCustomerTrainerTariffModal />
   <AddPaymentModal />
   <AddVisitModal />
+  <AddFakeVisitModal />
   <AddQrCodeModal />
   <AddSoldProductModal />
   <EditCustomerModal />
