@@ -319,5 +319,7 @@
   "coffeeBar": "Кофе Бар",
   "productName": "Маҳсулот номи",
   "enterProductName": "Маҳсулот номини киритинг",
-  "productNumber": "Маҳсулот сони"
+  "productNumber": "Маҳсулот сони",
+  "visitCount": "Ташрифлар сони",
+  "plsSelectVisitCount": "Илтимос ташрифлар сонини киритинг"
 }

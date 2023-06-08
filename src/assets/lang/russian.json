@@ -318,5 +318,7 @@
   "coffeeBar": "Кофе Бар",
   "productNumber": "Количество продуктов",
   "productName": "Названия продуктa",
-  "enterProductName": "Введите название продукта"
+  "enterProductName": "Введите название продукта",
+  "visitCount": "Количество посещений",
+  "plsSelectVisitCount": "Введите количество посещений"
 }

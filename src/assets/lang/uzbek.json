@@ -310,6 +310,8 @@
   "sevenBusinessDayStatistics": "Yetti ish kuni statistikasi",
   "numberOfRegisteredCustomers": "Ro'yxatdan o'tgan mijozlar soni",
   "skip": "O'tkazish",
+  "visitCount": "Tashriflar soni",
+  "plsSelectVisitCount": "Iltimos tashriflar sonini kiriting"
   "soldProducts": "Sotilgan mahsulotlar",
   "historyProducts": "Mahsulotlar tarixi",
   "products": "Mahsulotlar",

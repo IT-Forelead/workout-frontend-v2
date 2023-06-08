@@ -318,5 +318,7 @@
   "addProduct": "Add product",
   "coffeeBar": "Coffee Bar",
   "productName": "Product name",
-  "productNumber": "Product Number"
+  "productNumber": "Product Number",
+  "visitCount": "Visit count",
+  "plsSelectVisitCount": "Please enter visit count"
 }

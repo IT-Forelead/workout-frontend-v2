@@ -15,12 +15,14 @@ import AddCustomerTariffModal from './Modals/AddCustomerTariffModal.vue'
 import AddCustomerTrainerTariffModal from './Modals/AddCustomerTrainerTariffModal.vue'
 import AddPaymentModal from './Modals/AddPaymentModal.vue'
 import AddVisitModal from './Modals/AddVisitModal.vue'
+import AddFakeVisitModal from './Modals/AddFakeVisitModal.vue'
 import AddUserModal from './Modals/AddUserModal.vue'
 import AddSoldProductModal from './Modals/AddSoldProductModal.vue'
 import EditCustomerModal from './Modals/EditCustomerModal.vue'
 import EditServiceModal from './Modals/EditServiceModal.vue'
 import EditTrainerServiceModal from './Modals/EditTrainerServiceModal.vue'
 import DeleteUserModal from './Modals/DeleteUserModal.vue'
+import AddTariffWithPaymentModal from './Modals/AddTariffWithPaymentModal.vue'
 import DeleteCustomerModal from './Modals/DeleteCustomerModal.vue'
 import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
 import DeleteTrainerServiceModal from './Modals/DeleteTrainerServiceModal.vue'
@@ -82,6 +84,7 @@ onMounted(() => {
   <AddCustomerTrainerTariffModal />
   <AddPaymentModal />
   <AddVisitModal />
+  <AddFakeVisitModal />
   <AddQrCodeModal />
   <AddSoldProductModal />
   <EditCustomerModal />
@@ -91,6 +94,7 @@ onMounted(() => {
   <DeleteCustomerModal />
   <DeleteServiceModal />
   <DeleteTrainerServiceModal />
+  <AddTariffWithPaymentModal />
   <AddProductModal />
 </template>
 
