@@ -312,7 +312,11 @@
   "soldProducts": "Sold products",
   "historyProducts": "History of products",
   "products": "Products",
+  "enterProductName": "Enter Product Name",
   "productsReport": "Products Report",
   "updatedAt": "Updated At",
-  "addProduct": "Add product"
+  "addProduct": "Add product",
+  "coffeeBar": "Coffee Bar",
+  "productName": "Product name",
+  "productNumber": "Product Number"
 }

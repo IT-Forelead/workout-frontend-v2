@@ -4,8 +4,8 @@ class ProductService {
   async createProduct(data) {
     return AxiosService.post('/products/create', data)
   }
-  async getSales(filter) {
-    return AxiosService.post('/product/report', filter)
+  async getProducts(filter) {
+    return AxiosService.post('/products/report', filter)
   }
 }
 

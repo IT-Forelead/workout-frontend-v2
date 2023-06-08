@@ -314,5 +314,9 @@
   "products": "Продукты",
   "productsReport": "Отчеты продуктов",
   "updatedAt": "Обновлено",
-  "addProduct": "Добавить товар"
+  "addProduct": "Добавить товар",
+  "coffeeBar": "Кофе Бар",
+  "productNumber": "Количество продуктов",
+  "productName": "Названия продуктa",
+  "enterProductName": "Введите название продукта"
 }

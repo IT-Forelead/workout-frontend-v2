@@ -315,5 +315,9 @@
   "products": "Маҳсулотлар",
   "productsReport": "Маҳсулотлар ҳисоботи",
   "updatedAt": "Янгиланган вақти",
-  "addProduct": "Маҳсулот қўшиш"
+  "addProduct": "Маҳсулот қўшиш",
+  "coffeeBar": "Кофе Бар",
+  "productName": "Маҳсулот номи",
+  "enterProductName": "Маҳсулот номини киритинг",
+  "productNumber": "Маҳсулот сони"
 }
