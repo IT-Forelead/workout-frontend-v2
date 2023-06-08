@@ -311,7 +311,7 @@
   "numberOfRegisteredCustomers": "Ro'yxatdan o'tgan mijozlar soni",
   "skip": "O'tkazish",
   "visitCount": "Tashriflar soni",
-  "plsSelectVisitCount": "Iltimos tashriflar sonini kiriting"
+  "plsSelectVisitCount": "Iltimos tashriflar sonini kiriting",
   "soldProducts": "Sotilgan mahsulotlar",
   "historyProducts": "Mahsulotlar tarixi",
   "products": "Mahsulotlar",
@@ -324,5 +324,8 @@
   "addProduct": "Mahsulot qo'shish",
   "productNumber": "Mahsulot soni",
   "enterProductNumber": "Mahsulot sonini kiriting",
-  "coffeeBar": "Kofe Bar"
+  "coffeeBar": "Kofe Bar",
+  "sold": "Sotilgan",
+  "bought": "Sotib olingan",
+  "productHistoryType": "Mahsulot tarixi turi"
 }

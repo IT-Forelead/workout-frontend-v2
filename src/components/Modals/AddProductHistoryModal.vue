@@ -7,24 +7,25 @@ import { useModalStore } from '../../store/modal.store'
 import XIcon from '../Icons/XIcon.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import SelectProductOptionType from '../Inputs/SelectOptionProductType.vue'
+import SelectOptionProductHistoryTypes from '../Inputs/SelectOptionProductHistoryTypes.vue'
 const { t } = useI18n()
 
 const productCount = ref(0)
 const productName = ref('')
 
 const clearForm = () => {
-  useDropdownStore().setSelectProductTypeOption('')
+  useDropdownStore().setSelectProductHistoryTypesOption('')
   productCount.value = 0
   productName.value = ''
 }
 
 const closeModal = () => {
-  useModalStore().closeAddProductModal()
+  useModalStore().closeAddProductHistoryModal()
   clearForm()
 }
 </script>
 <template>
-  <div v-if="useModalStore().isAddProductModalOpen" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
+  <div v-if="useModalStore().isAddProductHistoryModalOpen" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
@@ -39,8 +40,8 @@ const closeModal = () => {
             <input v-model="productName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="serviceName" :placeholder="$t('enterProductName')" />
           </div>
           <div>
-            <label>{{ $t('productType') }}</label>
-            <SelectProductOptionType />
+            <label>{{ $t('productHistoryType') }}</label>
+            <SelectOptionProductHistoryTypes />
           </div>
           <div>
             <label>{{ $t('productNumber') }}</label>

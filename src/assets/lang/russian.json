@@ -320,5 +320,8 @@
   "productName": "Названия продуктa",
   "enterProductName": "Введите название продукта",
   "visitCount": "Количество посещений",
-  "plsSelectVisitCount": "Введите количество посещений"
+  "plsSelectVisitCount": "Введите количество посещений",
+  "sold": "Проданный",
+  "bought": "Купленный",
+  "productHistoryType": "Тип истории продукта"
 }

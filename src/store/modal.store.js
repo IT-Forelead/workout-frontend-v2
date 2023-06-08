@@ -24,7 +24,8 @@ export const useModalStore = defineStore('modal', {
     isOpenFilterBy: false,
     isOpenNotification: false,
     isOpenProfileDropDown: false,
-    isAddProductModalOpen: false
+    isAddProductModalOpen: false,
+    isAddProductHistoryModalOpen: false
   }),
   actions: {
     openAddUserModal() {
@@ -116,6 +117,12 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddProductModal() {
     this.isAddProductModalOpen = false
+    },
+    openAddProductHistoryModal(){
+      this.isAddProductHistoryModalOpen = true
+    },
+    closeAddProductHistoryModal(){
+      this.isAddProductHistoryModalOpen = false
     },
     openAddFakeVisitModal() {
       this.isAddFakeVisitModalOpen = true

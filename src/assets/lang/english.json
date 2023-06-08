@@ -320,5 +320,8 @@
   "productName": "Product name",
   "productNumber": "Product Number",
   "visitCount": "Visit count",
-  "plsSelectVisitCount": "Please enter visit count"
+  "plsSelectVisitCount": "Please enter visit count",
+  "sold": "Sold",
+  "bought": "Bought",
+  "productHistoryType": "Product History Type"
 }

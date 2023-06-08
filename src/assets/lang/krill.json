@@ -321,5 +321,8 @@
   "enterProductName": "Маҳсулот номини киритинг",
   "productNumber": "Маҳсулот сони",
   "visitCount": "Ташрифлар сони",
-  "plsSelectVisitCount": "Илтимос ташрифлар сонини киритинг"
+  "plsSelectVisitCount": "Илтимос ташрифлар сонини киритинг",
+  "sold": "Сотилган",
+  "bought": "Сотиб олинган",
+  "productHistoryType": "Маҳсулот тарихи тури"
 }

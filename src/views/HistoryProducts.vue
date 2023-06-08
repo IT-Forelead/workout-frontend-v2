@@ -9,6 +9,7 @@ import { cleanObjectEmptyFields } from '../mixins/utils'
 import { useModalStore } from '../store/modal.store'
 import { useProductStore } from '../store/product.store.js'
 import ProductService from '../services/product.service.js'
+import SelectOptionProductHistoryTypes from '../components/Inputs/SelectOptionProductHistoryTypes.vue'
 
 const isLoading = ref(false)
 
@@ -16,6 +17,8 @@ const total = ref(1)
 const products = computed(() => {
   return useProductStore().products
 })
+const target = ref('.customers-wrapper')
+const distance = ref(0)
 
 let page = 0
 const loadProducts = async ($state) => {
@@ -87,7 +90,7 @@ const submitFilterData = () => {
   <div class="px-4 py-2">
     <div class="bg-white rounded p-5">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('productsReport') }}</p>
+        <p class="text-3xl font-bold">{{ $t('historyProducts') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()" class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
@@ -100,6 +103,10 @@ const submitFilterData = () => {
               <div>
                 <label for="productName">{{ $t('productName') }}</label>
                 <input v-model="filterData.productName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="productName" :placeholder="$t('enterProductName')" />
+              </div>
+              <div>
+                <label>{{ $t('productHistoryType') }}</label>
+                <SelectOptionProductHistoryTypes />
               </div>
               <div>
                 <label>{{ $t('createdAt') }}</label>
@@ -123,7 +130,7 @@ const submitFilterData = () => {
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openAddProductModal()" class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+          <div @click="useModalStore().openAddProductHistoryModal" class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
             {{ $t('addProduct') }}
           </div>
         </div>

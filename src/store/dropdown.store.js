@@ -17,11 +17,13 @@ export const useDropdownStore = defineStore('dropdown', {
     selectTrainerOption: '',
     selectCustomerOption: '',
     selectProductTypeOption: '',
+    selectProductHistoryTypesOption: '',
     selectCustomerTariffOption: '',
     selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentTypeDropDown: false,
     isOpenProductTypeDropDown: false,
+    isOpenProductHistoryTypesDropDown: false,
     isOpenVisitTypeDropDown: false,
     isOpenMessageTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
@@ -39,8 +41,11 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenCustomerTrainerTariffDropDown: false,
   }),
   actions: {
-    setSelectProductTypeOption(data){
+    setSelectProductTypeOption(data) {
       this.selectProductTypeOption = data
+    },
+    setSelectProductHistoryTypesOption(data) {
+      this.selectProductHistoryTypesOption = data
     },
     setSelectPaymentTypeOption(data) {
       this.selectPaymentTypeOption = data
@@ -114,11 +119,17 @@ export const useDropdownStore = defineStore('dropdown', {
     closeTrainerDropdown() {
       this.isOpenTrainerDropDown = false
     },
-    openProductTypeDropDown(){
+    openProductTypeDropDown() {
       this.isOpenProductTypeDropDown = true
     },
-    closeProductTypeDropDown(){
+    closeProductTypeDropDown() {
       this.isOpenProductTypeDropDown = false
+    },
+    openProductHistoryTypesDropDown() {
+      this.isOpenProductHistoryTypesDropDown = true
+    },
+    closeProductHistoryTypesDropDown() {
+      this.isOpenProductHistoryTypesDropDown = false
     },
     openPaymentTypeDropDown() {
       this.isOpenPaymentTypeDropDown = true
@@ -217,6 +228,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectCustomerTrainerTariffOption = ''
       this.isOpenSelectLanguage = false
       this.isOpenProductTypeDropDown = false
+      this.isOpenProductHistoryTypesDropDown = false
       this.isOpenPaymentTypeDropDown = false
       this.isOpenVisitTypeDropDown = false
       this.isOpenMessageTypeDropDown = false
@@ -229,7 +241,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false
       this.isOpenMonthlyVisitDropDown = false
-      this.isOpenTrainerDropDown = false,
+      this.isOpenTrainerDropDown = false
       this.isOpenCustomerTariffDropDown = false
       this.isOpenCustomerTrainerTariffDropDown = false
     },
