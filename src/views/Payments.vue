@@ -8,15 +8,22 @@ import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import PaymentItem from '../components/Items/PaymentItem.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import PaymentService from '../services/payment.service'
+import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
+import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
 import { usePaymentStore } from '../store/payment.store'
 
 const isLoading = ref(false)
 
-const total = ref(1)
+const selectedCustomer = computed(() => {
+  return useDropdownStore().selectCustomerOption
+})
+
+// load payments
 const payments = computed(() => {
   return usePaymentStore().payments
 })
+const total = ref(1)
 const target = ref('.payments-wrapper')
 const distance = ref(0)
 
@@ -27,6 +34,7 @@ const loadPayments = async ($state) => {
   if (total.value !== 0 && total.value / 30 + additional >= page) {
     PaymentService.getPayments(
       cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
         startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
         endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
         page: page,
@@ -63,8 +71,9 @@ const submitFilterData = () => {
   isLoading.value = true
   PaymentService.getPayments(
     cleanObjectEmptyFields({
-      startDate: moment(filterData.startDate).startOf('day').format().slice(0, 16),
-      endDate: moment(filterData.endDate).endOf('day').format().slice(0, 16),
+      customerId: selectedCustomer.value?.id,
+      startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+      endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
       page: 1,
       limit: 30,
     })
@@ -95,6 +104,10 @@ const submitFilterData = () => {
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
               class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              <div>
+                <label>{{ $t('customer') }}</label>
+                <SelectOptionCustomer />
+              </div>
               <div>
                 <label>{{ $t('createdAt') }}</label>
                 <div class="flex items-center space-x-1">
