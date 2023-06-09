@@ -7,20 +7,22 @@ import { useRouter } from 'vue-router'
 import UserIcon from '../components/Icons/UserIcon.vue'
 import CustomerTariffItem from '../components/Items/CustomerTariffItem.vue'
 import CustomerTrainerTariffItem from '../components/Items/CustomerTrainerTariffItem.vue'
+import PaymentItem from '../components/Items/PaymentItem.vue'
 import VisitItem from '../components/Items/VisitItem.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import CustomerTariffService from '../services/customerTariff.service'
 import CustomerTrainerTariffService from '../services/customerTrainerTariff.service'
+import PaymentService from '../services/payment.service'
 import VisitService from '../services/visit.service'
 import { useCustomerStore } from '../store/customer.store'
 import { useCustomerTariffStore } from '../store/customerTariff.store'
 import { useCustomerTrainerTariffStore } from '../store/customerTrainerTariff.store'
+import { usePaymentStore } from '../store/payment.store'
 import { useVisitStore } from '../store/visit.store'
-
-const { t } = useI18n()
 
 const CUSTOMER_IMAGE_URL = import.meta.env.VITE_CUSTOMER_IMAGE_URL;
 
+const { t } = useI18n()
 const router = useRouter()
 
 const selectedCustomer = computed(() => {
@@ -76,8 +78,8 @@ const customerTrainerTariffDistance = ref(0)
 let customerTrainerTarifPage = 0
 const loadCustomerTrainerTariffs = async ($state) => {
   customerTrainerTarifPage++
-  let additional = customerTrainerTariffTotal.value % 30 === 0 ? 0 : 1
-  if (customerTrainerTariffTotal.value !== 0 && customerTrainerTariffTotal.value / 30 + additional >= customerTrainerTarifPage) {
+  let additional = customerTrainerTariffTotal.value % 5 === 0 ? 0 : 1
+  if (customerTrainerTariffTotal.value !== 0 && customerTrainerTariffTotal.value / 5 + additional >= customerTrainerTarifPage) {
     CustomerTrainerTariffService.getCustomerTrainerTariffs(
       cleanObjectEmptyFields({
         customerId: selectedCustomer.value?.id,
@@ -87,6 +89,35 @@ const loadCustomerTrainerTariffs = async ($state) => {
     ).then((result) => {
       customerTrainerTariffTotal.value = result?.total
       useCustomerTrainerTariffStore().setCustomerTrainerTariffs(result?.data)
+      $state.loaded()
+    }).catch(() => {
+      $state.error()
+    })
+  } else $state.loaded()
+}
+
+// load payments
+const payments = computed(() => {
+  return usePaymentStore().payments
+})
+const paymentTotal = ref(1)
+const paymentTarget = ref('.payments-wrapper')
+const paymentDistance = ref(0)
+
+let paymentPage = 0
+const loadPayments = async ($state) => {
+  paymentPage++
+  let additional = paymentTotal.value % 5 === 0 ? 0 : 1
+  if (paymentTotal.value !== 0 && paymentTotal.value / 5 + additional >= paymentPage) {
+    PaymentService.getPayments(
+      cleanObjectEmptyFields({
+        customerId: selectedCustomer.value?.id,
+        page: paymentPage,
+        limit: 5,
+      })
+    ).then((result) => {
+      paymentTotal.value = result?.total
+      usePaymentStore().setPayments(result?.data)
       $state.loaded()
     }).catch(() => {
       $state.error()
@@ -127,6 +158,7 @@ onMounted(() => {
   if (selectedCustomer.value?.id) {
     useCustomerTariffStore().clearStore()
     useCustomerTrainerTariffStore().clearStore()
+    usePaymentStore().clearStore()
     useVisitStore().clearStore()
   } else router.push('/customers')
 })
@@ -226,11 +258,33 @@ onMounted(() => {
               </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
-              <CustomerTrainerTariffItem :customerTrainerTariffs="customerTrainerTariffs" :distance="customerTrainerTariffDistance"
-                :target="customerTrainerTariffTarget" @infinite="loadCustomerTrainerTariffs" />
+              <CustomerTrainerTariffItem :customerTrainerTariffs="customerTrainerTariffs"
+                :distance="customerTrainerTariffDistance" :target="customerTrainerTariffTarget"
+                @infinite="loadCustomerTrainerTariffs" />
             </tbody>
           </table>
           <div v-if="customerTrainerTariffs?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+        </div>
+      </div>
+      <div>
+        <div class="text-xl font-bold">{{ $t('paymentsReport') }}</div>
+        <div class="max-h-48 overflow-auto xxl:overflow-x-hidden payments-wrapper">
+          <table class="min-w-max w-full table-auto">
+            <thead class="sticky z-10 top-0 bg-white shadow">
+              <tr class="text-gray-600 capitalize text-lg leading-normal">
+                <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('createdAt') }}</th>
+                <th class="py-2 px-4 text-left">{{ $t('price') }}</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+              <PaymentItem :payments="payments" :distance="paymentDistance" :target="paymentTarget"
+                @infinite="loadPayments" />
+            </tbody>
+          </table>
+          <div v-if="payments?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
         </div>
       </div>
       <div>

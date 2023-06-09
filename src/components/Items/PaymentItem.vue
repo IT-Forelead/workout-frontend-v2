@@ -60,7 +60,7 @@ onMounted(() => {
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(payment, idx) in payments"
     :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <div v-if="payment?.customer?.image">
           <img :src="URL + payment?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
