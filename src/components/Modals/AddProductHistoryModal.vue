@@ -8,6 +8,7 @@ import XIcon from '../Icons/XIcon.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 import SelectProductOptionType from '../Inputs/SelectOptionProductType.vue'
 import SelectOptionProductHistoryTypes from '../Inputs/SelectOptionProductHistoryTypes.vue'
+import SelectOptionProduct from '../Inputs/SelectOptionProduct.vue'
 const { t } = useI18n()
 
 const productCount = ref(0)
@@ -37,7 +38,7 @@ const closeModal = () => {
         <div class="p-6 space-y-4">
           <div>
             <label>{{ $t('productName') }}</label>
-            <input v-model="productName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="serviceName" :placeholder="$t('enterProductName')" />
+            <SelectOptionProduct />
           </div>
           <div>
             <label>{{ $t('productHistoryType') }}</label>

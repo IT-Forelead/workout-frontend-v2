@@ -16,6 +16,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectMonthlyVisitOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
+    selectProductOption: '',
     selectProductTypeOption: '',
     selectProductHistoryTypesOption: '',
     selectCustomerTariffOption: '',
@@ -37,6 +38,7 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenMonthlyVisitDropDown: false,
     isOpenTrainerDropDown: false,
     isOpenCustomerDropDown: false,
+    isOpenProductDropDown: false,
     isOpenCustomerTariffDropDown: false,
     isOpenCustomerTrainerTariffDropDown: false,
   }),
@@ -87,6 +89,9 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectMonthlyVisitOption = data
     },
     setSelectCustomerOption(data) {
+      this.selectCustomerOption = data
+    },
+    setSelectProductOption(data) {
       this.selectCustomerOption = data
     },
     setSelectCustomerTariffOption(data) {
@@ -207,6 +212,12 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenCustomerDropDown = true
     },
     closeCustomerDropDown() {
+      this.isOpenCustomerDropDown = false
+    },
+    openProductDropDown() {
+      this.isOpenCustomerDropDown = true
+    },
+    closeProductDropDown() {
       this.isOpenCustomerDropDown = false
     },
     clearStore() {

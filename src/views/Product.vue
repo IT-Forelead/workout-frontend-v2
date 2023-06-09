@@ -21,7 +21,6 @@ const selectedProduct = computed(() => {
 onMounted(() => {
   if (selectedProduct.value?.id) {
     useProductStore().clearStore()
-    // useVisitStore().clearStore()
   } else router.push('/products')
 })
 </script>
