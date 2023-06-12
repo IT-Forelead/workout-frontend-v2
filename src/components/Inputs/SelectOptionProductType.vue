@@ -16,11 +16,11 @@ const dropdown = ref(null)
 
 const list = [
   {
-    id: 'product_type',
+    id: 'chocolate_bar',
     name: t('coffeeBar'),
   },
   {
-    id: 'product_type',
+    id: 'water',
     name: t('water'),
   },
 ]

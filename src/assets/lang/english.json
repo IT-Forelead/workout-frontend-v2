@@ -323,5 +323,9 @@
   "plsSelectVisitCount": "Please enter visit count",
   "sold": "Sold",
   "bought": "Bought",
-  "productHistoryType": "Product History Type"
+  "productHistoryType": "Product History Type",
+  "plsEnterProductName": "Please enter product name",
+  "productCreated": "Product successfully created!",
+  "errorGettingProducts": "Error while getting products!",
+  "errorCreatingProduct": "Error while creating product!"
 }

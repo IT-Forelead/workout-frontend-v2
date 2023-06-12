@@ -327,5 +327,9 @@
   "coffeeBar": "Kofe Bar",
   "sold": "Sotilgan",
   "bought": "Sotib olingan",
-  "productHistoryType": "Mahsulot tarixi turi"
+  "productHistoryType": "Mahsulot tarixi turi",
+  "plsEnterProductName": "Iltimos, mahsulot nomini kiriting",
+  "productCreated": "Mahsulot muvaffaqiyatli yaratildi!",
+  "errorGettingProducts": "Mahsulotlar olishda xatolik yuz berdi!",
+  "errorCreatingProduct": "Mahsulot yaratishda xatolik yuz berdi!"
 }

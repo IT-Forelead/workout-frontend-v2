@@ -2,10 +2,10 @@ import { AxiosService } from './axios.service'
 
 class ProductService {
   async createProduct(data) {
-    return AxiosService.post('/products/create', data)
+    return AxiosService.post('/product/create', data)
   }
   async getProducts(filter) {
-    return AxiosService.post('/products/report', filter)
+    return AxiosService.post('/product/report', filter)
   }
 }
 

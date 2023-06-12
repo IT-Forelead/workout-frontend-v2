@@ -7,15 +7,25 @@ import FunnelIcon from '../components/Icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../components/Icons/Spinners270RingIcon.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import { useModalStore } from '../store/modal.store'
-import { useProductStore } from '../store/product.store.js'
-import ProductService from '../services/product.service.js'
+import { useProductStore } from '../store/product.store'
+import { useDropdownStore } from '../store/dropdown.store'
+import ProductService from '../services/product.service'
+import ProductItem from '../components/Items/ProductItem.vue'
+import SelectProductOptionType from '../components/Inputs/SelectOptionProductType.vue'
 
 const isLoading = ref(false)
 
-const total = ref(1)
+const selectProductType = computed(() => {
+  return useDropdownStore().selectProductTypeOption
+})
+
+// load products
 const products = computed(() => {
   return useProductStore().products
 })
+const total = ref(1)
+const target = ref('.products-wrapper')
+const distance = ref(0)
 
 let page = 0
 const loadProducts = async ($state) => {
@@ -24,8 +34,8 @@ const loadProducts = async ($state) => {
   if (total.value !== 0 && total.value / 30 + additional >= page) {
     ProductService.getProducts(
       cleanObjectEmptyFields({
-        productName: filterData.productName ? `%${filterData.productName}%` : '',
-        productType: filterData.productType ? `%${filterData.productType}%` : '',
+        name: filterData.name ? `%${filterData.name}%` : '',
+        productType: selectProductType?.value?.id,
         startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
         endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
         page: page,
@@ -56,7 +66,7 @@ onClickOutside(dropdown, () => {
 })
 
 const filterData = reactive({
-  productName: '',
+  name: '',
   productType: '',
   startDate: '',
   endDate: '',
@@ -66,10 +76,10 @@ const submitFilterData = () => {
   isLoading.value = true
   ProductService.getProducts(
     cleanObjectEmptyFields({
-      productName: filterData.productName ? `%${filterData.productName}%` : '',
-      productType: filterData.productType ? `%${filterData.productType}%` : '',
-      startDate: moment(filterData.startDate).startOf('day').format().slice(0, 16),
-      endDate: moment(filterData.endDate).endOf('day').format().slice(0, 16),
+      name: filterData.name ? `%${filterData.name}%` : '',
+      productType: selectProductType?.value?.id,
+      startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+      endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
       page: 1,
       limit: 30,
     })
@@ -99,7 +109,11 @@ const submitFilterData = () => {
             <div v-if="useModalStore().isOpenFilterBy" class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
               <div>
                 <label for="productName">{{ $t('productName') }}</label>
-                <input v-model="filterData.productName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="productName" :placeholder="$t('enterProductName')" />
+                <input v-model="filterData.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text" id="productName" :placeholder="$t('enterProductName')" />
+              </div>
+              <div>
+                <label>{{ $t('productType') }}</label>
+                <SelectProductOptionType />
               </div>
               <div>
                 <label>{{ $t('createdAt') }}</label>
@@ -128,18 +142,21 @@ const submitFilterData = () => {
           </div>
         </div>
       </div>
-      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customers-wrapper">
+      <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden products-wrapper">
         <table class="min-w-max w-full table-auto">
           <thead class="sticky z-10 top-0 bg-white shadow">
             <tr class="text-gray-600 capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('type') }}</th>
-              <th class="py-2 px-4 text-left">{{ $t('number') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('updatedAt') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('number') }}</th>
+              <th class="py-2 px-4 text-center">{{ $t('actions') }}</th>
             </tr>
           </thead>
-          <tbody class="text-gray-600 text-sm font-light"></tbody>
+          <tbody class="text-gray-600 text-sm font-light">
+            <ProductItem :products="products" :distance="distance" :target="target" @infinite="loadProducts" />
+          </tbody>
         </table>
         <div v-if="products?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
       </div>

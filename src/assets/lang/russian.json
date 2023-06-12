@@ -323,5 +323,9 @@
   "plsSelectVisitCount": "Введите количество посещений",
   "sold": "Проданный",
   "bought": "Купленный",
-  "productHistoryType": "Тип истории продукта"
+  "productHistoryType": "Тип истории продукта",
+  "plsEnterProductName": "Пожалуйста, введите название продукта",
+  "productCreated": "Продукт успешно создан!",
+  "errorGettingProducts": "Ошибка при получении товаров!",
+  "errorCreatingProduct": "Ошибка при создании продукта!"
 }

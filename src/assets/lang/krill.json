@@ -324,5 +324,9 @@
   "plsSelectVisitCount": "Илтимос ташрифлар сонини киритинг",
   "sold": "Сотилган",
   "bought": "Сотиб олинган",
-  "productHistoryType": "Маҳсулот тарихи тури"
+  "productHistoryType": "Маҳсулот тарихи тури",
+  "plsEnterProductName": "Илтимос, маҳсулот номини киритинг",
+  "productCreated": "Маҳсулот муваффақиятли яратилди!",
+  "errorGettingProducts": "Маҳсулотлар олишда хатолик юз берди!",
+  "errorCreatingProduct": "Маҳсулот яратишда хатолик юз берди!"
 }
