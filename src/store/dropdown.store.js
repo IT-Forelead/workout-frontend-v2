@@ -18,7 +18,7 @@ export const useDropdownStore = defineStore('dropdown', {
     selectCustomerOption: '',
     selectProductOption: '',
     selectProductTypeOption: '',
-    selectProductHistoryTypesOption: '',
+    selectProductHistoryTypeOption: '',
     selectCustomerTariffOption: '',
     selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,
@@ -46,8 +46,8 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectProductTypeOption(data) {
       this.selectProductTypeOption = data
     },
-    setSelectProductHistoryTypesOption(data) {
-      this.selectProductHistoryTypesOption = data
+    setSelectProductHistoryTypeOption(data) {
+      this.selectProductHistoryTypeOption = data
     },
     setSelectPaymentTypeOption(data) {
       this.selectPaymentTypeOption = data
@@ -92,7 +92,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectCustomerOption = data
     },
     setSelectProductOption(data) {
-      this.selectCustomerOption = data
+      this.selectProductOption = data
     },
     setSelectCustomerTariffOption(data) {
       this.selectCustomerTariffOption = data
@@ -215,10 +215,10 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenCustomerDropDown = false
     },
     openProductDropDown() {
-      this.isOpenCustomerDropDown = true
+      this.isOpenProductDropDown = true
     },
     closeProductDropDown() {
-      this.isOpenCustomerDropDown = false
+      this.isOpenProductDropDown = false
     },
     clearStore() {
       this.selectProductTypeOption = ''
@@ -255,6 +255,7 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenTrainerDropDown = false
       this.isOpenCustomerTariffDropDown = false
       this.isOpenCustomerTrainerTariffDropDown = false
+      this.isOpenProductDropDown = false
     },
   },
 })

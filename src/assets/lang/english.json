@@ -327,5 +327,11 @@
   "plsEnterProductName": "Please enter product name",
   "productCreated": "Product successfully created!",
   "errorGettingProducts": "Error while getting products!",
-  "errorCreatingProduct": "Error while creating product!"
+  "errorCreatingProduct": "Error while creating product!",
+  "plsSelectProduct": "Please select product!",
+  "plsSelectProductHistoryType": "Please select product history type!",
+  "plsEnterProductCount": "Please enter product count!",
+  "productHistoryCreated": "Product history successfully created!",
+  "errorGettingProductHistories": "Error while getting product histories!",
+  "errorCreatingProductHistory": "Error while creating product history!"
 }

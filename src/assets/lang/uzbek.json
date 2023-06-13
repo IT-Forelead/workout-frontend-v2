@@ -331,5 +331,11 @@
   "plsEnterProductName": "Iltimos, mahsulot nomini kiriting",
   "productCreated": "Mahsulot muvaffaqiyatli yaratildi!",
   "errorGettingProducts": "Mahsulotlar olishda xatolik yuz berdi!",
-  "errorCreatingProduct": "Mahsulot yaratishda xatolik yuz berdi!"
+  "errorCreatingProduct": "Mahsulot yaratishda xatolik yuz berdi!",
+  "plsSelectProduct": "Iltimos, mahsulotni tanlang!",
+  "plsSelectProductHistoryType": "Iltimos, mahsulot tarixi turini tanlang!",
+  "plsEnterProductCount": "Iltimos, mahsulot sonini kiriting!",
+  "productHistoryCreated": "Mahsulot tarixi muvaffaqiyatli yaratildi!",
+  "errorGettingProductHistories": "Mahsulot tarixini olishda xatolik yuz berdi!",
+  "errorCreatingProductHistory": "Mahsulot tarixini yaratishda xatolik yuz berdi!"
 }

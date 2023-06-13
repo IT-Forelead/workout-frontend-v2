@@ -33,7 +33,6 @@ const isLoading = ref(false)
 
 const submitData = () => {
   if (!selectedCustomerTariff.value?.customerTariff?.customerId) {
-    console.log(selectedCustomerTariff.value?.customer?.id);
     notify.warning({
       message: t('plsSelectCustomer'),
     })

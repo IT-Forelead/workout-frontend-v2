@@ -10,23 +10,23 @@ import XIcon from '../Icons/XIcon.vue'
 const { t } = useI18n()
 
 const selectedOption = computed(() => {
-  return useDropdownStore().selectProductHistoryTypesOption
+  return useDropdownStore().selectProductHistoryTypeOption
 })
 const dropdown = ref(null)
 
 const list = [
   {
-    id: 'product_history_type',
+    id: 'sold',
     name: t('sold'),
   },
   {
-    id: 'product_history_type',
+    id: 'bought',
     name: t('bought'),
   },
 ]
 
 const clearSelectedOptionData = () => {
-  useDropdownStore().setSelectProductHistoryTypesOption('')
+  useDropdownStore().setSelectProductHistoryTypeOption('')
 }
 
 onClickOutside(dropdown, () => {
@@ -34,7 +34,7 @@ onClickOutside(dropdown, () => {
 })
 
 const optionClicked = (data) => {
-  useDropdownStore().setSelectProductHistoryTypesOption(data)
+  useDropdownStore().setSelectProductHistoryTypeOption(data)
   useDropdownStore().closeProductHistoryTypesDropDown()
 }
 </script>

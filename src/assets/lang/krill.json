@@ -328,5 +328,11 @@
   "plsEnterProductName": "Илтимос, маҳсулот номини киритинг",
   "productCreated": "Маҳсулот муваффақиятли яратилди!",
   "errorGettingProducts": "Маҳсулотлар олишда хатолик юз берди!",
-  "errorCreatingProduct": "Маҳсулот яратишда хатолик юз берди!"
+  "errorCreatingProduct": "Маҳсулот яратишда хатолик юз берди!",
+  "plsSelectProduct": "Илтимос, маҳсулотни танланг!",
+  "plsSelectProductHistoryType": "Илтимос, маҳсулот тарихи турини танланг!",
+  "plsEnterProductCount": "Илтимос, маҳсулот сонини киритинг!",
+  "productHistoryCreated": "Маҳсулот тарихи муваффақиятли яратилди!",
+  "errorGettingProductHistories": "Маҳсулот тарихини олишда хатолик юз берди!",
+  "errorCreatingProductHistory": "Маҳсулот тарихини яратишда хатолик юз берди!"
 }

@@ -9,7 +9,7 @@ export const useProductStore = defineStore('product', {
     setProducts(data) {
       this.products.push(...data)
     },
-    setSelectedCustomer(data) {
+    setSelectedProduct(data) {
       this.selectedProduct = data
     },
     clearStore() {

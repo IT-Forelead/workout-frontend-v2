@@ -327,5 +327,11 @@
   "plsEnterProductName": "Пожалуйста, введите название продукта",
   "productCreated": "Продукт успешно создан!",
   "errorGettingProducts": "Ошибка при получении товаров!",
-  "errorCreatingProduct": "Ошибка при создании продукта!"
+  "errorCreatingProduct": "Ошибка при создании продукта!",
+  "plsSelectProduct": "Выберите продукт!",
+  "plsSelectProductHistoryType": "Пожалуйста, выберите тип истории продукта!",
+  "plsEnterProductCount": "Введите количество товаров!",
+  "productHistoryCreated": "История товаров успешно создана!",
+  "errorGettingProductHistories": "Ошибка при получении истории продуктов!",
+  "errorCreatingProductHistory": "Ошибка при создании истории товара!"
 }
