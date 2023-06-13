@@ -16,10 +16,15 @@ export const useDropdownStore = defineStore('dropdown', {
     selectMonthlyVisitOption: '',
     selectTrainerOption: '',
     selectCustomerOption: '',
+    selectProductOption: '',
+    selectProductTypeOption: '',
+    selectProductHistoryTypeOption: '',
     selectCustomerTariffOption: '',
     selectCustomerTrainerTariffOption: '',
     isOpenSelectLanguage: false,
     isOpenPaymentTypeDropDown: false,
+    isOpenProductTypeDropDown: false,
+    isOpenProductHistoryTypesDropDown: false,
     isOpenVisitTypeDropDown: false,
     isOpenMessageTypeDropDown: false,
     isOpenPaymentStatusDropDown: false,
@@ -33,10 +38,17 @@ export const useDropdownStore = defineStore('dropdown', {
     isOpenMonthlyVisitDropDown: false,
     isOpenTrainerDropDown: false,
     isOpenCustomerDropDown: false,
+    isOpenProductDropDown: false,
     isOpenCustomerTariffDropDown: false,
     isOpenCustomerTrainerTariffDropDown: false,
   }),
   actions: {
+    setSelectProductTypeOption(data) {
+      this.selectProductTypeOption = data
+    },
+    setSelectProductHistoryTypeOption(data) {
+      this.selectProductHistoryTypeOption = data
+    },
     setSelectPaymentTypeOption(data) {
       this.selectPaymentTypeOption = data
     },
@@ -79,6 +91,9 @@ export const useDropdownStore = defineStore('dropdown', {
     setSelectCustomerOption(data) {
       this.selectCustomerOption = data
     },
+    setSelectProductOption(data) {
+      this.selectProductOption = data
+    },
     setSelectCustomerTariffOption(data) {
       this.selectCustomerTariffOption = data
     },
@@ -108,6 +123,18 @@ export const useDropdownStore = defineStore('dropdown', {
     },
     closeTrainerDropdown() {
       this.isOpenTrainerDropDown = false
+    },
+    openProductTypeDropDown() {
+      this.isOpenProductTypeDropDown = true
+    },
+    closeProductTypeDropDown() {
+      this.isOpenProductTypeDropDown = false
+    },
+    openProductHistoryTypesDropDown() {
+      this.isOpenProductHistoryTypesDropDown = true
+    },
+    closeProductHistoryTypesDropDown() {
+      this.isOpenProductHistoryTypesDropDown = false
     },
     openPaymentTypeDropDown() {
       this.isOpenPaymentTypeDropDown = true
@@ -187,7 +214,14 @@ export const useDropdownStore = defineStore('dropdown', {
     closeCustomerDropDown() {
       this.isOpenCustomerDropDown = false
     },
+    openProductDropDown() {
+      this.isOpenProductDropDown = true
+    },
+    closeProductDropDown() {
+      this.isOpenProductDropDown = false
+    },
     clearStore() {
+      this.selectProductTypeOption = ''
       this.selectPaymentTypeOption = ''
       this.selectVisitTypeOption = ''
       this.selectMessageTypeOption = ''
@@ -204,6 +238,8 @@ export const useDropdownStore = defineStore('dropdown', {
       this.selectCustomerTariffOption = ''
       this.selectCustomerTrainerTariffOption = ''
       this.isOpenSelectLanguage = false
+      this.isOpenProductTypeDropDown = false
+      this.isOpenProductHistoryTypesDropDown = false
       this.isOpenPaymentTypeDropDown = false
       this.isOpenVisitTypeDropDown = false
       this.isOpenMessageTypeDropDown = false
@@ -216,9 +252,10 @@ export const useDropdownStore = defineStore('dropdown', {
       this.isOpenRoleDropDown = false
       this.isOpenDurationDayDropDown = false
       this.isOpenMonthlyVisitDropDown = false
-      this.isOpenTrainerDropDown = false,
+      this.isOpenTrainerDropDown = false
       this.isOpenCustomerTariffDropDown = false
       this.isOpenCustomerTrainerTariffDropDown = false
+      this.isOpenProductDropDown = false
     },
   },
 })

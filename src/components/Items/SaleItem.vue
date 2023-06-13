@@ -59,7 +59,7 @@ onMounted(() => {
       </div>
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
-      {{ productTypeTranslate(soldProduct?.product?.productType) + ' ' + soldProduct?.product?.quantity + 'L' }}
+      {{ productTypeTranslate(soldProduct?.soldProduct?.productType) + ' ' + soldProduct?.soldProduct?.quantity + 'L' }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-left">
       {{ moment(soldProduct?.product?.createdAt).format('DD/MM/YYYY H:mm') }}

@@ -28,6 +28,8 @@ import DeleteServiceModal from './Modals/DeleteServiceModal.vue'
 import DeleteTrainerServiceModal from './Modals/DeleteTrainerServiceModal.vue'
 import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
+import AddProductModal from './Modals/AddProductModal.vue'
+import AddProductHistoryModal from './Modals/AddProductHistoryModal.vue'
 
 const { t } = useI18n()
 const payload = ref({})
@@ -95,6 +97,8 @@ onMounted(() => {
   <DeleteServiceModal />
   <DeleteTrainerServiceModal />
   <AddTariffWithPaymentModal />
+  <AddProductModal />
+  <AddProductHistoryModal />
 </template>
 
 <style scoped></style>
