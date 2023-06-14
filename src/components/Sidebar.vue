@@ -38,7 +38,7 @@ onMounted(() => {
     <div class="bg-gray-600 h-20 flex items-center justify-center">
       <img src="/images/alpha-sport-urgench-logo.png" class="h-14 w-auto" alt="#" />
     </div>
-    <div class="relative space-y-1 py-14">
+    <div class="relative space-y-1 py-14 h-5/6 overflow-y-auto">
       <router-link to="/dashboard" active-class="active" class="relative flex items-center h-10 w-full hover:bg-yellow-300/10 hover:text-yellow-200 py-7 font-medium space-x-4 cursor-pointer transition-colors duration-300">
         <div class="w-1.5 h-10 rounded-r-xl first-child-bg-color mr-2"></div>
         <div class="flex items-center justify-center rounded-xl w-10 h-10 second-child-bg-color">
