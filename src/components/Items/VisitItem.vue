@@ -63,12 +63,7 @@ const visitTypeColor = (type) => {
       </div>
     </td>
     <td v-motion-fade class="py-2 px-4 text-center">
-      <div v-if="visit?.monthlyVisitOfTariff">
-        {{ visit?.numberOfVisit + ' / ' + visit?.monthlyVisitOfTariff }}
-      </div>
-      <div v-else>
-        -
-      </div>
+      {{ visit?.numberOfVisit + ' / ' + visit?.monthlyVisitOfTariff }}
     </td>
     <td v-motion-fade class="py-2 px-4 text-left">
       {{ moment(visit?.visit?.createdAt).format('DD/MM/YYYY H:mm') }}

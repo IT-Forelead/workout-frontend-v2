@@ -9,8 +9,8 @@ import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { parseJwt } from '../../mixins/utils.js'
 import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
 import CalendarXIcon from '../Icons/CalendarXIcon.vue'
-import CheckIcon from '../Icons/CheckCircleIcon.vue'
-import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
+import CheckCircleBoldIcon from '../Icons/CheckCircleBoldIcon.vue'
+import WarningCircleBoldIcon from '../Icons/WarningCircleBoldIcon.vue'
 import UserIcon from '../Icons/UserIcon.vue'
 import EditIcon from '../Icons/EditIcon.vue'
 import { useCustomerTariffStore } from '../../store/customerTariff.store'
@@ -134,10 +134,10 @@ const openAddFakeVisitModal = (customerTariff) => {
           </div>
         </div>
         <div v-if="moment().isBefore(tariff?.customerTariff?.expireAt)">
-          <CheckIcon class="w-5 h-5 text-green-700" />
+          <CheckCircleBoldIcon class="w-6 h-6 text-green-700" />
         </div>
         <div v-else>
-          <WarningCircleIcon class="w-5 h-5 text-gray-300" />
+          <WarningCircleBoldIcon class="w-6 h-6 text-red-500" />
         </div>
       </div>
     </td>
