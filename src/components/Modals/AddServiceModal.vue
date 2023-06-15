@@ -7,7 +7,6 @@ import ServicesService from '../../services/services.service'
 import { useServiceStore } from '../../store/service.store'
 import { useModalStore } from '../../store/modal.store'
 import { useDropdownStore } from '../../store/dropdown.store'
-import { cleanObjectEmptyFields } from '../../mixins/utils'
 import XIcon from '../Icons/XIcon.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
@@ -81,41 +80,37 @@ const submitServiceData = () => {
     })
   } else {
     isLoading.value = true
-    ServicesService.createService(
-      cleanObjectEmptyFields({
-        name: submitForm.name,
-        serviceType: selectServiceType?.value?.id,
-        durationDay: selectDurationDay?.value?.id,
-        monthlyVisit: selectMonthlyVisit?.value?.id,
-        priceForMale: submitForm.priceForMale,
-        priceForFemale: submitForm.priceForFemale,
+    ServicesService.createService({
+      name: submitForm.name,
+      serviceType: selectServiceType?.value?.id,
+      durationDay: selectDurationDay?.value?.id,
+      monthlyVisit: selectMonthlyVisit?.value?.id,
+      priceForMale: submitForm.priceForMale,
+      priceForFemale: submitForm.priceForFemale,
+    }).then(() => {
+      notify.success({
+        message: t('serviceCreated'),
       })
-    )
-      .then(() => {
-        notify.success({
-          message: t('serviceCreated'),
+      isLoading.value = false
+      ServicesService.getServices({})
+        .then((res) => {
+          useServiceStore().clearStore()
+          setTimeout(() => {
+            useServiceStore().setServices(res)
+          }, 500)
         })
-        isLoading.value = false
-        ServicesService.getServices({})
-          .then((res) => {
-            useServiceStore().clearStore()
-            setTimeout(() => {
-              useServiceStore().setServices(res)
-            }, 500)
+        .catch(() => {
+          notify.error({
+            message: t('errorGettingServices'),
           })
-          .catch(() => {
-            notify.error({
-              message: t('errorGettingServices'),
-            })
-          })
-        closeModal()
-      })
-      .catch((err) => {
-        notify.error({
-          message: t('errorCreatingService'),
         })
-        isLoading.value = false
+      closeModal()
+    }).catch((err) => {
+      notify.error({
+        message: t('errorCreatingService'),
       })
+      isLoading.value = false
+    })
   }
 }
 </script>

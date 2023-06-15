@@ -3,6 +3,7 @@ import { computed, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import VisitService from '../../services/visit.service'
 import { useVisitStore } from '../../store/visit.store'
 import { useDropdownStore } from '../../store/dropdown.store'
@@ -13,6 +14,7 @@ import RadionVisitType from '../Inputs/RadionVisitType.vue'
 import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
+const router = useRouter()
 
 const selectedCustomer = computed(() => {
   return useDropdownStore().selectCustomerOption
@@ -49,24 +51,25 @@ const submitData = () => {
       customerId: selectedCustomer.value?.id,
       visitType: selectedVisitType.value?.id,
       fake: false,
-    })
-      .then(() => {
+    }).then(() => {
         notify.success({
           message: t('visitCreated'),
         })
         isLoading.value = false
-        VisitService.getVisits({})
-          .then((res) => {
-            useVisitStore().clearStore()
-            setTimeout(() => {
-              useVisitStore().setVisits(res?.data)
-            }, 500)
-          })
-          .catch(() => {
-            notify.error({
-              message: t('errorGettingVisits'),
+        if (router?.currentRoute?.value?.path == '/visits/report') {
+          VisitService.getVisits({})
+            .then((res) => {
+              useVisitStore().clearStore()
+              setTimeout(() => {
+                useVisitStore().setVisits(res?.data)
+              }, 500)
             })
-          })
+            .catch(() => {
+              notify.error({
+                message: t('errorGettingVisits'),
+              })
+            })
+        } else router.push('/visits/report')
         closeModal()
       })
       .catch((err) => {

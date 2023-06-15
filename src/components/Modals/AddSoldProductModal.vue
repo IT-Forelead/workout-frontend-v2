@@ -3,6 +3,7 @@ import { computed, reactive, ref } from '@vue/reactivity'
 import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import SoldProductService from '../../services/soldProduct.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
@@ -12,6 +13,7 @@ import XIcon from '../Icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 
 const { t } = useI18n()
+const router = useRouter()
 
 const selectedCustomer = computed(() => {
   return useDropdownStore().selectCustomerOption
@@ -58,19 +60,20 @@ const submitData = () => {
       customerId: selectedCustomer.value?.id,
       productType: submitForm.productType,
       quantity: submitForm.quantity,
-    })
-      .then(() => {
-        notify.success({
-          message: t('soldProductCreated'),
-        })
-        isLoading.value = false
+    }).then(() => {
+      notify.success({
+        message: t('soldProductCreated'),
+      })
+      isLoading.value = false
+      if (router?.currentRoute?.value?.path == '/sales/report') {
         SoldProductService.getSales({})
           .then((res) => {
             useSoldProductStore().clearStore()
             useSoldProductStore().setSoldProducts(res?.data)
           })
-        closeModal()
-      })
+      } else router.push('/sales/report')
+      closeModal()
+    })
       .catch((err) => {
         notify.error({
           message: t('errorCreatingSoldProduct'),
