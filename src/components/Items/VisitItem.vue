@@ -7,6 +7,8 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
 import UserIcon from '../Icons/UserIcon.vue'
+import WarningCircleBoldIcon from '../Icons/WarningCircleBoldIcon.vue'
+import CheckCircleBoldIcon from '../Icons/CheckCircleBoldIcon.vue'
 
 const { t } = useI18n()
 
@@ -64,6 +66,16 @@ const visitTypeColor = (type) => {
     </td>
     <td v-motion-fade class="py-2 px-4 text-center">
       {{ visit?.numberOfVisit + ' / ' + visit?.monthlyVisitOfTariff }}
+    </td>
+    <td v-motion-fade class="py-2 px-4 text-left">
+      <div v-if="visit?.monthlyVisitOfTariff == 0" class="flex items-center space-x-2">
+        <WarningCircleBoldIcon class="w-5 h-5 text-red-500" />
+        <div class="text-xs w-44">{{ $t('tariffHasExpired') }}</div>
+      </div>
+      <div v-else class="flex items-center space-x-2">
+        <CheckCircleBoldIcon class="w-5 h-5 text-green-700" />
+        <div class="text-xs w-44">{{ $t('tariffHasNotExpired') }}</div>
+      </div>
     </td>
     <td v-motion-fade class="py-2 px-4 text-left">
       {{ moment(visit?.visit?.createdAt).format('DD/MM/YYYY H:mm') }}

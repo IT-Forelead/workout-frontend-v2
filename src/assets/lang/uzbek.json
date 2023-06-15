@@ -337,5 +337,8 @@
   "plsEnterProductCount": "Iltimos, mahsulot sonini kiriting!",
   "productHistoryCreated": "Mahsulot tarixi muvaffaqiyatli yaratildi!",
   "errorGettingProductHistories": "Mahsulot tarixini olishda xatolik yuz berdi!",
-  "errorCreatingProductHistory": "Mahsulot tarixini yaratishda xatolik yuz berdi!"
+  "errorCreatingProductHistory": "Mahsulot tarixini yaratishda xatolik yuz berdi!",
+  "information": "Ma'lumot",
+  "tariffHasExpired": "Ushbu mijoznig tarif vaqti tugagan yoki hali tarifga yozilmagan.",
+  "tariffHasNotExpired": "Ushbu mijozning tarifi aktiv holatda."
 }

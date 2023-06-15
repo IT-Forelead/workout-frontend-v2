@@ -333,5 +333,8 @@
   "plsEnterProductCount": "Please enter product count!",
   "productHistoryCreated": "Product history successfully created!",
   "errorGettingProductHistories": "Error while getting product histories!",
-  "errorCreatingProductHistory": "Error while creating product history!"
+  "errorCreatingProductHistory": "Error while creating product history!",
+  "information": "Information",
+  "tariffHasExpired": "This customer's tariff period has expired or has not yet been subscribed to a tariff.",
+  "tariffHasNotExpired": "This customer's tariff is active."
 }

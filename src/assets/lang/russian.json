@@ -333,5 +333,8 @@
   "plsEnterProductCount": "Введите количество товаров!",
   "productHistoryCreated": "История товаров успешно создана!",
   "errorGettingProductHistories": "Ошибка при получении истории продуктов!",
-  "errorCreatingProductHistory": "Ошибка при создании истории товара!"
+  "errorCreatingProductHistory": "Ошибка при создании истории товара!",
+  "information": "Информация",
+  "tariffHasExpired": "Тарифный период этого клиента истек или еще не подключен к тарифу.",
+  "tariffHasNotExpired": "Тариф этого клиента активен."
 }

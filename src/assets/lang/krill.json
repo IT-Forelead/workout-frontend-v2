@@ -334,5 +334,8 @@
   "plsEnterProductCount": "Илтимос, маҳсулот сонини киритинг!",
   "productHistoryCreated": "Маҳсулот тарихи муваффақиятли яратилди!",
   "errorGettingProductHistories": "Маҳсулот тарихини олишда хатолик юз берди!",
-  "errorCreatingProductHistory": "Маҳсулот тарихини яратишда хатолик юз берди!"
+  "errorCreatingProductHistory": "Маҳсулот тарихини яратишда хатолик юз берди!",
+  "information": "Маълумот",
+  "tariffHasExpired": "Ушбу мижозниг тариф вақти тугаган ёки ҳали тарифга ёзилмаган.",
+  "tariffHasNotExpired": "Ушбу мижознинг тарифи актив ҳолатда."
 }
