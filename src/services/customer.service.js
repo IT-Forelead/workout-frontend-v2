@@ -18,6 +18,9 @@ class CustomerService {
   async getCustomers(filter) {
     return AxiosService.post('/customer/report', filter)
   }
+  async getCustomersNowAt() {
+    return AxiosService.get('/customer/all-now')
+  }
   async sendActivationCode(phone) {
     return AxiosService.get(`/customer/sent-code?phone=${encodeURIComponent(phone)}`)
   }

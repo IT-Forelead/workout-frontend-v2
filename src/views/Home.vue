@@ -12,6 +12,7 @@ import UsersThreeIcon from '../components/Icons/UsersThreeIcon.vue'
 
 const { t } = useI18n()
 const numberOfAllCustomers = ref(0)
+const numberOffCurrentlyCustomers = ref(0)
 
 const dailyVisits = computed(() => {
   return useVisitStore().dailyVisits
@@ -396,6 +397,10 @@ onMounted(() => {
     .then((result) => {
       numberOfAllCustomers.value = result?.total
     })
+    CustomerService.getCustomersNowAt()
+    .then((result) => {
+      numberOffCurrentlyCustomers.value = result.total
+    })
 })
 </script>
 
@@ -465,7 +470,7 @@ onMounted(() => {
             <div class="flex justify-between mb-3">
               <div>
                 <p>In GYM</p>
-                <p class="text-2xl font-bold">17</p>
+                <p class="text-2xl font-bold">{{numberOffCurrentlyCustomers}}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <FootPrintsIcon class="w-7 h-7 text-gray-900" />
