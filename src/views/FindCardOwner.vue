@@ -1,9 +1,13 @@
 <script setup>
-import { computed, reactive, ref } from '@vue/reactivity'
 
 </script>
 <template>
     <div class="px-4 py-2">
-        Find Card Owner
+        <div class="bg-white rounded p-5">
+            <div class="flex items-center justify-between mb-1">
+                <p class="text-3xl font-bold">Full name</p>
+
+            </div>
+        </div>
     </div>
 </template>
