@@ -352,7 +352,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
       colors: ['#fff'],
     },
     xaxis: {
-      categories: ['Apples', 'Oranges', 'Mangoes', 'Bananas', 'Blackberries'],
+      categories: ['March', 'April', 'May', 'June', 'July'],
       labels: {
         show: false,
       },
