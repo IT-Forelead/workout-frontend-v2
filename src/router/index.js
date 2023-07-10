@@ -109,6 +109,13 @@ const routes = [
     beforeEnter: navigationGuards(['super_manager']),
   },
   {
+    path: '/find-card-owner',
+    name: 'findCardOwner',
+    component: () => import('../views/FindCardOwner.vue'),
+    meta: { layout: 'dashboard' },
+    beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
+  },
+  {
     path: '/sales',
     name: 'Sales',
     meta: { layout: 'dashboard' },
@@ -129,14 +136,14 @@ const routes = [
   {
     path: '/products',
     name: 'Products',
-    component: ()=> import('../views/Products.vue'),
+    component: () => import('../views/Products.vue'),
     meta: { layout: 'dashboard' },
     beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
   },
   {
     path: '/history-products',
     name: 'History Products',
-    component: ()=> import('../views/HistoryProducts.vue'),
+    component: () => import('../views/HistoryProducts.vue'),
     meta: { layout: 'dashboard' },
     beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin']),
   },

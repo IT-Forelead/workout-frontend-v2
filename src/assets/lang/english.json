@@ -336,5 +336,6 @@
   "errorCreatingProductHistory": "Error while creating product history!",
   "information": "Information",
   "tariffHasExpired": "This customer's tariff period has expired or has not yet been subscribed to a tariff.",
-  "tariffHasNotExpired": "This customer's tariff is active."
+  "tariffHasNotExpired": "This customer's tariff is active.",
+  "findCardOwner": "Find card owner"
 }

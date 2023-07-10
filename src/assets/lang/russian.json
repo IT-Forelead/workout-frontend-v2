@@ -336,5 +336,7 @@
   "errorCreatingProductHistory": "Ошибка при создании истории товара!",
   "information": "Информация",
   "tariffHasExpired": "Тарифный период этого клиента истек или еще не подключен к тарифу.",
-  "tariffHasNotExpired": "Тариф этого клиента активен."
+  "tariffHasNotExpired": "Тариф этого клиента активен.",
+  "findCardOwner": "Найдите владельца карты"
 }
+
