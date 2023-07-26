@@ -338,5 +338,7 @@
   "tariffHasExpired": "Тарифный период этого клиента истек или еще не подключен к тарифу.",
   "tariffHasNotExpired": "Тариф этого клиента активен.",
   "fewWeeklyStatistics": "Несколько недельной статистики",
-  "numberOfVisitsPerWeek": "Количество посещений в неделю"
+  "numberOfVisitsPerWeek": "Количество посещений в неделю",
+  "statisticsForSeveralMonths": "Статистика за несколько месяцев",
+  "numberOfMonthlyVisits": "Количество посещений в месяц"
 }

@@ -342,5 +342,7 @@
   "tariffHasExpired": "Ushbu mijoznig tarif vaqti tugagan yoki hali tarifga yozilmagan.",
   "tariffHasNotExpired": "Ushbu mijozning tarifi aktiv holatda.",
   "fewWeeklyStatistics": "Bir necha haftalik statistika",
-  "numberOfVisitsPerWeek": "Haftalik tashriflar soni"
+  "numberOfVisitsPerWeek": "Haftalik tashriflar soni",
+  "statisticsForSeveralMonths": "Bir necha oylik statistika",
+  "numberOfMonthlyVisits": "Oylik tashriflar soni"
 }

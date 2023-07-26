@@ -5,6 +5,7 @@ export const useVisitStore = defineStore('visit', {
     visits: [],
     dailyVisits: [],
     fewWeeksVisits: [],
+    fewMonthsVisits: [],
     selectedVisit: {},
   }),
   actions: {
@@ -16,6 +17,9 @@ export const useVisitStore = defineStore('visit', {
     },
     setFewWeeksVisits(data) {
       this.fewWeeksVisits.push(...data)
+    },
+    setFewMonthsVisits(data) {
+      this.fewMonthsVisits.push(...data)
     },
     setSelectedVisit(data) {
       this.selectedVisit = data
@@ -33,6 +37,7 @@ export const useVisitStore = defineStore('visit', {
       this.visits = []
       this.dailyVisits = []
       this.fewWeeksVisits = []
+      this.fewMonthsVisits = []
     },
   },
 })

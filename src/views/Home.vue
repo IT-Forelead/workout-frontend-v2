@@ -21,6 +21,10 @@ const fewWeeksVisits = computed(() => {
   return useVisitStore().fewWeeksVisits
 })
 
+const fewMonthsVisits = computed(() => {
+  return useVisitStore().fewMonthsVisits
+})
+
 // Daily visits chart
 const numberOfDailyVisitsSeries = computed(() => [
   {
@@ -312,11 +316,11 @@ const numberOfFewWeeksVisitsChartOptions = computed(() => {
   }
 })
 
-// Monthly Operations Chart
+// Few Weeks Visits Chart
 const numberOfMonthlyOperationsSeries = computed(() => [
   {
-    name: 'series1',
-    data: [31, 51, 72, 109, 100]
+    name: t('numberOfMonthlyVisits'),
+    data: fewMonthsVisits.value?.map((a) => a.visits),
   }
 ])
 
@@ -331,34 +335,59 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
     plotOptions: {
       bar: {
         borderRadius: 5,
-        barHeight: '100%',
+        columnWidth: '45%',
         distributed: true,
-        horizontal: true,
         dataLabels: {
-          position: 'bottom',
+          position: 'top',
         },
+        colors: {
+          ranges: [{
+            from: 0,
+            to: 2,
+            color: '#161b22'
+          }, {
+            from: 3,
+            to: 4,
+            color: '#0e4429'
+          }, {
+            from: 5,
+            to: 6,
+            color: '#006d32'
+          }, {
+            from: 7,
+            to: 8,
+            color: '#26a641'
+          }, {
+            from: 9,
+            to: 200,
+            color: '#39d353'
+          }]
+        }
       },
     },
-    colors: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
     dataLabels: {
       enabled: true,
-      textAnchor: 'start',
+      offsetY: -17,
       style: {
-        colors: ['#fff'],
+        fontSize: '12px',
+        colors: ['#304758'],
       },
-      formatter: function (val) {
-        return val
-      },
-      offsetX: 0,
     },
-    stroke: {
-      width: 1,
-      colors: ['#fff'],
+    legend: {
+      show: false,
     },
     xaxis: {
-      categories: ['Apples', 'Oranges', 'Mangoes', 'Bananas', 'Blackberries'],
+      categories: fewMonthsVisits.value?.map((a) => a.month),
       labels: {
-        show: false,
+        style: {
+          fontSize: '12px',
+        },
+        formatter: function (val) {
+          return moment(val).format('MMMM')
+        },
+      },
+      tooltip: {
+        enabled: true,
       },
       axisBorder: {
         show: false,
@@ -368,19 +397,16 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
       },
     },
     yaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
       labels: {
-        show: true,
-      },
-    },
-    tooltip: {
-      x: {
-        show: true,
-      },
-      y: {
-        title: {
-          formatter: function () {
-            return 'Number:'
-          },
+        show: false,
+        formatter: function (val) {
+          return val
         },
       },
     },
@@ -398,6 +424,10 @@ onMounted(() => {
       VisitService.getNumberOfFewWeeksVisits()
         .then((res) => {
           useVisitStore().setFewWeeksVisits(res)
+        })
+      VisitService.getNumberOfFewMonthsVisits()
+        .then((res) => {
+          useVisitStore().setFewMonthsVisits(res)
         })
     })
   CustomerService.getCustomers({})
@@ -443,10 +473,10 @@ onMounted(() => {
             <div class="flex items-center justify-between p-5">
               <div>
                 <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
-                <div class="text-sm">Statistics for a month</div>
+                <div class="text-sm">{{ $t('statisticsForSeveralMonths') }}</div>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
-                <ChartBarHorizontalIcon class="w-7 h-7 text-gray-900" />
+                <ChartBarIcon class="w-7 h-7 text-gray-900" />
               </div>
             </div>
             <div class="px-1">

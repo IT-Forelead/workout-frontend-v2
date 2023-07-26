@@ -338,5 +338,7 @@
   "tariffHasExpired": "This customer's tariff period has expired or has not yet been subscribed to a tariff.",
   "tariffHasNotExpired": "This customer's tariff is active.",
   "fewWeeklyStatistics": "Few weekly statistics",
-  "numberOfVisitsPerWeek": "Number of visits per week"
+  "numberOfVisitsPerWeek": "Number of visits per week",
+  "statisticsForSeveralMonths": "Statistics for several months",
+  "numberOfMonthlyVisits": "Number of monthly visits"
 }
