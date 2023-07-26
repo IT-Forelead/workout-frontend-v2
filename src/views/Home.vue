@@ -391,15 +391,15 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
 })
 
 onMounted(() => {
-  useVisitStore().clearStore()
   VisitService.getNumberOfDailyVisit()
-  .then((res) => {
-    useVisitStore().setDailyVisits(res)
-  })
-  VisitService.getNumberOfFewWeeksVisits()
-  .then((res) => {
-    useVisitStore().setFewWeeksVisits(res)
-  })
+    .then((res) => {
+      useVisitStore().clearStore()
+      useVisitStore().setDailyVisits(res)
+      VisitService.getNumberOfFewWeeksVisits()
+        .then((res) => {
+          useVisitStore().setFewWeeksVisits(res)
+        })
+    })
   CustomerService.getCustomers({})
     .then((result) => {
       numberOfAllCustomers.value = result?.total
