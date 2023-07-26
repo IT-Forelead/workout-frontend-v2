@@ -340,5 +340,7 @@
   "errorCreatingProductHistory": "Mahsulot tarixini yaratishda xatolik yuz berdi!",
   "information": "Ma'lumot",
   "tariffHasExpired": "Ushbu mijoznig tarif vaqti tugagan yoki hali tarifga yozilmagan.",
-  "tariffHasNotExpired": "Ushbu mijozning tarifi aktiv holatda."
+  "tariffHasNotExpired": "Ushbu mijozning tarifi aktiv holatda.",
+  "fewWeeklyStatistics": "Bir necha haftalik statistika",
+  "numberOfVisitsPerWeek": "Haftalik tashriflar soni"
 }

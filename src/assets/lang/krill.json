@@ -337,5 +337,7 @@
   "errorCreatingProductHistory": "Маҳсулот тарихини яратишда хатолик юз берди!",
   "information": "Маълумот",
   "tariffHasExpired": "Ушбу мижозниг тариф вақти тугаган ёки ҳали тарифга ёзилмаган.",
-  "tariffHasNotExpired": "Ушбу мижознинг тарифи актив ҳолатда."
+  "tariffHasNotExpired": "Ушбу мижознинг тарифи актив ҳолатда.",
+  "fewWeeklyStatistics": "Бир неча ҳафталик статистика",
+  "numberOfVisitsPerWeek": "Ҳафталик ташрифлар сони"
 }

@@ -13,6 +13,9 @@ class VisitService {
   async getNumberOfDailyVisit() {
     return AxiosService.get('/visit/daily-visits')
   }
+  async getNumberOfFewWeeksVisits() {
+    return AxiosService.get('/visit/weeks-visits')
+  }
 }
 
 export default new VisitService()

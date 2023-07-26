@@ -4,6 +4,7 @@ export const useVisitStore = defineStore('visit', {
   state: () => ({
     visits: [],
     dailyVisits: [],
+    fewWeeksVisits: [],
     selectedVisit: {},
   }),
   actions: {
@@ -12,6 +13,9 @@ export const useVisitStore = defineStore('visit', {
     },
     setDailyVisits(data) {
       this.dailyVisits.push(...data)
+    },
+    setFewWeeksVisits(data) {
+      this.fewWeeksVisits.push(...data)
     },
     setSelectedVisit(data) {
       this.selectedVisit = data
@@ -28,6 +32,7 @@ export const useVisitStore = defineStore('visit', {
     clearStore() {
       this.visits = []
       this.dailyVisits = []
+      this.fewWeeksVisits = []
     },
   },
 })

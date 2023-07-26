@@ -17,6 +17,10 @@ const dailyVisits = computed(() => {
   return useVisitStore().dailyVisits
 })
 
+const fewWeeksVisits = computed(() => {
+  return useVisitStore().fewWeeksVisits
+})
+
 // Daily visits chart
 const numberOfDailyVisitsSeries = computed(() => [
   {
@@ -205,15 +209,15 @@ const expensesChartChartOptions = {
 
 }
 
-// Daily Operations Chart
-const numberOfDailyOperationsSeries = computed(() => [
+// Few Weeks Visits Chart
+const numberOfFewWeeksVisitsSeries = computed(() => [
   {
-    name: 'Operatsiyalar soni',
-    data: [31, 40, 28, 51, 42, 109, 100]
+    name: t('numberOfVisitsPerWeek'),
+    data: fewWeeksVisits.value?.map((a) => a.y),
   },
 ])
 
-const numberOfDailyOperationsChartOptions = computed(() => {
+const numberOfFewWeeksVisitsChartOptions = computed(() => {
   return {
     chart: {
       type: 'bar',
@@ -269,7 +273,7 @@ const numberOfDailyOperationsChartOptions = computed(() => {
       show: false,
     },
     xaxis: {
-      categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"],
+      categories: fewWeeksVisits.value?.map((a) => a.x),
       labels: {
         style: {
           fontSize: '12px',
@@ -387,10 +391,14 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
 })
 
 onMounted(() => {
+  useVisitStore().clearStore()
   VisitService.getNumberOfDailyVisit()
   .then((res) => {
-    useVisitStore().clearStore()
     useVisitStore().setDailyVisits(res)
+  })
+  VisitService.getNumberOfFewWeeksVisits()
+  .then((res) => {
+    useVisitStore().setFewWeeksVisits(res)
   })
   CustomerService.getCustomers({})
     .then((result) => {
@@ -398,7 +406,6 @@ onMounted(() => {
     })
 })
 </script>
-
 <template>
   <div class="px-4 py-2">
     <div class="grid grid-cols-2 gap-x-5 mb-6 overflow-hidden">
@@ -420,22 +427,22 @@ onMounted(() => {
           <div class="bg-lime-300 rounded-lg">
             <div class="flex items-center justify-between p-5">
               <div>
-                <div class="text-lg font-bold">Visit statistics</div>
-                <div class="text-sm">Statistics for a week</div>
+                <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
+                <div class="text-sm">{{ $t('fewWeeklyStatistics') }}</div>
               </div>
               <div class="rounded-xl p-3 bg-white flex items-center justify-center">
                 <ChartBarIcon class="w-7 h-7 text-gray-900" />
               </div>
             </div>
             <div class="px-1">
-              <apexchart type="bar" height="180" :options="numberOfDailyOperationsChartOptions"
-                :series="numberOfDailyOperationsSeries"></apexchart>
+              <apexchart type="bar" height="180" :options="numberOfFewWeeksVisitsChartOptions"
+                :series="numberOfFewWeeksVisitsSeries"></apexchart>
             </div>
           </div>
           <div class="bg-white rounded-lg w-full">
             <div class="flex items-center justify-between p-5">
               <div>
-                <div class="text-lg font-bold">Visit statistics</div>
+                <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
                 <div class="text-sm">Statistics for a month</div>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
@@ -479,24 +486,6 @@ onMounted(() => {
     <div class="bg-white rounded-lg w-full p-3">
       <apexchart type="area" height="320" :options="expensesChartChartOptions" :series="expensesChartSeries"></apexchart>
     </div>
-
-    <!-- <div class="grid grid-cols-2 gap-5">
-      <div class="bg-white rounded-xl h-[40vh] p-5"></div>
-      <div class="grid grid-cols-2 gap-5">
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
-      </div>
-    </div>
-    <div class="grid grid-cols-4 gap-5 mt-5">
-      <div class="bg-white rounded-xl h-[43vh] p-5 col-span-3"></div>
-      <div class="grid grid-cols-1 gap-5 grid-rows-4">
-        <div class="bg-white rounded-xl capitalize h-full p-5 row-span-3"></div>
-        <div class="bg-white rounded-xl capitalize h-full p-5"></div>
-      </div>
-    </div> -->
   </div>
 </template>
-
 <style scoped></style>
