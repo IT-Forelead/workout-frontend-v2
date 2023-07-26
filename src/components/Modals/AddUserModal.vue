@@ -9,9 +9,9 @@ import UserService from '../../services/user.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useUserStore } from '../../store/user.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionRole from '../Inputs/SelectOptionRole.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

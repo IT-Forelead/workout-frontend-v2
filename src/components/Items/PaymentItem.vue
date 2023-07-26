@@ -7,9 +7,9 @@ import moment from 'moment'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import UserIcon from '../Icons/UserIcon.vue'
-import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
-import CalendarXIcon from '../Icons/CalendarXIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import CalendarCheckIcon from '../../assets/icons/CalendarCheckIcon.vue'
+import CalendarXIcon from '../../assets/icons/CalendarXIcon.vue'
 
 const { t } = useI18n()
 

@@ -8,10 +8,10 @@ import VisitService from '../../services/visit.service'
 import { useVisitStore } from '../../store/visit.store'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 import RadionVisitType from '../Inputs/RadionVisitType.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 const router = useRouter()

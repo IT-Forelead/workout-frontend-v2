@@ -8,8 +8,8 @@ import SoldProductService from '../../services/soldProduct.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useSoldProductStore } from '../../store/soldProduct.store'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
 
 const { t } = useI18n()

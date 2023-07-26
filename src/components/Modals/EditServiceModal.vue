@@ -8,11 +8,11 @@ import ServicesService from '../../services/services.service'
 import { useServiceStore } from '../../store/service.store'
 import { useModalStore } from '../../store/modal.store'
 import { useDropdownStore } from '../../store/dropdown.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
 import SelectOptionMonthlyVisit from '../Inputs/SelectOptionMonthlyVisit.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

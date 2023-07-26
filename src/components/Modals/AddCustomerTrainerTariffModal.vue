@@ -11,11 +11,11 @@ import { useCustomerTrainerTariffStore } from '../../store/customerTrainerTariff
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
 import SelectOptionTrainerService from '../Inputs/SelectOptionTrainerService.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

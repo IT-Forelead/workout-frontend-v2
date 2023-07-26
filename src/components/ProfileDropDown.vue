@@ -1,14 +1,14 @@
 <script setup>
 import { useModalStore } from '../store/modal.store'
 import { useAuthStore } from '../store/auth.store'
-import CaretDownIcon from './Icons/CaretDownIcon.vue'
-import SettingsIcon from './Icons/SettingsIcon.vue'
-import LogoutIcon from './Icons/LogoutIcon.vue'
+import CaretDownIcon from './../assets/icons/CaretDownIcon.vue'
+import SettingsIcon from './../assets/icons/SettingsIcon.vue'
+import LogoutIcon from './../assets/icons/LogoutIcon.vue'
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 import AuthService from '../services/auth.service'
 import { useRouter } from 'vue-router'
-import UserIcon from './Icons/UserIcon.vue'
+import UserIcon from './../assets/icons/UserIcon.vue'
 
 
 const router = useRouter()

@@ -4,9 +4,9 @@ import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { useI18n } from 'vue-i18n'
 import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
-import UserIcon from '../Icons/UserIcon.vue'
-import TrashIcon from '../Icons/TrashIcon.vue'
-import EditIcon from '../Icons/EditIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import TrashIcon from '../../assets/icons/TrashIcon.vue'
+import EditIcon from '../../assets/icons/EditIcon.vue'
 
 const { t } = useI18n()
 

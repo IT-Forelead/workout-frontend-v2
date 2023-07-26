@@ -4,11 +4,11 @@ import { computed, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import { useUserStore } from '../../store/user.store'
 import userService from '../../services/user.service'
-import UserIcon from '../Icons/UserIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
 
 const { t } = useI18n()
 

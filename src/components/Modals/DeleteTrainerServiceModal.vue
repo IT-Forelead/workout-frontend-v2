@@ -7,8 +7,8 @@ import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import TrainerServicesService from '../../services/trainerService.service'
 import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
-import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import WarningCircleIcon from '../../assets/icons/WarningCircleIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

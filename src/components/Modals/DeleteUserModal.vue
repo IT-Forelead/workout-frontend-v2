@@ -7,9 +7,9 @@ import { useI18n } from 'vue-i18n'
 import UserService from '../../services/user.service'
 import { useUserStore } from '../../store/user.store'
 import { useModalStore } from '../../store/modal.store'
-import UserIcon from '../Icons/UserIcon.vue'
-import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import WarningCircleIcon from '../../assets/icons/WarningCircleIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

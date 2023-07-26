@@ -8,8 +8,8 @@ import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
 import { useModalStore } from '../../store/modal.store'
 import { useUserStore } from '../../store/user.store'
-import UserIcon from '../Icons/UserIcon.vue'
-import TrashIcon from '../Icons/TrashIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import TrashIcon from '../../assets/icons/TrashIcon.vue'
 
 const { t } = useI18n()
 

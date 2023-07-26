@@ -8,9 +8,9 @@ import CustomerTariffService from '../../services/customerTariff.service'
 import VisitService from '../../services/visit.service'
 import { useCustomerTariffStore } from '../../store/customerTariff.store'
 import { useModalStore } from '../../store/modal.store'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

@@ -6,9 +6,9 @@ import { onMounted, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
-import UserIcon from '../Icons/UserIcon.vue'
-import WarningCircleBoldIcon from '../Icons/WarningCircleBoldIcon.vue'
-import CheckCircleBoldIcon from '../Icons/CheckCircleBoldIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import WarningCircleBoldIcon from '../../assets/icons/WarningCircleBoldIcon.vue'
+import CheckCircleBoldIcon from '../../assets/icons/CheckCircleBoldIcon.vue'
 
 const { t } = useI18n()
 

@@ -7,9 +7,9 @@ import ProductService from '../../services/product.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useProductStore } from '../../store/product.store'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import SearchIcon from '../Icons/SearchIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import SearchIcon from '../../assets/icons/SearchIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionProductItem from '../Items/SelectOptionProductItem.vue'
 
 const isLoading = ref(false)

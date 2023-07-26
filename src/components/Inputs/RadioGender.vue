@@ -2,8 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useI18n } from 'vue-i18n'
-import GenderMaleIcon from '../Icons/GenderMaleIcon.vue'
-import GenderFemaleIcon from '../Icons/GenderFemaleIcon.vue'
+import GenderMaleIcon from '../../assets/icons/GenderMaleIcon.vue'
+import GenderFemaleIcon from '../../assets/icons/GenderFemaleIcon.vue'
 
 const props = defineProps({
   gender: null,

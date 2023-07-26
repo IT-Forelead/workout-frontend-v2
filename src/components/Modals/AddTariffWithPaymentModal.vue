@@ -8,9 +8,9 @@ import CustomerTariffService from '../../services/customerTariff.service'
 import PaymentService from '../../services/payment.service.js'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionService from '../Inputs/SelectOptionService.vue'
 
 const { t } = useI18n()

@@ -3,12 +3,12 @@ import moment from 'moment'
 import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useVisitStore } from '../store/visit.store'
-import ChartBarHorizontalIcon from '../components/Icons/ChartBarHorizontalIcon.vue'
-import ChartBarIcon from '../components/Icons/ChartBarIcon.vue'
+import ChartBarHorizontalIcon from '../assets/icons/ChartBarHorizontalIcon.vue'
+import ChartBarIcon from '../assets/icons/ChartBarIcon.vue'
 import VisitService from '../services/visit.service'
 import CustomerService from '../services/customer.service'
-import FootPrintsIcon from '../components/Icons/FootPrintsIcon.vue'
-import UsersThreeIcon from '../components/Icons/UsersThreeIcon.vue'
+import FootPrintsIcon from '../assets/icons/FootPrintsIcon.vue'
+import UsersThreeIcon from '../assets/icons/UsersThreeIcon.vue'
 
 const { t } = useI18n()
 const numberOfAllCustomers = ref(0)

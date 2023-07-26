@@ -4,8 +4,8 @@ import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import i18n from '../../i18n.js'
 import { useDropdownStore } from '../../store/dropdown.store'
-import CaretDownIcon from '../Icons/CaretDownIcon.vue'
-import GlobeIcon from '../Icons/GlobeIcon.vue'
+import CaretDownIcon from '../../assets/icons/CaretDownIcon.vue'
+import GlobeIcon from '../../assets/icons/GlobeIcon.vue'
 
 const { t } = useI18n()
 const currentLang = ref('')

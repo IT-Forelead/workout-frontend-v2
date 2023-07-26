@@ -5,8 +5,8 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

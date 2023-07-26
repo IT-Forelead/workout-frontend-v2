@@ -8,10 +8,10 @@ import CustomerService from '../../services/customer.service'
 import { useCustomerStore } from '../../store/customer.store'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import SearchIcon from '../Icons/SearchIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import SearchIcon from '../../assets/icons/SearchIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const isLoading = ref(false)
 const dropdown = ref(null)

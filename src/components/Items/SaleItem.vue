@@ -6,7 +6,7 @@ import { parseJwt } from '../../mixins/utils.js'
 import moment from 'moment'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import UserIcon from '../Icons/UserIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
 
 const { t } = useI18n()
 

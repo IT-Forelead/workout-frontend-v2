@@ -2,8 +2,8 @@
 import { toRefs } from 'vue'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { useI18n } from 'vue-i18n'
-import TrashIcon from '../Icons/TrashIcon.vue'
-import EditIcon from '../Icons/EditIcon.vue'
+import TrashIcon from '../../assets/icons/TrashIcon.vue'
+import EditIcon from '../../assets/icons/EditIcon.vue'
 import { useServiceStore } from '../../store/service.store'
 import { useModalStore } from '../../store/modal.store'
 

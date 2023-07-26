@@ -6,10 +6,10 @@ import { useI18n } from 'vue-i18n'
 import { useModalStore } from '../../store/modal.store'
 import { useCustomerStore } from '../../store/customer.store'
 import CustomerService from '../../services/customer.service'
-import XIcon from '../Icons/XIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import QrCodeIcon from '../Icons/QrCodeIcon.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import QrCodeIcon from '../../assets/icons/QrCodeIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

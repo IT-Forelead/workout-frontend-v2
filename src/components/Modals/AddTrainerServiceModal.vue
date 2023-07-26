@@ -8,12 +8,12 @@ import TrainerServiceService from '../../services/trainerService.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { useTrainerServiceStore } from '../../store/trainerService.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionDurationDay from '../Inputs/SelectOptionDurationDay.vue'
 import SelectOptionMonthlyVisit from '../Inputs/SelectOptionMonthlyVisit.vue'
 import SelectOptionServiceType from '../Inputs/SelectOptionServiceType.vue'
 import SelectOptionTrainer from '../Inputs/SelectOptionTrainer.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

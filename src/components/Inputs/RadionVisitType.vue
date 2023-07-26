@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useDropdownStore } from '../../store/dropdown.store'
-import CheckIcon from '../Icons/CheckIcon.vue'
+import CheckIcon from '../../assets/icons/CheckIcon.vue'
 
 const { t } = useI18n()
 

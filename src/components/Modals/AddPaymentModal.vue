@@ -8,11 +8,11 @@ import PaymentService from '../../services/payment.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useModalStore } from '../../store/modal.store'
 import { usePaymentStore } from '../../store/payment.store'
-import XIcon from '../Icons/XIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionCustomerTariff from '../Inputs/SelectOptionCustomerTariff.vue'
 import SelectOptionCustomerTrainerTariff from '../Inputs/SelectOptionCustomerTrainerTariff.vue'
 import SelectOptionPaymentType from '../Inputs/SelectOptionPaymentType.vue'
-import Spinners270RingIcon from '../Icons/Spinners270RingIcon.vue'
+import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 
 const { t } = useI18n()
 

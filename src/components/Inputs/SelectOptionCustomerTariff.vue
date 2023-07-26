@@ -6,9 +6,9 @@ import { useI18n } from 'vue-i18n'
 import customerTariffService from '../../services/customerTariff.service'
 import { useCustomerTariffStore } from '../../store/customerTariff.store'
 import { useDropdownStore } from '../../store/dropdown.store'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

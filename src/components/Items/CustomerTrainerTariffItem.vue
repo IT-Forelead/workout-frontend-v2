@@ -7,11 +7,11 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import useMoneyFormatter from '../../mixins/currencyFormatter.js'
 import { parseJwt } from '../../mixins/utils.js'
-import CalendarCheckIcon from '../Icons/CalendarCheckIcon.vue'
-import CalendarXIcon from '../Icons/CalendarXIcon.vue'
-import UserIcon from '../Icons/UserIcon.vue'
-import CheckIcon from '../Icons/CheckCircleIcon.vue'
-import WarningCircleIcon from '../Icons/WarningCircleIcon.vue'
+import CalendarCheckIcon from '../../assets/icons/CalendarCheckIcon.vue'
+import CalendarXIcon from '../../assets/icons/CalendarXIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
+import CheckIcon from '../../assets/icons/CheckCircleIcon.vue'
+import WarningCircleIcon from '../../assets/icons/WarningCircleIcon.vue'
 
 const { t } = useI18n()
 

@@ -7,9 +7,9 @@ import { cleanObjectEmptyFields } from '../../mixins/utils'
 import ServicesService from '../../services/services.service'
 import { useDropdownStore } from '../../store/dropdown.store'
 import { useServiceStore } from '../../store/service.store'
-import ChevronRightIcon from '../Icons/ChevronRightIcon.vue'
-import SearchIcon from '../Icons/SearchIcon.vue'
-import XIcon from '../Icons/XIcon.vue'
+import ChevronRightIcon from '../../assets/icons/ChevronRightIcon.vue'
+import SearchIcon from '../../assets/icons/SearchIcon.vue'
+import XIcon from '../../assets/icons/XIcon.vue'
 
 const { t } = useI18n()
 

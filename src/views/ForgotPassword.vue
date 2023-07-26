@@ -7,7 +7,7 @@ import { onMounted } from 'vue'
 import { Vue3Marquee } from "vue3-marquee";
 import "vue3-marquee/dist/style.css";
 import { useI18n } from 'vue-i18n'
-import CheckIcon from '../components/Icons/EnvelopeIcon.vue'
+import CheckIcon from '../assets/icons/EnvelopeIcon.vue'
 import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
 import AuthService from '../services/auth.service'
 import { useSidebarStore } from '../store/sidebar.store.js'

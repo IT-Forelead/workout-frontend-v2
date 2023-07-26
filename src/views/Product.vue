@@ -4,7 +4,7 @@ import moment from 'moment'
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import UserIcon from '../components/Icons/UserIcon.vue'
+import UserIcon from '../assets/icons/UserIcon.vue'
 import { useProductStore } from '../store/product.store.js'
 
 const { t } = useI18n()

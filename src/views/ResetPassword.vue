@@ -1,8 +1,8 @@
 <script setup>
 import { ref, reactive } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
-import EyeIcon from '../components/Icons/EyeIcon.vue'
-import EyeSlashIcon from '../components/Icons/EyeSlashIcon.vue'
+import EyeIcon from '../assets/icons/EyeIcon.vue'
+import EyeSlashIcon from '../assets/icons/EyeSlashIcon.vue'
 import AuthService from '../services/auth.service'
 import { Vue3Marquee } from "vue3-marquee";
 import "vue3-marquee/dist/style.css";

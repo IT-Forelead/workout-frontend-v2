@@ -3,7 +3,7 @@ import InfiniteLoading from 'v3-infinite-loading'
 import 'v3-infinite-loading/lib/style.css'
 import { ref, toRefs } from 'vue'
 import { useDropdownStore } from '../../store/dropdown.store'
-import UserIcon from '../Icons/UserIcon.vue'
+import UserIcon from '../../assets/icons/UserIcon.vue'
 
 const props = defineProps({
   customers: { type: Array, required: true },
