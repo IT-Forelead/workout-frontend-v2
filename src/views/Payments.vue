@@ -130,7 +130,7 @@ const convertedData = (res) => {
       extraLength: 3, // A bigger number means that columns will be wider
       writeMode: "writeFile", // The available parameters are 'WriteFile' and 'write'. 
       writeOptions: {}, // Style options from https://docs.sheetjs.com/docs/api/write-options
-      RTL: true, // Display the columns from right-to-left (the default value is false)
+      RTL: false, // Display the columns from right-to-left (the default value is false)
     }
 
     let data = [
