@@ -341,5 +341,12 @@
   "fewWeeklyStatistics": "Бир неча ҳафталик статистика",
   "numberOfVisitsPerWeek": "Ҳафталик ташрифлар сони",
   "statisticsForSeveralMonths": "Бир неча ойлик статистика",
-  "numberOfMonthlyVisits": "Ойлик ташрифлар сони"
+  "numberOfMonthlyVisits": "Ойлик ташрифлар сони",
+  "signUp": "Рўйхатдан ўтиш",
+  "haveAnAccountAlready": "Aкоунтингиз борми?",
+  "dontHaveAnAccount": "Aкоунтингиз йўқми?",
+  "enterYourFirstname": "Исмингизни киритинг",
+  "enterYourLastname": "Фамилиянгизни киритинг",
+  "plsEnterYourFirstname": "Илтимос, исмингизни киритинг!",
+  "plsEnterYourLastname": "Илтимос, фамилиянгизни киритинг!"
 }

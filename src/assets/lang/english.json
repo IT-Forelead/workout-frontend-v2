@@ -340,5 +340,12 @@
   "fewWeeklyStatistics": "Few weekly statistics",
   "numberOfVisitsPerWeek": "Number of visits per week",
   "statisticsForSeveralMonths": "Statistics for several months",
-  "numberOfMonthlyVisits": "Number of monthly visits"
+  "numberOfMonthlyVisits": "Number of monthly visits",
+  "signUp": "Sign up",
+  "haveAnAccountAlready": "Have an account already?",
+  "dontHaveAnAccount": "Don't have an account?",
+  "enterYourFirstname": "Enter your firstname",
+  "enterYourLastname": "Enter your lastname",
+  "plsEnterYourFirstname": "Please enter your firstname!",
+  "plsEnterYourLastname": "Please enter your lastname!"
 }

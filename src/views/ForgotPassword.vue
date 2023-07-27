@@ -4,13 +4,12 @@ import notify from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 import { vMaska } from "maska"
 import { onMounted } from 'vue'
-import { Vue3Marquee } from "vue3-marquee";
-import "vue3-marquee/dist/style.css";
 import { useI18n } from 'vue-i18n'
 import CheckIcon from '../assets/icons/EnvelopeIcon.vue'
 import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
 import AuthService from '../services/auth.service'
 import { useSidebarStore } from '../store/sidebar.store.js'
+import ShoucaseSection from '../components/ShoucaseSection.vue'
 
 const { t } = useI18n()
 const lang = ref('')
@@ -95,50 +94,15 @@ onMounted(() => {
           </router-link>
         </div>
       </div>
+      <div class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap">
+        Developed and designed by 
+        <a href="http://it-forelead.uz" target="_blank" class="cursor-pointer text-indigo-600 hover:text-indigo-900 font-medium">
+          IT-Forelead
+        </a>
+      </div>
     </div>
-    <div class="col-span-2 hidden  max-h-screen bg-gray-100 py-20 xl:flex flex-col justify-center space-y-10">
-      <div class="flex justify-center">
-        <div class="py-8 rounded-lg w-3/6 space-y-4">
-          <div class="text-3xl text-center font-bold text-gray-900">{{ $t('workoutPlatform') }}</div>
-          <div class="text-lg text-center text-gray-800">{{ $t('platformDescription') }}</div>
-        </div>
-      </div>
-      <div class="space-y-2">
-        <Vue3Marquee :pauseOnHover="true" :duration="200" :gradient="false" :direction="'normal'" class="overflow-hidden">
-          <div class="flex ml-2 space-x-2">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-1.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-2.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-3.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-4.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-5.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-6.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-7.webp" alt="#">
-          </div>
-        </Vue3Marquee>
-        <Vue3Marquee :pauseOnHover="true" :duration="250" :gradient="false" :direction="'reverse'"
-          class="overflow-hidden">
-          <div class="flex ml-2 space-x-2">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-8.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-9.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-10.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-11.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-12.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-13.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-14.webp" alt="#">
-          </div>
-        </Vue3Marquee>
-        <Vue3Marquee :pauseOnHover="true" :duration="225" :gradient="false" :direction="'normal'" class="overflow-hidden">
-          <div class="flex ml-2 space-x-2">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-15.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-16.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-17.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-18.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-19.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-20.webp" alt="#">
-            <img class="rounded-xl h-44 w-auto" src="/images/workout/image-21.webp" alt="#">
-          </div>
-        </Vue3Marquee>
-      </div>
+    <div class="col-span-2 hidden  max-h-screen bg-gray-100 py-20 xl:block">
+      <ShoucaseSection />
     </div>
   </div>
 </template>

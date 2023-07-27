@@ -340,5 +340,12 @@
   "fewWeeklyStatistics": "Несколько недельной статистики",
   "numberOfVisitsPerWeek": "Количество посещений в неделю",
   "statisticsForSeveralMonths": "Статистика за несколько месяцев",
-  "numberOfMonthlyVisits": "Количество посещений в месяц"
+  "numberOfMonthlyVisits": "Количество посещений в месяц",
+  "signUp": "Зарегистрироваться",
+  "haveAnAccountAlready": "У вас уже есть аккаунт?",
+  "dontHaveAnAccount": "У вас нет учетной записи?",
+  "enterYourFirstname": "Введите ваше имя",
+  "enterYourLastname": "Введите свою фамилию",
+  "plsEnterYourFirstname": "Пожалуйста, введите ваше имя!",
+  "plsEnterYourLastname": "Пожалуйста, введите свою фамилию!"
 }
