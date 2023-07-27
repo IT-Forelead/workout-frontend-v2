@@ -344,5 +344,12 @@
   "fewWeeklyStatistics": "Bir necha haftalik statistika",
   "numberOfVisitsPerWeek": "Haftalik tashriflar soni",
   "statisticsForSeveralMonths": "Bir necha oylik statistika",
-  "numberOfMonthlyVisits": "Oylik tashriflar soni"
+  "numberOfMonthlyVisits": "Oylik tashriflar soni",
+  "signUp": "Ro'yxatdan o'tish",
+  "haveAnAccountAlready": "Akountingiz bormi?",
+  "dontHaveAnAccount": "Akountingiz yo'qmi?",
+  "enterYourFirstname": "Ismingizni kiriting",
+  "enterYourLastname": "Familiyangizni kiriting",
+  "plsEnterYourFirstname": "Iltimos, ismingizni kiriting!",
+  "plsEnterYourLastname": "Iltimos, familiyangizni kiriting!"
 }
