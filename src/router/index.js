@@ -4,6 +4,12 @@ import { parseJwt } from '../mixins/utils.js'
 const routes = [
   {
     path: '/',
+    name: 'Index',
+    component: () => import('../views/Index.vue'),
+    meta: { layout: 'login' },
+  },
+  {
+    path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
     meta: { layout: 'login' },
@@ -28,7 +34,7 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'Index',
+    name: 'Dashboard',
     component: () => import('../views/Home.vue'),
     meta: { layout: 'dashboard' },
     beforeEnter: navigationGuards(['admin', 'super_manager', 'tech_admin', 'trainer']),
@@ -164,7 +170,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/', '/forgot-password', '/reset-password', '/sign-up']
+  const publicPages = ['/', '/login', '/sign-up', '/forgot-password', '/reset-password']
   const authNotRequired = !publicPages.includes(to.path)
   const notLoggedIn = localStorage.getItem('session')
   if ((authNotRequired && notLoggedIn) || publicPages.includes(`/${to.path.split('/')[1]}`)) {

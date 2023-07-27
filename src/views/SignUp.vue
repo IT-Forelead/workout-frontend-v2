@@ -97,7 +97,7 @@ onMounted(() => {
             <span class="font-normal">
               {{ $t('haveAnAccountAlready') }}
             </span>
-            <router-link to="/" class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900">
+            <router-link to="/login" class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900">
               {{ $t('login') }}
             </router-link>
           </div>
