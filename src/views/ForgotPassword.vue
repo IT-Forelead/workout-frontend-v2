@@ -53,7 +53,10 @@ onMounted(() => {
   <div class="grid grid-cols-1 xl:grid-cols-3 w-full h-screen overflow-hidden">
     <div class="relative w-full xl:basis-1/3 max-h-screen p-4 md:p-8">
       <div class="flex items-center justify-between">
-        <img src="/images/alpha-sport-urgench-logo.png" class="p-2 border border-gray-300 rounded-lg w-auto h-16" alt="Logo" />
+        <router-link to="/">
+          <img src="/images/alpha-sport-urgench-logo.png" class="p-2 border border-gray-300 rounded-lg w-auto h-16"
+            alt="Logo" />
+        </router-link>
         <SelectOptionLanguages />
       </div>
       <div v-if="result" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-2/3 px-8 md:px-4">
