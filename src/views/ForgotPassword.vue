@@ -94,6 +94,12 @@ onMounted(() => {
           </router-link>
         </div>
       </div>
+      <div class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap">
+        Developed and designed by 
+        <a href="http://it-forelead.uz" target="_blank" class="cursor-pointer text-indigo-600 hover:text-indigo-900 font-medium">
+          IT-Forelead
+        </a>
+      </div>
     </div>
     <div class="col-span-2 hidden  max-h-screen bg-gray-100 py-20 xl:block">
       <ShoucaseSection />
