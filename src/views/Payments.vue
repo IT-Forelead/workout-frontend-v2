@@ -1,22 +1,19 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import xlsx from 'json-as-xlsx'
 import moment from 'moment'
 import { onMounted } from 'vue'
+import XlsIcon from '../assets/icons/ExcelIcon.vue'
 import FunnelIcon from '../assets/icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../assets/icons/Spinners270RingIcon.vue'
+import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import PaymentItem from '../components/Items/PaymentItem.vue'
 import { cleanObjectEmptyFields } from '../mixins/utils'
 import PaymentService from '../services/payment.service'
-import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
 import { usePaymentStore } from '../store/payment.store'
-import XlsIcon from '../assets/icons/ExcelIcon.vue'
-import PdfIcon from '../assets/icons/PdfIcon.vue'
-import CsvIcon from '../assets/icons/CsvIcon.vue'
-import xlsx from 'json-as-xlsx'
-import { AxiosService } from '../services/axios.service'
 
 const isLoading = ref(false)
 
