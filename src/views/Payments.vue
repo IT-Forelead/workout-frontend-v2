@@ -12,6 +12,11 @@ import SelectOptionCustomer from '../components/Inputs/SelectOptionCustomer.vue'
 import { useDropdownStore } from '../store/dropdown.store'
 import { useModalStore } from '../store/modal.store'
 import { usePaymentStore } from '../store/payment.store'
+import XlsIcon from '../assets/icons/ExcelIcon.vue'
+import PdfIcon from '../assets/icons/PdfIcon.vue'
+import CsvIcon from '../assets/icons/CsvIcon.vue'
+import xlsx from 'json-as-xlsx'
+import { AxiosService } from '../services/axios.service'
 
 const isLoading = ref(false)
 
@@ -86,6 +91,73 @@ const submitFilterData = () => {
     }
   })
 }
+
+const getDataForExcel = (limit) => {
+  isLoading.value = true
+  PaymentService.getPayments(
+    cleanObjectEmptyFields({
+      customerId: selectedCustomer.value?.id,
+      startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+      endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
+      page: 1,
+      limit,
+    })
+  ).then((res) => {
+    convertedData(res?.data)
+    isLoading.value = false
+  })
+}
+
+let excelContent = []
+
+const convertedData = (res) => {
+  try {
+    if (res) {
+      excelContent = res.map((record, index) => ({
+        idx: index + 1,
+        customerFullName: `${record.customer.firstname} ${record.customer.lastname}`,
+        phone: record.customer.phone,
+        service: record.service.name,
+        payedAt: moment(record.payment.createdAt).format('DD/MM/YYYY H:mm'),
+        cash: record.payment.price
+      }))
+    } else {
+      excelContent = []
+    }
+
+    let settings = {
+      fileName: `To'lovlar_hisoboti_${moment().format('DD-MM-YYYY H:mm:ss')}`, // Name of the resulting spreadsheet
+      extraLength: 3, // A bigger number means that columns will be wider
+      writeMode: "writeFile", // The available parameters are 'WriteFile' and 'write'. 
+      writeOptions: {}, // Style options from https://docs.sheetjs.com/docs/api/write-options
+      RTL: true, // Display the columns from right-to-left (the default value is false)
+    }
+
+    let data = [
+      {
+        sheet: "To'lovlar hisoboti",
+        columns: [
+          { label: "№", value: "idx" },
+          { label: "Mijoz", value: 'customerFullName' },
+          { label: "Telefon raqami", value: 'phone' },
+          { label: "Xizmat", value: 'service' },
+          { label: "To'lov qilingan sana", value: 'payedAt' },
+          { label: "Summa (UZS)", value: 'cash' },
+        ],
+        content: excelContent,
+      }
+    ]
+
+    xlsx(data, settings)
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/* Download Excel Report */
+const downloadXlsReport = () => {
+  getDataForExcel(10000)
+}
 </script>
 
 <template>
@@ -94,6 +166,17 @@ const submitFilterData = () => {
       <div class="flex items-center justify-between mb-1">
         <p class="text-3xl font-bold">{{ $t('paymentsReport') }}</p>
         <div class="flex items-center space-x-3">
+          <div class="flex items-center justify-center space-x-3">
+            <div class="cursor-pointer" @click="downloadXlsReport()">
+              <XlsIcon class="w-7 h-7 text-green-500 hover:text-green-600" />
+            </div>
+            <!-- <div class="cursor-pointer">
+              <PdfIcon class="w-7 h-7 text-red-500 hover:text-red-600" />
+            </div>
+            <div class="cursor-pointer">
+              <CsvIcon class="w-7 h-7 text-indigo-500 hover:text-indigo-600" />
+            </div> -->
+          </div>
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
               class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
