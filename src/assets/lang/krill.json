@@ -348,5 +348,7 @@
   "enterYourFirstname": "Исмингизни киритинг",
   "enterYourLastname": "Фамилиянгизни киритинг",
   "plsEnterYourFirstname": "Илтимос, исмингизни киритинг!",
-  "plsEnterYourLastname": "Илтимос, фамилиянгизни киритинг!"
+  "plsEnterYourLastname": "Илтимос, фамилиянгизни киритинг!",
+  "inGym": "Тренеровкахонада",
+  "currentlyNumberOfCustomersInGym": "Ҳозирда тренеровкадаги мижозлар сони"
 }

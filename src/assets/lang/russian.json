@@ -347,5 +347,7 @@
   "enterYourFirstname": "Введите ваше имя",
   "enterYourLastname": "Введите свою фамилию",
   "plsEnterYourFirstname": "Пожалуйста, введите ваше имя!",
-  "plsEnterYourLastname": "Пожалуйста, введите свою фамилию!"
+  "plsEnterYourLastname": "Пожалуйста, введите свою фамилию!",
+  "inGym": "В спортзале",
+  "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM"
 }

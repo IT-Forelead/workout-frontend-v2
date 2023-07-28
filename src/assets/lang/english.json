@@ -347,5 +347,7 @@
   "enterYourFirstname": "Enter your firstname",
   "enterYourLastname": "Enter your lastname",
   "plsEnterYourFirstname": "Please enter your firstname!",
-  "plsEnterYourLastname": "Please enter your lastname!"
+  "plsEnterYourLastname": "Please enter your lastname!",
+  "inGym": "In GYM",
+  "currentlyNumberOfCustomersInGym": "Currently the number of customers in GYM"
 }

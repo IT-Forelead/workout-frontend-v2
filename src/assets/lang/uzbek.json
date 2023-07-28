@@ -351,5 +351,7 @@
   "enterYourFirstname": "Ismingizni kiriting",
   "enterYourLastname": "Familiyangizni kiriting",
   "plsEnterYourFirstname": "Iltimos, ismingizni kiriting!",
-  "plsEnterYourLastname": "Iltimos, familiyangizni kiriting!"
+  "plsEnterYourLastname": "Iltimos, familiyangizni kiriting!",
+  "inGym": "Trenerovkaxonada",
+  "currentlyNumberOfCustomersInGym": "Hozirda trenerovkadagi mijozlar soni"
 }

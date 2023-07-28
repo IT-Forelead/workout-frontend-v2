@@ -11,6 +11,7 @@ import { useVisitStore } from '../store/visit.store'
 
 const { t } = useI18n()
 const numberOfAllCustomers = ref(0)
+const numberOfCustomersInGym = ref(0)
 
 const dailyVisits = computed(() => {
   return useVisitStore().dailyVisits
@@ -433,6 +434,10 @@ onMounted(() => {
     .then((result) => {
       numberOfAllCustomers.value = result?.total
     })
+  CustomerService.getCustomersInGym()
+    .then((result) => {
+      numberOfCustomersInGym.value = result.length
+    })
 })
 </script>
 <template>
@@ -500,14 +505,14 @@ onMounted(() => {
           <div class="bg-white rounded-lg w-full p-5 space-y-2">
             <div class="flex justify-between mb-3">
               <div>
-                <p>In GYM</p>
-                <p class="text-2xl font-bold">17</p>
+                <p>{{ $t('inGym') }}</p>
+                <p class="text-2xl font-bold">{{ numberOfCustomersInGym }}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <FootPrintsIcon class="w-7 h-7 text-gray-900" />
               </div>
             </div>
-            <p>Currently our clients in GYM</p>
+            <p>{{ $t('currentlyNumberOfCustomersInGym') }}</p>
           </div>
         </div>
       </div>
