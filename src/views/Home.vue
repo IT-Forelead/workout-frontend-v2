@@ -415,6 +415,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
   }
 })
 
+const numberOffCurrentlyCustomers = ref(0)
 onMounted(() => {
   VisitService.getNumberOfDailyVisit()
     .then((res) => {
@@ -432,6 +433,10 @@ onMounted(() => {
   CustomerService.getCustomers({})
     .then((result) => {
       numberOfAllCustomers.value = result?.total
+    })
+  CustomerService.getCustomersNowAt()
+    .then((result) => {
+      numberOffCurrentlyCustomers.value = result?.length
     })
 })
 </script>
@@ -501,7 +506,7 @@ onMounted(() => {
             <div class="flex justify-between mb-3">
               <div>
                 <p>In GYM</p>
-                <p class="text-2xl font-bold">17</p>
+                <p class="text-2xl font-bold">{{numberOffCurrentlyCustomers}}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <FootPrintsIcon class="w-7 h-7 text-gray-900" />
