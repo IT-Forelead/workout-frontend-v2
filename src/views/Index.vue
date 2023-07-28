@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import ChartBarIcon from '../assets/icons/ChartBarIcon.vue'
 import FootPrintsIcon from '../assets/icons/FootPrintsIcon.vue'
 import UsersThreeIcon from '../assets/icons/UsersThreeIcon.vue'
+import UsersIcon from '../assets/icons/UsersIcon.vue'
 import PublicNavbar from '../components/PublicNavbar.vue'
 import VisitService from '../services/visit.service'
 import { useVisitStore } from '../store/visit.store'
@@ -373,26 +374,26 @@ onMounted(() => {
         <div class="bg-white rounded-lg w-full p-5 space-y-2">
           <div class="flex justify-between mb-3">
             <div>
-              <p>In GYM</p>
-              <p class="text-2xl font-bold">17</p>
+              <p>{{ $t('inGym') }}</p>
+              <p class="text-2xl font-bold">0</p>
             </div>
             <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
               <FootPrintsIcon class="w-7 h-7 text-gray-900" />
             </div>
           </div>
-          <p>Currently our clients in GYM</p>
+          <p>{{ $t('currentlyNumberOfCustomersInGym') }}</p>
         </div>
         <div class="bg-white rounded-lg w-full p-5 space-y-2">
           <div class="flex justify-between mb-3">
             <div>
-              <p>In GYM</p>
-              <p class="text-2xl font-bold">17</p>
+              <p>{{ $t('trainers') }}</p>
+              <p class="text-2xl font-bold">2</p>
             </div>
             <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
-              <FootPrintsIcon class="w-7 h-7 text-gray-900" />
+              <UsersIcon class="w-7 h-7 text-gray-900" />
             </div>
           </div>
-          <p>Currently our clients in GYM</p>
+          <p>{{ $t('numberOfTrainers') }}</p>
         </div>
       </div>
     </div>

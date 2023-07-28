@@ -188,6 +188,7 @@
   "monthlyVisit": "Monthly visit",
   "addTrainerService": "Add trainer service",
   "trainer": "Trainer",
+  "trainers": "Trainers",
   "addUser": "Add user",
   "expireAt": "Expire at",
   "trainerService": "Trainer service",
@@ -349,5 +350,6 @@
   "plsEnterYourFirstname": "Please enter your firstname!",
   "plsEnterYourLastname": "Please enter your lastname!",
   "inGym": "In GYM",
-  "currentlyNumberOfCustomersInGym": "Currently the number of customers in GYM"
+  "currentlyNumberOfCustomersInGym": "Currently the number of customers in GYM",
+  "numberOfTrainers": "Number of trainers"
 }

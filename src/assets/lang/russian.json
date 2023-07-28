@@ -188,6 +188,7 @@
   "monthlyVisit": "Ежемесячное посещение",
   "addTrainerService": "Добавить тренерский сервис",
   "trainer": "Тренер",
+  "trainers": "Тренери",
   "addUser": "Добавить пользователя",
   "expireAt": "Срок действия истекает в",
   "trainerService": "Услуги тренера",
@@ -349,5 +350,6 @@
   "plsEnterYourFirstname": "Пожалуйста, введите ваше имя!",
   "plsEnterYourLastname": "Пожалуйста, введите свою фамилию!",
   "inGym": "В спортзале",
-  "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM"
+  "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM",
+  "numberOfTrainers": "Количество тренеров"
 }

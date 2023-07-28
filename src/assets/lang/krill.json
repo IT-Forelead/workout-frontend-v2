@@ -188,6 +188,7 @@
   "monthlyVisit": "Ойлик ташриф",
   "addTrainerService": "Мураббий хизматини қўшиш",
   "trainer": "Мураббий",
+  "trainerы": "Мураббийkfh",
   "addUser": "Фойдаланувчи қўшиш",
   "expireAt": "Муддати тугаш вақти",
   "trainerService": "Мураббий хизмати",
@@ -350,5 +351,6 @@
   "plsEnterYourFirstname": "Илтимос, исмингизни киритинг!",
   "plsEnterYourLastname": "Илтимос, фамилиянгизни киритинг!",
   "inGym": "Тренеровкахонада",
-  "currentlyNumberOfCustomersInGym": "Ҳозирда тренеровкадаги мижозлар сони"
+  "currentlyNumberOfCustomersInGym": "Ҳозирда тренеровкадаги мижозлар сони",
+  "numberOfTrainers": "Мураббийлар сони"
 }

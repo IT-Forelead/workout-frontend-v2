@@ -188,6 +188,7 @@
   "monthlyVisit": "Oylik tashriflar",
   "addTrainerService": "Murabbiy xizmatini qo'shish",
   "trainer": "Murabbiy",
+  "trainers": "Murabbiylar",
   "addUser": "Foydalanuvchi qo'shish",
   "expireAt": "Muddati tugash vaqti",
   "trainerService": "Murabbiy xizmati",
@@ -353,5 +354,6 @@
   "plsEnterYourFirstname": "Iltimos, ismingizni kiriting!",
   "plsEnterYourLastname": "Iltimos, familiyangizni kiriting!",
   "inGym": "Trenerovkaxonada",
-  "currentlyNumberOfCustomersInGym": "Hozirda trenerovkadagi mijozlar soni"
+  "currentlyNumberOfCustomersInGym": "Hozirda trenerovkadagi mijozlar soni",
+  "numberOfTrainers": "Murabbiylar soni"
 }
