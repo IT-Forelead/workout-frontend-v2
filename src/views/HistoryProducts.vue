@@ -1,19 +1,23 @@
 <script setup>
 import { computed, reactive, ref } from '@vue/reactivity'
 import { onClickOutside } from '@vueuse/core'
+import xlsx from 'json-as-xlsx'
 import moment from 'moment'
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import XlsIcon from '../assets/icons/ExcelIcon.vue'
 import FunnelIcon from '../assets/icons/FunnelIcon.vue'
 import Spinners270RingIcon from '../assets/icons/Spinners270RingIcon.vue'
-import { cleanObjectEmptyFields } from '../mixins/utils'
-import { useModalStore } from '../store/modal.store'
-import { useProductHistoryStore } from '../store/productHistory.store'
-import { useDropdownStore } from '../store/dropdown.store'
-import ProductHistoryService from '../services/productHistory.service'
 import SelectOptionProduct from '../components/Inputs/SelectOptionProduct.vue'
 import SelectOptionProductHistoryType from '../components/Inputs/SelectOptionProductHistoryType.vue'
 import ProductHistoryItem from '../components/Items/ProductHistoryItem.vue'
+import { cleanObjectEmptyFields } from '../mixins/utils'
+import ProductHistoryService from '../services/productHistory.service'
+import { useDropdownStore } from '../store/dropdown.store'
+import { useModalStore } from '../store/modal.store'
+import { useProductHistoryStore } from '../store/productHistory.store'
 
+const { t } = useI18n()
 const isLoading = ref(false)
 
 const selectedProduct = computed(() => {
@@ -74,6 +78,24 @@ const filterData = reactive({
   endDate: '',
 })
 
+const productTypeTranslate = (type) => {
+  switch (type) {
+    case 'chocolate_bar':
+      return t('coffeeBar')
+    case 'water':
+      return t('water')
+  }
+}
+
+const productHistoryTypeTranslate = (type) => {
+  switch (type) {
+    case 'bought':
+      return t('bought')
+    case 'sold':
+      return t('sold')
+  }
+}
+
 const submitFilterData = () => {
   isLoading.value = true
   ProductHistoryService.getProductHistories(
@@ -94,6 +116,74 @@ const submitFilterData = () => {
     }
   })
 }
+
+const getDataForExcel = (limit) => {
+  isLoading.value = true
+  ProductHistoryService.getProductHistories(
+    cleanObjectEmptyFields({
+      productId: selectedProduct.value?.id,
+      productHistoryType: selectedProductHistoryType.value?.id,
+      startDate: filterData.startDate ? moment(filterData.startDate).startOf('day').format().slice(0, 16) : '',
+      endDate: filterData.endDate ? moment(filterData.endDate).endOf('day').format().slice(0, 16) : '',
+      page: 1,
+      limit,
+    })
+  ).then((res) => {
+    convertedData(res?.data)
+    isLoading.value = false
+  })
+}
+
+let excelContent = []
+
+const convertedData = (res) => {
+  try {
+    if (res) {
+      excelContent = res.map((record, index) => ({
+        idx: index + 1,
+        productName: record.product.name,
+        productType: productTypeTranslate(record.product.productType),
+        productCount: record.productHistory.count,
+        type: productHistoryTypeTranslate(record.productHistory.productHistoryType),
+        createdAt: moment(record.productHistory.createdAt).format('DD/MM/YYYY H:mm'),
+      }))
+    } else {
+      excelContent = []
+    }
+
+    let settings = {
+      fileName: `Mahsulotlar_tarixi_hisoboti_${moment().format('DD-MM-YYYY H:mm:ss')}`, // Name of the resulting spreadsheet
+      extraLength: 3, // A bigger number means that columns will be wider
+      writeMode: "writeFile", // The available parameters are 'WriteFile' and 'write'. 
+      writeOptions: {}, // Style options from https://docs.sheetjs.com/docs/api/write-options
+      RTL: false, // Display the columns from right-to-left (the default value is false)
+    }
+
+    let data = [
+      {
+        sheet: "Mahsulotlar tarixi hisoboti",
+        columns: [
+          { label: "№", value: "idx" },
+          { label: "Mahsulot", value: 'productName' },
+          { label: "Mahsulot turi", value: 'productType' },
+          { label: "Mahsulot soni", value: 'productCount' },
+          { label: "Amal turi", value: 'type' },
+          { label: "Sanasi", value: 'createdAt' },
+        ],
+        content: excelContent,
+      }
+    ]
+
+    xlsx(data, settings)
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+/* Download Excel Report */
+const downloadXlsReport = () => {
+  getDataForExcel(10000)
+}
 </script>
 <template>
   <div class="px-4 py-2">
@@ -101,6 +191,9 @@ const submitFilterData = () => {
       <div class="flex items-center justify-between mb-1">
         <p class="text-3xl font-bold">{{ $t('historyProducts') }}</p>
         <div class="flex items-center space-x-3">
+          <div class="cursor-pointer" @click="downloadXlsReport()">
+            <XlsIcon class="w-7 h-7 text-green-500 hover:text-green-600" />
+          </div>
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
               class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
@@ -165,12 +258,13 @@ const submitFilterData = () => {
             </tr>
           </thead>
           <tbody class="text-gray-600 text-sm font-light">
-            <ProductHistoryItem :productHistories="productHistories" :distance="distance"
-              :target="target" @infinite="loadProductHistories" />
+            <ProductHistoryItem :productHistories="productHistories" :distance="distance" :target="target"
+              @infinite="loadProductHistories" />
           </tbody>
         </table>
-      <div v-if="productHistories?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+        <div v-if="productHistories?.length === 0" class="w-full text-center text-red-500">{{ $t('empty') }}</div>
+      </div>
     </div>
   </div>
-</div></template>
+</template>
 <style scoped></style>
