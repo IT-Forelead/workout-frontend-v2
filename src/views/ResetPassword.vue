@@ -1,15 +1,15 @@
 <script setup>
-import { ref, reactive } from '@vue/reactivity'
+import { reactive, ref } from '@vue/reactivity'
+import notify from 'izitoast'
+import 'izitoast/dist/css/iziToast.min.css'
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import EyeIcon from '../assets/icons/EyeIcon.vue'
 import EyeSlashIcon from '../assets/icons/EyeSlashIcon.vue'
-import AuthService from '../services/auth.service'
-import { onMounted } from 'vue'
-import notify from 'izitoast'
-import 'izitoast/dist/css/iziToast.min.css'
-import { useI18n } from 'vue-i18n'
-import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
+import PublicNavbar from '../components/PublicNavbar.vue'
 import ShoucaseSection from '../components/ShoucaseSection.vue'
+import AuthService from '../services/auth.service'
 
 const { t } = useI18n()
 const lang = ref('')
@@ -81,15 +81,9 @@ onMounted(() => {
 })
 </script>
 <template>
+  <PublicNavbar />
   <div v-if="validCode" class="grid grid-cols-1 xl:grid-cols-3 w-full h-screen overflow-hidden">
     <div class="relative w-full xl:basis-1/3 max-h-screen p-4 md:p-8">
-      <div class="flex items-center justify-between">
-        <router-link to="/">
-          <img src="/images/alpha-sport-urgench-logo.png" class="p-2 border border-gray-300 rounded-lg w-auto h-16"
-            alt="Logo" />
-        </router-link>
-        <SelectOptionLanguages />
-      </div>
       <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-2/3 px-8 md:px-4">
         <h1 class="text-2xl font-bold mb-5">{{ $t('changePassword') }}</h1>
         <div class="flex flex-col space-y-6">

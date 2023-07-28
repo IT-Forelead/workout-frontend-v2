@@ -4,9 +4,8 @@ import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ChartBarIcon from '../assets/icons/ChartBarIcon.vue'
 import FootPrintsIcon from '../assets/icons/FootPrintsIcon.vue'
-import SignInIcon from '../assets/icons/SignInIcon.vue'
 import UsersThreeIcon from '../assets/icons/UsersThreeIcon.vue'
-import SelectOptionLanguages from '../components/Inputs/SelectOptionLanguages.vue'
+import PublicNavbar from '../components/PublicNavbar.vue'
 import VisitService from '../services/visit.service'
 import { useVisitStore } from '../store/visit.store'
 
@@ -342,22 +341,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <header class="fixed top-0 w-full p-0 bg-white">
-    <div class="container flex items-center py-2 mx-auto justify-between">
-      <router-link to="/">
-        <img src="/images/alpha-sport-urgench-logo.png" class="w-auto h-10" alt="Logo" />
-      </router-link>
-      <div class="flex items-start space-x-4">
-        <SelectOptionLanguages />
-        <router-link to="/login">
-          <div class="flex items-center rounded-lg bg-gray-100 p-2 cursor-pointer hover:bg-gray-200 w-28 space-x-2">
-            <SignInIcon class="w-6 h-6 text-gray-500" />
-            <span>{{ $t('login') }}</span>
-          </div>
-        </router-link>
-      </div>
-    </div>
-  </header>
+  <PublicNavbar />
   <div class="w-full h-screen bg-gray-100 py-20 px-10 space-y-6">
     <div class="grid grid-cols-3 gap-8 w-full">
       <div class="bg-white col-span-2 rounded-lg">
