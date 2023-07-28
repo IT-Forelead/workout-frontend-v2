@@ -11,7 +11,8 @@ import 'vue3-marquee/dist/style.css'
             </div>
         </div>
         <div class="space-y-2">
-            <Vue3Marquee :pauseOnHover="true" :duration="200" :gradient="false" :direction="'normal'" class="overflow-hidden">
+            <Vue3Marquee :pauseOnHover="true" :duration="200" :gradient="false" :direction="'normal'"
+                class="overflow-hidden">
                 <div class="flex ml-2 space-x-2">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-1.webp" alt="#">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-2.webp" alt="#">
@@ -22,7 +23,8 @@ import 'vue3-marquee/dist/style.css'
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-7.webp" alt="#">
                 </div>
             </Vue3Marquee>
-            <Vue3Marquee :pauseOnHover="true" :duration="250" :gradient="false" :direction="'reverse'" class="overflow-hidden">
+            <Vue3Marquee :pauseOnHover="true" :duration="250" :gradient="false" :direction="'reverse'"
+                class="overflow-hidden">
                 <div class="flex ml-2 space-x-2">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-8.webp" alt="#">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-9.webp" alt="#">
@@ -33,7 +35,8 @@ import 'vue3-marquee/dist/style.css'
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-14.webp" alt="#">
                 </div>
             </Vue3Marquee>
-            <Vue3Marquee :pauseOnHover="true" :duration="225" :gradient="false" :direction="'normal'" class="overflow-hidden">
+            <Vue3Marquee :pauseOnHover="true" :duration="225" :gradient="false" :direction="'normal'"
+                class="overflow-hidden">
                 <div class="flex ml-2 space-x-2">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-15.webp" alt="#">
                     <img class="rounded-xl h-44 w-auto" src="/images/workout/image-16.webp" alt="#">
@@ -45,6 +48,5 @@ import 'vue3-marquee/dist/style.css'
                 </div>
             </Vue3Marquee>
         </div>
-    </section>
-</template>
+</section></template>
 <style scoped></style>
