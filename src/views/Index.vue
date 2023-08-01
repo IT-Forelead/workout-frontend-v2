@@ -93,6 +93,7 @@ const numberOfDailyVisitsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors: ['#8e8da4', '#8e8da4', '#8e8da4',  '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4',],
         },
         formatter: function (val) {
           return moment(val).format('D-MMMM')
@@ -190,6 +191,7 @@ const numberOfFewWeeksVisitsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors:['#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4']
         },
         formatter: function (val) {
           return moment(val).format('D-MMM')
@@ -290,6 +292,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors: ['#8e8da4', '#8e8da4', '#8e8da4',  '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4',],
         },
         formatter: function (val) {
           return moment(val).format('MMMM')
@@ -343,15 +346,15 @@ onMounted(() => {
 </script>
 <template>
   <PublicNavbar />
-  <div class="w-full h-screen bg-gray-100 py-20 px-10 space-y-6">
+  <div class="w-full h-screen bg-gray-100 dark:bg-gray-800 py-20 px-10 space-y-6">
     <div class="grid grid-cols-3 gap-8 w-full">
-      <div class="bg-white col-span-2 rounded-lg">
+      <div class="bg-white dark:bg-gray-900 col-span-2 rounded-lg">
         <div class="flex items-center justify-between p-5">
           <div>
-            <h1 class="text-3xl font-bold">{{ $t('visitStatistics') }}</h1>
-            <p class="font-medium text-lg">{{ $t('sevenBusinessDayStatistics') }}</p>
+            <h1 class="text-3xl font-bold dark:text-white">{{ $t('visitStatistics') }}</h1>
+            <p class="font-medium text-lg dark:text-gray-300">{{ $t('sevenBusinessDayStatistics') }}</p>
           </div>
-          <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
+          <div class="rounded-xl p-3 bg-lime-300 dark:bg-white flex items-center justify-center">
             <ChartBarIcon class="w-9 h-9 text-gray-900" />
           </div>
         </div>
@@ -359,50 +362,50 @@ onMounted(() => {
         </apexchart>
       </div>
       <div class="space-y-4">
-        <div class="bg-white rounded-lg w-full p-5 space-y-2">
+        <div class="bg-white dark:bg-gray-900 rounded-lg w-full p-5 space-y-2">
           <div class="flex justify-between mb-3">
             <div>
-              <p>{{ $t('customers') }}</p>
-              <p class="text-2xl font-bold">{{ numberOfAllCustomers }}</p>
+              <p class="dark:text-white">{{ $t('customers') }}</p>
+              <p class="text-2xl font-bold dark:text-gray-300">{{ numberOfAllCustomers }}</p>
             </div>
-            <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
+            <div class="rounded-xl p-3 bg-lime-300 dark:bg-white flex items-center justify-center">
               <UsersThreeIcon class="w-8 h-8 text-gray-900" />
             </div>
           </div>
-          <p>{{ $t('numberOfRegisteredCustomers') }}</p>
+          <p class="dark:text-gray-300">{{ $t('numberOfRegisteredCustomers') }}</p>
         </div>
-        <div class="bg-white rounded-lg w-full p-5 space-y-2">
+        <div class="bg-white dark:bg-gray-900 rounded-lg w-full p-5 space-y-2">
           <div class="flex justify-between mb-3">
             <div>
-              <p>{{ $t('inGym') }}</p>
-              <p class="text-2xl font-bold">0</p>
+              <p class="dark:text-white">{{ $t('inGym') }}</p>
+              <p class="text-2xl font-bold dark:text-gray-300">0</p>
             </div>
-            <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
+            <div class="rounded-xl p-3 bg-lime-300 dark:bg-white flex items-center justify-center">
               <FootPrintsIcon class="w-7 h-7 text-gray-900" />
             </div>
           </div>
-          <p>{{ $t('currentlyNumberOfCustomersInGym') }}</p>
+          <p class="dark:text-gray-300">{{ $t('currentlyNumberOfCustomersInGym') }}</p>
         </div>
-        <div class="bg-white rounded-lg w-full p-5 space-y-2">
+        <div class="bg-white dark:bg-gray-900 rounded-lg w-full p-5 space-y-2">
           <div class="flex justify-between mb-3">
             <div>
-              <p>{{ $t('trainers') }}</p>
-              <p class="text-2xl font-bold">2</p>
+              <p class="dark:text-white">{{ $t('trainers') }}</p>
+              <p class="text-2xl font-bold dark:text-gray-300">2</p>
             </div>
-            <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
+            <div class="rounded-xl p-3 bg-lime-300 dark:bg-white flex items-center justify-center">
               <UsersIcon class="w-7 h-7 text-gray-900" />
             </div>
           </div>
-          <p>{{ $t('numberOfTrainers') }}</p>
+          <p class="dark:text-gray-300">{{ $t('numberOfTrainers') }}</p>
         </div>
       </div>
     </div>
     <div class="grid grid-cols-2 gap-8 w-full">
-      <div class="bg-lime-300 rounded-lg">
+      <div class="bg-lime-300 dark:bg-gray-900 rounded-lg">
         <div class="flex items-center justify-between p-5">
           <div>
-            <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
-            <div class="text-sm">{{ $t('fewWeeklyStatistics') }}</div>
+            <div class="text-lg font-bold dark:text-white">{{ $t('visitStatistics') }}</div>
+            <div class="text-sm dark:text-gray-300">{{ $t('fewWeeklyStatistics') }}</div>
           </div>
           <div class="rounded-xl p-3 bg-white flex items-center justify-center">
             <ChartBarIcon class="w-7 h-7 text-gray-900" />
@@ -413,13 +416,13 @@ onMounted(() => {
             :series="numberOfFewWeeksVisitsSeries"></apexchart>
         </div>
       </div>
-      <div class="bg-white rounded-lg w-full">
+      <div class="bg-white dark:bg-gray-900 rounded-lg w-full">
         <div class="flex items-center justify-between p-5">
           <div>
-            <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
-            <div class="text-sm">{{ $t('statisticsForSeveralMonths') }}</div>
+            <div class="text-lg font-bold dark:text-white">{{ $t('visitStatistics') }}</div>
+            <div class="text-sm dark:text-gray-300">{{ $t('statisticsForSeveralMonths') }}</div>
           </div>
-          <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
+          <div class="rounded-xl p-3 bg-lime-300 dark:bg-white flex items-center justify-center">
             <ChartBarIcon class="w-7 h-7 text-gray-900" />
           </div>
         </div>

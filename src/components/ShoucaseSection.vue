@@ -3,11 +3,11 @@ import { Vue3Marquee } from 'vue3-marquee'
 import 'vue3-marquee/dist/style.css'
 </script>
 <template>
-    <section class="flex flex-col justify-center space-y-10">
+    <section class="flex flex-col justify-center space-y-10 min-h-screen dark:bg-gray-900">
         <div class="flex justify-center">
             <div class="py-8 rounded-lg w-3/6 space-y-4">
-                <div class="text-3xl text-center font-bold text-gray-900">{{ $t('workoutPlatform') }}</div>
-                <div class="text-lg text-center text-gray-800">{{ $t('platformDescription') }}</div>
+                <div class="text-3xl text-center font-bold text-gray-900 dark:text-white">{{ $t('workoutPlatform') }}</div>
+                <div class="text-lg text-center text-gray-800 dark:text-gray-300">{{ $t('platformDescription') }}</div>
             </div>
         </div>
         <div class="space-y-2">
