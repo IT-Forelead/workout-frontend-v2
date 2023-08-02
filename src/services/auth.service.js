@@ -24,7 +24,7 @@ class AuthService {
   async linkValidation(linkCode) {
     await PublicAxiosService.get(`/auth/link-validation/${linkCode}`)
   }
-  
+
   async logout() {
     await AxiosService.get('/auth/user/logout').then(() => {
       localStorage.clear()

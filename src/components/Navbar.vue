@@ -30,6 +30,9 @@ import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
 import AddProductModal from './Modals/AddProductModal.vue'
 import AddProductHistoryModal from './Modals/AddProductHistoryModal.vue'
+import QrCodeIcon from '../assets/icons/QrCodeIcon.vue'
+import ShowQRCustomerModal from './Modals/ShowQRCodeCustomerModal.vue'
+
 
 const { t } = useI18n()
 const payload = ref({})
@@ -58,6 +61,10 @@ onMounted(() => {
         <ChatTextIcon class="w-6 h-6 text-gray-500" />
         <span>{{ $t('help') }}</span>
       </a>
+      <div @click="useModalStore().openQRCodeCustomerModal()"
+        class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 px-4 space-x-2 cursor-pointer hover:bg-gray-200">
+        <QrCodeIcon class="w-6 h-6 text-gray-500" />
+      </div>
     </div>
     <div class="flex items-center space-x-5">
       <div class="relative" ref="notificationDropdown">
@@ -84,6 +91,7 @@ onMounted(() => {
   <AddTrainerServiceModal />
   <AddCustomerTariffModal />
   <AddCustomerTrainerTariffModal />
+  <ShowQRCustomerModal />
   <AddPaymentModal />
   <AddVisitModal />
   <AddFakeVisitModal />

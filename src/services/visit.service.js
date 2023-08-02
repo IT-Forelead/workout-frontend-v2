@@ -19,6 +19,9 @@ class VisitService {
   async getNumberOfFewMonthsVisits() {
     return PublicAxiosService.get('/visit/last-few-month')
   }
+  async gettttttt(data) {
+    return PublicAxiosService.get('/qr-code/create', data)
+  }
 }
 
 export default new VisitService()

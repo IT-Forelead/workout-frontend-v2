@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useModalStore = defineStore('modal', {
   state: () => ({
+    isShowQRCodeCustomer: false,
     isAddUserModalOpen: false,
     isDeleteUserModalOpen: false,
     isAddCustomerModalOpen: false,
@@ -30,6 +31,9 @@ export const useModalStore = defineStore('modal', {
   actions: {
     openAddUserModal() {
       this.isAddUserModalOpen = true
+    },
+    openQRCodeCustomerModal() {
+      this.isShowQRCodeCustomer = true
     },
     closeAddUserModal() {
       this.isAddUserModalOpen = false
@@ -123,6 +127,9 @@ export const useModalStore = defineStore('modal', {
     },
     closeAddProductHistoryModal(){
       this.isAddProductHistoryModalOpen = false
+    },
+    closeQRCodeCustomerModal(){
+      this.isShowQRCodeCustomer = false
     },
     openAddFakeVisitModal() {
       this.isAddFakeVisitModalOpen = true
