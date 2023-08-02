@@ -11,6 +11,7 @@ import { useSoldProductStore } from '../../store/soldProduct.store'
 import Spinners270RingIcon from '../../assets/icons/Spinners270RingIcon.vue'
 import XIcon from '../../assets/icons/XIcon.vue'
 import SelectOptionCustomer from '../Inputs/SelectOptionCustomer.vue'
+import SelectOptionProduct from '../Inputs/SelectOptionProduct.vue'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -19,10 +20,16 @@ const selectedCustomer = computed(() => {
   return useDropdownStore().selectCustomerOption
 })
 
+const selectedProduct = computed(() => {
+  return useDropdownStore().selectProductOption
+})
+
 const clearForm = () => {
   useDropdownStore().setSelectCustomerOption('')
-  submitForm.productType = 'water'
+  useDropdownStore().setSelectProductOption('')
+  submitForm.productType = ''
   submitForm.quantity = 1
+  submitForm.customer = ''
 }
 
 const closeModal = () => {
@@ -33,7 +40,8 @@ const closeModal = () => {
 const isLoading = ref(false)
 
 const submitForm = reactive({
-  productType: 'water',
+  productType: '',
+  customer: '',
   quantity: 1,
 })
 
@@ -46,7 +54,7 @@ const submitData = () => {
     notify.warning({
       message: t('plsSelectCustomer'),
     })
-  } else if (!submitForm.productType) {
+  } else if (!selectedProduct.value?.name) {
     notify.warning({
       message: t('plsSelectProductType'),
     })
@@ -58,7 +66,7 @@ const submitData = () => {
     isLoading.value = true
     SoldProductService.createSaleProduct({
       customerId: selectedCustomer.value?.id,
-      productType: submitForm.productType,
+      productType: selectedProduct.value?.name,
       quantity: submitForm.quantity,
     }).then(() => {
       notify.success({
@@ -102,6 +110,10 @@ const submitData = () => {
           </div>
           <div class="select-none">
             <label>{{ $t('productType') }}</label>
+            <SelectOptionProduct />
+          </div>
+          <div>
+            <h4>{{ $t('product') }} {{ $t('quantity') }}</h4>
             <div
               class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
               <input id="toggle-05" @click="optionClicked('0.5')" class="toggle toggle-left" name="toggle" value="false"
@@ -187,3 +199,5 @@ input[type='radio'].toggle:checked+label:after {
   @apply left-0;
 }
 </style>
+
+
