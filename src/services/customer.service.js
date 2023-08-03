@@ -33,6 +33,9 @@ class CustomerService {
   async getCustomersTotal(filter) {
     return PublicAxiosService.post('/customer/total', filter)
   }
+  async getNumberOfCustomersInGym() {
+    return PublicAxiosService.get('/customer/customers-in-gym')
+  }
 }
 
 export default new CustomerService()

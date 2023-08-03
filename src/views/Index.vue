@@ -15,6 +15,7 @@ import { cleanObjectEmptyFields } from '../mixins/utils'
 
 const { t } = useI18n()
 const numberOfAllCustomers = ref(0)
+const numberOfCustomersInGym = ref(0)
 const numberOfAllTrainers = ref(0)
 
 const dailyVisits = computed(() => {
@@ -347,6 +348,10 @@ onMounted(() => {
     .then((res) => {
       numberOfAllCustomers.value = res?.data
     })
+  CustomerService.getNumberOfCustomersInGym({})
+    .then((res) => {
+      numberOfCustomersInGym.value = res?.data
+    })
   UserService.getUsersTotal(
     cleanObjectEmptyFields({
       role: 'trainer'
@@ -391,7 +396,7 @@ onMounted(() => {
           <div class="flex justify-between mb-3">
             <div>
               <p>{{ $t('inGym') }}</p>
-              <p class="text-2xl font-bold">0</p>
+              <p class="text-2xl font-bold">{{ numberOfCustomersInGym }}</p>
             </div>
             <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
               <FootPrintsIcon class="w-7 h-7 text-gray-900" />
