@@ -1,4 +1,4 @@
-import { AxiosService } from './axios.service'
+import { AxiosService, PublicAxiosService } from './axios.service'
 
 class UserService {
   async createUser(data) {
@@ -9,6 +9,9 @@ class UserService {
   }
   async deleteUser(userId) {
     return AxiosService.get(`/user/delete/${userId}`)
+  }
+  async getUsersTotal(filter) {
+    return PublicAxiosService.post('/user/total', filter)
   }
 }
 
