@@ -8,10 +8,11 @@ import UsersThreeIcon from '../assets/icons/UsersThreeIcon.vue'
 import UsersIcon from '../assets/icons/UsersIcon.vue'
 import PublicNavbar from '../components/PublicNavbar.vue'
 import VisitService from '../services/visit.service'
+import CustomerService from '../services/customer.service'
 import { useVisitStore } from '../store/visit.store'
 
 const { t } = useI18n()
-const numberOfAllCustomers = ref(215)
+const numberOfAllCustomers = ref(0)
 
 const dailyVisits = computed(() => {
   return useVisitStore().dailyVisits
@@ -338,6 +339,10 @@ onMounted(() => {
         .then((res) => {
           useVisitStore().setFewMonthsVisits(res?.data)
         })
+    })
+  CustomerService.getCustomersTotal({})
+    .then((res) => {
+      numberOfAllCustomers.value = res?.data
     })
 })
 </script>
