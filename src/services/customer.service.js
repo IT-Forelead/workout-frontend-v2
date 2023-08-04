@@ -1,4 +1,4 @@
-import { AxiosService } from './axios.service'
+import { AxiosService, PublicAxiosService } from './axios.service'
 
 class CustomerService {
   async createCustomer(data) {
@@ -29,6 +29,12 @@ class CustomerService {
   }
   async deleteCustomer(customerId) {
     return AxiosService.get(`/customer/delete/${customerId}`)
+  }
+  async getCustomersTotal(filter) {
+    return PublicAxiosService.post('/customer/total', filter)
+  }
+  async getNumberOfCustomersInGym() {
+    return PublicAxiosService.get('/customer/customers-in-gym')
   }
 }
 
