@@ -351,5 +351,6 @@
   "plsEnterYourLastname": "Please enter your lastname!",
   "inGym": "In GYM",
   "currentlyNumberOfCustomersInGym": "Currently the number of customers in GYM",
-  "numberOfTrainers": "Number of trainers"
+  "numberOfTrainers": "Number of trainers",
+  "youHaveSuccessfullyRegistered": "You have successfully registered!"
 }

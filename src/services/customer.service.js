@@ -8,6 +8,16 @@ class CustomerService {
       },
     })
   }
+  async create(data) {
+    return PublicAxiosService.post('/customer/register', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  }
+  async sendVerifyCode(phone) {
+    return AxiosService.get(`/customer/verify-code?phone=${encodeURIComponent(phone)}`)
+  }
   async editCustomer(data) {
     return AxiosService.post('/customer/edit', data, {
       headers: {
