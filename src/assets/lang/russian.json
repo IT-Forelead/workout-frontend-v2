@@ -351,5 +351,6 @@
   "plsEnterYourLastname": "Пожалуйста, введите свою фамилию!",
   "inGym": "В спортзале",
   "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM",
-  "numberOfTrainers": "Количество тренеров"
+  "numberOfTrainers": "Количество тренеров",
+  "youHaveSuccessfulRegistered": "Вы успешно зарегистрировались!"
 }

@@ -8,10 +8,15 @@ import UsersThreeIcon from '../assets/icons/UsersThreeIcon.vue'
 import UsersIcon from '../assets/icons/UsersIcon.vue'
 import PublicNavbar from '../components/PublicNavbar.vue'
 import VisitService from '../services/visit.service'
+import CustomerService from '../services/customer.service'
+import UserService from '../services/user.service'
 import { useVisitStore } from '../store/visit.store'
+import { cleanObjectEmptyFields } from '../mixins/utils'
 
 const { t } = useI18n()
-const numberOfAllCustomers = ref(215)
+const numberOfAllCustomers = ref(0)
+const numberOfCustomersInGym = ref(0)
+const numberOfAllTrainers = ref(0)
 
 const dailyVisits = computed(() => {
   return useVisitStore().dailyVisits
@@ -339,6 +344,22 @@ onMounted(() => {
           useVisitStore().setFewMonthsVisits(res?.data)
         })
     })
+  CustomerService.getCustomersTotal({})
+    .then((res) => {
+      numberOfAllCustomers.value = res?.data
+    })
+  CustomerService.getNumberOfCustomersInGym({})
+    .then((res) => {
+      numberOfCustomersInGym.value = res?.data
+    })
+  UserService.getUsersTotal(
+    cleanObjectEmptyFields({
+      role: 'trainer'
+    })
+  )
+    .then((res) => {
+      numberOfAllTrainers.value = res?.data
+    })
 })
 </script>
 <template>
@@ -375,7 +396,7 @@ onMounted(() => {
           <div class="flex justify-between mb-3">
             <div>
               <p>{{ $t('inGym') }}</p>
-              <p class="text-2xl font-bold">0</p>
+              <p class="text-2xl font-bold">{{ numberOfCustomersInGym }}</p>
             </div>
             <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
               <FootPrintsIcon class="w-7 h-7 text-gray-900" />
@@ -387,7 +408,7 @@ onMounted(() => {
           <div class="flex justify-between mb-3">
             <div>
               <p>{{ $t('trainers') }}</p>
-              <p class="text-2xl font-bold">2</p>
+              <p class="text-2xl font-bold">{{ numberOfAllTrainers }}</p>
             </div>
             <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
               <UsersIcon class="w-7 h-7 text-gray-900" />

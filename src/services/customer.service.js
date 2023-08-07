@@ -1,4 +1,4 @@
-import { AxiosService } from './axios.service'
+import { AxiosService, PublicAxiosService } from './axios.service'
 
 class CustomerService {
   async createCustomer(data) {
@@ -7,6 +7,16 @@ class CustomerService {
         'Content-Type': 'multipart/form-data',
       },
     })
+  }
+  async create(data) {
+    return PublicAxiosService.post('/customer/register', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  }
+  async sendVerifyCode(phone) {
+    return AxiosService.get(`/customer/verify-code?phone=${encodeURIComponent(phone)}`)
   }
   async editCustomer(data) {
     return AxiosService.post('/customer/edit', data, {
@@ -29,6 +39,12 @@ class CustomerService {
   }
   async deleteCustomer(customerId) {
     return AxiosService.get(`/customer/delete/${customerId}`)
+  }
+  async getCustomersTotal(filter) {
+    return PublicAxiosService.post('/customer/total', filter)
+  }
+  async getNumberOfCustomersInGym() {
+    return PublicAxiosService.get('/customer/customers-in-gym')
   }
 }
 
