@@ -6,6 +6,10 @@ import { onMounted, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { parseJwt } from '../../mixins/utils.js'
+import EditIcon from '../../assets/icons/EditIcon.vue'
+import TrashIcon from '../../assets/icons/TrashIcon.vue'
+import { useModalStore } from '../../store/modal.store.js'
+import { useProductStore } from '../../store/product.store.js'
 
 const { t } = useI18n()
 
@@ -34,6 +38,19 @@ const productTypeTranslate = (type) => {
       return t('water')
   }
 }
+
+const openEditModal = (product) => {
+  console.log('Selected Product:', product);
+  useProductStore().setSelectedProduct(product)
+  useModalStore().openEditProductModal()
+}
+
+const openDeleteModal = (product) => {
+  console.log('Selected Product:', product);
+  useProductStore().setSelectedProduct(product)
+  useModalStore().openDeleteProductModal()
+}
+
 </script>
 <template>
   <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(product, idx) in products"
@@ -45,7 +62,17 @@ const productTypeTranslate = (type) => {
       {{ moment(product?.updatedAt).format('DD/MM/YYYY H:mm') }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">{{ product?.count }}</td>
-    <td v-motion-pop class="py-2 px-4 text-center"></td>
+    <td v-motion-pop class="py-2 px-4 text-center">
+      <div class="flex item-center justify-center">
+        <div @click="openEditModal(product)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
+          <EditIcon class="w-6 h-6" />
+        </div>
+        <div @click="openDeleteModal(product)"
+             class="w-4 mr-3 transform text-red-500 hover:text-red-600 hover:scale-110 cursor-pointer">
+          <TrashIcon class="w-6 h-6" />
+        </div>
+      </div>
+    </td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300">
     <td v-motion-pop colspan="10">

@@ -355,5 +355,11 @@
   "plsEnterYourLastname": "Iltimos, familiyangizni kiriting!",
   "inGym": "Trenerovkaxonada",
   "currentlyNumberOfCustomersInGym": "Hozirda trenerovkadagi mijozlar soni",
-  "numberOfTrainers": "Murabbiylar soni"
+  "numberOfTrainers": "Murabbiylar soni",
+  "deletedProduct": "Mahsulot muvaffaqiyatli o'chirildi!",
+  "errorDeletingProduct": "Mahsulotni o'chirishda xatolik yuz berdi!",
+  "productEdited": "Mahsulot muvaffaqiyatli tahrir qilindi!",
+  "errorEditingProduct": "Mahsulotni tahrirlashda xatolik yuz berdi!",
+  "editProduct": "Mahsulotni tahrirlash",
+  "productNotFound": "Mahsulot topilmadi"
 }

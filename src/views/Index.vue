@@ -61,7 +61,7 @@ const numberOfDailyVisitsChartOptions = computed(() => {
           ranges: [{
             from: 0,
             to: 10,
-            color: '#161b22'
+            color: '#6b7280'
           }, {
             from: 11,
             to: 20,
@@ -159,7 +159,7 @@ const numberOfFewWeeksVisitsChartOptions = computed(() => {
           ranges: [{
             from: 0,
             to: 2,
-            color: '#161b22'
+            color: '#6b7280'
           }, {
             from: 3,
             to: 4,
@@ -260,7 +260,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
           ranges: [{
             from: 0,
             to: 2,
-            color: '#161b22'
+            color: '#6b7280'
           }, {
             from: 3,
             to: 4,
