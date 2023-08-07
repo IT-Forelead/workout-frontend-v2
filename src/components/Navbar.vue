@@ -30,6 +30,8 @@ import SelectOptionLanguages from './Inputs/SelectOptionLanguages.vue'
 import ProfileDropDown from './ProfileDropDown.vue'
 import AddProductModal from './Modals/AddProductModal.vue'
 import AddProductHistoryModal from './Modals/AddProductHistoryModal.vue'
+import EditProductModal from './Modals/EditProductModal.vue'
+import DeleteProductModal from './Modals/DeleteProductModal.vue'
 
 const { t } = useI18n()
 const payload = ref({})
@@ -99,6 +101,8 @@ onMounted(() => {
   <AddTariffWithPaymentModal />
   <AddProductModal />
   <AddProductHistoryModal />
+  <EditProductModal/>
+  <DeleteProductModal/>
 </template>
 
 <style scoped></style>

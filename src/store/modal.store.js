@@ -9,6 +9,8 @@ export const useModalStore = defineStore('modal', {
     isDeleteCustomerModalOpen: false,
     isAddServiceModalOpen: false,
     isEditServiceModalOpen: false,
+    isEditProductModalOpen:false,
+    isDeleteProductModalOpen:false,
     isDeleteServiceModalOpen: false,
     isAddTrainerServiceModalOpen: false,
     isEditTrainerServiceModalOpen: false,
@@ -69,6 +71,18 @@ export const useModalStore = defineStore('modal', {
     },
     closeEditServiceModal() {
       this.isEditServiceModalOpen = false
+    },
+    openEditProductModal() {
+      this.isEditProductModalOpen = true
+    },
+    closeEditProductModal() {
+      this.isEditProductModalOpen = false
+    },
+    openDeleteProductModal() {
+      this.isDeleteProductModalOpen = true
+    },
+    closeDeleteProductModal() {
+      this.isDeleteProductModalOpen = false
     },
     openDeleteServiceModal() {
       this.isDeleteServiceModalOpen = true
