@@ -98,7 +98,7 @@ onMounted(() => {
         </a>
       </div>
     </div>
-    <div class="col-span-2 hidden  max-h-screen bg-gray-100 py-20 xl:block">
+    <div class="col-span-2 hidden  max-h-screen bg-gray-100 py-14 xl:block">
       <ShoucaseSection />
     </div>
   </div>

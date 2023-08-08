@@ -59,14 +59,14 @@ onMounted(() => {
 <template>
   <div class="relative w-36" ref="dropdown">
     <div @click="useDropdownStore().openSelectLanguage()"
-      class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-700 p-2 cursor-pointer hover:bg-gray-200">
-      <GlobeIcon class="w-6 h-6 text-gray-500" />
-      <span>{{ currentLang }}</span>
-      <CaretDownIcon class="w-4 h-4" />
+      class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-800 p-2 cursor-pointer hover:bg-gray-200">
+      <GlobeIcon class="w-6 h-6 text-gray-500 dark:text-gray-300" />
+      <span class="dark:text-gray-300">{{ currentLang }}</span>
+      <CaretDownIcon class="w-4 h-4 dark:text-gray-300" />
     </div>
     <ul v-if="useDropdownStore().isOpenSelectLanguage"
-      class="absolute w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-200">
-      <li v-for="(lang, idx) in list" :key="idx" @click="changeLang(lang)" class="hover:bg-gray-200 cursor-pointer p-2 ">
+      class="absolute dark:bg-gray-800 w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-600">
+      <li v-for="(lang, idx) in list" :key="idx" @click="changeLang(lang)" class="hover:bg-gray-200 dark:hover:bg-gray-900 dark:text-gray-300 cursor-pointer p-2">
         {{ lang?.name }}
       </li>
     </ul>

@@ -40,18 +40,18 @@ onMounted(() => {
 </script>
 <template>
   <div class="select-none">
-    <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+    <div class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 dark:border-gray-600 dark:bg-gray-900 w-full text-lg rounded-lg">
       <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" :checked="isMale" />
       <label for="toggle-on" @click="optionClicked(list[0])"
         class="relative flex items-center justify-center space-x-3 py-2">
-        <GenderMaleIcon class="w-5 h-5" />
-        <span>{{ $t('male') }}</span>
+        <GenderMaleIcon class="w-5 h-5 dark:text-gray-300" />
+        <span class="dark:text-gray-300">{{ $t('male') }}</span>
       </label>
       <input id="toggle-off" @click="optionClicked(list[1])" class="toggle toggle-right" name="toggle" value="true"
         type="radio" :checked="!isMale"/>
       <label for="toggle-off" class="relative flex items-center justify-center space-x-3 py-2">
-        <GenderFemaleIcon class="w-5 h-5" />
-        <span>{{ $t('female') }}</span>
+        <GenderFemaleIcon class="w-5 h-5 dark:text-gray-300" />
+        <span class="dark:text-gray-300">{{ $t('female') }}</span>
       </label>
     </div>
   </div>
@@ -87,8 +87,10 @@ input[type='radio'].toggle:checked+label {
   @apply cursor-default;
   @apply text-blue-500;
   @apply bg-white;
+  @apply dark:bg-gray-700;
   @apply border-4;
   @apply border-gray-100;
+  @apply dark:border-gray-600;
   @apply rounded-lg;
 }
 

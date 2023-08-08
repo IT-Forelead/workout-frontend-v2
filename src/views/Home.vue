@@ -56,7 +56,7 @@ const numberOfDailyVisitsChartOptions = computed(() => {
           ranges: [{
             from: 0,
             to: 10,
-            color: '#161b22'
+            color: '#6b7280'
           }, {
             from: 11,
             to: 20,
@@ -93,6 +93,7 @@ const numberOfDailyVisitsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors: ['#8e8da4', '#8e8da4', '#8e8da4',  '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4',],
         },
         formatter: function (val) {
           return moment(val).format('D-MMMM')
@@ -128,15 +129,20 @@ const numberOfDailyVisitsChartOptions = computed(() => {
 // Expenses Chart
 const expensesChartSeries = computed(() => [
   {
-    name: 'series1',
+    name: 'series 1',
     data: [31, 40, 28, 51, 42, 109, 100]
   }, {
-    name: 'series2',
+    name: 'series 2',
     data: [11, 32, 45, 32, 34, 52, 41]
   }
 ])
 
 const expensesChartChartOptions = {
+  legend:{
+    labels:{
+      colors:['#8e8da4']
+    },
+  },
   chart: {
     height: 350,
     type: 'area',
@@ -153,15 +159,14 @@ const expensesChartChartOptions = {
   stroke: {
     curve: 'smooth'
   },
-  title: {
-    text: 'Cost statistics',
-    align: 'left',
-    style: {
-      fontSize: '18px',
-    },
-  },
   xaxis: {
     type: 'datetime',
+    labels: {
+      style: {
+        fontSize: '12px',
+        colors: ['#8e8da4', '#8e8da4', '#8e8da4',  '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4',],
+      },
+    },
     axisBorder: {
       show: false,
     },
@@ -241,7 +246,7 @@ const numberOfFewWeeksVisitsChartOptions = computed(() => {
           ranges: [{
             from: 0,
             to: 2,
-            color: '#161b22'
+            color: '#6b7280'
           }, {
             from: 3,
             to: 4,
@@ -281,6 +286,7 @@ const numberOfFewWeeksVisitsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors:['#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4']
         },
         formatter: function (val) {
           return moment(val).format('D-MMM')
@@ -381,6 +387,7 @@ const numberOfMonthlyOperationsChartOptions = computed(() => {
       labels: {
         style: {
           fontSize: '12px',
+          colors:['#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4', '#8e8da4']
         },
         formatter: function (val) {
           return moment(val).format('MMMM')
@@ -441,13 +448,13 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="px-4 py-2">
+  <div class="min-h-screen px-6 py-6 dark:border-l dark:border-l-gray-600 dark:bg-gray-800">
     <div class="grid grid-cols-2 gap-x-5 mb-6 overflow-hidden">
-      <div class="bg-white rounded-lg">
+      <div class="bg-white rounded-lg dark:bg-gray-900">
         <div class="flex items-center justify-between p-5">
           <div>
-            <h1 class="text-3xl font-bold">{{ $t('visitStatistics') }}</h1>
-            <p class="font-medium text-lg">{{ $t('sevenBusinessDayStatistics') }}</p>
+            <h1 class="text-3xl font-bold dark:text-white">{{ $t('visitStatistics') }}</h1>
+            <p class="font-medium text-lg dark:text-gray-300">{{ $t('sevenBusinessDayStatistics') }}</p>
           </div>
           <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
             <ChartBarIcon class="w-9 h-9 text-gray-900" />
@@ -458,11 +465,11 @@ onMounted(() => {
       </div>
       <div class="space-y-5">
         <div class="grid grid-cols-2 gap-x-5">
-          <div class="bg-lime-300 rounded-lg">
+          <div class="bg-lime-300 rounded-lg dark:bg-gray-900">
             <div class="flex items-center justify-between p-5">
               <div>
-                <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
-                <div class="text-sm">{{ $t('fewWeeklyStatistics') }}</div>
+                <div class="text-lg font-bold dark:text-white">{{ $t('visitStatistics') }}</div>
+                <div class="text-sm dark:text-gray-300">{{ $t('fewWeeklyStatistics') }}</div>
               </div>
               <div class="rounded-xl p-3 bg-white flex items-center justify-center">
                 <ChartBarIcon class="w-7 h-7 text-gray-900" />
@@ -473,11 +480,11 @@ onMounted(() => {
                 :series="numberOfFewWeeksVisitsSeries"></apexchart>
             </div>
           </div>
-          <div class="bg-white rounded-lg w-full">
+          <div class="bg-white rounded-lg w-full dark:bg-gray-900">
             <div class="flex items-center justify-between p-5">
               <div>
-                <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
-                <div class="text-sm">{{ $t('statisticsForSeveralMonths') }}</div>
+                <div class="text-lg font-bold dark:text-white">{{ $t('visitStatistics') }}</div>
+                <div class="text-sm dark:text-gray-300">{{ $t('statisticsForSeveralMonths') }}</div>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <ChartBarIcon class="w-7 h-7 text-gray-900" />
@@ -490,9 +497,9 @@ onMounted(() => {
           </div>
         </div>
         <div class="grid grid-cols-2 gap-5">
-          <div class="bg-white rounded-lg w-full p-5 space-y-2">
+          <div class="bg-white rounded-lg w-full p-5 space-y-2 dark:bg-gray-900">
             <div class="flex justify-between mb-3">
-              <div>
+              <div class="dark:text-gray-300">
                 <p>{{ $t('customers') }}</p>
                 <p class="text-2xl font-bold">{{ numberOfAllCustomers }}</p>
               </div>
@@ -500,24 +507,25 @@ onMounted(() => {
                 <UsersThreeIcon class="w-8 h-8 text-gray-900" />
               </div>
             </div>
-            <p>{{ $t('numberOfRegisteredCustomers') }}</p>
+            <p class="dark:text-gray-300">{{ $t('numberOfRegisteredCustomers') }}</p>
           </div>
-          <div class="bg-white rounded-lg w-full p-5 space-y-2">
+          <div class="bg-white rounded-lg w-full p-5 space-y-2 dark:bg-gray-900">
             <div class="flex justify-between mb-3">
               <div>
-                <p>{{ $t('inGym') }}</p>
-                <p class="text-2xl font-bold">{{ numberOfCustomersInGym }}</p>
+                <p class="dark:text-white">{{ $t('inGym') }}</p>
+                <p class="text-2xl font-bold dark:text-gray-300">{{ numberOfCustomersInGym }}</p>
               </div>
               <div class="rounded-xl p-3 bg-lime-300 flex items-center justify-center">
                 <FootPrintsIcon class="w-7 h-7 text-gray-900" />
               </div>
             </div>
-            <p>{{ $t('currentlyNumberOfCustomersInGym') }}</p>
+            <p class="dark:text-gray-300">{{ $t('currentlyNumberOfCustomersInGym') }}</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="bg-white rounded-lg w-full p-3">
+    <div class="bg-white rounded-lg w-full p-3 dark:bg-gray-900">
+      <p class="dark:text-white font-bold px-2 text-lg">Cost statistics</p>
       <apexchart type="area" height="320" :options="expensesChartChartOptions" :series="expensesChartSeries"></apexchart>
     </div>
   </div>
