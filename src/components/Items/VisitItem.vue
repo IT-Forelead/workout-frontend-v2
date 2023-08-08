@@ -86,7 +86,7 @@ const visitTypeColor = (type) => {
       </span>
     </td>
   </tr>
-  <tr class="text-gray-700 text-md dark:text-gray-300 dark:bg-gray-800">
+  <tr class="text-gray-700 text-md dark:text-gray-300">
     <td v-motion-fade colspan="10">
       <div class="flex items-center justify-center w-full p-2">
         <InfiniteLoading v-bind="$attrs" />
