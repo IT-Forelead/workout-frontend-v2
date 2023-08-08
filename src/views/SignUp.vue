@@ -154,20 +154,20 @@ onMounted(() => {
           <div>
             <label for="firstname" class="font-medium text-gray-500 pb-2 dark:text-white">{{ $t('firstname') }}</label>
             <input id="firstname" type="text" v-model="submitForm.firstname"
-              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
+              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:text-gray-300 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
               :placeholder="$t('enterYourFirstname')" />
           </div>
           <div>
             <label for="lastname" class="font-medium text-gray-500 pb-2 dark:text-white">{{ $t('lastname') }}</label>
             <input id="lastname" type="text" v-model="submitForm.lastname"
-              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
+              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:text-gray-300 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
               :placeholder="$t('enterYourLastname')" />
           </div>
           <div>
             <label for="phone" class="font-medium text-gray-500 pb-2 dark:text-white">{{ $t('mobilePhone') }}</label>
             <input id="phone" v-maska data-maska="+998(##) ###-##-##" data-maska-tokens="998" v-model="submitForm.phone"
               type="text"
-              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
+              class="w-full py-2 border border-gray-300 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 dark:placeholder-gray-400 rounded focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="+998(00) 000-00-00" />
           </div>
           <div>
@@ -194,7 +194,7 @@ onMounted(() => {
           </div>
         </div>
         <!-- Step 2 -->
-        <div v-if="registerProcess.checkingMode" class="flex flex-col space-y-6">
+        <div v-if="registerProcess.checkingMode" class="flex flex-col space-y-6 dark:bg-gray-800">
           <div class="px-3 text-xl text-center text-gray-600 dark:text-gray-300">
             {{ $t('verificationCodeHasBeenSentToTheNumberBelow') }}
             <strong class="text-black dark:text-gray-300 ml-2">{{ submitForm.phone }}</strong>

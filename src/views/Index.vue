@@ -422,14 +422,14 @@ onMounted(() => {
       </div>
     </div>
     <div class="grid grid-cols-2 gap-8 w-full">
-      <div class="bg-lime-300 rounded-lg dark:bg-gray-900">
+      <div class="bg-lime-300 rounded-lg">
         <div class="flex items-center justify-between p-5">
           <div>
-            <div class="text-lg font-bold dark:text-white">{{ $t('visitStatistics') }}</div>
-            <div class="text-sm dark:text-gray-300">{{ $t('fewWeeklyStatistics') }}</div>
+            <div class="text-lg font-bold">{{ $t('visitStatistics') }}</div>
+            <div class="text-sm">{{ $t('fewWeeklyStatistics') }}</div>
           </div>
-          <div class="rounded-xl p-3 bg-white flex items-center justify-center">
-            <ChartBarIcon class="w-7 h-7 text-gray-900" />
+          <div class="rounded-xl p-3 bg-white dark:bg-gray-900 flex items-center justify-center">
+            <ChartBarIcon class="w-7 h-7 text-gray-900 dark:text-white" />
           </div>
         </div>
         <div class="px-1">
