@@ -111,9 +111,14 @@ const sendActivationCode = () => {
     notify.warning({
       message: t('plsEnterLastname'),
     })
-  } else if (submitForm.phone.length < 18) {
+  } else if (!submitForm.phone) {
     notify.warning({
       message: t('plsEnterPhone'),
+    })
+  }
+  else if (submitForm.phone.length < 18) {
+    notify.warning({
+      message: t('plsEnterPhoneCorrectly'),
     })
   } else if (!selectGender.value?.id) {
     notify.warning({
