@@ -86,31 +86,31 @@ const whenPressEnter = (e) => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div @click="useDropdownStore().openCustomerDropDown()"
-        class="w-11 h-11 flex items-center rounded-l-lg justify-center bg-gray-100 cursor-pointer">
-        <UserIcon class="w-10 h-10 border-r rounded-lg p-2" />
+        class="w-11 h-11 flex items-center rounded-l-lg justify-center bg-gray-100 cursor-pointer dark:bg-gray-900 dark:text-gray-300">
+        <UserIcon class="w-10 h-10 border-r dark:border-none rounded-lg p-2" />
       </div>
       <div v-if="useDropdownStore().selectCustomerOption"
-        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
+        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize dark:bg-gray-900 dark:text-gray-300">
         {{ useDropdownStore().selectCustomerOption?.firstname + ' ' + useDropdownStore().selectCustomerOption?.lastname }}
       </div>
       <input type="text" v-model="searchCustomer" v-on:keypress="whenPressEnter($event)"
         v-if="useDropdownStore().isOpenCustomerDropDown"
-        class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
+        class="relative w-full focus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2 dark:bg-gray-900 dark:text-gray-300 dark:placeholder-gray-400"
         :placeholder="$t('enterCustomerName')" />
       <SearchIcon v-if="useDropdownStore().isOpenCustomerDropDown" @click="submitFilterData()"
-        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500" />
+        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500 dark:text-gray-300" />
       <div @click="useDropdownStore().openCustomerDropDown()"
         v-if="!useDropdownStore().isOpenCustomerDropDown && !useDropdownStore().selectCustomerOption"
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2">
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2 dark:bg-gray-900 dark:text-gray-300">
         {{ $t('select') }}
       </div>
       <ChevronRightIcon @click="useDropdownStore().openCustomerDropDown()"
         v-if="!useDropdownStore().isOpenCustomerDropDown && !useDropdownStore().selectCustomerOption"
-        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
+        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600 dark:text-gray-300" />
       <XIcon @click="clearSelectedOptionData()" v-if="useDropdownStore().selectCustomerOption"
-        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
+        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1 dark:bg-gray-700 dark:hover:bg-gray-600" />
       <ul v-if="useDropdownStore().isOpenCustomerDropDown"
-        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 max-h-56 overflow-auto divide-y divide-gray-200 customers-wrapper">
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 right-0 max-h-56 overflow-auto divide-y divide-gray-200 dark:divide-gray-600 customers-wrapper">
         <SelectOptionCustomerItem :customers="customers" :distance="distance" :target="target"
           @infinite="loadCustomers" />
         <li v-if="customers?.length === 0" class="w-full text-center text-red-500 p-2">

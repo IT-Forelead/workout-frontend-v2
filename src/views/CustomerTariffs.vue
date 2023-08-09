@@ -104,56 +104,56 @@ const submitFilterData = () => {
 </script>
 
 <template>
-  <div class="px-4 py-2">
-    <div class="bg-white rounded p-5">
-      <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('customerTariffsReport') }}</p>
+  <div class="px-4 py-4 dark:bg-gray-800 min-h-screen">
+    <div class="bg-white rounded p-5 dark:bg-gray-900">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-3xl font-bold dark:text-white">{{ $t('customerTariffsReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
-              <FunnelIcon class="w-5 h-5 text-gray-500" />
-              <span>
+              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer dark:bg-gray-800">
+              <FunnelIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
+              <span class="dark:text-gray-300">
                 {{ $t('filter') }}
               </span>
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
-              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800">
               <div>
-                <label>{{ $t('customer') }}</label>
+                <label class="dark:text-white">{{ $t('customer') }}</label>
                 <SelectOptionCustomer />
               </div>
               <div>
-                <label for="paymentStatus">{{ $t('paymentStatus') }}</label>
+                <label for="paymentStatus" class="dark:text-white">{{ $t('paymentStatus') }}</label>
                 <SelectOptionPaymentStatus />
               </div>
               <div>
-                <label>{{ $t('createdAt') }}</label>
+                <label class="dark:text-white">{{ $t('createdAt') }}</label>
                 <div class="flex items-center space-x-1">
                   <div class="relative">
                     <input v-model="filterData.startDate" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('from') }}</div>
                   </div>
                   <div class="relative">
                     <input v-model="filterData.endDate" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('to') }}</div>
                   </div>
                 </div>
               </div>
               <div>
-                <label>{{ $t('expireAt') }}</label>
+                <label class="dark:text-white">{{ $t('expireAt') }}</label>
                 <div class="flex items-center space-x-1">
                   <div class="relative">
                     <input v-model="filterData.expireAtFrom" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('from') }}</div>
                   </div>
                   <div class="relative">
                     <input v-model="filterData.expireAtTo" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('to') }}</div>
                   </div>
                 </div>
               </div>
@@ -164,21 +164,21 @@ const submitFilterData = () => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center">
+                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>
           </div>
           <div @click="useModalStore().openAddCustomerTariffModal()"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+            class="bg-black dark:bg-white dark:text-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
             {{ $t('addTariff') }}
           </div>
         </div>
       </div>
       <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
         <table class="min-w-max w-full table-auto">
-          <thead class="sticky z-10 top-0 bg-white shadow">
-            <tr class="text-gray-600 capitalize text-lg leading-normal">
+          <thead class="sticky z-10 top-0 dark:bg-gray-800 bg-white shadow">
+            <tr class="text-gray-600 dark:text-white capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
