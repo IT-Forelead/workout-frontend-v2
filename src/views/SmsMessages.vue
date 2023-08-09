@@ -101,15 +101,15 @@ const submitFilterData = () => {
 </script>
 
 <template>
-  <div class="px-4 py-2">
-    <div class="bg-white rounded p-5">
+  <div class="px-4 py-2 dark:bg-gray-800 min-h-screen">
+    <div class="bg-white rounded p-5  dark:bg-gray-900 ">
       <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('smsMessagesReport') }}</p>
+        <p class="text-3xl font-bold dark:text-white ">{{ $t('smsMessagesReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
               class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
-              <FunnelIcon class="w-5 h-5 text-gray-500" />
+              <FunnelIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
               <span>
                 {{ $t('filter') }}
               </span>
