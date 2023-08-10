@@ -95,7 +95,6 @@ const submitFilterData = () => {
   })
 }
 </script>
-
 <template>
   <div class="px-4 py-4 dark:bg-gray-800 min-h-screen">
     <div class="bg-white rounded p-5 dark:bg-gray-900">
