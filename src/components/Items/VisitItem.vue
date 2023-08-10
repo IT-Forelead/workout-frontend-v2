@@ -46,7 +46,7 @@ const visitTypeColor = (type) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(visit, idx) in visits" :key="idx">
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium dark:border-gray-600 dark:hover:bg-gray-800" v-for="(visit, idx) in visits" :key="idx">
     <td v-motion-fade class="text-center">{{ idx + 1 }}</td>
     <td v-motion-fade v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
@@ -54,7 +54,7 @@ const visitTypeColor = (type) => {
           <img :src="URL + visit?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
         </div>
         <div v-else>
-          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+          <UserIcon class="w-9 h-9 rounded-full border p-1.5 dark:bg-gray-900 dark:border-gray-600" />
         </div>
         <div>
           <div class="text-lg font-medium capitalize">

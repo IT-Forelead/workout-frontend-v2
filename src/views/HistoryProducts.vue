@@ -203,27 +203,27 @@ const downloadXlsReport = () => {
               </span>
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
-              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800">
               <div>
-                <label>{{ $t('product') }}</label>
+                <label class="dark:text-white">{{ $t('product') }}</label>
                 <SelectOptionProduct />
               </div>
               <div>
-                <label>{{ $t('productHistoryType') }}</label>
+                <label class="dark:text-white">{{ $t('productHistoryType') }}</label>
                 <SelectOptionProductHistoryType />
               </div>
               <div>
-                <label>{{ $t('createdAt') }}</label>
+                <label class="dark:text-white">{{ $t('createdAt') }}</label>
                 <div class="flex items-center space-x-1">
                   <div class="relative">
                     <input v-model="filterData.startDate" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('from') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-11 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('from') }}</div>
                   </div>
                   <div class="relative">
                     <input v-model="filterData.endDate" type="date"
-                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14" />
-                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm">{{ $t('to') }}</div>
+                      class="w-60 rounded-lg border-none bg-gray-100 text-gray-500 pr-14 dark:bg-gray-900 dark:text-gray-300" />
+                    <div class="text-gray-500 absolute top-1/2 -translate-y-1/2 right-2 text-sm dark:text-gray-300">{{ $t('to') }}</div>
                   </div>
                 </div>
               </div>
@@ -234,7 +234,7 @@ const downloadXlsReport = () => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center">
+                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>

@@ -57,7 +57,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(payment, idx) in payments"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium dark:hover:bg-gray-800 dark:border-gray-600" v-for="(payment, idx) in payments"
     :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
@@ -66,13 +66,13 @@ onMounted(() => {
           <img :src="URL + payment?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
         </div>
         <div v-else>
-          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+          <UserIcon class="w-9 h-9 rounded-full border p-1.5 dark:border-gray-600" />
         </div>
         <div>
           <div class="text-lg font-medium capitalize">
             {{ payment?.customer?.firstname + ' ' + payment?.customer?.lastname }}
           </div>
-          <div class="text-sm text-gray-500">
+          <div class="text-sm text-gray-500 dark:text-gray-300">
             {{ payment?.customer?.phone }}
           </div>
         </div>
@@ -104,13 +104,13 @@ onMounted(() => {
     <td v-motion-pop class="py-2 px-4 text-left">
       <div v-if="payment?.customerTrainerTariff">
         <div class="flex items-center space-x-1">
-          <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
+          <CalendarCheckIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
           <div>
             {{ moment(payment?.customerTrainerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}
           </div>
         </div>
         <div class="flex items-center space-x-1">
-          <CalendarXIcon class="w-5 h-5 text-gray-500" />
+          <CalendarXIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
           <div>
             {{ moment(payment?.customerTrainerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}
           </div>

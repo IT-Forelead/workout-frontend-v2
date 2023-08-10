@@ -45,19 +45,19 @@ const productHistoryTypeTranslate = (type) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(product, idx) in productHistories"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 text-lg font-medium dark:border-gray-600" v-for="(product, idx) in productHistories"
     :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ product?.product?.name + ' - ' + productTypeTranslate(product?.product?.productType) }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ productHistoryTypeTranslate(product?.productHistory?.productHistoryType) }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ moment(product?.productHistory?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-center">{{ product?.productHistory?.count }}</td>
+    <td v-motion-pop class="py-2 px-4 text-center dark:text-gray-300">{{ product?.productHistory?.count }}</td>
     <td v-motion-pop class="py-2 px-4 text-center"></td>
   </tr>
   <tr class="text-gray-700 text-md dark:text-gray-300">

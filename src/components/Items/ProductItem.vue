@@ -36,7 +36,7 @@ const productTypeTranslate = (type) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(product, idx) in products"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium dark:hover:bg-gray-800 dark:border-gray-600" v-for="(product, idx) in products"
     :key="idx">
     <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
     <td v-motion-pop class="py-2 px-4 text-left">{{ product?.name }}</td>

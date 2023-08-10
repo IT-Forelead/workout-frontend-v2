@@ -111,7 +111,7 @@ const submitFilterData = () => {
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer dark:bg-gray-800">
+              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700">
               <FunnelIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
               <span class="dark:text-gray-300">
                 {{ $t('filter') }}
@@ -170,7 +170,7 @@ const submitFilterData = () => {
             </div>
           </div>
           <div @click="useModalStore().openAddCustomerTrainerTariffModal()"
-            class="bg-black text-white text-base dark:bg-white dark:text-black rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+            class="bg-black text-white text-base dark:bg-white dark:text-black dark:hover:bg-gray-200 rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
             {{ $t('addTariff') }}
           </div>
         </div>

@@ -16,7 +16,7 @@ const optionClicked = (data) => {
 }
 </script>
 <template>
-  <li v-for="(product, idx) in products" :key="idx" @click="optionClicked(product)" class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2">
+  <li v-for="(product, idx) in products" :key="idx" @click="optionClicked(product)" class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 dark:hover:bg-gray-700">
     {{ product?.name }}
   </li>
   <li class="flex items-center justify-center w-full p-2">

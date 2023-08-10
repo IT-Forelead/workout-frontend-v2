@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div class="select-none">
     <div
-      class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+      class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg dark:bg-gray-900 dark:text-gray-300">
       <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked />
       <label for="toggle-on" @click="optionClicked(list[0])"
         class="relative flex items-center justify-center space-x-3 py-2">
@@ -81,6 +81,9 @@ input[type='radio'].toggle:checked+label {
   @apply border-4;
   @apply border-gray-100;
   @apply rounded-lg;
+  @apply dark:bg-gray-800;
+  @apply dark:text-gray-300;
+  @apply dark:border-gray-600;
 }
 
 input[type='radio'].toggle:checked+label>span {
