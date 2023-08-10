@@ -49,19 +49,19 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(user, idx) in users" :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
-      <div class="flex items-center space-x-2">
-        <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+  <tr class="border-y border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 text-lg font-medium dark:border-gray-600" v-for="(user, idx) in users" :key="idx">
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
+      <div class="flex items-center space-x-2 dark:text-gray-300">
+        <UserIcon class="w-9 h-9 rounded-full border dark:border-gray-600 p-1.5 dark:text-gray-300" />
         <span class="text-lg font-medium capitalize">
           {{ user?.firstname + ' ' + user?.lastname }}
         </span>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ user?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left uppercase">{{ roleTranslate(user?.role) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ user?.phone }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left uppercase dark:text-gray-300">{{ roleTranslate(user?.role) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ moment(user?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">

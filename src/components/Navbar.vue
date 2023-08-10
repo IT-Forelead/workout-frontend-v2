@@ -106,7 +106,6 @@ onMounted(() => {
   <AddTariffWithPaymentModal />
   <AddProductModal />
   <AddProductHistoryModal />
-
 </template>
 
 <style scoped></style>
