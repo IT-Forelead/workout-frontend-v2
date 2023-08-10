@@ -193,10 +193,9 @@ const skipConfirmation = () => {
   <div v-if="useModalStore().isAddCustomerModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-4xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
           <div class="text-xl font-medium dark:text-white">{{ $t('addCustomer') }}</div>
-
           <button @click="closeModal()"
                   class="dark:bg-gray-900 dark:text-gray-300 text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
@@ -246,10 +245,10 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-else-if="registerProcess.checkingMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
                   02
                 </div>
-                <div class="hidden ml-3 font-semibold text-blue-500 text-md md:block">
+                <div class="hidden ml-3 font-semibold text-blue-500 dark:text-white text-md md:block">
                   {{ $t('confirmation') }}
                 </div>
               </div>
@@ -258,7 +257,7 @@ const skipConfirmation = () => {
                 <div class="flex items-center justify-center w-10 h-10 text-2xl text-white bg-blue-500 rounded-full">
                   <CheckIcon class="w-6 h-6" />
                 </div>
-                <div class="font-semibold text-gray-700 text-md">
+                <div class="font-semibold text-gray-700 dark:text-white text-md">
                   {{ $t('confirmation') }}
                 </div>
               </div>
@@ -272,7 +271,7 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-if="registerProcess.congratulationMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
                   03
                 </div>
                 <div class="hidden ml-3 font-semibold dark:text-white text-blue-500 text-md md:block">
@@ -301,7 +300,7 @@ const skipConfirmation = () => {
                 <ImageIcon class="w-16 h-16 text-blue-500" />
                 <input id="dropzone-file" type="file" class="hidden" name="image" @change="getImage" />
                 <div
-                  class="absolute mx-auto mt-3 text-lg font-semibold tracking-wide text-blue-500 -bottom-10 whitespace-nowrap">
+                  class="absolute mx-auto mt-3 text-lg font-semibold tracking-wide dark:text-blue-400 text-blue-500 -bottom-10 whitespace-nowrap">
                   {{ $t('uploadPhoto') }}
                 </div>
               </label>

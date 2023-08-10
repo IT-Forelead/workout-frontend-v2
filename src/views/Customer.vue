@@ -164,57 +164,57 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="px-4 py-2">
-    <div class="bg-white rounded p-5 space-y-4">
+  <div class="px-4  py-4 dark:bg-gray-800 min-h-screen">
+    <div class="bg-white rounded p-5 space-y-4 dark:bg-gray-900">
       <div class="flex items-center space-x-4">
         <div v-if="selectedCustomer?.image">
           <img :src="CUSTOMER_IMAGE_URL + selectedCustomer?.image" alt="#"
             class="object-cover w-32 h-32 rounded-lg border duration-500 cursor-zoom-out hover:object-scale-down" />
         </div>
         <div v-else>
-          <UserIcon class="w-32 h-32 rounded-lg text-gray-500 border p-1.5" />
+          <UserIcon class="w-32 h-32 rounded-lg text-gray-500 border p-1.5 dark:border-gray-600 dark:text-gray-300" />
         </div>
         <div>
           <div class="flex items-center space-x-2">
-            <div class="text-base text-gray-500">
+            <div class="text-base text-gray-500 dark:text-white">
               {{ $t('customer') }}:
             </div>
-            <div class="text-lg font-medium capitalize">
+            <div class="text-lg font-medium dark:text-gray-300 capitalize">
               {{ selectedCustomer?.firstname + ' ' + selectedCustomer?.lastname }}
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <div class="text-base text-gray-500">
+            <div class="text-base text-gray-500 dark:text-white">
               {{ $t('phone') }}:
             </div>
-            <div class="text-lg font-medium">
+            <div class="text-lg dark:text-gray-300 font-medium">
               {{ selectedCustomer?.phone }}
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <div class="text-base text-gray-500">
+            <div class="text-base dark:text-white text-gray-500">
               {{ $t('gender') }}:
             </div>
-            <div class="text-lg font-medium">
+            <div class="text-lg dark:text-gray-300 font-medium">
               {{ genderTranslate(selectedCustomer?.gender) }}
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <div class="text-base text-gray-500">
+            <div class="text-base text-gray-500 dark:text-white">
               {{ $t('qrcode') }}:
             </div>
-            <div v-if="selectedCustomer?.barcode" class="text-lg font-medium">
+            <div v-if="selectedCustomer?.barcode" class="text-lg dark:text-gray-300 font-medium">
               {{ selectedCustomer?.barcode }}
             </div>
-            <div v-else class="text-base font-medium uppercase">
+            <div v-else class="text-base font-medium dark:text-white uppercase">
               {{ $t('noQrCodeAvailable') }}
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <div class="text-base text-gray-500">
+            <div class="text-base text-gray-500 dark:text-white">
               {{ $t('createdAt') }}:
             </div>
-            <div class="text-lg font-medium">
+            <div class="text-lg dark:text-gray-300 font-medium">
               {{ moment(selectedCustomer?.createdAt).format('DD/MM/YYYY H:mm') }}
             </div>
           </div>
@@ -224,8 +224,8 @@ onMounted(() => {
         <div class="text-xl font-bold">{{ $t('customerTariffs') }}</div>
         <div class="max-h-48 overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
           <table class="min-w-max w-full table-auto">
-            <thead class="sticky z-10 top-0 bg-white shadow">
-              <tr class="text-gray-600 capitalize text-lg leading-normal">
+            <thead class="sticky z-10 top-0 bg-white dark:bg-gray-800 shadow">
+              <tr class="text-gray-600 capitalize dark:text-white text-lg leading-normal">
                 <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
@@ -246,8 +246,8 @@ onMounted(() => {
         <div class="text-xl font-bold">{{ $t('customerTrainerTariffs') }}</div>
         <div class="max-h-48 overflow-auto xxl:overflow-x-hidden customer-trainer-tariffs-wrapper">
           <table class="min-w-max w-full table-auto">
-            <thead class="sticky z-10 top-0 bg-white shadow">
-              <tr class="text-gray-600 capitalize text-lg leading-normal">
+            <thead class="sticky z-10 top-0 bg-white dark:bg-gray-800 shadow">
+              <tr class="text-gray-600 capitalize dark:text-white text-lg leading-normal">
                 <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('trainer') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
@@ -270,8 +270,8 @@ onMounted(() => {
         <div class="text-xl font-bold">{{ $t('paymentsReport') }}</div>
         <div class="max-h-48 overflow-auto xxl:overflow-x-hidden payments-wrapper">
           <table class="min-w-max w-full table-auto">
-            <thead class="sticky z-10 top-0 bg-white shadow">
-              <tr class="text-gray-600 capitalize text-lg leading-normal">
+            <thead class="sticky z-10 top-0 bg-white dark:bg-gray-800 shadow">
+              <tr class="text-gray-600 capitalize dark:text-white text-lg leading-normal">
                 <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('service') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('duration') }}</th>
@@ -291,8 +291,8 @@ onMounted(() => {
         <div class="text-xl font-bold">{{ $t('visits') }}</div>
         <div class="max-h-80 overflow-auto xxl:overflow-x-hidden visits-wrapper">
           <table class="min-w-max w-full table-auto">
-            <thead class="sticky z-10 top-0 bg-white shadow">
-              <tr class="text-gray-600 capitalize text-lg leading-normal">
+            <thead class="sticky z-10 top-0 bg-white dark:bg-gray-800 shadow">
+              <tr class="text-gray-600 capitalize dark:text-white text-lg leading-normal">
                 <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
                 <th class="py-2 px-4 text-left">{{ $t('visitTime') }}</th>
                 <th class="py-2 px-4 text-center">{{ $t('visitType') }}</th>
