@@ -186,18 +186,18 @@ const downloadXlsReport = () => {
 }
 </script>
 <template>
-  <div class="px-4 py-2">
-    <div class="bg-white rounded p-5">
-      <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('historyProducts') }}</p>
+  <div class="px-4 py-2 min-h-screen dark:bg-gray-800">
+    <div class="bg-white rounded p-5 dark:bg-gray-900">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-3xl font-bold dark:text-white">{{ $t('historyProducts') }}</p>
         <div class="flex items-center space-x-3">
           <div class="cursor-pointer" @click="downloadXlsReport()">
             <XlsIcon class="w-7 h-7 text-green-500 hover:text-green-600" />
           </div>
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
-              <FunnelIcon class="w-5 h-5 text-gray-500" />
+              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+              <FunnelIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
               <span>
                 {{ $t('filter') }}
               </span>
@@ -240,15 +240,15 @@ const downloadXlsReport = () => {
             </div>
           </div>
           <div @click="useModalStore().openAddProductHistoryModal"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:text-black dark:bg-white dark:hover:bg-gray-200">
             {{ $t('addProduct') }}
           </div>
         </div>
       </div>
       <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden product-histories-wrapper">
         <table class="min-w-max w-full table-auto">
-          <thead class="sticky z-10 top-0 bg-white shadow">
-            <tr class="text-gray-600 capitalize text-lg leading-normal">
+          <thead class="sticky z-10 top-0 bg-white shadow dark:bg-gray-800">
+            <tr class="text-gray-600 capitalize text-lg leading-normal dark:text-white">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('product') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('type') }}</th>
