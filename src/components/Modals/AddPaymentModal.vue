@@ -104,7 +104,7 @@ const submitServiceData = () => {
   <div v-if="useModalStore().isAddPaymentModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
           <div class="text-xl font-medium dark:text-white">{{ $t('addPayment') }}</div>
           <button @click="closeModal()"

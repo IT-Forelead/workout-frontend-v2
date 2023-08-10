@@ -106,7 +106,7 @@ const submitFilterData = () => {
                 {{ $t('filter') }}
               </span>
             </div>
-            <div v-if="useModalStore().isOpenFilterBy" class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800">
+            <div v-if="useModalStore().isOpenFilterBy" class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800 border dark:border-gray-600">
               <div>
                 <label class="dark:text-white" for="productName">{{ $t('productName') }}</label>
                 <input v-model="filterData.name" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400" type="text" id="productName" :placeholder="$t('enterProductName')" />

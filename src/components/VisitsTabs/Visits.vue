@@ -120,7 +120,7 @@ const submitFilterData = () => {
               </span>
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
-              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800">
+              class="absolute bg-white shadow rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800 border dark:border-gray-600">
               <div>
                 <label class="dark:text-gray-300">{{ $t('customer') }}</label>
                 <SelectOptionCustomer />
