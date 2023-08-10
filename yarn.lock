@@ -745,10 +745,10 @@ es-get-iterator@^1.1.2:
     is-string "^1.0.5"
     isarray "^2.0.5"
 
-esbuild-linux-64@0.15.12:
+esbuild-windows-64@0.15.12:
   version "0.15.12"
-  resolved "https://registry.npmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.15.12.tgz"
-  integrity sha512-QcgCKb7zfJxqT9o5z9ZUeGH1k8N6iX1Y7VNsEi5F9+HzN1OIx7ESxtQXDN9jbeUSPiRH1n9cw6gFT3H4qbdvcA==
+  resolved "https://registry.npmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.15.12.tgz"
+  integrity sha512-VActO3WnWZSN//xjSfbiGOSyC+wkZtI8I4KlgrTo5oHJM6z3MZZBCuFaZHd8hzf/W9KPhF0lY8OqlmWC9HO5AA==
 
 esbuild@^0.15.9:
   version "0.15.12"

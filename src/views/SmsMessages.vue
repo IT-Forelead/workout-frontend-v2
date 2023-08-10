@@ -102,7 +102,7 @@ const submitFilterData = () => {
 
 <template>
   <div class="px-4 py-4 dark:bg-gray-800 min-h-screen">
-    <div class="bg-white rounded p-5  dark:bg-gray-900 ">
+    <div class="bg-white rounded p-5  dark:bg-gray-900">
       <div class="flex items-center justify-between mb-4">
         <p class="text-3xl font-bold dark:text-white ">{{ $t('smsMessagesReport') }}</p>
         <div class="flex items-center space-x-3">

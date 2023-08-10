@@ -193,11 +193,12 @@ const skipConfirmation = () => {
   <div v-if="useModalStore().isAddCustomerModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-4xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('addCustomer') }}</div>
+          <div class="text-xl font-medium dark:text-white">{{ $t('addCustomer') }}</div>
+
           <button @click="closeModal()"
-            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                  class="dark:bg-gray-900 dark:text-gray-300 text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>
         </div>
@@ -209,10 +210,10 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-if="registerProcess.registerMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
                   01
                 </div>
-                <div class="ml-3 font-semibold text-blue-500 text-md">
+                <div class="ml-3 font-semibold text-blue-500 text-md dark:text-blue-400">
                   {{ $t('customerData') }}
                 </div>
               </div>
@@ -221,7 +222,7 @@ const skipConfirmation = () => {
                 <div class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
                   <CheckIcon class="w-6 h-6" />
                 </div>
-                <div class="font-semibold text-gray-700 text-md">
+                <div class="font-semibold text-gray-70 dark:text-white text-md">
                   {{ $t('customerData') }}
                 </div>
               </div>
@@ -238,7 +239,7 @@ const skipConfirmation = () => {
                   class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
                   02
                 </div>
-                <div class="hidden ml-3 font-semibold text-gray-500 text-md md:block">
+                <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white text-md md:block">
                   {{ $t('confirmation') }}
                 </div>
               </div>
@@ -274,7 +275,7 @@ const skipConfirmation = () => {
                   class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
                   03
                 </div>
-                <div class="hidden ml-3 font-semibold text-blue-500 text-md md:block">
+                <div class="hidden ml-3 font-semibold dark:text-white text-blue-500 text-md md:block">
                   {{ $t('finish') }}
                 </div>
               </div>
@@ -284,7 +285,7 @@ const skipConfirmation = () => {
                   class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
                   03
                 </div>
-                <div class="hidden ml-3 font-semibold text-gray-500 text-md md:block">
+                <div class="hidden ml-3 font-semibold dark:text-white text-gray-500 text-md md:block">
                   {{ $t('finish') }}
                 </div>
               </div>
@@ -315,23 +316,23 @@ const skipConfirmation = () => {
               </label>
             </div>
             <div>
-              <label for="lastname">{{ $t('lastname') }}</label>
-              <input v-model="submitForm.lastname" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+              <label class="dark:text-white" for="lastname">{{ $t('lastname') }}</label>
+              <input v-model="submitForm.lastname" class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
                 type="text" id="lastname" :placeholder="$t('enterLastname')" />
             </div>
             <div>
-              <label for="firstname">{{ $t('firstname') }}</label>
+              <label class="dark:text-white" for="firstname">{{ $t('firstname') }}</label>
               <input v-model="submitForm.firstname"
-                class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" type="text" id="firstname"
+                class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400" type="text" id="firstname"
                 :placeholder="$t('enterFirstname')" />
             </div>
             <div>
-              <label for="phone">{{ $t('phone') }}</label>
-              <input v-model="submitForm.phone" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg"
+              <label class="dark:text-white" for="phone">{{ $t('phone') }}</label>
+              <input v-model="submitForm.phone" class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
                 type="text" v-maska data-maska="+998(##) ###-##-##" placeholder="+998(00) 000-00-00" />
             </div>
             <div>
-              <label>{{ $t('gender') }}</label>
+              <label class="dark:text-white">{{ $t('gender') }}</label>
               <RadioGender :gender="'male'" />
             </div>
           </div>
@@ -393,7 +394,7 @@ const skipConfirmation = () => {
           <div v-else></div>
           <div class="space-x-2">
             <button v-if="registerProcess.registerMode" @click="clearForm()"
-              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-700">
               {{ $t('reset') }}
             </button>
             <button v-if="registerProcess.registerMode && !isLoading" @click="sendActivationCode()"
@@ -408,11 +409,11 @@ const skipConfirmation = () => {
               </div>
             </button>
             <button v-if="registerProcess.checkingMode" @click="skipConfirmation"
-                    class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+                    class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-700">
               {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"
-              class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-700">
               {{ $t('confirmation') }}
             </button>
             <button v-if="registerProcess.congratulationMode" @click="closeModal()"

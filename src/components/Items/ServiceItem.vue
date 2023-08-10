@@ -61,17 +61,17 @@ const openDeleteModal = (service) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(service, idx) in services"
+  <tr class="border-y border-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100 text-lg font-medium dark:border-gray-600" v-for="(service, idx) in services"
     :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ service?.name }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ serviceTypeTranslate(service?.serviceType) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ service?.name }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ serviceTypeTranslate(service?.serviceType) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForMale) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ useMoneyFormatter(service?.priceForFemale) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ useMoneyFormatter(service?.priceForMale) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ useMoneyFormatter(service?.priceForFemale) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-center dark:text-gray-300">
       <div class="flex item-center justify-center">
         <div @click="openEditModal(service)" class="w-4 mr-3 transform text-blue-500 hover:text-purple-500 hover:scale-110 cursor-pointer">
           <EditIcon class="w-6 h-6" />
