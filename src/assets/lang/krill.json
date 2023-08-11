@@ -354,5 +354,6 @@
   "currentlyNumberOfCustomersInGym": "Ҳозирда тренеровкадаги мижозлар сони",
   "numberOfTrainers": "Мураббийлар сони",
   "youHaveSuccessfullyRegistered": "Сиз муоффақиятли рўйхатдан ўтдингиз!",
-  "thisNumberHasCustomer": " ушбу рақамда мижоз мавжуд!"
+  "thisNumberHasCustomer": " ушбу рақамда мижоз мавжуд!",
+  "editCustomer": "Мижозни тахрирлаш"
 }

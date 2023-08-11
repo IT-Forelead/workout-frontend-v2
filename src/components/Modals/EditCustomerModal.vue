@@ -224,7 +224,7 @@ const editCustomer = () => {
               <!-- in progress -->
               <div v-if="registerProcess.registerMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-800 dark:text-blue-500 dark:border-blue-500 border-2 border-blue-500 rounded-full text-md">
                   01
                 </div>
                 <div class="ml-3 font-semibold text-blue-500 text-md dark:text-blue-400">
@@ -241,8 +241,8 @@ const editCustomer = () => {
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
               </div>
             </div>
             <!-- Step 2 -->
@@ -250,7 +250,7 @@ const editCustomer = () => {
               <!-- default -->
               <div v-if="registerProcess.registerMode" class="flex items-center">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                   02
                 </div>
                 <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white text-md md:block">
@@ -260,7 +260,7 @@ const editCustomer = () => {
               <!-- in progress -->
               <div v-else-if="registerProcess.checkingMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-800 dark:text-blue-500 dark:border-blue-500 border-2 border-blue-500 rounded-full text-md">
                   02
                 </div>
                 <div class="hidden ml-3 font-semibold text-blue-500 text-md md:block">
@@ -272,13 +272,13 @@ const editCustomer = () => {
                 <div class="flex items-center justify-center w-10 h-10 text-2xl text-white bg-blue-500 rounded-full">
                   <CheckIcon class="w-6 h-6" />
                 </div>
-                <div class="font-semibold text-gray-700 text-md">
+                <div class="font-semibold text-gray-700 text-md dark:text-gray-300">
                   {{ $t('confirmation') }}
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
               </div>
             </div>
             <!-- Step 3 -->
@@ -286,7 +286,7 @@ const editCustomer = () => {
               <!-- in progress -->
               <div v-if="registerProcess.congratulationMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
                   03
                 </div>
                 <div class="hidden ml-3 font-semibold text-blue-500 text-md md:block">
@@ -296,10 +296,10 @@ const editCustomer = () => {
               <!-- default -->
               <div v-else class="flex items-center">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full  text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 dark:text-gray-300 rounded-full  text-md dark:border-gray-600 dark:bg-gray-800">
                   03
                 </div>
-                <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white text-md md:block">
+                <div class="hidden ml-3 font-semibold text-gray-500 dark:text-gray-300 text-md md:block">
                   {{ $t('finish') }}
                 </div>
               </div>

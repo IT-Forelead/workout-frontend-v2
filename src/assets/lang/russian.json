@@ -354,5 +354,6 @@
   "numberOfTrainers": "Количество тренеров",
   "thisNumberHasCustomer": " у этого номера есть клиент!",
   "youHaveSuccessfulRegistered": "Вы успешно зарегистрировались!",
-  "editProduct": "Редактировать продукт"
+  "editProduct": "Редактировать продукт",
+  "editCustomer": "Редактировать клиента"
 }
