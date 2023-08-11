@@ -177,7 +177,7 @@ const submitFilterData = () => {
       </div>
       <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden customer-tariffs-wrapper">
         <table class="min-w-max w-full table-auto">
-          <thead class="sticky z-10 top-0 dark:bg-gray-800 bg-white shadow">
+          <thead class="sticky z-10 top-0 bg-white shadow dark:bg-gray-900 dark:shadow-gray-600">
             <tr class="text-gray-600 dark:text-white capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('customer') }}</th>
