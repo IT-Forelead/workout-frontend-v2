@@ -92,31 +92,31 @@ const monthlyVisitTranslate = (n) => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div v-if="useDropdownStore().selectServiceOption"
-        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize">
+        class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-r-lg pl-2 py-2 capitalize dark:bg-gray-900 dark:text-gray-300">
         {{ useDropdownStore().selectServiceOption?.name + ' ' +
           durationDayTranslate(useDropdownStore().selectServiceOption?.durationDay) + ' (' +
           monthlyVisitTranslate(useDropdownStore().selectServiceOption?.monthlyVisit) + ')' }}
       </div>
       <input type="text" v-model="search" v-on:keypress="whenPressEnter($event)"
         v-if="useDropdownStore().isOpenServiceDropDown"
-        class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2"
+        class="relative w-full foucus:ring-0 focus:outline-none border-none rounded-r-lg bg-gray-100 py-2 dark:bg-gray-900 dark:placeholder-gray-400"
         :placeholder="$t('enterCustomerName')" />
       <SearchIcon v-if="useDropdownStore().isOpenServiceDropDown" @click="submitFilterData()"
-        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500" />
+        class="w-5 h-5 absolute right-2 cursor-pointer hover:text-red-500 dark:text-gray-300" />
       <div @click="useDropdownStore().openServiceDropDown()"
         v-if="!useDropdownStore().isOpenServiceDropDown && !useDropdownStore().selectServiceOption"
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2">
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-r-lg cursor-pointer text-gray-500 pl-2 dark:bg-gray-900 dark:text-gray-300">
         {{ $t('select') }}
       </div>
       <ChevronRightIcon @click="useDropdownStore().openServiceDropDown()"
         v-if="!useDropdownStore().isOpenServiceDropDown && !useDropdownStore().selectServiceOption"
-        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
+        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600 dark:text-gray-300" />
       <XIcon @click="clearSelectedOptionData()" v-if="useDropdownStore().selectServiceOption"
-        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
+        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1 dark:bg-gray-700 dark:hover:bg-gray-600" />
       <ul v-if="useDropdownStore().isOpenServiceDropDown"
-        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200 dark:divide-gray-600 dark:bg-gray-900">
         <li v-for="(service, idx) in services" :key="idx" @click="optionClicked(service)"
-          class="hover:bg-gray-200 cursor-pointer p-2 ">
+          class="hover:bg-gray-200 cursor-pointer p-2 dark:text-gray-300 dark:hover:bg-gray-700">
           {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' +
             monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
         </li>

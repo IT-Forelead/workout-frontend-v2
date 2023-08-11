@@ -352,6 +352,8 @@
   "inGym": "В спортзале",
   "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM",
   "numberOfTrainers": "Количество тренеров",
+  "thisNumberHasCustomer": " у этого номера есть клиент!",
   "youHaveSuccessfulRegistered": "Вы успешно зарегистрировались!",
-  "thisNumberHasCustomer": " у этого номера есть клиент!"
+  "editProduct": "Редактировать продукт",
+  "editCustomer": "Редактировать клиента"
 }

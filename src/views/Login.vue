@@ -93,9 +93,9 @@ onMounted(() => {
                   class="w-full py-2 border border-gray-300 dark:border-gray-600 dark:placeholder-gray-400 rounded px-3 focus:outline-none focus:border-slate-500 dark:focus:border-slate-600 hover:shadow dark:bg-gray-900 dark:text-gray-300"
                   :placeholder="$t('enterYourPassword')" />
                 <EyeIcon v-if="hidePassword" @click="togglePassword()"
-                  class="text-gray-500 dark:text-gray-300 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
+                  class="text-gray-500 dark:text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
                 <EyeSlashIcon v-else @click="togglePassword()"
-                  class="text-gray-500 dark:text-gray-300 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
+                  class="text-gray-500 dark:text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 right-3 w-5 h-5 cursor-pointer" />
               </div>
             </label>
           </div>

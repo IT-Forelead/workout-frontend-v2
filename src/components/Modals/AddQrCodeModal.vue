@@ -58,11 +58,11 @@ const submitServiceData = (customerId) => {
   <div v-if="useModalStore().isAddQrCodeModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('customer') }}</div>
+          <div class="text-xl font-medium dark:text-white">{{ $t('customer') }}</div>
           <button @click="closeModal()"
-            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                  class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white dark:text-gray-300 dark:bg-gray-900">
             <XIcon />
           </button>
         </div>
@@ -73,22 +73,22 @@ const submitServiceData = (customerId) => {
                 class="object-cover w-32 h-32 rounded-lg border duration-500 cursor-zoom-out hover:object-scale-down" />
             </div>
             <div v-else>
-              <UserIcon class="w-32 h-32 rounded-lg text-gray-500 border p-1.5" />
+              <UserIcon class="w-32 h-32 rounded-lg text-gray-500 border p-1.5 dark:border-gray-600 dark:text-gray-300" />
             </div>
-            <div class="text-lg font-medium capitalize">
+            <div class="text-lg font-medium dark:text-white capitalize">
               {{ selectedCustomer?.firstname + ' ' + selectedCustomer?.lastname }}
             </div>
-            <div class="text-base text-gray-700">
+            <div class="text-base dark:text-gray-300 text-gray-700">
               {{ selectedCustomer?.phone }}
             </div>
           </div>
           <div v-if="selectedCustomer?.barcode" class="relative">
             <input type="text" :value="selectedCustomer?.barcode"
-              class="border-none pl-12 text-gray-500 bg-gray-100 rounded-lg w-full text-lg" disabled />
+              class="border-none pl-12 text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400" disabled />
             <QrCodeIcon class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 left-3 w-7 h-7 cursor-pointer" />
           </div>
           <div v-else class="relative">
-            <input type="text" class="border-none pl-12 text-gray-500 bg-gray-100 rounded-lg w-full text-lg uppercase"
+            <input type="text" class="border-none pl-12 text-gray-500 bg-gray-100 rounded-lg w-full text-lg uppercase dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
               :placeholder="t('noQrCodeAvailable')" disabled />
             <QrCodeIcon class="text-gray-500 absolute z-10 top-1/2 -translate-y-1/2 left-3 w-7 h-7 cursor-pointer" />
           </div>

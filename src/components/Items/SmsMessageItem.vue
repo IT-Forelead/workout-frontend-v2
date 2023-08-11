@@ -66,16 +66,16 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(smsMessage, idx) in smsMessages"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 text-lg font-medium dark:border-gray-600" v-for="(smsMessage, idx) in smsMessages"
     :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ smsMessage?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ smsMessage?.text }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ smsMessage?.phone }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ smsMessage?.text }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ moment(smsMessage?.sentDate).format('DD/MM/YYYY H:mm') }}
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ messageTypeTranslate(smsMessage?.messageType) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ messageTypeTranslate(smsMessage?.messageType) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-center ">
       <span class="p-1.5 px-3 text-sm rounded-full" :class="deliveryStatusColor(smsMessage?.deliveryStatus)">
         {{ deliveryStatusTranslate(smsMessage?.deliveryStatus) }}
       </span>

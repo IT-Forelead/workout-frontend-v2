@@ -71,26 +71,26 @@ onMounted(() => {
 })
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(customer, idx) in customers"
+  <tr class="border-y border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 text-lg font-medium dark:border-gray-600" v-for="(customer, idx) in customers"
     :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
-      <div class="flex items-center space-x-2">
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
+      <div class="flex items-center space-x-2 dark:text-gray-300">
         <div v-if="customer?.image">
           <img :src="CUSTOMER_IMAGE_URL + customer?.image" alt="#"
             class="object-cover w-9 h-9 rounded-full border duration-500 cursor-zoom-out hover:object-scale-down" />
         </div>
         <div v-else>
-          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+          <UserIcon class="w-9 h-9 rounded-full border dark:border-gray-600 p-1.5 dark:text-gray-300" />
         </div>
         <span class="text-lg font-medium capitalize">
           {{ customer?.firstname + ' ' + customer?.lastname }}
         </span>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ customer?.phone }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">{{ genderTranslate(customer?.gender) }}</td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ customer?.phone }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">{{ genderTranslate(customer?.gender) }}</td>
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       {{ moment(customer?.createdAt).format('DD/MM/YYYY H:mm') }}
     </td>
     <td v-motion-pop class="py-2 px-4 text-center">

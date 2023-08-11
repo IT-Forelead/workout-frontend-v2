@@ -60,24 +60,24 @@ const monthlyVisitTranslate = (n) => {
 <template>
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
-      <div v-if="selectedOption" class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg p-2">
+      <div v-if="selectedOption" class="border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg p-2 dark:bg-gray-900 dark:text-gray-300">
         {{ selectedOption?.name + ' - ' + durationDayTranslate(selectedOption?.durationDay) + ' (' + monthlyVisitTranslate(selectedOption?.monthlyVisit) + ')' }}
       </div>
       <div @click="useDropdownStore().openTrainerServiceDropDown()" v-else
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2 dark:bg-gray-900 dark:text-gray-300">
         {{ $t('select') }}
       </div>
       <ChevronRightIcon @click="useDropdownStore().openTrainerServiceDropDown()" v-if="!selectedOption"
-        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
+        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600 dark:text-gray-300" />
       <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
-        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
+        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1 dark:hover:bg-gray-600 dark:bg-gray-700" />
       <ul v-if="useDropdownStore().isOpenTrainerServiceDropDown"
-        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
-        <li v-if="trainerServices.length == 0" class="w-full text-center text-red-500 p-2">
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200 dark:divide-gray-600 dark:bg-gray-900 ">
+        <li v-if="trainerServices.length == 0" class="w-full text-center text-red-500 p-2 ">
           {{ $t('empty') }}
         </li>
         <li v-else v-for="(service, idx) in trainerServices" :key="idx" @click="optionClicked(service)"
-          class="hover:bg-gray-200 cursor-pointer p-2 ">
+          class="hover:bg-gray-200 cursor-pointer p-2 dark:bg-gray-900 dark:hover:bg-gray-700 dark:text-gray-300">
           {{ service?.name + ' - ' + durationDayTranslate(service?.durationDay) + ' (' + monthlyVisitTranslate(service?.monthlyVisit) + ')' }}
         </li>
       </ul>

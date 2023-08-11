@@ -93,26 +93,26 @@ const openAddFakeVisitModal = (customerTariff) => {
 }
 </script>
 <template>
-  <tr class="border-y border-gray-200 hover:bg-gray-100 text-lg font-medium" v-for="(tariff, idx) in customerTariffs"
+  <tr class="border-y border-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800 text-lg font-medium dark:border-gray-600" v-for="(tariff, idx) in customerTariffs"
     :key="idx">
-    <td v-motion-pop class="text-center">{{ idx + 1 }}</td>
+    <td v-motion-pop class="text-center dark:text-gray-300">{{ idx + 1 }}</td>
     <td v-motion-pop v-if="router?.currentRoute?.value?.path !== '/customer'" class="py-2 px-4 text-left">
       <div class="flex items-center space-x-2">
         <div v-if="tariff?.customer?.image">
           <img :src="URL + tariff?.customer?.image" alt="#" class="object-cover w-9 h-9 rounded-full border" />
         </div>
         <div v-else>
-          <UserIcon class="w-9 h-9 rounded-full border p-1.5" />
+          <UserIcon class="w-9 h-9 rounded-full border dark:border-gray-600 p-1.5 dark:text-gray-300" />
         </div>
         <div>
-          <div class="text-lg font-medium capitalize">
+          <div class="text-lg font-medium capitalize dark:text-gray-300">
             {{ tariff?.customer?.firstname + ' ' + tariff?.customer?.lastname }}
           </div>
-          <div>{{ tariff?.customer?.phone }}</div>
+          <div class="dark:text-gray-300">{{ tariff?.customer?.phone }}</div>
         </div>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       <div class="">
         {{ tariff?.service?.name }}
       </div>
@@ -121,15 +121,15 @@ const openAddFakeVisitModal = (customerTariff) => {
           monthlyVisitTranslate(tariff?.service?.monthlyVisit) + ')' }}
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       <div class="flex items-center space-x-2">
         <div>
           <div class="flex items-center space-x-1">
-            <CalendarCheckIcon class="w-5 h-5 text-gray-500" />
+            <CalendarCheckIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
             <div>{{ moment(tariff?.customerTariff?.createdAt).format('DD/MM/YYYY H:mm') }}</div>
           </div>
           <div class="flex items-center space-x-1">
-            <CalendarXIcon class="w-5 h-5 text-gray-500" />
+            <CalendarXIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
             <div>{{ moment(tariff?.customerTariff?.expireAt).format('DD/MM/YYYY H:mm') }}</div>
           </div>
         </div>
@@ -141,9 +141,9 @@ const openAddFakeVisitModal = (customerTariff) => {
         </div>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-left">
+    <td v-motion-pop class="py-2 px-4 text-left dark:text-gray-300">
       <div class="flex items-center space-x-1">
-        <div class="text-sm text-gray-500">
+        <div class="text-sm text-gray-500 dark:text-gray-300">
           {{ $t('total') }}:
         </div>
         <div>
@@ -151,7 +151,7 @@ const openAddFakeVisitModal = (customerTariff) => {
         </div>
       </div>
       <div class="flex items-center space-x-1">
-        <div class="text-sm text-gray-500">
+        <div class="text-sm text-gray-500 dark:text-gray-300">
           {{ $t('paid') }}:
         </div>
         <div>
@@ -159,7 +159,7 @@ const openAddFakeVisitModal = (customerTariff) => {
         </div>
       </div>
     </td>
-    <td v-motion-pop class="py-2 px-4 text-center">
+    <td v-motion-pop class="py-2 px-4 text-center dark:text-gray-300">
       <div class="flex item-center justify-center space-x-2">
         <div>
           {{ tariff?.numberOfVisit + " / " + tariff?.service?.monthlyVisit }}

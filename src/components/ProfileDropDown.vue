@@ -46,7 +46,7 @@ const logout = () => {
     </div>
   </div>
   <ul v-if="useModalStore().isOpenProfileDropDown"
-      class="absolute dark:bg-gray-800 w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-600">
+      class="absolute dark:bg-gray-800 w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-200 dark:divide-gray-600">
       <li class="flex items-center dark:hover:bg-gray-900 dark:text-gray-300 hover:bg-gray-200 cursor-pointer p-2 space-x-2">
         <SettingsIcon class="w-6 h-6" />
         <span>{{ $t('settings') }}</span>

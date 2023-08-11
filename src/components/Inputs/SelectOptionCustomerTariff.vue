@@ -48,25 +48,25 @@ onMounted(() => {
   <div class="select-none">
     <label ref="dropdown" class="flex items-center w-full relative">
       <div v-if="selectedOption"
-        class="flex items-center space-x-2 border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2">
-        <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
-        <div class="capitalize">
+        class="flex items-center space-x-2 border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg pl-2 py-2  dark:bg-gray-900 dark:text-gray-300">
+        <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1 dark:bg-gray-900 dark:border-gray-600" />
+        <div class="capitalize dark:bg-gray-900 dark:text-gray-300">
           {{ selectedOption?.customer?.firstname + " " + selectedOption?.customer?.lastname + " - " + selectedOption?.service?.name }}
         </div>
       </div>
       <div @click="useDropdownStore().openCustomerTariffDropDown()" v-else
-        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2">
+        class="border-none bg-gray-100 py-2 w-full text-lg rounded-lg cursor-pointer text-gray-500 pl-2 dark:text-gray-300 dark:bg-gray-900">
         {{ $t('select') }}
       </div>
       <ChevronRightIcon @click="useDropdownStore().openCustomerTariffDropDown()" v-if="!selectedOption"
-        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600" />
+        class="absolute right-2.5 z-10 rotate-90 cursor-pointer text-gray-600 dark:text-gray-300" />
       <XIcon @click="clearSelectedOptionData()" v-if="selectedOption"
-        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1" />
+        class="absolute right-2.5 z-10 cursor-pointer bg-gray-500 hover:bg-gray-600 text-white rounded-full p-1 dark:bg-gray-700 dark:hover:bg-gray-600" />
       <ul v-if="useDropdownStore().isOpenCustomerTariffDropDown"
-        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200">
+        class="absolute w-full bg-white shadow rounded-b-md z-20 top-12 max-h-56 overflow-y-auto right-0 divide-y divide-gray-200 dark:divide-gray-600 dark:bg-gray-900">
         <li v-for="(customerTariff, idx) in customerTariffs" :key="idx" @click="optionClicked(customerTariff)"
-          class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 ">
-          <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
+          class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 dark:text-gray-300 dark:hover:bg-gray-700">
+          <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1 dark:bg-gray-900 dark:border-gray-600" />
           <div class="capitalize">
             {{ customerTariff?.customer?.firstname + " " + customerTariff?.customer?.lastname + " - " + customerTariff?.service?.name }}
           </div>

@@ -87,23 +87,23 @@ const submitData = () => {
   <div v-if="useModalStore().isAddSoldProdoctModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('addSales') }}</div>
+          <div class="text-xl font-medium dark:text-white">{{ $t('addSales') }}</div>
           <button @click="closeModal()"
-            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white dark:bg-gray-900 dark:text-gray-300">
             <XIcon />
           </button>
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <label>{{ $t('customer') }}</label>
+            <label class="dark:text-white">{{ $t('customer') }}</label>
             <SelectOptionCustomer />
           </div>
           <div class="select-none">
-            <label>{{ $t('productType') }}</label>
+            <label class="dark:text-white">{{ $t('productType') }}</label>
             <div
-              class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg">
+              class="flex items-center justify-around border-none focus:ring-0 outline-0 bg-gray-100 w-full text-lg rounded-lg dark:bg-gray-900">
               <input id="toggle-05" @click="optionClicked('0.5')" class="toggle toggle-left" name="toggle" value="false"
                 type="radio" :checked="submitForm.quantity == 0.5" />
               <label for="toggle-05" class="relative flex items-center justify-center py-2">
@@ -124,7 +124,7 @@ const submitData = () => {
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
           <button @click="clearForm()"
-            class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+            class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-700">
             {{ $t('reset') }}
           </button>
           <button v-if="!isLoading" @click="submitData()"
@@ -177,6 +177,8 @@ input[type='radio'].toggle:checked+label {
   @apply border-4;
   @apply border-blue-200;
   @apply rounded-lg;
+  @apply dark:bg-gray-800;
+  @apply dark:border-gray-600;
 }
 
 input[type='radio'].toggle:checked+label>span {

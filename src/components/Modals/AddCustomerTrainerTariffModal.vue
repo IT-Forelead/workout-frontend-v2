@@ -108,36 +108,36 @@ const submitServiceData = () => {
   <div v-if="useModalStore().isAddCustomerTrainerTariffModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium">{{ $t('addCustomerTrainerTariff') }}</div>
+          <div class="text-xl font-medium dark:text-white">{{ $t('addCustomerTrainerTariff') }}</div>
           <button @click="closeModal()"
-            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="text-gray-600 bg-gray-100 dark:bg-gray-900 dark:text-gray-300 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>
         </div>
         <div class="p-6 space-y-4">
           <div>
-            <label>{{ $t('customerTariff') }}</label>
+            <label class="dark:text-white">{{ $t('customerTariff') }}</label>
             <SelectOptionCustomerTariff />
           </div>
           <div>
-            <label>{{ $t('trainer') }}</label>
+            <label class="dark:text-white">{{ $t('trainer') }}</label>
             <SelectOptionTrainer />
           </div>
           <div>
-            <label>{{ $t('trainerService') }}</label>
+            <label class="dark:text-white">{{ $t('trainerService') }}</label>
             <SelectOptionTrainerService />
           </div>
           <div>
-            <label for="createdAt">{{ $t('createdAt') }}</label>
+            <label for="createdAt" class="dark:text-white">{{ $t('createdAt') }}</label>
             <input v-model="createdAt" type="datetime-local" id="createdAt"
-              class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg" />
+              class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900" />
           </div>
         </div>
         <div class="flex items-center justify-end p-4 space-x-2 border-t dark:border-gray-600">
           <button @click="clearForm()"
-            class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+            class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-700">
             {{ $t('reset') }}
           </button>
           <button v-if="!isLoading" @click="submitServiceData()"

@@ -18,13 +18,13 @@ const optionClicked = (data) => {
 </script>
 <template>
   <li v-for="(customer, idx) in customers" :key="idx" @click="optionClicked(customer)"
-    class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 ">
-    <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1" />
-    <div class="capitalize">
+    class="flex items-center space-x-2 hover:bg-gray-200 cursor-pointer p-2 dark:bg-gray-900">
+    <UserIcon class="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 p-1 dark:border-gray-600 dark:text-gray-300 dark:bg-gray-900" />
+    <div class="capitalize dark:text-gray-300">
       {{ customer?.firstname + ' ' + customer?.lastname }}
     </div>
   </li>
-  <li class="flex items-center justify-center w-full p-2">
+  <li class="flex items-center justify-center w-full p-2 dark:bg-gray-900">
     <InfiniteLoading v-bind="$attrs" />
   </li>
 </template>

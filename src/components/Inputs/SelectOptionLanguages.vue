@@ -65,7 +65,7 @@ onMounted(() => {
       <CaretDownIcon class="w-4 h-4 dark:text-gray-300" />
     </div>
     <ul v-if="useDropdownStore().isOpenSelectLanguage"
-      class="absolute dark:bg-gray-800 w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-600">
+      class="absolute dark:bg-gray-800 w-full bg-white shadow rounded-b-md z-20 top-14 right-0 divide-y divide-gray-200 dark:divide-gray-600">
       <li v-for="(lang, idx) in list" :key="idx" @click="changeLang(lang)" class="hover:bg-gray-200 dark:hover:bg-gray-900 dark:text-gray-300 cursor-pointer p-2">
         {{ lang?.name }}
       </li>

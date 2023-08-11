@@ -7,6 +7,8 @@ import LightModeIcon from '../assets/icons/LightModeIcon.vue'
 
 const isDark = useDark()
 </script>
+
+
 <template>
     <header class="fixed top-0 w-full p-0 bg-white dark:bg-gray-900 dark:border-b dark:border-b-gray-600">
       <div class="container flex items-center py-2 mx-auto justify-between">
@@ -30,4 +32,5 @@ const isDark = useDark()
       </div>
     </header>
 </template>
+
 <style scoped></style>

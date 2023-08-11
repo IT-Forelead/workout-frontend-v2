@@ -71,34 +71,36 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="px-4 py-2">
-    <div class="bg-white rounded p-5">
-      <div class="flex items-center justify-between mb-1">
-        <p class="text-3xl font-bold">{{ $t('servicesReport') }}</p>
+  <div class="px-4 py-4 dark:bg-gray-800 min-h-screen">
+    <div class="bg-white rounded p-5 dark:bg-gray-900">
+      <div class="flex items-center justify-between mb-4">
+        <p class="text-3xl font-bold dark:text-white">{{ $t('servicesReport') }}</p>
         <div class="flex items-center space-x-3">
           <div class="relative" ref="dropdown">
             <div @click="useModalStore().toggleFilterBy()"
-              class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer">
-              <FunnelIcon class="w-5 h-5 text-gray-500" />
-              <span>{{ $t('filter') }}</span>
+                 class="select-none bg-gray-100 rounded-lg w-full p-2 px-5 flex items-center space-x-2 hover:bg-gray-200 cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700">
+              <FunnelIcon class="w-5 h-5 text-gray-500 dark:text-gray-300" />
+              <span class="dark:text-gray-300">
+                {{ $t('filter') }}
+              </span>
             </div>
             <div v-if="useModalStore().isOpenFilterBy"
-              class="absolute bg-white shadow w-96 rounded-xl p-3 z-20 top-12 right-0 space-y-3">
+              class="absolute bg-white shadow w-96 rounded-xl p-3 z-20 top-12 right-0 space-y-3 dark:bg-gray-800 border dark:border-gray-600">
               <div>
-                <label for="name">{{ $t('serviceName') }}</label>
-                <input v-model="serviceName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full" type="text"
+                <label class="dark:text-white" for="name">{{ $t('serviceName') }}</label>
+                <input v-model="serviceName" class="border-none text-gray-500 bg-gray-100 rounded-lg w-full dark:bg-gray-900 dark:text-gray-300 dark:placeholder-gray-400" type="text"
                   id="name" :placeholder="$t('enterServiceName')" />
               </div>
               <div>
-                <label>{{ $t('serviceType') }}</label>
+                <label class="dark:text-white">{{ $t('serviceType') }}</label>
                 <SelectOptionServiceType />
               </div>
               <div>
-                <label>{{ $t('duration') }}</label>
+                <label class="dark:text-white">{{ $t('duration') }}</label>
                 <SelectOptionDurationDay />
               </div>
               <div>
-                <label>{{ $t('monthlyVisit') }}</label>
+                <label class="dark:text-white">{{ $t('monthlyVisit') }}</label>
                 <SelectOptionMonthlyVisit />
               </div>
               <div v-if="isLoading"
@@ -108,21 +110,21 @@ onMounted(() => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center">
+                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:bg-blue-500 dark:hover:bg-blue-600">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>
           </div>
           <div @click="useModalStore().openAddServiceModal()"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75">
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:bg-blue-500 dark:hover:bg-blue-600">
             {{ $t('addService') }}
           </div>
         </div>
       </div>
       <div class="max-h-[77vh] overflow-auto xxl:overflow-x-hidden users-wrapper">
         <table class="min-w-max w-full table-auto">
-          <thead class="sticky z-10 top-0 bg-white shadow">
-            <tr class="text-gray-600 capitalize text-lg leading-normal">
+          <thead class="sticky z-10 top-0 bg-white dark:bg-gray-900 dark:shadow-gray-600 shadow">
+            <tr class=" dark:text-white capitalize text-lg leading-normal">
               <th class="py-2 px-4 text-center">{{ $t('n') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('serviceName') }}</th>
               <th class="py-2 px-4 text-left">{{ $t('serviceType') }}</th>
