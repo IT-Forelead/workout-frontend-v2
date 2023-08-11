@@ -352,5 +352,6 @@
   "inGym": "В спортзале",
   "currentlyNumberOfCustomersInGym": "Сейчас количество клиентов в GYM",
   "numberOfTrainers": "Количество тренеров",
-  "youHaveSuccessfulRegistered": "Вы успешно зарегистрировались!"
+  "youHaveSuccessfulRegistered": "Вы успешно зарегистрировались!",
+  "thisNumberHasCustomer": " у этого номера есть клиент!"
 }

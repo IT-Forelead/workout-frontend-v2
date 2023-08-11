@@ -35,7 +35,7 @@ const deliveryStatusTranslate = (status) => {
   }
 }
 
-const deliveryStatusColor = (status) => {
+const deliveryStatusColor = (status) => {998668324768
   switch (status) {
     case 'sent':
       return 'bg-orange-500 text-white'
