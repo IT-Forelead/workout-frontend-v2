@@ -115,6 +115,11 @@ const sendActivationCode = () => {
     notify.warning({
       message: t('plsEnterPhone'),
     })
+  }
+  else if (submitForm.phone.length < 18) {
+    notify.warning({
+      message: t('plsEnterPhoneCorrectly'),
+    })
   } else if (!selectGender.value?.id) {
     notify.warning({
       message: t('plsSelectGender'),
@@ -408,7 +413,7 @@ const skipConfirmation = () => {
               </div>
             </button>
             <button v-if="registerProcess.checkingMode" @click="skipConfirmation"
-                    class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
               {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"
