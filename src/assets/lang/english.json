@@ -353,6 +353,7 @@
   "inGym": "In GYM",
   "currentlyNumberOfCustomersInGym": "Currently the number of customers in GYM",
   "numberOfTrainers": "Number of trainers",
+  "editProduct": "Edit product",
   "youHaveSuccessfullyRegistered": "You have successfully registered!",
-  "editProduct": "Edit product"
+  "thisNumberHasCustomer": " this number has a customer!"
 }

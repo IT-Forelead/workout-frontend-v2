@@ -122,20 +122,26 @@ const sendActivationCode = () => {
   } else if (submitForm.smsConfirmation) {
     CustomerService.sendActivationCode(submitForm.phone.replace(/([() -])/g, ''))
       .then(() => {
+        localStorage.setItem('time', '02:00')
+        startTimer()
+        registerProcess.registerMode = false
+        registerProcess.checkingMode = true
         notify.success({
           message: t('verificationCodeSentSuccessfully'),
         })
       })
-      .catch(() => {
-        notify.error({
-          message: t('errorSendingVerificationCode'),
-        })
+      .catch((err) => {
+        if (err.response.data.includes('Phone in use:')) {
+          notify.error({
+            message: err.response.data.substring(14, 27) + t('thisNumberHasCustomer'),
+          })
+        } else {
+          notify.error({
+            message: t('errorCreatingCustomer'),
+          })
+        }
         showResendSMS.value = true
       })
-    localStorage.setItem('time', '02:00')
-    startTimer()
-    registerProcess.registerMode = false
-    registerProcess.checkingMode = true
     showResendSMS.value = false
   } else createCustomer()
 }
@@ -176,9 +182,15 @@ const createCustomer = () => {
         })
     })
     .catch((err) => {
-      notify.error({
-        message: t('errorCreatingCustomer'),
-      })
+      if (err.response.data.includes('Phone in use:')) {
+        notify.error({
+          message: err.response.data.substring(14, 27) + t('thisNumberHasCustomer'),
+        })
+      } else {
+        notify.error({
+          message: t('errorCreatingCustomer'),
+        })
+      }
       isLoading.value = false
     })
 }
@@ -187,7 +199,6 @@ const skipConfirmation = () => {
   submitForm.smsConfirmation = false
   createCustomer()
 }
-
 </script>
 <template>
   <div v-if="useModalStore().isAddCustomerModalOpen"

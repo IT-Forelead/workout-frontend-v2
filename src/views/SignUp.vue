@@ -86,25 +86,30 @@ const sendActivationCode = () => {
     })
   } else {
     isLoading.value = true
-    registerProcess.registerMode = false
-    registerProcess.checkingMode = true
     CustomerService.sendVerifyCode(submitForm.phone.replace(/([() -])/g, ''))
       .then(() => {
         isLoading.value = false
+        localStorage.setItem('time', '02:00')
+        startTimer()
+        registerProcess.registerMode = false
+        registerProcess.checkingMode = true
         notify.success({
           message: t('verificationCodeSentSuccessfully'),
         })
       })
-      .catch(() => {
-        notify.error({
-          message: t('errorSendingVerificationCode'),
-        })
+      .catch((err) => {
+        isLoading.value = false
+        if (err.response.data.includes('Phone in use:')) {
+          notify.error({
+            message: err.response.data.substring(14, 27) + t('thisNumberHasCustomer'),
+          })
+        } else {
+          notify.error({
+            message: t('errorCreatingCustomer'),
+          })
+        }
         showResendSMS.value = true
       })
-    localStorage.setItem('time', '02:00')
-    startTimer()
-    registerProcess.registerMode = false
-    registerProcess.checkingMode = true
     showResendSMS.value = false
   }
 }
@@ -131,9 +136,15 @@ const createCustomer = () => {
       isLoading.value = false
     })
     .catch((err) => {
-      notify.error({
-        message: t('errorCreatingCustomer'),
-      })
+      if (err.response.data.includes('Phone in use:')) {
+        notify.error({
+          message: err.response.data.substring(14, 27) + t('thisNumberHasCustomer'),
+        })
+      } else {
+        notify.error({
+          message: t('errorCreatingCustomer'),
+        })
+      }
       isLoading.value = false
     })
 }
@@ -188,7 +199,8 @@ onMounted(() => {
             <span class="font-normal dark:text-white">
               {{ $t('haveAnAccountAlready') }}
             </span>
-            <router-link to="/login" class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
+            <router-link to="/login"
+              class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
               {{ $t('login') }}
             </router-link>
           </div>
@@ -233,7 +245,8 @@ onMounted(() => {
           </router-link>
         </div>
       </div>
-      <div class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap dark:text-gray-300">
+      <div
+        class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap dark:text-gray-300">
         Developed and designed by
         <a href="http://it-forelead.uz" target="_blank"
           class="dark:text-indigo-500 dark:hover:text-indigo-600 cursor-pointer text-indigo-600 hover:text-indigo-900 font-medium">
