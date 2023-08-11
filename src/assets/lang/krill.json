@@ -344,8 +344,8 @@
   "statisticsForSeveralMonths": "Бир неча ойлик статистика",
   "numberOfMonthlyVisits": "Ойлик ташрифлар сони",
   "signUp": "Рўйхатдан ўтиш",
-  "haveAnAccountAlready": "Aкоунтингиз борми?",
-  "dontHaveAnAccount": "Aкоунтингиз йўқми?",
+  "haveAnAccountAlready": "Aккаунтингиз борми?",
+  "dontHaveAnAccount": "Aккаунтингиз йўқми?",
   "enterYourFirstname": "Исмингизни киритинг",
   "enterYourLastname": "Фамилиянгизни киритинг",
   "plsEnterYourFirstname": "Илтимос, исмингизни киритинг!",
@@ -353,5 +353,6 @@
   "inGym": "Тренеровкахонада",
   "currentlyNumberOfCustomersInGym": "Ҳозирда тренеровкадаги мижозлар сони",
   "numberOfTrainers": "Мураббийлар сони",
-  "youHaveSuccessfullyRegistered": "Сиз муоффақиятли рўйхатдан ўтдингиз!"
+  "youHaveSuccessfullyRegistered": "Сиз муоффақиятли рўйхатдан ўтдингиз!",
+  "editProduct": "Маҳсулотни тахрирлаш"
 }

@@ -151,7 +151,7 @@ const submitFilterData = () => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
+                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:bg-blue-500 dark:hover:bg-blue-600">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>

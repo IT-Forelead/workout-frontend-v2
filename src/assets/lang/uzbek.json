@@ -356,5 +356,6 @@
   "inGym": "Trenerovkaxonada",
   "currentlyNumberOfCustomersInGym": "Hozirda trenerovkadagi mijozlar soni",
   "numberOfTrainers": "Murabbiylar soni",
-  "youHaveSuccessfullyRegistered": "Siz muoffaqiyatli ro'yxatdan o'tdingiz!"
+  "youHaveSuccessfullyRegistered": "Siz muoffaqiyatli ro'yxatdan o'tdingiz!",
+  "editProduct": "Mahsulotni tahrirlash"
 }

@@ -74,7 +74,7 @@ onMounted(() => {
           <span class="dark:text-gray-300">{{ $t('notification') }}</span>
         </div>
         <div v-if="useModalStore().isOpenNotification"
-          class="absolute dark:bg-gray-800 flex flex-col items-center justify-center bg-white w-80 h-40 shadow rounded-b-md p-3 z-20 top-14 right-0 space-y-2">
+          class="absolute dark:bg-gray-800 dark:border dark:border-gray-600 dark:rounded-md flex flex-col items-center justify-center bg-white w-80 h-40 shadow rounded-b-md p-3 z-20 top-14 right-0 space-y-2">
           <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 shadow">
             <BellIcon class="w-10 h-10 text-gray-500 dark:text-gray-900" />
           </div>

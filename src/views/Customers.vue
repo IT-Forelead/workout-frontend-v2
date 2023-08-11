@@ -150,13 +150,13 @@ const submitFilterData = () => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                   class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
+                   class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:bg-blue-500 dark:hover:bg-blue-600">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>
           </div>
           <div @click="useModalStore().openAddCustomerModal()"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:bg-blue-500 dark:hover:bg-blue-600">
             {{ $t('addCustomer') }}
           </div>
         </div>

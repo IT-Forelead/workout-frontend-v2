@@ -132,12 +132,12 @@ const submitFilterData = () => {
                 <Spinners270RingIcon class="mr-2 w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" />
                 <span>{{ $t('loading') }}</span>
               </div>
-              <div v-else @click="submitFilterData()" class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
+              <div v-else @click="submitFilterData()" class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:bg-blue-500 dark:hover:bg-blue-600">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>
           </div>
-          <div @click="useModalStore().openAddProductModal()" class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:hover:bg-gray-200 dark:bg-white dark:text-black">
+          <div @click="useModalStore().openAddProductModal()" class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:bg-blue-500 dark:hover:bg-blue-600">
             {{ $t('addProduct') }}
           </div>
         </div>

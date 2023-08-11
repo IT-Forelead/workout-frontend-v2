@@ -165,7 +165,7 @@ const downloadXlsReport = () => {
         <div class="flex items-center space-x-3">
           <div class="flex items-center justify-center space-x-3">
             <div class="cursor-pointer" @click="downloadXlsReport()">
-              <XlsIcon class="w-7 h-7 text-green-500 hover:text-green-600" />
+              <XlsIcon class="w-7 h-7 text-green-500 hover:text-green-600 dark:text-white" />
             </div>
             <!-- <div class="cursor-pointer">
               <PdfIcon class="w-7 h-7 text-red-500 hover:text-red-600" />
@@ -210,13 +210,13 @@ const downloadXlsReport = () => {
                 <span>{{ $t('loading') }}</span>
               </div>
               <div v-else @click="submitFilterData()"
-                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:hover:bg-gray-700">
+                class="w-full bg-gray-900 hover:bg-gray-800 cursor-pointer select-none py-3 text-white rounded-lg flex items-center justify-center dark:bg-blue-500 dark:hover:bg-blue-600">
                 <span>{{ $t('filter') }}</span>
               </div>
             </div>
           </div>
           <div @click="useModalStore().openAddPaymentModal()"
-            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75 dark:text-black dark:bg-white dark:hover:bg-gray-200">
+            class="bg-black text-white text-base rounded-lg p-2 px-4 cursor-pointer hover:bg-black/75  dark:bg-blue-500 dark:hover:bg-blue-600">
             {{ $t('addPayment') }}
           </div>
         </div>
