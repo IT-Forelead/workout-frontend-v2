@@ -193,11 +193,11 @@ const skipConfirmation = () => {
   <div v-if="useModalStore().isAddCustomerModalOpen"
     class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 backdrop-blur bg-gray-900/75 w-full max-h-screen md:inset-0 md:h-full">
     <div class="relative p-4 w-full h-full max-w-4xl md:h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800 border dark:border-gray-600">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-          <div class="text-xl font-medium dark:text-white">{{ $t('addCustomer') }}</div>
+          <div class="text-xl font-medium">{{ $t('addCustomer') }}</div>
           <button @click="closeModal()"
-                  class="dark:bg-gray-900 dark:text-gray-300 text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            class="text-gray-600 bg-gray-100 hover:bg-gray-800 hover:text-gray-300 transition-all duration-300 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
             <XIcon />
           </button>
         </div>
@@ -221,7 +221,7 @@ const skipConfirmation = () => {
                 <div class="flex items-center justify-center w-10 h-10 text-white bg-blue-500 rounded-full">
                   <CheckIcon class="w-6 h-6" />
                 </div>
-                <div class="font-semibold text-gray-70 dark:text-white text-md">
+                <div class="font-semibold text-gray-700 text-md dark:text-white">
                   {{ $t('customerData') }}
                 </div>
               </div>
@@ -245,7 +245,7 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-else-if="registerProcess.checkingMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
                   02
                 </div>
                 <div class="hidden ml-3 font-semibold text-blue-500 dark:text-white text-md md:block">
@@ -274,7 +274,7 @@ const skipConfirmation = () => {
                   class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 border-2 border-blue-500 rounded-full text-md">
                   03
                 </div>
-                <div class="hidden ml-3 font-semibold dark:text-white text-blue-500 text-md md:block">
+                <div class="hidden ml-3 font-semibold text-blue-500 text-md md:block">
                   {{ $t('finish') }}
                 </div>
               </div>
@@ -300,7 +300,7 @@ const skipConfirmation = () => {
                 <ImageIcon class="w-16 h-16 text-blue-500" />
                 <input id="dropzone-file" type="file" class="hidden" name="image" @change="getImage" />
                 <div
-                  class="absolute mx-auto mt-3 text-lg font-semibold tracking-wide dark:text-blue-400 text-blue-500 -bottom-10 whitespace-nowrap">
+                  class="absolute mx-auto mt-3 text-lg font-semibold tracking-wide text-blue-500 -bottom-10 whitespace-nowrap">
                   {{ $t('uploadPhoto') }}
                 </div>
               </label>
@@ -408,11 +408,11 @@ const skipConfirmation = () => {
               </div>
             </button>
             <button v-if="registerProcess.checkingMode" @click="skipConfirmation"
-                    class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-700">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
               {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"
-              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-700">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-blue-600 cursor-pointer hover:bg-blue-800">
               {{ $t('confirmation') }}
             </button>
             <button v-if="registerProcess.congratulationMode" @click="closeModal()"
