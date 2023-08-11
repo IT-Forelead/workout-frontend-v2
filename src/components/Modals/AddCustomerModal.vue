@@ -220,7 +220,7 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-if="registerProcess.registerMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-800 dark:text-gray-300 dark:border-blue-500 border-2 border-blue-500 rounded-full text-md">
+                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500  bg-white dark:bg-gray-800 dark:text-blue-500 dark:border-blue-500 border-2 border-blue-500 rounded-full text-md">
                   01
                 </div>
                 <div class="ml-3 font-semibold text-blue-500 text-md dark:text-blue-400">
@@ -237,8 +237,8 @@ const skipConfirmation = () => {
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
               </div>
             </div>
             <!-- Step 2 -->
@@ -249,17 +249,17 @@ const skipConfirmation = () => {
                   class="dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
                   02
                 </div>
-                <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white text-md md:block">
+                <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white  text-md md:block">
                   {{ $t('confirmation') }}
                 </div>
               </div>
               <!-- in progress -->
               <div v-else-if="registerProcess.checkingMode" class="flex items-center justify-between">
                 <div
-                  class="dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
+                  class="dark:bg-gray-800 dark:text-blue-500 dark:border-blue-500 flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
                   02
                 </div>
-                <div class="hidden ml-3 font-semibold text-blue-500 dark:text-white text-md md:block">
+                <div class="hidden ml-3 font-semibold text-blue-500 dark:text-blue-500 text-md md:block">
                   {{ $t('confirmation') }}
                 </div>
               </div>
@@ -273,8 +273,8 @@ const skipConfirmation = () => {
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
               </div>
             </div>
             <!-- Step 3 -->
