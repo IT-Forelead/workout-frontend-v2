@@ -246,7 +246,7 @@ const skipConfirmation = () => {
               <!-- default -->
               <div v-if="registerProcess.registerMode" class="flex items-center">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
+                  class="dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
                   02
                 </div>
                 <div class="hidden ml-3 font-semibold text-gray-500 dark:text-white text-md md:block">
@@ -256,7 +256,7 @@ const skipConfirmation = () => {
               <!-- in progress -->
               <div v-else-if="registerProcess.checkingMode" class="flex items-center justify-between">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
+                  class="dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 flex items-center justify-center w-10 h-10 font-semibold text-blue-500 bg-white border-2 border-blue-500 rounded-full text-md">
                   02
                 </div>
                 <div class="hidden ml-3 font-semibold text-blue-500 dark:text-white text-md md:block">
@@ -292,7 +292,7 @@ const skipConfirmation = () => {
               <!-- default -->
               <div v-else class="flex items-center">
                 <div
-                  class="flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
+                  class="dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 flex items-center justify-center w-10 h-10 font-semibold text-gray-500 bg-white border-2 border-gray-300 rounded-full text-md">
                   03
                 </div>
                 <div class="hidden ml-3 font-semibold dark:text-white text-gray-500 text-md md:block">
@@ -419,7 +419,7 @@ const skipConfirmation = () => {
               </div>
             </button>
             <button v-if="registerProcess.checkingMode" @click="skipConfirmation"
-              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800">
+              class="w-36 py-2 px-4 rounded-md text-white text-base bg-gray-600 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-700">
               {{ $t('skip') }}
             </button>
             <button v-if="registerProcess.checkingMode" @click="createCustomer()"

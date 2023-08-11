@@ -24,7 +24,7 @@ const optionClicked = (data) => {
       {{ customer?.firstname + ' ' + customer?.lastname }}
     </div>
   </li>
-  <li class="flex items-center justify-center w-full p-2">
+  <li class="flex items-center justify-center w-full p-2 dark:bg-gray-900">
     <InfiniteLoading v-bind="$attrs" />
   </li>
 </template>
