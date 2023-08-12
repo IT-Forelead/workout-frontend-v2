@@ -18,13 +18,13 @@ export async function refreshToken() {
 
     localStorage.setItem('session', JSON.stringify(session))
 
-    return response?.data
+    return session
   } catch (error) {
     if (error?.response?.status === 403) {
       alert("Your session has been expired!")
+      localStorage.removeItem('session')
+      localStorage.removeItem('user')
       window.location.reload()
     }
-    localStorage.removeItem('session')
-    localStorage.removeItem('user')
   }
 }
