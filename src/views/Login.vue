@@ -28,9 +28,17 @@ const togglePassword = () => (hidePassword.value = !hidePassword.value)
 
 const login = () => {
   localStorage.removeItem('session')
-  if (!loginFormData.phone || !loginFormData.password) {
+  if (!loginFormData.phone) {
     notify.warning({
-      message: t('phoneOrPasswordIncorrect'),
+      message: t('plsEnterYourPhone'),
+    })
+  } else if (loginFormData.phone.replace(/([() -])/g, '').length < 13) {
+    notify.warning({
+      message: t('plsEnterPhoneCorrectly'),
+    })
+  } else if (!loginFormData.password) {
+    notify.warning({
+      message: t('plsEnterPassword'),
     })
   } else {
     isLoading.value = true
@@ -83,7 +91,8 @@ onMounted(() => {
           <div>
             <div class="flex flex-row items-center justify-between mb-2">
               <p class="font-medium text-gray-500 dark:text-white">{{ $t('password') }}</p>
-              <router-link to="/forgot-password" class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
+              <router-link to="/forgot-password"
+                class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
                 {{ $t('forgotPassword') }}
               </router-link>
             </div>
@@ -113,15 +122,18 @@ onMounted(() => {
             <span class="font-normal dark:text-white">
               {{ $t('dontHaveAnAccount') }}
             </span>
-            <router-link to="/sign-up" class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
+            <router-link to="/sign-up"
+              class="font-medium text-indigo-600 cursor-pointer hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-600">
               {{ $t('signUp') }}
             </router-link>
           </div>
         </div>
       </div>
-      <div class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap  dark:text-gray-300">
-        Developed and designed by 
-        <a href="http://it-forelead.uz" target="_blank" class="dark:text-indigo-500 dark:hover:text-indigo-600 cursor-pointer text-indigo-600 hover:text-indigo-900 font-medium">
+      <div
+        class="absolute bottom-0 left-1/2 py-4 -translate-x-1/2 text-xs text-[#5f697a] whitespace-nowrap  dark:text-gray-300">
+        Developed and designed by
+        <a href="http://it-forelead.uz" target="_blank"
+          class="dark:text-indigo-500 dark:hover:text-indigo-600 cursor-pointer text-indigo-600 hover:text-indigo-900 font-medium">
           IT-Forelead
         </a>
       </div>

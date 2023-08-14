@@ -11,7 +11,7 @@
   "enterYourNewPassword": "Yangi parolingizni kiriting",
   "reEnterYourPassword": "Parolingizni qayta kiriting",
   "changePassword": "Parolni o'zgartirish",
-  "plsEnterPassword": "Parolni kiriting",
+  "plsEnterPassword": "Iltimos, parolni kiriting",
   "plsConfirmPassword": "Parolni tasdiqlang",
   "plsConfirmPasswordCorrectly": "Iltimos, parolni to'g'ri tasdiqlang",
   "passwordComplexity":"Parol kamida 6 ta belgidan, katta va kichik lotin harflari va raqamlaridan iborat bo'lishi kerak",
