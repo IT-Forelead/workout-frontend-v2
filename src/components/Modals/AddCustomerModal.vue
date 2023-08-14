@@ -115,6 +115,10 @@ const sendActivationCode = () => {
     notify.warning({
       message: t('plsEnterPhone'),
     })
+  } else if (submitForm.phone.replace(/([() -])/g, '').length < 13) {
+    notify.warning({
+      message: t('plsEnterPhoneCorrectly'),
+    })
   } else if (!selectGender.value?.id) {
     notify.warning({
       message: t('plsSelectGender'),
@@ -237,8 +241,11 @@ const skipConfirmation = () => {
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div
+                  class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9">
+                </div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9">
+                </div>
               </div>
             </div>
             <!-- Step 2 -->
@@ -273,8 +280,11 @@ const skipConfirmation = () => {
                 </div>
               </div>
               <div class="relative mt-1 ml-7 md:-left-8 md:ml-0">
-                <div class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9"></div>
-                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9"></div>
+                <div
+                  class="absolute bottom-0 border-r border-gray-300 dark:border-gray-600 rounded-lg -rotate-[25deg] h-9">
+                </div>
+                <div class="absolute border-r border-gray-300 dark:border-gray-600 rounded-lg rotate-[25deg] -top-1 h-9">
+                </div>
               </div>
             </div>
             <!-- Step 3 -->
@@ -327,18 +337,20 @@ const skipConfirmation = () => {
             </div>
             <div>
               <label class="dark:text-white" for="lastname">{{ $t('lastname') }}</label>
-              <input v-model="submitForm.lastname" class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
+              <input v-model="submitForm.lastname"
+                class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
                 type="text" id="lastname" :placeholder="$t('enterLastname')" />
             </div>
             <div>
               <label class="dark:text-white" for="firstname">{{ $t('firstname') }}</label>
               <input v-model="submitForm.firstname"
-                class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400" type="text" id="firstname"
-                :placeholder="$t('enterFirstname')" />
+                class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
+                type="text" id="firstname" :placeholder="$t('enterFirstname')" />
             </div>
             <div>
               <label class="dark:text-white" for="phone">{{ $t('phone') }}</label>
-              <input v-model="submitForm.phone" class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
+              <input v-model="submitForm.phone"
+                class="block border-none text-gray-500 bg-gray-100 rounded-lg w-full text-lg dark:text-gray-300 dark:bg-gray-900 dark:placeholder-gray-400"
                 type="text" v-maska data-maska="+998(##) ###-##-##" placeholder="+998(00) 000-00-00" />
             </div>
             <div>
